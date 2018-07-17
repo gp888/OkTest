@@ -14,6 +14,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
+    //模糊定位权限：一般用于网络定位
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    //精确定位权限：一般用于gps定位
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
