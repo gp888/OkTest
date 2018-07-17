@@ -1,0 +1,11 @@
+<!--slideEdge表示起始滑动的侧边位置，end表示右侧，start表示左侧，top表示顶部，bottom表示底侧，各种效果你可以亲自试试~，一起看看滑动效果吧-->
+<slide xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/decelerate_cubic"
+    android:slideEdge="top">
+    <!--如果不希望顶部的状态栏以及底部的导航栏一起执行动画-->
+    <!--<targets>-->
+        <!--<target android:excludeId="@android:id/navigationBarBackground" />-->
+        <!--<target android:excludeId="@android:id/statusBarBackground" />-->
+    <!--</targets>-->
+
+</slide>

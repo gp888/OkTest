@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gp.oktest.MainActivity">
+    <Button
+        android:id="@+id/toCountDownTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toCountDownTimer"/>
+
+    <Button
+        android:id="@+id/toloadimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toloadimage"
+        app:layout_constraintStart_toEndOf="@+id/toCountDownTimer" />
+
+    <Button
+        android:id="@+id/recycler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="torecycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toCountDownTimer" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/v_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toViewMove"
+        app:layout_constraintStart_toEndOf="@+id/recycler"
+        app:layout_constraintTop_toBottomOf="@+id/toloadimage"
+        android:transitionName="sharedView"/>
+    <!--shared element-->
+
+    <Button
+        android:id="@+id/toPhotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toPhotos"
+        app:layout_constraintStart_toEndOf="@+id/v_move"
+        app:layout_constraintTop_toBottomOf="@+id/toloadimage" />
+
+    <Button
+        android:id="@+id/rxpermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="rxpermission"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler" />
+
+    <Button
+        android:id="@+id/themeActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="theme"
+        app:layout_constraintStart_toEndOf="@+id/rxpermission"
+        app:layout_constraintTop_toBottomOf="@+id/v_move" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,5 @@
+项目中就可以根据 Application 的 mNetType 字段来判断网络是否可用，
+如果 Activity 需要 监听网络状态，
+只需要 NetStateReceiver.getReceiver().registerObserver(netChangeObserver) 来处理网络连解或者断开的情况。
+再次提醒如果在 Activity 注册了一个 netChangeObserver，要在 onDestroy 时 移除掉，
+退出应用时，移除所有 netChangeObserver，并解注册掉该广播。切记切记，
