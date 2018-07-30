@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.rxpermission).setOnClickListener(this);
         findViewById(R.id.themeActivity).setOnClickListener(this);
         findViewById(R.id.popmenu).setOnClickListener(this);
+        findViewById(R.id.popupwindow).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -94,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 popupMenu.getMenuInflater().inflate(R.menu.menu_navigationview, popupMenu.getMenu());
                 menu.setOnTouchListener(popupMenu.getDragToOpenListener());
                 popupMenu.show();
+                break;
+            case R.id.popupwindow:
+                startActivity(new Intent(MainActivity.this, PopupWindowActivity.class));
                 break;
             default:
                 break;

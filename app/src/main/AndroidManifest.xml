@@ -49,6 +49,7 @@
         <activity android:name=".ThemeBaseActivity"
             android:theme="@style/RedTheme"/>
         <activity android:name=".KeyBoardAvtivity"/>
+        <activity android:name=".PopupWindowActivity"/>
 
 
         <provider

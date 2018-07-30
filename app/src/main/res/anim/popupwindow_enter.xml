@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--位移动画：1为持续时长；2为X轴起始位置；3为X轴到达位置-->
+    <!--X轴相对左右方向，Y轴相对上下方向-->
+    <translate
+        android:duration="500"
+        android:fromYDelta="-100"
+        android:toYDelta="0"/>
+</set>

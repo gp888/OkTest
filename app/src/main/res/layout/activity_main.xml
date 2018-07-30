@@ -5,18 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gp.oktest.MainActivity">
+
     <Button
         android:id="@+id/toCountDownTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="toCountDownTimer"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="toCountDownTimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/toloadimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="toloadimage"
-        app:layout_constraintStart_toEndOf="@+id/toCountDownTimer" />
+        app:layout_constraintStart_toEndOf="@+id/toCountDownTimer"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/recycler"
@@ -78,5 +85,15 @@
         android:text="popmenu"
         app:layout_constraintStart_toEndOf="@+id/themeActivity"
         app:layout_constraintTop_toBottomOf="@+id/toPhotos" />
+
+    <Button
+        android:id="@+id/popupwindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="popupwindow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rxpermission" />
 
 </android.support.constraint.ConstraintLayout>
