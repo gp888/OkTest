@@ -9,8 +9,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 import java.io.IOException;
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.toPhotos).setOnClickListener(this);
         findViewById(R.id.rxpermission).setOnClickListener(this);
         findViewById(R.id.themeActivity).setOnClickListener(this);
+        findViewById(R.id.popmenu).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -83,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.themeActivity:
                 startActivity(new Intent(MainActivity.this, ThemeBaseActivity.class));
+                break;
+            case R.id.popmenu:
+                View menu = findViewById(R.id.popmenu);
+                PopupMenu popupMenu = new PopupMenu(this, menu);
+                popupMenu.setGravity(Gravity.RIGHT);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_navigationview, popupMenu.getMenu());
+                menu.setOnTouchListener(popupMenu.getDragToOpenListener());
+                popupMenu.show();
                 break;
             default:
                 break;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/point_shop"
+            android:icon="@drawable/icon_shop"
+            android:title="商城"/>
+        <item
+            android:id="@+id/user_setting"
+            android:icon="@drawable/icon_setting"
+            android:title="设置"/>
+    </group>
+</menu>
