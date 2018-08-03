@@ -50,6 +50,7 @@
             android:theme="@style/RedTheme"/>
         <activity android:name=".KeyBoardAvtivity"/>
         <activity android:name=".PopupWindowActivity"/>
+        <activity android:name="TestActivity" />
 
 
         <provider

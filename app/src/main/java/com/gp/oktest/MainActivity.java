@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.themeActivity).setOnClickListener(this);
         findViewById(R.id.popmenu).setOnClickListener(this);
         findViewById(R.id.popupwindow).setOnClickListener(this);
+        findViewById(R.id.test).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -98,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.popupwindow:
                 startActivity(new Intent(MainActivity.this, PopupWindowActivity.class));
+                break;
+            case R.id.test:
+                startActivity(new Intent(MainActivity.this, TestActivity.class));
                 break;
             default:
                 break;
