@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.popupwindow).setOnClickListener(this);
         findViewById(R.id.test).setOnClickListener(this);
         findViewById(R.id.tomap).setOnClickListener(this);
+        findViewById(R.id.popup).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -105,13 +107,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, TestActivity.class));
                 break;
             case R.id.tomap:
+                //显示地图
 //                Uri uri = Uri.parse("geo:38.899533,-77.036476");
 //                Intent it = new Intent(Intent.ACTION_VIEW, uri);
 //                startActivity(it);
 
-//                Uri uri = Uri.parse("http://maps.google.com/maps?f=d&saddr=startLat%20startLng&daddr=endLat%20endLng&hl=en");
-//                Intent it = new Intent(Intent.ACTION_VIEW, URI);
-//                startActivity(it);
+                //路径规划
+                Uri uri = Uri.parse("http://maps.google.com/maps?f=d&saddr=startLat%20startLng&daddr=endLat%20endLng&hl=en");
+                Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
+                break;
+            case R.id.popup:
                 new AppCompatPopupWin(this).showPop();
                 break;
             default:
