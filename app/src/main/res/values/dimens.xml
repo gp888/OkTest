@@ -1,0 +1,72 @@
+<resources>
+
+    <dimen name="chat_image_size">125dp</dimen>
+    <dimen name="btn_radius">2dp</dimen>
+    <dimen name="dimens_1px">1px</dimen>
+    <dimen name="dimens_4px">4px</dimen>
+    <dimen name="dimens_200px">200px</dimen>
+    <dimen name="dimens_0">0dp</dimen>
+    <dimen name="dimens_1">1dp</dimen>
+    <dimen name="dimens_2">2dp</dimen>
+    <dimen name="dimens_3">3dp</dimen>
+    <dimen name="dimens_4">4dp</dimen>
+    <dimen name="dimens_5">5dp</dimen>
+    <dimen name="dimens_6">6dp</dimen>
+    <dimen name="dimens_8">8dp</dimen>
+    <dimen name="dimens_10">10dp</dimen>
+    <dimen name="dimens_12">12dp</dimen>
+    <dimen name="dimens_14">14dp</dimen>
+    <dimen name="dimens_15">15dp</dimen>
+    <dimen name="dimens_16">16dp</dimen>
+    <dimen name="dimens_18">18dp</dimen>
+    <dimen name="dimens_20">20dp</dimen>
+    <dimen name="dimens_21">21dp</dimen>
+    <dimen name="dimens_22">22dp</dimen>
+    <dimen name="dimens_24">24dp</dimen>
+    <dimen name="dimens_25">25dp</dimen>
+    <dimen name="dimens_30">30dp</dimen>
+    <dimen name="dimens_35">35dp</dimen>
+    <dimen name="dimens_33">33dp</dimen>
+    <dimen name="dimens_36">36dp</dimen>
+    <dimen name="dimens_40">40dp</dimen>
+    <dimen name="dimens_44">44dp</dimen>
+    <dimen name="dimens_45">45dp</dimen>
+    <dimen name="dimens_48">48dp</dimen>
+    <dimen name="dimens_50">50dp</dimen>
+    <dimen name="dimens_55">55dp</dimen>
+    <dimen name="dimens_56">56dp</dimen>
+    <dimen name="dimens_60">60dp</dimen>
+    <dimen name="dimens_70">70dp</dimen>
+    <dimen name="dimens_72">72dp</dimen>
+    <dimen name="dimens_80">80dp</dimen>
+    <dimen name="dimens_100">100dp</dimen>
+    <dimen name="dimens_140">140dp</dimen>
+    <dimen name="dimens_160">160dp</dimen>
+    <dimen name="dimens_200">200dp</dimen>
+    <dimen name="dimens_240">240dp</dimen>
+    <dimen name="dialog_line">1px</dimen>
+    <dimen name="set_margin_left">16dp</dimen>
+    <dimen name="set_margin_right">16dp</dimen>
+    <dimen name="title_icon_size">16dp</dimen>
+    <dimen name="chat_toolbox_icon_size">56dp</dimen>
+    <dimen name="chat_toolbox_icon_margin">16dp</dimen>
+    <dimen name="chat_forward_width">220dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="tag_corner_radius">5dip</dimen>
+
+    <!-- 消息列表 -->
+    <dimen name="home_page_menu_text_size">12sp</dimen>
+    <dimen name="home_page_menu_tips_text_size">11sp</dimen>
+
+    <!--ToolBar-->
+    <dimen name="toolbar_size">48dp</dimen>
+
+
+    <!--字体大小-->
+    <dimen name="font_size_9">9sp</dimen>
+    <dimen name="font_size_16">16sp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_12">12sp</dimen>
+
+</resources>

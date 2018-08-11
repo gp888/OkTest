@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.popmenu).setOnClickListener(this);
         findViewById(R.id.popupwindow).setOnClickListener(this);
         findViewById(R.id.test).setOnClickListener(this);
+        findViewById(R.id.tomap).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -102,6 +103,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.test:
                 startActivity(new Intent(MainActivity.this, TestActivity.class));
+                break;
+            case R.id.tomap:
+//                Uri uri = Uri.parse("geo:38.899533,-77.036476");
+//                Intent it = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(it);
+
+//                Uri uri = Uri.parse("http://maps.google.com/maps?f=d&saddr=startLat%20startLng&daddr=endLat%20endLng&hl=en");
+//                Intent it = new Intent(Intent.ACTION_VIEW, URI);
+//                startActivity(it);
+                new AppCompatPopupWin(this).showPop();
                 break;
             default:
                 break;

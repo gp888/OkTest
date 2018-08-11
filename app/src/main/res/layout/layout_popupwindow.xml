@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_tag_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="全部"
+        android:paddingLeft="@dimen/dimens_16"
+        android:paddingRight="@dimen/dimens_16"
+        android:paddingBottom="@dimen/dimens_10"
+        android:paddingTop="@dimen/dimens_10" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#eeeeee"/>
+    <TextView
+        android:id="@+id/tv_colleague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="同事"
+        android:paddingLeft="@dimen/dimens_16"
+        android:paddingRight="@dimen/dimens_16"
+        android:paddingBottom="@dimen/dimens_10"
+        android:paddingTop="@dimen/dimens_10" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#eeeeee"/>
+    <TextView
+        android:id="@+id/tv_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="好友"
+        android:paddingLeft="@dimen/dimens_16"
+        android:paddingRight="@dimen/dimens_16"
+        android:paddingBottom="@dimen/dimens_10"
+        android:paddingTop="@dimen/dimens_10" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#eeeeee"/>
+    <TextView
+        android:id="@+id/tv_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="客户"
+        android:paddingLeft="@dimen/dimens_16"
+        android:paddingRight="@dimen/dimens_16"
+        android:paddingBottom="@dimen/dimens_10"
+        android:paddingTop="@dimen/dimens_10" />
+
+    <!--<ListView-->
+        <!--android:id="@+id/popmenu_listview"-->
+        <!--style="@style/common_listview"-->
+        <!--android:layout_width="@dimen/dimens_100"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="@dimen/dimens_10"-->
+        <!--android:divider="@color/cl_line_gray3"-->
+        <!--android:dividerHeight="@dimen/dimens_1px"-->
+        <!--android:background="@drawable/bg_drop" />-->
+</LinearLayout>
+
