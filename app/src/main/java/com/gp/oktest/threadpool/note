@@ -1,0 +1,21 @@
+ThreadTaskObject taskObject = new ThreadTaskObject(ThreadPoolTypeEnum.THREAD_TYPE_WORK);
+taskObject.setTaskName(ThreadPoolTaskName.ContactsListActivity);
+taskObject.setOnRunListener(new ThreadTaskObject.OnRunListener() {
+            @Override
+            public void onRun() {
+
+            }
+        });
+ThreadPoolFactory.getThreadPoolManager().addTask(taskObject);
+
+
+
+
+
+@Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (taskObject != null) {
+             ThreadPoolFactory.getThreadPoolManager().removeTask(taskObject);
+        }
+    }
