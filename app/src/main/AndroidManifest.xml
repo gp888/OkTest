@@ -63,6 +63,9 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
+        <service android:name=".service.ForegroundService"/>
+        <service android:name=".service.AsycnService"/>
+
     </application>
 
 </manifest>

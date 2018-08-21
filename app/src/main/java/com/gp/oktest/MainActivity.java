@@ -15,6 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import com.gp.oktest.service.AsycnService;
+import com.gp.oktest.service.ForegroundService;
+
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.test).setOnClickListener(this);
         findViewById(R.id.tomap).setOnClickListener(this);
         findViewById(R.id.popup).setOnClickListener(this);
+        findViewById(R.id.fService).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -119,6 +124,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.popup:
                 new AppCompatPopupWin(this).showPop();
+                break;
+            case R.id.fService:
+//                Intent intentOne = new Intent(this, ForegroundService.class);
+//                startService(intentOne);
+                Log.d(TAG, "主线程 id: " + Thread.currentThread().getId());
+                Intent intentService = new Intent(this, AsycnService.class);
+                startService(intentService);
                 break;
             default:
                 break;
