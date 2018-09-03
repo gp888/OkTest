@@ -2,9 +2,12 @@ package com.gp.oktest;
 
 import android.Manifest;
 import android.app.ActivityOptions;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -128,9 +131,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.fService:
 //                Intent intentOne = new Intent(this, ForegroundService.class);
 //                startService(intentOne);
-                Log.d(TAG, "主线程 id: " + Thread.currentThread().getId());
-                Intent intentService = new Intent(this, AsycnService.class);
-                startService(intentService);
+
+
+//                Log.d(TAG, "主线程 id: " + Thread.currentThread().getId());
+//                Intent intentService = new Intent(this, AsycnService.class);
+//                startService(intentService);
+
+                Intent intent = new Intent(this, ForegroundService.class);
+                Log.i("Kathy", "ActivityA 执行 bindService");
+                bindService(intent, conn, BIND_AUTO_CREATE);
+
+//                if (isBind) {
+//                    Log.i("Kathy", "ActivityA 执行 unbindService");
+//                    unbindService(conn);
+//                }
                 break;
             default:
                 break;
@@ -261,4 +275,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
+    private ForegroundService service = null;
+    private boolean isBind = false;
+
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder binder) {
+            isBind = true;
+            ForegroundService.MyBinder myBinder = (ForegroundService.MyBinder) binder;
+            service = myBinder.getService();
+            Log.i("Kathy", "ActivityA - onServiceConnected");
+            int num = service.getRandomNumber();
+            Log.i("Kathy", "ActivityA - getRandomNumber = " + num);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBind = false;
+            Log.i("Kathy", "ActivityA - onServiceDisconnected");
+        }
+    };
 }
