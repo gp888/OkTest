@@ -1,5 +1,7 @@
 package com.gp.oktest;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,5 +46,24 @@ public class FileUtils {
             }
         }
         return 0;
+    }
+
+    public static void createProjectSdcardFile() {
+        try {
+            if (!FileUtils.isSDCardAvailable()) {
+                return;
+            }
+
+            File file = new File(Constant.DIR_DOWNLOAD);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isSDCardAvailable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 }

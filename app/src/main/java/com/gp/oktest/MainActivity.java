@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.gp.oktest.service.AsycnService;
 import com.gp.oktest.service.ForegroundService;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Toast.makeText(this, "permission allow", Toast.LENGTH_SHORT).show();
         }
+
+        //andfix
+        FileUtils.createProjectSdcardFile();
+        AndFixManager.getAndFixManager().addPatch(Constant.DIR_DOWNLOAD + File.separator + "mypatch1.apatch");
+
     }
 
     @Override
@@ -145,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    Log.i("Kathy", "ActivityA 执行 unbindService");
 //                    unbindService(conn);
 //                }
+                DeviceUtils.testAndfix();
                 break;
             default:
                 break;
@@ -276,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    //service
     private ForegroundService service = null;
     private boolean isBind = false;
 
@@ -296,4 +304,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("Kathy", "ActivityA - onServiceDisconnected");
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

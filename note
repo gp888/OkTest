@@ -1,1 +1,9 @@
 qq的开放平台 安卓和ios是分开的 ，所以应该有对应的appid
+
+Log.getStackTraceString(e)
+
+TranslateAnimation translateAnim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                            Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1.0f, Animation.RELATIVE_TO_SELF, 1.0f);
+                    translateAnim.setDuration(4000);
+                    translateAnim.setFillAfter(true);
+                    bar_back.startAnimation(translateAnim);

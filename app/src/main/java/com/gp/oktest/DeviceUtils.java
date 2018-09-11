@@ -100,4 +100,10 @@ public class DeviceUtils {
         }
         return bmp;
     }
+
+    public static void testAndfix() {
+        String str = "strr";
+        int len = str.length();
+        ToastUtil.showToastShort(len + "");
+    }
 }

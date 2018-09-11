@@ -2,7 +2,6 @@ package com.gp.oktest;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.gp.oktest.networklistener.NetChangeObserver;
 import com.gp.oktest.networklistener.NetStateReceiver;
 import com.gp.oktest.networklistener.NetworkType;
@@ -24,8 +23,10 @@ public class GlobalApplication extends Application {
         globalContext = getApplicationContext();
 
         initNetChangeReceiver();
-    }
 
+        //andfix
+        AndFixManager.getAndFixManager().initAndFix(this);
+    }
 
     /**
      * 应用全局的网络变化处理

@@ -22,4 +22,7 @@ public class Constant {
 
 
     public static final int CHOICE_CMARE = 20101;
+
+    public static final String DIR_PROJECT = "/okTest/";
+    public static final String DIR_DOWNLOAD = mExternalStorage + DIR_PROJECT + "download/"; //文件下载
 }
