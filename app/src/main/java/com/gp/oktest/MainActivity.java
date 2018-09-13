@@ -19,10 +19,8 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.gp.oktest.service.AsycnService;
 import com.gp.oktest.service.ForegroundService;
 
-import java.io.File;
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -44,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String login = "gp888";
     Button v_move;
 
+
+    private static final int REQ_PERMISSION_CODE_FIND_LOCATION = 0X113;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tomap).setOnClickListener(this);
         findViewById(R.id.popup).setOnClickListener(this);
         findViewById(R.id.fService).setOnClickListener(this);
+        findViewById(R.id.fileprovider7).setOnClickListener(this);
 
         httpGithubString();
         httpGithubJson();
@@ -71,14 +73,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this, permissions, 100);
+            ActivityCompat.requestPermissions(MainActivity.this, permissions, REQ_PERMISSION_CODE_FIND_LOCATION);
         } else {
             Toast.makeText(this, "permission allow", Toast.LENGTH_SHORT).show();
         }
 
         //andfix
-        FileUtils.createProjectSdcardFile();
-        AndFixManager.getAndFixManager().addPatch(Constant.DIR_DOWNLOAD + File.separator + "mypatch1.apatch");
+//        FileUtils.createProjectSdcardFile();
+//        AndFixManager.getAndFixManager().addPatch(Constant.DIR_DOWNLOAD + File.separator + "mypatch1.apatch");
 
     }
 
@@ -152,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    unbindService(conn);
 //                }
                 DeviceUtils.testAndfix();
+                break;
+            case R.id.fileprovider7:
+                startActivity(new Intent(this, FileProvider7Activity.class));
                 break;
             default:
                 break;
@@ -270,10 +275,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 100) {
+        if (requestCode == REQ_PERMISSION_CODE_FIND_LOCATION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "permission sucess", Toast.LENGTH_SHORT).show();
-                //成功
             } else {
                 // Permission Denied
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();

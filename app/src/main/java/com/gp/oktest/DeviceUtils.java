@@ -10,7 +10,8 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+
+import com.gp.testlibrary.FileProvider7Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class DeviceUtils {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            Uri photoUri = FileProvider.getUriForFile(mContext, Constant.FILE_PROVIDER_AUTHORITY, file);
+            Uri photoUri = FileProvider7Util.getUriForFile24(mContext, file);
             //photoUri：content://com.gp.oktest.fileprovider/okPhotos/okTest/temp/filename
             Intent intent = new Intent();
             //表示对目标应用临时授权该Uri所代表的文件

@@ -51,21 +51,10 @@
         <activity android:name=".KeyBoardAvtivity"/>
         <activity android:name=".PopupWindowActivity"/>
         <activity android:name="TestActivity" />
-
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.gp.oktest.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths" />
-        </provider>
-
         <service android:name=".service.ForegroundService"/>
         <service android:name=".service.AsycnService"/>
 
+        <activity android:name=".FileProvider7Activity"/>
     </application>
 
 </manifest>
