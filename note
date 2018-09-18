@@ -7,3 +7,16 @@ TranslateAnimation translateAnim = new TranslateAnimation(Animation.RELATIVE_TO_
                     translateAnim.setDuration(4000);
                     translateAnim.setFillAfter(true);
                     bar_back.startAnimation(translateAnim);
+
+
+                    Volatile
+                    修饰的成员变量在每次被线程访问时，都强迫从共享内存重新读取该成员的值，而且，
+                    当成员变量值发生变化时，强迫将变化的值重新写入共享内存，这样两个不同的线程在访问同一个共享变量的值时，始终看到的是同一个值。
+
+                    java语言规范指出：为了获取最佳的运行速度，允许线程保留共享变量的副本，当这个线程进入或者离开同步代码块时，
+                    才与共享成员变量进行比对，如果有变化再更新共享成员变量。这样当多个线程同时访问一个共享变量时，可能会存在值不同步的现象。
+                    而volatile这个值的作用就是告诉VM：对于这个成员变量不能保存它的副本，要直接与共享成员变量交互。
+
+                    建议：当多个线程同时访问一个共享变量时，可以使用volatile，而当访问的变量已在synchronized代码块中时，不必使用。
+
+                    缺点：使用volatile将使得VM优化失去作用，导致效率较低，所以要在必要的时候使用。

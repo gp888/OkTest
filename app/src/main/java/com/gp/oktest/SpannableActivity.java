@@ -19,6 +19,9 @@ import android.widget.TextView;
 import com.gp.oktest.utils.SpanUtils;
 import com.gp.oktest.utils.ToastUtil;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -114,5 +117,16 @@ public class SpannableActivity extends AppCompatActivity {
                 .appendLine()
                 .append("测试空格").appendSpace(30, Color.LTGRAY).appendSpace(50, Color.GREEN).appendSpace(100).appendSpace(30, Color.LTGRAY).appendSpace(50, Color.GREEN)
                 .create());
+    }
+
+    private void testRemove() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        for (int i = 0; i < list.size(); i++) {
+            if ("A".equals(list.get(i))) {
+                list.remove("A");
+            }
+        }
     }
 }
