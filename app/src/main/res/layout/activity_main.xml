@@ -97,12 +97,12 @@
         app:layout_constraintTop_toBottomOf="@+id/rxpermission" />
 
     <Button
-        android:id="@+id/test"
+        android:id="@+id/span"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="test"
+        android:text="span"
         app:layout_constraintStart_toEndOf="@+id/popupwindow"
         app:layout_constraintTop_toBottomOf="@+id/themeActivity" />
 
@@ -113,7 +113,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="tomap"
-        app:layout_constraintStart_toEndOf="@+id/test"
+        app:layout_constraintStart_toEndOf="@+id/span"
         app:layout_constraintTop_toBottomOf="@+id/popmenu" />
 
     <Button
@@ -134,7 +134,7 @@
         android:layout_marginTop="8dp"
         android:text="fService"
         app:layout_constraintStart_toEndOf="@+id/popup"
-        app:layout_constraintTop_toBottomOf="@+id/test" />
+        app:layout_constraintTop_toBottomOf="@+id/span" />
 
     <Button
         android:id="@+id/fileprovider7"
@@ -145,5 +145,15 @@
         android:text="fileprovider7"
         app:layout_constraintStart_toEndOf="@+id/fService"
         app:layout_constraintTop_toBottomOf="@+id/tomap" />
+
+    <Button
+        android:id="@+id/spannable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="spannable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popup" />
 
 </android.support.constraint.ConstraintLayout>

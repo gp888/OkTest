@@ -69,4 +69,11 @@
     <dimen name="font_size_14">14sp</dimen>
     <dimen name="font_size_12">12sp</dimen>
 
+
+
+
+    <dimen name="block_width">40dp</dimen>
+    <dimen name="block_low_height">8dp</dimen>
+    <dimen name="block_high_height">196dp</dimen>
+
 </resources>

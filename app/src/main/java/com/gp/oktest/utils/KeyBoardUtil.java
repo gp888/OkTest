@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.utils;
 
 import android.app.Activity;
 import android.content.Context;

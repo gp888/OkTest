@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     //精确定位权限：一般用于gps定位
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--适配8.0允许未知来源安装应用程序-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".GlobalApplication"
@@ -50,7 +52,7 @@
             android:theme="@style/RedTheme"/>
         <activity android:name=".KeyBoardAvtivity"/>
         <activity android:name=".PopupWindowActivity"/>
-        <activity android:name="TestActivity" />
+        <activity android:name=".SpannableActivity" />
         <service android:name=".service.ForegroundService"/>
         <service android:name=".service.AsycnService"/>
 

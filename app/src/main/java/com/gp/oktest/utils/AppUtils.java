@@ -1,14 +1,18 @@
-package com.gp.oktest;
+package com.gp.oktest.utils;
 
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import java.util.List;
 
-public class Apputils {
+import static com.gp.oktest.GlobalApplication.globalContext;
+
+public class AppUtils {
 
     /**
      * 判断app是否处于前台
@@ -42,5 +46,15 @@ public class Apputils {
             return true ;
         }
         return false ;
+    }
+
+    public static String getVersionName() {
+        try {
+            PackageInfo pi = globalContext.getPackageManager().getPackageInfo(globalContext.getPackageName(), 0);
+            return pi.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

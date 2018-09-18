@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">OkTest</string>
+    <string name="space">&#160;</string>
+    <string name="narrow_space">&#8201;</string>
+    <!--用两个空格（&#160;&#160;）占一个汉字的宽度时，两个空格比一个汉字略窄，三个空格（&#160;&#160;&#160;）比一个汉字略宽-->
+    <string name="a_chinese_character_space">&#160;&#160;&#8201;</string>
+    <!--首行缩进setText(“\u3000\u3000”+xxxxx);-->
+    <string name="shsj">"\u3000\u3000"</string>
 </resources>

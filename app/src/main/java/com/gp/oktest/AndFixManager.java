@@ -3,6 +3,7 @@ package com.gp.oktest;
 import android.content.Context;
 
 import com.alipay.euler.andfix.patch.PatchManager;
+import com.gp.oktest.utils.AppUtils;
 
 import java.io.IOException;
 
@@ -29,7 +30,7 @@ public class AndFixManager {
     public void initAndFix(Context context){
         //step.1 init PatchManager
         mPatchManager = new PatchManager(context);
-        mPatchManager.init(Utils.getVersionName());
+        mPatchManager.init(AppUtils.getVersionName());
         //step.2 load patch
         mPatchManager.loadPatch();
     }

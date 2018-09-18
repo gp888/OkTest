@@ -16,8 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gp.oktest.utils.DeviceUtils;
+
 import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Method;
 
 /**
  * Created by guoping on 2017/12/19.

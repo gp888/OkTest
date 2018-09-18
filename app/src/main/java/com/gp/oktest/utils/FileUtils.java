@@ -1,6 +1,8 @@
-package com.gp.oktest;
+package com.gp.oktest.utils;
 
 import android.os.Environment;
+
+import com.gp.oktest.Constant;
 
 import java.io.File;
 import java.io.FileInputStream;

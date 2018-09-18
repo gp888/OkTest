@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gp.oktest.utils.ToastUtil;
 import com.gp.testlibrary.FileProvider7Util;
 
 import java.io.File;
@@ -33,6 +36,7 @@ public class FileProvider7Activity extends AppCompatActivity {
     private static final int REQUEST_CODE_TAKE_PHOTO = 0x110;
     private static final int REQ_PERMISSION_CODE_SDCARD = 0X111;
     private static final int REQ_PERMISSION_CODE_TAKE_PHOTO = 0X112;
+    private static final int REQ_INSTALL_PERMISS_CODE = 0X113;
     private String mCurrentPhotoPath;
 
     @BindView(R.id.iv)
@@ -69,13 +73,32 @@ public class FileProvider7Activity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_PERMISSION_CODE_SDCARD);
         } else {
-            installApk();
+            installApk8();
         }
     }
 
-    private void installApk() {
+    private void installApk8() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if(getPackageManager().canRequestPackageInstalls()){
+                installApp();
+            } else{
+                Uri packageURI = Uri.parse("package:" + getPackageName());
+                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+                startActivityForResult(intent, REQ_INSTALL_PERMISS_CODE);
+            }
+        } else {
+            installApp();
+        }
+    }
+
+    private void installApp() {
         File file = new File(Environment.getExternalStorageDirectory(), "znt.apk");
+        if (!file.exists()) {
+            ToastUtil.showToastShort("no apk");
+            return;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         FileProvider7Util.setIntentDataAndType(this, intent, "application/vnd.android.package-archive", file, true);
         startActivity(intent);
@@ -107,8 +130,13 @@ public class FileProvider7Activity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_TAKE_PHOTO) {
-            iv.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
+        if (resultCode == RESULT_OK ) {
+            if (requestCode == REQUEST_CODE_TAKE_PHOTO) {
+                iv.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
+                //8.0未知应用来源权限
+            } else if (requestCode == REQ_INSTALL_PERMISS_CODE) {
+                installApp();
+            }
         }
     }
 
@@ -116,7 +144,7 @@ public class FileProvider7Activity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQ_PERMISSION_CODE_SDCARD) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                installApk();
+                installApk8();
             } else {
                 // Permission Denied
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();

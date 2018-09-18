@@ -1,7 +1,10 @@
-package com.gp.oktest;
+package com.gp.oktest.utils;
 
 import android.app.Activity;
 import android.content.Context;
+
+import com.gp.oktest.PreferenceUtils;
+import com.gp.oktest.R;
 
 /**
  * Created by guoping on 2018/1/5.

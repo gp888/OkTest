@@ -6,6 +6,7 @@ import com.gp.oktest.networklistener.NetChangeObserver;
 import com.gp.oktest.networklistener.NetStateReceiver;
 import com.gp.oktest.networklistener.NetworkType;
 import com.gp.oktest.networklistener.NetworkUtil;
+import com.gp.oktest.utils.ToastUtil;
 
 /**
  * Created by guoping on 2017/11/15.

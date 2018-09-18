@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 
+import com.gp.oktest.Constant;
 import com.gp.testlibrary.FileProvider7Util;
 
 import java.io.File;

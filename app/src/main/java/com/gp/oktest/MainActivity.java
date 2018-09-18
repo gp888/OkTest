@@ -20,9 +20,13 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.gp.oktest.service.ForegroundService;
+import com.gp.oktest.utils.DeviceUtils;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,35 +40,65 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
     public final String TAG = getClass().getSimpleName();
 
-    private String login = "gp888";
-    Button v_move;
-
+    //传入github的用户名
+    private String loginName = "gp888";
 
     private static final int REQ_PERMISSION_CODE_FIND_LOCATION = 0X113;
+
+    @BindView(R.id.v_move)
+    Button v_move;
+
+    @BindView(R.id.toCountDownTimer)
+    Button toCountDownTimer;
+
+    @BindView(R.id.toloadimage)
+    Button toloadimage;
+
+    @BindView(R.id.recycler)
+    Button recycler;
+
+    @BindView(R.id.toPhotos)
+    Button toPhotos;
+
+    @BindView(R.id.rxpermission)
+    Button rxpermission;
+
+    @BindView(R.id.themeActivity)
+    Button themeActivity;
+
+    @BindView(R.id.popmenu)
+    Button popmenu;
+
+    @BindView(R.id.popupwindow)
+    Button popupwindow;
+
+    @BindView(R.id.span)
+    Button span;
+
+    @BindView(R.id.tomap)
+    Button tomap;
+
+    @BindView(R.id.popup)
+    Button popup;
+
+    @BindView(R.id.fService)
+    Button fService;
+
+    @BindView(R.id.fileprovider7)
+    Button fileprovider7;
+
+    @BindView(R.id.spannable)
+    Button spannable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        findViewById(R.id.toCountDownTimer).setOnClickListener(this);
-        findViewById(R.id.toloadimage).setOnClickListener(this);
-        findViewById(R.id.recycler).setOnClickListener(this);
-        v_move = findViewById(R.id.v_move);
-        v_move.setOnClickListener(this);
-        findViewById(R.id.toPhotos).setOnClickListener(this);
-        findViewById(R.id.rxpermission).setOnClickListener(this);
-        findViewById(R.id.themeActivity).setOnClickListener(this);
-        findViewById(R.id.popmenu).setOnClickListener(this);
-        findViewById(R.id.popupwindow).setOnClickListener(this);
-        findViewById(R.id.test).setOnClickListener(this);
-        findViewById(R.id.tomap).setOnClickListener(this);
-        findViewById(R.id.popup).setOnClickListener(this);
-        findViewById(R.id.fService).setOnClickListener(this);
-        findViewById(R.id.fileprovider7).setOnClickListener(this);
+        ButterKnife.bind(this);
 
         httpGithubString();
         httpGithubJson();
@@ -84,8 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    public void onClick(View v) {
+    @OnClick({R.id.toCountDownTimer, R.id.toloadimage, R.id.recycler, R.id.v_move, R.id.toPhotos, R.id.rxpermission, R.id.themeActivity, R.id.popmenu,
+            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.fService, R.id.fileprovider7})
+    public void ViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.toCountDownTimer:
                 startActivity(new Intent(MainActivity.this, CountDownTimerActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -119,8 +154,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.popupwindow:
                 startActivity(new Intent(MainActivity.this, PopupWindowActivity.class));
                 break;
-            case R.id.test:
-                startActivity(new Intent(MainActivity.this, TestActivity.class));
+            case R.id.span:
+                startActivity(new Intent(MainActivity.this, SpannableActivity.class));
                 break;
             case R.id.tomap:
                 //显示地图
@@ -158,10 +193,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.fileprovider7:
                 startActivity(new Intent(this, FileProvider7Activity.class));
                 break;
+            case R.id.spannable:
+                break;
             default:
                 break;
         }
-
     }
 
     private void httpGithubString() {
@@ -172,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);
-        Call<String> call = service.getData(login);//可以自己传入github的用户名
+        Call<String> call = service.getData(loginName);
 
         // 异步请求
         call.enqueue(new Callback<String>() {
@@ -200,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);
-        Call<GitModel> call = service.getUserInfo(login);//可填入自己Github账号用户名
+        Call<GitModel> call = service.getUserInfo(loginName);
         call.enqueue(new Callback<GitModel>() {
 
             @Override
@@ -222,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .baseUrl(GitHubService.BASEURL)
                 .build();
         GitHubService service = retrofit.create(GitHubService.class);
-        Call<ResponseBody> call = service.getResponseBody(login);
+        Call<ResponseBody> call = service.getResponseBody(loginName);
         call.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -251,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);
-        Observable<GitModel> obserable = service.rxUser(login);
+        Observable<GitModel> obserable = service.rxUser(loginName);
         obserable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GitModel>() {
