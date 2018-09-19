@@ -16,6 +16,7 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.SpanUtils;
 import com.gp.oktest.utils.ToastUtil;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SpannableActivity extends AppCompatActivity {
+public class SpannableActivity extends BaseActivity {
 
     @BindView(R.id.spannableText)
     TextView spannText;

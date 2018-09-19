@@ -20,3 +20,20 @@ TranslateAnimation translateAnim = new TranslateAnimation(Animation.RELATIVE_TO_
                     建议：当多个线程同时访问一个共享变量时，可以使用volatile，而当访问的变量已在synchronized代码块中时，不必使用。
 
                     缺点：使用volatile将使得VM优化失去作用，导致效率较低，所以要在必要的时候使用。
+
+
+
+
+
+
+
+
+                    Service想要弹toast，需要主线程UI(Activity的主线程)的Context，或者getApplicationContext().
+                    还可以通过Handler将一个自定义的线程运行于主线程之上。
+                    handler=new Handler(Looper.getMainLooper());
+                    		handler.post(new Runnable(){
+                    			public void run(){
+                    				Toast.makeText(getApplicationContext(), "Service is created!", Toast.LENGTH_LONG).show();
+                    			}
+                    		});
+                    在Android的Framework中使用Toast，要将Toast添加到主线程里才能正常工作

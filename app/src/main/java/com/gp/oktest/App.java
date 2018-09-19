@@ -12,7 +12,7 @@ import com.gp.oktest.utils.ToastUtil;
  * Created by guoping on 2017/11/15.
  */
 
-public class GlobalApplication extends Application {
+public class App extends Application {
 
     public static Context globalContext;
     public NetworkType mNetType;

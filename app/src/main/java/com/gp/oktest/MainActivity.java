@@ -2,15 +2,11 @@ package com.gp.oktest;
 
 import android.Manifest;
 import android.app.ActivityOptions;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,8 +15,8 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.gp.oktest.service.ForegroundService;
-import com.gp.oktest.utils.DeviceUtils;
+import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.handlerthread.HandlerThreadActivity;
 
 import java.io.IOException;
 
@@ -40,8 +36,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
-    public final String TAG = getClass().getSimpleName();
+public class MainActivity extends BaseActivity {
 
     //传入github的用户名
     private String loginName = "gp888";
@@ -84,14 +79,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.popup)
     Button popup;
 
-    @BindView(R.id.fService)
+    @BindView(R.id.toService)
     Button fService;
 
     @BindView(R.id.fileprovider7)
     Button fileprovider7;
-
-    @BindView(R.id.spannable)
-    Button spannable;
 
 
     @Override
@@ -119,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.toCountDownTimer, R.id.toloadimage, R.id.recycler, R.id.v_move, R.id.toPhotos, R.id.rxpermission, R.id.themeActivity, R.id.popmenu,
-            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.fService, R.id.fileprovider7})
+            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead})
     public void ViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.toCountDownTimer:
@@ -171,29 +163,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.popup:
                 new AppCompatPopupWin(this).showPop();
                 break;
-            case R.id.fService:
-//                Intent intentOne = new Intent(this, ForegroundService.class);
-//                startService(intentOne);
-
-
-//                Log.d(TAG, "主线程 id: " + Thread.currentThread().getId());
-//                Intent intentService = new Intent(this, AsycnService.class);
-//                startService(intentService);
-
-                Intent intent = new Intent(this, ForegroundService.class);
-                Log.i("Kathy", "ActivityA 执行 bindService");
-                bindService(intent, conn, BIND_AUTO_CREATE);
-
-//                if (isBind) {
-//                    Log.i("Kathy", "ActivityA 执行 unbindService");
-//                    unbindService(conn);
-//                }
-                DeviceUtils.testAndfix();
+            case R.id.toService:
+                startActivity(new Intent(MainActivity.this, ServiceActivity.class));
+//                DeviceUtils.testAndfix();
                 break;
             case R.id.fileprovider7:
                 startActivity(new Intent(this, FileProvider7Activity.class));
                 break;
-            case R.id.spannable:
+            case R.id.handlerthead:
+                startActivity(new Intent(this, HandlerThreadActivity.class));
                 break;
             default:
                 break;
@@ -322,28 +300,6 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
-    //service
-    private ForegroundService service = null;
-    private boolean isBind = false;
-
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder binder) {
-            isBind = true;
-            ForegroundService.MyBinder myBinder = (ForegroundService.MyBinder) binder;
-            service = myBinder.getService();
-            Log.i("Kathy", "ActivityA - onServiceConnected");
-            int num = service.getRandomNumber();
-            Log.i("Kathy", "ActivityA - getRandomNumber = " + num);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isBind = false;
-            Log.i("Kathy", "ActivityA - onServiceDisconnected");
-        }
-    };
 
     @Override
     protected void onDestroy() {

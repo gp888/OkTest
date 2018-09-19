@@ -14,8 +14,20 @@ public class AsycnService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.d(TAG, "子线程 id（Intent 服务）: " + Thread.currentThread().getId());
+        Log.d(TAG, "子线程 id: " + Thread.currentThread().getId());
+        android.os.Handler handler = new android.os.Handler();
         //在此执行耗时逻辑
+        for(int i = 0;i < 5; i++) {
+            Log.d(TAG, "run" + i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d(TAG, "run down");
+
+//        Snackbar snackbar = new Snackbar();
     }
 
     @Override

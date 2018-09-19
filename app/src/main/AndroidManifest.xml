@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
-        android:name=".GlobalApplication"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -57,6 +57,8 @@
         <service android:name=".service.AsycnService"/>
 
         <activity android:name=".FileProvider7Activity"/>
+        <activity android:name=".ServiceActivity"/>
+        <activity android:name=".handlerthread.HandlerThreadActivity"/>
     </application>
 
 </manifest>

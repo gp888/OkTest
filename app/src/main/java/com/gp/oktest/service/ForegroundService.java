@@ -98,7 +98,7 @@ public class ForegroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand");
+        Log.d(TAG, "onStartCommand" + "-主线程id:" + Thread.currentThread().getId());
 
         //在子线程中来执行耗时操作
         new Thread(new Runnable() {
@@ -113,7 +113,6 @@ public class ForegroundService extends Service {
                     }
                 }
                 Log.d(TAG, "run down");
-                //耗时操作
                 stopSelf();
             }
         }).start();

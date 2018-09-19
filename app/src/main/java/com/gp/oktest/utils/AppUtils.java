@@ -10,7 +10,7 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-import static com.gp.oktest.GlobalApplication.globalContext;
+import static com.gp.oktest.App.globalContext;
 
 public class AppUtils {
 

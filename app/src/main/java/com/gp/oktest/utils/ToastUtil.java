@@ -1,14 +1,8 @@
 package com.gp.oktest.utils;
 
-import android.content.Context;
-import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gp.oktest.GlobalApplication;
+import com.gp.oktest.App;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +16,7 @@ public class ToastUtil {
 
     public static void showToastShort(String toastText) {
         if (toast == null) {
-            toast = Toast.makeText(GlobalApplication.globalContext, "", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(App.globalContext, "", Toast.LENGTH_SHORT);
         }
         toast.setText(toastText);
         toast.show();
@@ -30,18 +24,18 @@ public class ToastUtil {
 
     public static void showToastLong(String toastText) {
         if (toast == null) {
-            toast = Toast.makeText(GlobalApplication.globalContext, "", Toast.LENGTH_LONG);
+            toast = Toast.makeText(App.globalContext, "", Toast.LENGTH_LONG);
         }
         toast.setText(toastText);
         toast.show();
     }
 
     public static void showToastShort(int res) {
-        showToastShort(GlobalApplication.globalContext.getString(res));
+        showToastShort(App.globalContext.getString(res));
     }
 
     public static void showToastLong(int res) {
-        showToastLong(GlobalApplication.globalContext.getString(res));
+        showToastLong(App.globalContext.getString(res));
     }
 
 

@@ -55,7 +55,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
 import static android.graphics.BlurMaskFilter.Blur;
-import static com.gp.oktest.GlobalApplication.globalContext;
+import static com.gp.oktest.App.globalContext;
 
 /**
  * <pre>
