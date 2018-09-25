@@ -1,6 +1,9 @@
 package com.gp.oktest;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -85,6 +88,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.fileprovider7)
     Button fileprovider7;
 
+    @BindView(R.id.keyboard)
+    Button keyboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +116,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick({R.id.toCountDownTimer, R.id.toloadimage, R.id.recycler, R.id.v_move, R.id.toPhotos, R.id.rxpermission, R.id.themeActivity, R.id.popmenu,
-            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead})
+            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead, R.id.keyboard})
     public void ViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.toCountDownTimer:
@@ -172,6 +177,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.handlerthead:
                 startActivity(new Intent(this, HandlerThreadActivity.class));
+                break;
+            case R.id.keyboard:
+                startActivity(new Intent(this, KeyBoardAvtivity.class));
                 break;
             default:
                 break;
@@ -305,5 +313,36 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    private void initAnim() {
+        ValueAnimator valueAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(this, R.animator.animate_test);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+//                pg.setProgress((Integer) animation.getAnimatedValue());
+            }
+        });
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Toast.makeText(MainActivity.this, "动画开始", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Toast.makeText(MainActivity.this, "动画结束", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                Toast.makeText(MainActivity.this, "动画取消", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                Toast.makeText(MainActivity.this, "动画重复", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

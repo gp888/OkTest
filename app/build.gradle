@@ -8,7 +8,6 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -34,24 +33,26 @@ android {
     }
 }
 
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion '26.1.0'
-            }
-        }
-    }
-}
+//统一替换SupportVersion版本
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == 'com.android.support') {
+//            if (!requested.name.startsWith("multidex")) {
+//                details.useVersion '26.1.0'
+//            }
+//        }
+//    }
+//}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation project(':testlibrary')
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.squareup.okio:okio:1.11.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -64,20 +65,17 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.android.support:recyclerview-v7:27.1.1'
+
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //状态栏
-    //    compile 'com.jaeger.statusbarutil:library:1.4.0'
+    //compile 'com.jaeger.statusbarutil:library:1.4.0'
     //rxpermissions with rxjava1.2.9
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
-    compile 'com.alipay.euler:andfix:0.5.0@aar'
     //AndFix
-    compile project(path: ':testlibrary')
-    implementation ('com.jakewharton:butterknife:8.8.1'){
-        exclude group: 'com.android.support'
-    }
+    compile 'com.alipay.euler:andfix:0.5.0@aar'
 
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-
-//    implementation 'com.android.support:design:27.1.1'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

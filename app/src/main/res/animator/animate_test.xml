@@ -1,0 +1,18 @@
+<animator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="2000"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:repeatCount="0"
+    android:repeatMode="restart"
+    android:startOffset="1000"
+    android:valueFrom="1"
+    android:valueTo="100"
+    android:valueType="intType"
+    />
+    <!--android:duration	动画执行时间-->
+    <!--android:interpolator	插值器-->
+    <!--android:repeatCount	重复次数-->
+    <!--android:repeatMode	重复模式，reverse：倒着重放动画。restart：正着重放动画-->
+    <!--android:startOffset	延迟开始动画时间-->
+    <!--android:valueFrom	值得开始值，int float color-->
+    <!--android:valueTo	值得目标值 int float color-->
+    <!--android:valueType=	值得类型 intType floatType-->
