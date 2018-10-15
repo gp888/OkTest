@@ -59,6 +59,7 @@
         <activity android:name=".FileProvider7Activity"/>
         <activity android:name=".ServiceActivity"/>
         <activity android:name=".handlerthread.HandlerThreadActivity"/>
+        <activity android:name=".ImageCacheActivity"/>
     </application>
 
 </manifest>

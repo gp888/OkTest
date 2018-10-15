@@ -6,4 +6,5 @@
     <string name="a_chinese_character_space">&#160;&#160;&#8201;</string>
     <!--首行缩进setText(“\u3000\u3000”+xxxxx);-->
     <string name="shsj">"\u3000\u3000"</string>
+    <!--%.2f, %2f-->
 </resources>

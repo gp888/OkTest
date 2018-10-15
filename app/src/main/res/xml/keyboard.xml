@@ -8,7 +8,8 @@
         <Key
             android:codes="49"
             android:keyLabel="1"
-            android:horizontalGap="2%p">
+            android:horizontalGap="2%p"
+            android:popupCharacters="ji">
 
         </Key>
         <Key

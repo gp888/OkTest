@@ -1,5 +1,6 @@
 package com.gp.oktest.utils;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
@@ -55,6 +56,24 @@ public class AppUtils {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    private static boolean hasExternalStoragePermission(Context context) {
+        int perm = context.checkCallingOrSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return perm == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+    private static boolean checkPermission(Context context, String permName, String pkgName){
+        PackageManager pm = context.getPackageManager();
+        if(PackageManager.PERMISSION_GRANTED == pm.checkPermission(permName, pkgName)){
+
+            return true;
+        }else{
+            //PackageManager.PERMISSION_DENIED == pm.checkPermission(permName, pkgName)
+
+            return false;
         }
     }
 }

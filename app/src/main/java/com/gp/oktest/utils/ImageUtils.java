@@ -30,4 +30,9 @@ public class ImageUtils {
         }
         return inSampleSize;
     }
+
+    /**
+     * 内存缓存技术对大量占用内存的图片提供了快速访问的方法。其中最核心的类是LruCache (此类在android-support-v4的包中提供) 。
+     * 这个类非常适合用来缓存图片，它的主要算法原理是把最近使用的对象用强引用存储在 LinkedHashMap 中，并且把最近最少使用的对象在缓存值达到预设定值之前从内存中移除
+     */
 }

@@ -5,7 +5,7 @@
     android:background="#999999"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:keyBackground="@drawable/www555"
+    android:keyBackground="@color/accent"
     android:keyPreviewHeight="64dip"
     android:keyPreviewLayout="@layout/keyboard_preview"
     android:keyTextColor="@android:color/black"
@@ -15,6 +15,7 @@
     android:paddingBottom="8dip"
     android:shadowColor="#FFFFFF"
     android:shadowRadius="0.0"
-    android:visibility="gone">
+    android:visibility="gone"
+    android:layout_gravity="center_horizontal">
 
 </android.inputmethodservice.KeyboardView>
