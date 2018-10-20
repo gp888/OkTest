@@ -3,9 +3,11 @@ package com.gp.oktest.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +18,7 @@ import com.gp.testlibrary.FileProvider7Util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by guoping on 2017/12/19.
@@ -107,5 +110,17 @@ public class DeviceUtils {
         String str = "strr";
         int len = str.length();
         ToastUtil.showToastShort(len + "");
+    }
+
+    //是否有摄像头
+    public static boolean hasCameraDevice(Context ctx) {
+        return ctx.getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
+    //是否支持自动对焦
+    public static boolean isAutoFocusSupported(Camera.Parameters params) {
+        List<String> modes = params.getSupportedFocusModes();
+        return modes.contains(Camera.Parameters.FOCUS_MODE_AUTO);
     }
 }

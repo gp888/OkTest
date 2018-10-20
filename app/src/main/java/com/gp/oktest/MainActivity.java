@@ -7,10 +7,13 @@ import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -19,30 +22,21 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.camera.CameraActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
-
-import java.io.IOException;
+import com.gp.oktest.utils.DeviceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
+import static android.text.format.DateUtils.FORMAT_24HOUR;
+import static android.text.format.DateUtils.FORMAT_ABBREV_ALL;
+import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
+import static android.text.format.DateUtils.FORMAT_SHOW_TIME;
+import static android.text.format.DateUtils.FORMAT_SHOW_YEAR;
 
 public class MainActivity extends BaseActivity {
-
-    //传入github的用户名
-    private String loginName = "gp888";
 
     private static final int REQ_PERMISSION_CODE_FIND_LOCATION = 0X113;
 
@@ -97,10 +91,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        httpGithubString();
-        httpGithubJson();
-        httpGithubResponseBody();
-        httpGithubRxjava();
+
 
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
@@ -116,7 +107,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick({R.id.toCountDownTimer, R.id.toloadimage, R.id.recycler, R.id.v_move, R.id.toPhotos, R.id.rxpermission, R.id.themeActivity, R.id.popmenu,
-            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead, R.id.keyboard})
+            R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead, R.id.keyboard, R.id.retrofit,
+    R.id.camera})
     public void ViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.toCountDownTimer:
@@ -143,7 +135,9 @@ public class MainActivity extends BaseActivity {
             case R.id.popmenu:
                 View menu = findViewById(R.id.popmenu);
                 PopupMenu popupMenu = new PopupMenu(this, menu);
-                popupMenu.setGravity(Gravity.RIGHT);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    popupMenu.setGravity(Gravity.RIGHT);
+                }
                 popupMenu.getMenuInflater().inflate(R.menu.menu_navigationview, popupMenu.getMenu());
                 menu.setOnTouchListener(popupMenu.getDragToOpenListener());
                 popupMenu.show();
@@ -181,117 +175,20 @@ public class MainActivity extends BaseActivity {
             case R.id.keyboard:
                 startActivity(new Intent(this, KeyBoardAvtivity.class));
                 break;
+            case R.id.retrofit:
+                startActivity(new Intent(this, RetrofitActivity.class));
+                break;
+            case R.id.camera:
+                boolean isHasCamera = DeviceUtils.hasCameraDevice(MainActivity.this);
+                Log.d(TAG,  isHasCamera+ "");
+
+                int cameras = Camera.getNumberOfCameras();
+                Log.d(TAG, cameras + "");
+                startActivity(new Intent(this, CameraActivity.class));
+                break;
             default:
                 break;
         }
-    }
-
-    private void httpGithubString() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(GitHubService.BASEURL)
-                //添加String支持
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        GitHubService service = retrofit.create(GitHubService.class);
-        Call<String> call = service.getData(loginName);
-
-        // 异步请求
-        call.enqueue(new Callback<String>() {
-
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                // 处理返回数据
-                if (response.isSuccessful()) {
-                    Log.d(TAG, response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d(TAG, "onFailure: 请求数据失败");
-            }
-        });
-    }
-
-    private void httpGithubJson() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(GitHubService.BASEURL)
-                // 添加Json转换器支持
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        GitHubService service = retrofit.create(GitHubService.class);
-        Call<GitModel> call = service.getUserInfo(loginName);
-        call.enqueue(new Callback<GitModel>() {
-
-            @Override
-            public void onResponse(Call<GitModel> call, Response<GitModel> response) {
-                if (response.isSuccessful()) {
-                    Log.d(TAG, response.body().getLogin());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GitModel> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getMessage());
-            }
-        });
-    }
-
-    private void httpGithubResponseBody() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(GitHubService.BASEURL)
-                .build();
-        GitHubService service = retrofit.create(GitHubService.class);
-        Call<ResponseBody> call = service.getResponseBody(loginName);
-        call.enqueue(new Callback<ResponseBody>() {
-
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()){
-                    try {
-                        Log.d(TAG, "onResponse: "+response.body().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "onFailure: ");
-            }
-        });
-    }
-
-    private void httpGithubRxjava () {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(GitHubService.BASEURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-
-        GitHubService service = retrofit.create(GitHubService.class);
-        Observable<GitModel> obserable = service.rxUser(loginName);
-        obserable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GitModel>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted: ");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "onError: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(GitModel gitModel) {
-                        Log.d(TAG, "onNext: " + gitModel.getLogin());
-                    }
-                });
     }
 
 
@@ -344,5 +241,11 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(MainActivity.this, "动画重复", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String getTimeStr() {
+        String dataStr = DateUtils.formatDateTime(MainActivity.this, System.currentTimeMillis(),
+                FORMAT_SHOW_YEAR | FORMAT_SHOW_DATE | FORMAT_SHOW_TIME | FORMAT_24HOUR | FORMAT_ABBREV_ALL);
+        return dataStr;
     }
 }
