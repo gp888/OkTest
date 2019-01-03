@@ -179,4 +179,12 @@
         app:layout_constraintTop_toBottomOf="@+id/handlerthead"
         android:text="camera"/>
 
+    <Button
+        android:id="@+id/pcm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PCM"
+        app:layout_constraintStart_toEndOf="@id/camera"
+        app:layout_constraintTop_toBottomOf="@+id/keyboard"/>
+
 </android.support.constraint.ConstraintLayout>

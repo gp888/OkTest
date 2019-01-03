@@ -25,6 +25,8 @@
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <!--<uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>-->
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -67,6 +69,7 @@
         <activity android:name=".RetrofitActivity"/>
         <activity android:name=".camera.CameraActivity"/>
         <activity android:name=".camera.CameraActivity2"/>
+        <activity android:name=".PcmRecordPlay"/>
     </application>
 
 </manifest>
