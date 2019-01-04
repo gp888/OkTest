@@ -62,4 +62,9 @@
     <color name="rainbow_green">#8eac00</color>
     <color name="rainbow_blue">#127a97</color>
     <color name="rainbow_purple">#452b72</color>
+
+
+
+    <color name="video_green">#FF00FF29</color>
+    <color name="transparent">#00000000</color>
 </resources>

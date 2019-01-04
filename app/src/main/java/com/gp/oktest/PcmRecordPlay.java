@@ -102,8 +102,7 @@ public class PcmRecordPlay extends BaseActivity implements View.OnClickListener 
             mRecode.setText("stop");
             mPlay.setEnabled(false);
 
-            File fpath = new File(Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + "/okTest/Record");
+            File fpath = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/okTest/Record");
             if (!fpath.exists()) {
                 fpath.mkdirs();
             }

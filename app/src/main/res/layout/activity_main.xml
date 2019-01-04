@@ -187,4 +187,14 @@
         app:layout_constraintStart_toEndOf="@id/camera"
         app:layout_constraintTop_toBottomOf="@+id/keyboard"/>
 
+    <Button
+        android:id="@+id/miniVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="minivideo"
+        app:layout_constraintStart_toEndOf="@+id/pcm"
+        app:layout_constraintTop_toBottomOf="@+id/keyboard" />
+
 </android.support.constraint.ConstraintLayout>
