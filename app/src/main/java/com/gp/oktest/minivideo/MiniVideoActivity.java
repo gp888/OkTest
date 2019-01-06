@@ -35,7 +35,7 @@ public class MiniVideoActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = VideoRecordActivity.startRecordActivity(videoPath,MiniVideoActivity.this);
+                Intent intent = MiniVideoRecordActivity.startRecordActivity(videoPath,MiniVideoActivity.this);
                 startActivity(intent);
             }
         });

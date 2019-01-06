@@ -25,6 +25,8 @@ import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
+import com.gp.oktest.minivideo.MiniVideoPlayActivity;
+import com.gp.oktest.player.VideoPlayActivity;
 import com.gp.oktest.utils.DeviceUtils;
 
 import butterknife.BindView;
@@ -92,6 +94,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.miniVideo)
     Button miniVideo;
 
+    @BindView(R.id.play)
+    Button play;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +120,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.toCountDownTimer, R.id.toloadimage, R.id.recycler, R.id.v_move, R.id.toPhotos, R.id.rxpermission, R.id.themeActivity, R.id.popmenu,
             R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead, R.id.keyboard, R.id.retrofit,
-    R.id.camera, R.id.pcm, R.id.miniVideo})
+    R.id.camera, R.id.pcm, R.id.miniVideo,R.id.play})
     public void ViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.toCountDownTimer:
@@ -198,6 +203,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.miniVideo:
                 startActivity(new Intent(this, MiniVideoActivity.class));
+                break;
+            case R.id.play:
+                startActivity(new Intent(this, VideoPlayActivity.class));
                 break;
             default:
                 break;

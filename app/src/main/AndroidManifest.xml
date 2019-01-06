@@ -73,8 +73,9 @@
         <activity android:name=".camera.CameraActivity2"/>
         <activity android:name=".PcmRecordPlay"/>
         <activity android:name=".minivideo.MiniVideoActivity"/>
-        <activity android:name=".minivideo.VideoPlayActivity"/>
-        <activity android:name=".minivideo.VideoRecordActivity"/>
+        <activity android:name=".minivideo.MiniVideoPlayActivity"/>
+        <activity android:name=".minivideo.MiniVideoRecordActivity"/>
+        <activity android:name=".player.VideoPlayActivity"/>
     </application>
 
 </manifest>
