@@ -21,12 +21,12 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.gp.oktest.androidmedia.MediaActivity;
+import com.gp.oktest.androidmedia.MediaMuxerActivity;
 import com.gp.oktest.base.BaseActivity;
-import com.gp.oktest.camera.CameraActivity;
+import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
-import com.gp.oktest.minivideo.MiniVideoActivity;
-import com.gp.oktest.minivideo.MiniVideoPlayActivity;
-import com.gp.oktest.player.VideoPlayActivity;
+import com.gp.oktest.mp4player.VideoPlayActivity;
 import com.gp.oktest.utils.DeviceUtils;
 
 import butterknife.BindView;
@@ -196,13 +196,15 @@ public class MainActivity extends BaseActivity {
 
                 int cameras = Camera.getNumberOfCameras();
                 Log.d(TAG, cameras + "");
-                startActivity(new Intent(this, CameraActivity.class));
+                startActivity(new Intent(this, CameraPreviewActivity.class));
                 break;
             case R.id.pcm:
                 startActivity(new Intent(this, PcmRecordPlay.class));
                 break;
             case R.id.miniVideo:
-                startActivity(new Intent(this, MiniVideoActivity.class));
+//                startActivity(new Intent(this, MiniVideoActivity.class));
+//                startActivity(new Intent(this, StickMenuActivity.class));
+                startActivity(new Intent(this, MediaActivity.class));
                 break;
             case R.id.play:
                 startActivity(new Intent(this, VideoPlayActivity.class));

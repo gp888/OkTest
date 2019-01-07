@@ -69,13 +69,17 @@
         <activity android:name=".handlerthread.HandlerThreadActivity"/>
         <activity android:name=".ImageCacheActivity"/>
         <activity android:name=".RetrofitActivity"/>
-        <activity android:name=".camera.CameraActivity"/>
+        <activity android:name=".camera.CameraPreviewActivity"/>
         <activity android:name=".camera.CameraActivity2"/>
         <activity android:name=".PcmRecordPlay"/>
         <activity android:name=".minivideo.MiniVideoActivity"/>
         <activity android:name=".minivideo.MiniVideoPlayActivity"/>
         <activity android:name=".minivideo.MiniVideoRecordActivity"/>
-        <activity android:name=".player.VideoPlayActivity"/>
+        <activity android:name=".StickMenuActivity"/>
+        <activity android:name=".mp4player.VideoPlayActivity"/>
+
+        <activity android:name=".androidmedia.MediaActivity"/>
+        <activity android:name=".androidmedia.MediaMuxerActivity"/>
     </application>
 
 </manifest>

@@ -65,13 +65,10 @@ public class CameraUtil {
      * @param cameraId
      * @param camera
      */
-    public void setCameraDisplayOrientation(Activity activity,
-                                            int cameraId, Camera camera) {
-        Camera.CameraInfo info =
-                new Camera.CameraInfo();
+    public void setCameraDisplayOrientation(Activity activity, int cameraId, Camera camera) {
+        Camera.CameraInfo info = new Camera.CameraInfo();
         Camera.getCameraInfo(cameraId, info);
-        int rotation = activity.getWindowManager().getDefaultDisplay()
-                .getRotation();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
         switch (rotation) {
             case Surface.ROTATION_0:

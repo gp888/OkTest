@@ -16,7 +16,7 @@ import com.gp.oktest.base.BaseActivity;
 
 import java.io.IOException;
 
-public class CameraActivity extends BaseActivity implements SurfaceHolder.Callback{
+public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder.Callback{
 
     private SurfaceHolder mHolder;
     private Camera mCamera;

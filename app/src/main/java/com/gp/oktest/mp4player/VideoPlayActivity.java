@@ -1,4 +1,4 @@
-package com.gp.oktest.player;
+package com.gp.oktest.mp4player;
 
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;

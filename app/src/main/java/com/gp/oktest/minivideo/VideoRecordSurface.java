@@ -123,6 +123,16 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
     }
 
     private void initParameters() {
+        //保存摄像机配置信息的一个实体类，
+        //文件输出格式
+        //视频编解码格式
+        //视频比特率，以位/秒为单位
+        //视频帧速率（以每秒帧数为单位）
+        //视频帧宽和高度，
+        //音频编解码格式
+        //音频比特率，以位/秒为单位，
+        //音频采样率
+        //录制的音频通道数
         CamcorderProfile mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
         Camera.Parameters mParams = mCamera.getParameters();
         mParams.setPreviewSize(mProfile.videoFrameWidth, mProfile.videoFrameHeight);

@@ -1,4 +1,4 @@
-package com.gp.oktest.player;
+package com.gp.oktest.mp4player;
 
 import android.content.Context;
 import android.util.AttributeSet;
