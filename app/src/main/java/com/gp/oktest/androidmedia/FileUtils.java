@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FileUtils {
 
-    private static final String MAIN_DIR_NAME = "/android_records";
+    private static final String MAIN_DIR_NAME = "/okTest/android_records";
     private static final String BASE_VIDEO = "/video/";
     private static final String BASE_EXT = ".mp4";
 

@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.recordplaypcm;
 
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 
 import java.io.BufferedInputStream;
@@ -31,6 +32,9 @@ import java.io.IOException;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+/**
+ * 录播pcm
+ */
 public class PcmRecordPlay extends BaseActivity implements View.OnClickListener {
 
     private final int REQ_PERMISSION_AUDIO = 0x01;

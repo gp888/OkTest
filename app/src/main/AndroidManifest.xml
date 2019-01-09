@@ -71,15 +71,18 @@
         <activity android:name=".RetrofitActivity"/>
         <activity android:name=".camera.CameraPreviewActivity"/>
         <activity android:name=".camera.CameraActivity2"/>
-        <activity android:name=".PcmRecordPlay"/>
+        <activity android:name=".recordplaypcm.PcmRecordPlay"/>
         <activity android:name=".minivideo.MiniVideoActivity"/>
         <activity android:name=".minivideo.MiniVideoPlayActivity"/>
         <activity android:name=".minivideo.MiniVideoRecordActivity"/>
         <activity android:name=".StickMenuActivity"/>
         <activity android:name=".mp4player.VideoPlayActivity"/>
 
-        <activity android:name=".androidmedia.MediaActivity"/>
+        <activity android:name=".androidmedia.H264EncodeActivity"/>
         <activity android:name=".androidmedia.MediaMuxerActivity"/>
+
+        <activity android:name=".pcmtowav.PcmToWavActivity"/>
+        <activity android:name=".pcmtowav.PcmToWavListActivity"/>
     </application>
 
 </manifest>

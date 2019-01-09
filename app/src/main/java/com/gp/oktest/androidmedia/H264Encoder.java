@@ -33,7 +33,7 @@ public class H264Encoder {
      * 构造函数
      * @param width
      * @param height
-     * @param framerate
+     * @param framerate 帧率 一般在15至30之内，太小容易造成视频卡顿
      */
     public H264Encoder(int width, int height, int framerate) {
         this.width = width;
@@ -41,9 +41,13 @@ public class H264Encoder {
         this.framerate = framerate;
 
         MediaFormat mediaFormat = MediaFormat.createVideoFormat("video/avc", width, height);
+        //色彩格式
         mediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar);
-        mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, width * height * 5);
+        //描述平均位速率（以位/秒为单位）的键。 关联的值是一个整数
+        mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, width * height * 5);//码率
+        //描述视频格式的帧速率（以帧/秒为单位）的键。
         mediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, 30);
+        //关键帧间隔时间，单位是秒
         mediaFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
         try {
             mediaCodec = MediaCodec.createEncoderByType("video/avc");
@@ -56,7 +60,7 @@ public class H264Encoder {
     }
 
     private void createfile() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.mp4";
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/okTest/video/gpdata.mp4";
         File file = new File(path);
         if (file.exists()) {
             file.delete();
@@ -98,24 +102,25 @@ public class H264Encoder {
                     }
                     if (input != null) {
                         try {
-                            ByteBuffer[] inputBuffers = mediaCodec.getInputBuffers();
-                            ByteBuffer[] outputBuffers = mediaCodec.getOutputBuffers();
+                            ByteBuffer[] inputBuffers = mediaCodec.getInputBuffers();//拿到输入缓冲区,用于传送数据进行编码
+                            ByteBuffer[] outputBuffers = mediaCodec.getOutputBuffers();;//拿到输出缓冲区,用于取到编码后的数据
                             int inputBufferIndex = mediaCodec.dequeueInputBuffer(-1);
-                            if (inputBufferIndex >= 0) {
+                            if (inputBufferIndex >= 0) {////当输入缓冲区有效时,就是>=0
                                 pts = computePresentationTime(generateIndex);
                                 ByteBuffer inputBuffer = inputBuffers[inputBufferIndex];
                                 inputBuffer.clear();
-                                inputBuffer.put(input);
+                                inputBuffer.put(input);//往输入缓冲区写入数据,
+                                //第一个是输入缓冲区的索引，第二个数据是输入缓冲区起始索引，第三个是放入的数据大小，第四个是时间戳，保证递增就是
                                 mediaCodec.queueInputBuffer(inputBufferIndex, 0, input.length, System.currentTimeMillis(), 0);
                                 generateIndex += 1;
                             }
 
                             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-                            int outputBufferIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, TIMEOUT_USEC);
+                            int outputBufferIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, TIMEOUT_USEC);//拿到输出缓冲区的索引
                             while (outputBufferIndex >= 0) {
                                 ByteBuffer outputBuffer = outputBuffers[outputBufferIndex];
                                 byte[] outData = new byte[bufferInfo.size];
-                                outputBuffer.get(outData);
+                                outputBuffer.get(outData); //outData就是输出的h264数据
                                 if (bufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG) {
                                     configbyte = new byte[bufferInfo.size];
                                     configbyte = outData;
@@ -125,7 +130,7 @@ public class H264Encoder {
                                     System.arraycopy(outData, 0, keyframe, configbyte.length, outData.length);
                                     outputStream.write(keyframe, 0, keyframe.length);
                                 } else {
-                                    outputStream.write(outData, 0, outData.length);
+                                    outputStream.write(outData, 0, outData.length);//将输出的h264数据保存为文件，用vlc就可以播放
                                 }
 
                                 mediaCodec.releaseOutputBuffer(outputBufferIndex, false);

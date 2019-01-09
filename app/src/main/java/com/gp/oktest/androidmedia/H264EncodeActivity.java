@@ -19,11 +19,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.io.IOException;
 
-public class MediaActivity extends BaseActivity implements SurfaceHolder.Callback, Camera.PreviewCallback {
+public class H264EncodeActivity extends BaseActivity implements SurfaceHolder.Callback, Camera.PreviewCallback {
 
     Camera camera;
     SurfaceView surfaceView;
@@ -45,8 +44,6 @@ public class MediaActivity extends BaseActivity implements SurfaceHolder.Callbac
                 ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "申请权限", Toast.LENGTH_SHORT).show();
-            // 申请 相机 麦克风权限
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.CAMERA,
                     Manifest.permission.RECORD_AUDIO,
@@ -61,16 +58,16 @@ public class MediaActivity extends BaseActivity implements SurfaceHolder.Callbac
         muxerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaActivity.this, MediaMuxerActivity.class);
+                Intent intent = new Intent(H264EncodeActivity.this, MediaMuxerActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
         if (supportH264Codec()) {
-            Log.e("MainActivity", "support H264 hard codec");
+            Log.e("H264EncodeActivity", "support H264 hard codec");
         } else {
-            Log.e("MainActivity", "not support H264 hard codec");
+            Log.e("H264EncodeActivity", "not support H264 hard codec");
         }
     }
 
