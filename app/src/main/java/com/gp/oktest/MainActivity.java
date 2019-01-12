@@ -25,7 +25,7 @@ import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
-import com.gp.oktest.mp4player.VideoPlayActivity;
+import com.gp.oktest.mp4player.Mp4PlayActivity;
 import com.gp.oktest.pcmtowav.PcmToWavActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.utils.DeviceUtils;
@@ -95,8 +95,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.miniVideo)
     Button miniVideo;
 
-    @BindView(R.id.play)
-    Button play;
+    @BindView(R.id.mp4)
+    Button mp4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.toCountDownTimer, R.id.toloadimage, R.id.recycler, R.id.v_move, R.id.toPhotos, R.id.rxpermission, R.id.themeActivity, R.id.popmenu,
             R.id.popupwindow, R.id.span, R.id.tomap, R.id.popup, R.id.toService, R.id.fileprovider7, R.id.handlerthead, R.id.keyboard, R.id.retrofit,
-    R.id.camera, R.id.pcm, R.id.miniVideo,R.id.play})
+    R.id.camera, R.id.pcm, R.id.miniVideo,R.id.mp4})
     public void ViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.toCountDownTimer:
@@ -205,11 +205,11 @@ public class MainActivity extends BaseActivity {
             case R.id.miniVideo:
 //                startActivity(new Intent(this, MiniVideoActivity.class));
 //                startActivity(new Intent(this, StickMenuActivity.class));
-//                startActivity(new Intent(this, H264EncodeActivity.class));
-                startActivity(new Intent(this, PcmToWavActivity.class));
+                startActivity(new Intent(this, H264EncodeActivity.class));
+//                startActivity(new Intent(this, PcmToWavActivity.class));
                 break;
-            case R.id.play:
-                startActivity(new Intent(this, VideoPlayActivity.class));
+            case R.id.mp4:
+                startActivity(new Intent(this, Mp4PlayActivity.class));
                 break;
             default:
                 break;

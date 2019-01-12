@@ -60,7 +60,7 @@ public class H264Encoder {
     }
 
     private void createfile() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/okTest/video/gpdata.mp4";
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/okTest/video/h264encode.mp4";
         File file = new File(path);
         if (file.exists()) {
             file.delete();

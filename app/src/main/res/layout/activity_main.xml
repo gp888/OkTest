@@ -198,10 +198,10 @@
         app:layout_constraintTop_toBottomOf="@+id/keyboard" />
 
     <Button
-        android:id="@+id/play"
+        android:id="@+id/mp4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="play"
+        android:text="mp4"
         app:layout_constraintStart_toEndOf="@id/miniVideo"
         app:layout_constraintTop_toBottomOf="@id/retrofit" />
 

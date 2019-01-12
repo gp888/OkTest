@@ -13,7 +13,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 
-public class VideoPlayActivity extends BaseActivity implements IPlayerCallBack {
+public class Mp4PlayActivity extends BaseActivity implements IPlayerCallBack {
     private VideoPlayer player;
     private PlayerView playerView;
 

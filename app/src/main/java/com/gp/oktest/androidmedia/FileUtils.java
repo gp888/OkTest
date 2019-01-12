@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class FileUtils {
 
-    private static final String MAIN_DIR_NAME = "/okTest/android_records";
-    private static final String BASE_VIDEO = "/video/";
+    private static final String MAIN_DIR_NAME = "/okTest";
+    private static final String BASE_VIDEO = "/muxe/";
     private static final String BASE_EXT = ".mp4";
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
