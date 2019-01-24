@@ -26,7 +26,6 @@ import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
-import com.gp.oktest.pcmtowav.PcmToWavActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.utils.DeviceUtils;
 

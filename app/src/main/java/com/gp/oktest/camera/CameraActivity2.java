@@ -47,7 +47,7 @@ public class CameraActivity2 extends BaseActivity {
         //        SURFACE_TYPE_HARDWARE     : 适用于 DMA(Direct memory access )引擎和硬件加速的Surface
         //        SURFACE_TYPE_GPU          : 适用于 GPU 加速的 Surface
         //        SURFACE_TYPE_PUSH_BUFFERS ：表明该 Surface 不包含原生数据，Surface用到的数据由其他对象提供
-        // 在 Camera 图像预览中就使用 SURFACE_TYPE_PUSH_BUFFERS 类型的 Surface，有 Camera 负责提供给预览 Surface 数据，这样图像预览会比较流
+        // 在 Camera 图像预览中就使用 SURFACE_TYPE_PUSH_BUFFERS 类型的 Surface，由 Camera 负责提供给预览 Surface 数据，这样图像预览会比较流
         mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
         mSurfaceHolder.addCallback(mSurfaceCallback);
@@ -118,8 +118,7 @@ public class CameraActivity2 extends BaseActivity {
      * @param cameraId 摄像头ID（假如手机有N个摄像头，cameraId 的值 就是 0 ~ N-1）
      * @param camera   摄像头对象
      */
-    public static void setCameraDisplayOrientation(Activity activity,
-                                                   int cameraId, Camera camera) {
+    public static void setCameraDisplayOrientation(Activity activity, int cameraId, Camera camera) {
 
         Camera.CameraInfo info = new Camera.CameraInfo();
         //获取摄像头信息
