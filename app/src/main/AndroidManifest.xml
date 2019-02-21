@@ -84,6 +84,23 @@
 
         <activity android:name=".pcmtowav.PcmToWavActivity"/>
         <activity android:name=".pcmtowav.PcmToWavListActivity"/>
+
+
+
+        <service android:name=".keepservicealive.DoubleProcessLiveService" />
+        <service android:name=".keepservicealive.StepService" />
+        <service
+            android:name=".keepservicealive.GuardService"
+            android:process=":guard_service" />
+        <activity android:name=".keepservicealive.DoubleProcessTestActivity"/>
+
+
+        <service
+            android:name=".aidltest.MyAidlService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":aidl"/>
+        <activity android:name=".aidltest.AidlActivity"/>
     </application>
 
 </manifest>

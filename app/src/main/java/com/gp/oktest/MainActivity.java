@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.gp.oktest.aidltest.AidlActivity;
 import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
@@ -208,7 +209,8 @@ public class MainActivity extends BaseActivity {
 //                startActivity(new Intent(this, PcmToWavActivity.class));
                 break;
             case R.id.mp4:
-                startActivity(new Intent(this, Mp4PlayActivity.class));
+//                startActivity(new Intent(this, Mp4PlayActivity.class));
+                startActivity(new Intent(this, AidlActivity.class));
                 break;
             default:
                 break;
