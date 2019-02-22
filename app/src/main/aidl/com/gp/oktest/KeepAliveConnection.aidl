@@ -1,5 +1,5 @@
 // KeepAliveConnection.aidl
-package com.gp.oktest;
+package com.gp.oktest;//keepservicealive
 
 // Declare any non-default types here with import statements
 

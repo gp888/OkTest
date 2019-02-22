@@ -1,11 +1,11 @@
-package com.gp.oktest.keepservicealive;
+package com.gp.oktest.keepservicealive
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent
+import android.os.Bundle
+import com.gp.oktest.base.BaseActivity
 
+class DoubleProcessTestActivity : BaseActivity(){
 
-public class DoubleProcessTestActivity extends AppCompatActivity {
 //    private ServiceConnection mServiceConnection = new ServiceConnection() {
 //        @Override
 //        public void onServiceConnected(ComponentName name, IBinder service) {
@@ -28,22 +28,22 @@ public class DoubleProcessTestActivity extends AppCompatActivity {
 //        }
 //    };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        Intent intent = new Intent(this, DoubleProcessLiveService.class);
-        startService(intent);
+
+        val intent = Intent(this, DoubleProcessLiveService::class.java)
+        startService(intent)
 //        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
         //双守护线程，优先级不一样
-        startAllServices();
+        startAllServices()
     }
 
     /**
      * 开启所有守护Service
      */
-    private void startAllServices() {
-        startService(new Intent(this, StepService.class));
-        startService(new Intent(this, GuardService.class));
+    private fun startAllServices() {
+        startService(Intent(this, StepService::class.java))
+        startService(Intent(this, GuardService::class.java))
     }
 }
