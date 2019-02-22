@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!--大致位置基于网络-->
+    <!--模糊定位权限：一般用于网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--精确位置基于gps和网络-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,10 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
-    <!--模糊定位权限：一般用于网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!--精确定位权限：一般用于gps定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!--适配8.0允许未知来源安装应用程序-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
@@ -89,7 +85,7 @@
 
         <service android:name=".keepservicealive.DoubleProcessLiveService" />
         <service android:name=".keepservicealive.StepService" android:exported="true">
-            <intent-filter android:priority="1000"></intent-filter>
+
         </service>
         <service
             android:name=".keepservicealive.GuardService"

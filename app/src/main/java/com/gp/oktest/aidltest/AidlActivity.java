@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.gp.oktest.IMyAidl;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -48,6 +50,7 @@ public class AidlActivity extends BaseActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             //连接后拿到 Binder，转换成 AIDL，在不同进程会返回个代理
             mAidl = IMyAidl.Stub.asInterface(service);
+            Log.d(TAG, "onServiceConnected");
         }
 
         @Override
@@ -60,6 +63,7 @@ public class AidlActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aidltest);
+        ButterKnife.bind(this);
 
         Intent intent1 = new Intent(getApplicationContext(), MyAidlService.class);
         bindService(intent1, mConnection, BIND_AUTO_CREATE);
