@@ -49,13 +49,14 @@ import android.text.style.UnderlineSpan;
 import android.text.style.UpdateAppearance;
 import android.util.Log;
 
+import com.gp.oktest.App;
+
 import java.io.InputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
 import static android.graphics.BlurMaskFilter.Blur;
-import static com.gp.oktest.App.globalContext;
 
 /**
  * <pre>
@@ -1154,7 +1155,7 @@ public final class SpanUtils {
 
         private CustomImageSpan(final Bitmap b, final int verticalAlignment) {
             super(verticalAlignment);
-            mDrawable = new BitmapDrawable(globalContext.getResources(), b);
+            mDrawable = new BitmapDrawable(App.Companion.getGlobalContext().getResources(), b);
             mDrawable.setBounds(
                     0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight()
             );
@@ -1187,9 +1188,9 @@ public final class SpanUtils {
                 Bitmap bitmap;
                 try {
                     InputStream is =
-                            globalContext.getContentResolver().openInputStream(mContentUri);
+                            App.Companion.getGlobalContext().getContentResolver().openInputStream(mContentUri);
                     bitmap = BitmapFactory.decodeStream(is);
-                    drawable = new BitmapDrawable(globalContext.getResources(), bitmap);
+                    drawable = new BitmapDrawable(App.Companion.getGlobalContext().getResources(), bitmap);
                     drawable.setBounds(
                             0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight()
                     );
@@ -1201,7 +1202,7 @@ public final class SpanUtils {
                 }
             } else {
                 try {
-                    drawable = ContextCompat.getDrawable(globalContext, mResourceId);
+                    drawable = ContextCompat.getDrawable(App.Companion.getGlobalContext(), mResourceId);
                     drawable.setBounds(
                             0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight()
                     );

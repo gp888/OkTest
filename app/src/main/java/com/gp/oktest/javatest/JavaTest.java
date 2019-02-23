@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.javatest;
 
 
 public class JavaTest {

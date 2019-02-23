@@ -9,9 +9,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
-import java.util.List;
+import com.gp.oktest.App;
 
-import static com.gp.oktest.App.globalContext;
+import java.util.List;
 
 public class AppUtils {
 
@@ -51,7 +51,7 @@ public class AppUtils {
 
     public static String getVersionName() {
         try {
-            PackageInfo pi = globalContext.getPackageManager().getPackageInfo(globalContext.getPackageName(), 0);
+            PackageInfo pi = App.Companion.getGlobalContext().getPackageManager().getPackageInfo(App.Companion.getGlobalContext().getPackageName(), 0);
             return pi.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

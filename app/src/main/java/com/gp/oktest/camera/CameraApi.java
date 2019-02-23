@@ -1,18 +1,8 @@
 package com.gp.oktest.camera;
 
-import android.app.Application;
 import android.content.Context;
 import android.hardware.Camera;
-import android.os.Build;
-import android.util.Log;
-import android.view.Surface;
 import android.view.SurfaceHolder;
-import android.view.WindowManager;
-
-import java.io.File;
-import java.io.IOException;
-
-import static com.gp.oktest.App.globalContext;
 
 public class CameraApi {
 

@@ -5,25 +5,27 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 作用: 保活此Service
  */
 public class DoubleProcessLiveService extends Service {
 
-    Timer timer = new Timer();
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
 
     @Override
     public void onCreate() {
         super.onCreate();
-        timer.schedule(new TimerTask() {
+
+        executor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 Log.d("LiveService", "双进程保活");
             }
-        }, 0, 60 * 1000);
+        }, 0, 60, TimeUnit.SECONDS);
     }
 
     @Override
