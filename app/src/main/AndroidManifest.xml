@@ -26,6 +26,9 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
 
+    <!--开机广播-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -83,14 +86,14 @@
 
 
 
-        <service android:name=".keepservicealive.DoubleProcessLiveService" />
-        <service android:name=".keepservicealive.StepService" android:exported="true">
+        <service android:name=".keepalive.DoubleProcessLiveService" />
+        <service android:name=".keepalive.StepService" android:exported="true">
 
         </service>
         <service
-            android:name=".keepservicealive.GuardService"
+            android:name=".keepalive.GuardService"
             android:process=":guard_service" />
-        <activity android:name=".keepservicealive.DoubleProcessTestActivity"/>
+        <activity android:name=".keepalive.DoubleProcessTestActivity"/>
 
 
         <service
@@ -99,6 +102,14 @@
             android:exported="true"
             android:process=":aidl"/>
         <activity android:name=".aidltest.AidlActivity"/>
+
+        <service android:name=".service.ForegroundService1"/>
+
+        <service
+            android:name=".keepalive.PlayerMusicService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":music_service" />
     </application>
 
 </manifest>

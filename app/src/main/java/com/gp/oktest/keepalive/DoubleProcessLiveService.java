@@ -1,4 +1,4 @@
-package com.gp.oktest.keepservicealive;
+package com.gp.oktest.keepalive;
 
 import android.app.Service;
 import android.content.Intent;

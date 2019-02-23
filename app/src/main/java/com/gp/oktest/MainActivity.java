@@ -28,6 +28,7 @@ import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
+import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
 
 import butterknife.BindView;
@@ -211,6 +212,7 @@ public class MainActivity extends BaseActivity {
             case R.id.mp4:
 //                startActivity(new Intent(this, Mp4PlayActivity.class));
                 startActivity(new Intent(this, AidlActivity.class));
+                startService(new Intent(this, ForegroundService1.class));
                 break;
             default:
                 break;
