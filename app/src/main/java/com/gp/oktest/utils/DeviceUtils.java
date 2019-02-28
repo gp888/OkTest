@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 
+import com.gp.oktest.App;
 import com.gp.oktest.Constant;
 import com.gp.testlibrary.FileProvider7Util;
 
@@ -132,8 +133,8 @@ public class DeviceUtils {
      *            （DisplayMetrics类中属性density）
      * @return
      */
-    public static int dip2px(Context context, float dipValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    public static int dip2px(float dipValue) {
+        final float scale = App.Companion.getGlobalContext().getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
 }
