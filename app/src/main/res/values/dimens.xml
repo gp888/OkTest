@@ -75,5 +75,7 @@
     <dimen name="block_width">40dp</dimen>
     <dimen name="block_low_height">8dp</dimen>
     <dimen name="block_high_height">196dp</dimen>
+    <dimen name="timeline_item_offset_left">100dp</dimen>
+    <dimen name="timeline_item_node_radius">10dp</dimen>
 
 </resources>
