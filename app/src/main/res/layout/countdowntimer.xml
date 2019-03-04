@@ -20,7 +20,8 @@
             android:layout_centerHorizontal="true"
             android:background="@color/grey_accent"
             android:layout_weight="1"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:gravity="center"/>
 
     </LinearLayout>
 </ScrollView>

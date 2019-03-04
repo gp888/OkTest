@@ -5,7 +5,6 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
-import android.app.AliasActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;

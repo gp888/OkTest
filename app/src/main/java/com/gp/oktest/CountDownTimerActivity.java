@@ -3,17 +3,17 @@ package com.gp.oktest;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.view.Banner;
 /**
  * Created by guoping on 2017/11/15.
  */
 
-public class CountDownTimerActivity extends AppCompatActivity {
+public class CountDownTimerActivity extends BaseActivity {
     TextView tv;
     long TOTAL_TIME = 10000, ONECE_TIME = 1000;
 

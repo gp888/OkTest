@@ -13,16 +13,19 @@
         <!--<item name="android:windowExitTransition">@transition/fade</item>-->
         <item name="android:windowEnterAnimation">@transition/fade</item>
         <!--<item name="android:windowReenterTransition">@transition/fade</item>-->
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="themeSlide" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:windowEnterAnimation">@transition/slide</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="themeExplode" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowEnterAnimation">@transition/explode</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 
