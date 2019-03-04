@@ -67,4 +67,7 @@
 
     <color name="video_green">#FF00FF29</color>
     <color name="transparent">#00000000</color>
+    <color name="aliPay_bar_color">#1983d1</color>
+
+    <color name="aliPay_search_bg_color">#11222222</color>
 </resources>

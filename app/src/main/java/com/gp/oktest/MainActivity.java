@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
+import android.app.AliasActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -113,6 +114,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("MiniVideoActivity", 22));
         typeBeans.add(new TypeBean("PcmToWavActivity", 23));
         typeBeans.add(new TypeBean("Mp4PlayActivity", 24));
+        typeBeans.add(new TypeBean("AlipayHome", 25));
         return typeBeans;
     }
 
@@ -276,6 +278,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 24:
                 startActivity(new Intent(this, Mp4PlayActivity.class));
+                break;
+            case 25:
+                startActivity(new Intent(this, AlipayHome.class));
                 break;
             default:
                 break;
