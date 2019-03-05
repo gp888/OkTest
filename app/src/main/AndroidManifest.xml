@@ -112,6 +112,8 @@
             android:process=":music_service" />
 
         <activity android:name=".AlipayHome"/>
+        <activity android:name=".kotlintest.SecondActivity"/>
+        <activity android:name=".kotlintest.BitmapOptionsActivity"/>
     </application>
 
 </manifest>

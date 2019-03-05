@@ -29,6 +29,7 @@ import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
+import com.gp.oktest.kotlintest.BitmapOptionsActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
@@ -85,6 +86,10 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 //        FileUtils.createProjectSdcardFile();
 //        AndFixManager.getAndFixManager().addPatch(Constant.DIR_DOWNLOAD + File.separator + "mypatch1.apatch");
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+        }
+
     }
 
     private ArrayList<TypeBean> getData() {
@@ -114,6 +119,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("PcmToWavActivity", 23));
         typeBeans.add(new TypeBean("Mp4PlayActivity", 24));
         typeBeans.add(new TypeBean("AlipayHome", 25));
+        typeBeans.add(new TypeBean("BitmapOptions", 26));
         return typeBeans;
     }
 
@@ -280,6 +286,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 25:
                 startActivity(new Intent(this, AlipayHome.class));
+                break;
+            case 26:
+                startActivity(new Intent(this, BitmapOptionsActivity.class));
                 break;
             default:
                 break;
