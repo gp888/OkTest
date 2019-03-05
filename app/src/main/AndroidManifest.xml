@@ -123,6 +123,8 @@
         <receiver android:name=".receiver.SMSReceiver"/>
         <activity android:name=".receiver.SendSMSActivity"/>
         <activity android:name=".database.SqliteActivity"/>
+
+        <activity android:name=".longconnect.LongConnectActivity"/>
     </application>
 
 </manifest>

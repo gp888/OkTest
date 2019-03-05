@@ -31,6 +31,7 @@ import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.database.SqliteActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.kotlintest.BitmapOptionsActivity;
+import com.gp.oktest.longconnect.LongConnectActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
@@ -126,6 +127,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("ExpandListView", 28));
         typeBeans.add(new TypeBean("sendsms", 29));
         typeBeans.add(new TypeBean("SqliteActivity", 30));
+        typeBeans.add(new TypeBean("longconnect", 31));
         return typeBeans;
     }
 
@@ -307,6 +309,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 30:
                 startActivity(new Intent(this, SqliteActivity.class));
+                break;
+            case 31:
+                startActivity(new Intent(this, LongConnectActivity.class));
                 break;
             default:
                 break;
