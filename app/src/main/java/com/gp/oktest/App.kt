@@ -1,6 +1,7 @@
 package com.gp.oktest
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.gp.oktest.networklistener.NetChangeObserver
 import com.gp.oktest.networklistener.NetStateReceiver
 import com.gp.oktest.networklistener.NetworkType
@@ -25,6 +26,7 @@ class App : Application() {
 
         //andfix
         AndFixManager.getAndFixManager().initAndFix(this)
+        Stetho.initializeWithDefaults(this)
     }
 
     /**

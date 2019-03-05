@@ -28,6 +28,7 @@ import com.gp.oktest.aidltest.AidlActivity;
 import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
+import com.gp.oktest.database.SqliteActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.kotlintest.BitmapOptionsActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
@@ -124,6 +125,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("DrawableButtonActivity", 27));
         typeBeans.add(new TypeBean("ExpandListView", 28));
         typeBeans.add(new TypeBean("sendsms", 29));
+        typeBeans.add(new TypeBean("SqliteActivity", 30));
         return typeBeans;
     }
 
@@ -302,6 +304,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 29:
                 startActivity(new Intent(this, SendSMSActivity.class));
+                break;
+            case 30:
+                startActivity(new Intent(this, SqliteActivity.class));
                 break;
             default:
                 break;

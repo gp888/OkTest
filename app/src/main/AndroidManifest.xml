@@ -122,6 +122,7 @@
 
         <receiver android:name=".receiver.SMSReceiver"/>
         <activity android:name=".receiver.SendSMSActivity"/>
+        <activity android:name=".database.SqliteActivity"/>
     </application>
 
 </manifest>
