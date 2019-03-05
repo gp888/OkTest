@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一带一路开会中!"
+        android:drawableRight="@drawable/register_delete_ic"
+        android:drawablePadding="20dp"/>
+
+    <com.gp.oktest.view.RightDrawableButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一带一路开会中!"
+        android:drawableRight="@drawable/register_delete_ic"
+        android:drawablePadding="20dp"/>
+
+    <com.gp.oktest.view.RightDrawableButton1
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一带一路开会中!"
+        android:drawableRight="@drawable/register_delete_ic"
+        android:drawablePadding="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@android:drawable/ic_delete"
+            android:gravity="center_vertical"
+            android:text="Button"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:id="@+id/id_text"
+            android:text="textView"
+            android:drawableRight="@android:drawable/ic_delete"/>
+    </RelativeLayout>
+
+</LinearLayout>

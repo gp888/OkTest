@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LGDrawableButton">
+        <attr name="drawableRight" format="reference"/>
+        <attr name="drawableLeft" format="reference"/>
+        <attr name="textMarginRight" format="dimension"/>
+        <attr name="textMarginLeft" format="dimension"/>
+    </declare-styleable>
+</resources>

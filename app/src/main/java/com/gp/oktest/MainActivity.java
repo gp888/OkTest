@@ -34,6 +34,7 @@ import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
 import com.gp.oktest.pcmtowav.PcmToWavActivity;
+import com.gp.oktest.receiver.SendSMSActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
@@ -120,6 +121,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("Mp4PlayActivity", 24));
         typeBeans.add(new TypeBean("AlipayHome", 25));
         typeBeans.add(new TypeBean("BitmapOptions", 26));
+        typeBeans.add(new TypeBean("DrawableButtonActivity", 27));
+        typeBeans.add(new TypeBean("ExpandListView", 28));
+        typeBeans.add(new TypeBean("sendsms", 29));
         return typeBeans;
     }
 
@@ -289,6 +293,15 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 26:
                 startActivity(new Intent(this, BitmapOptionsActivity.class));
+                break;
+            case 27:
+                startActivity(new Intent(this, DrawableButtonActivity.class));
+                break;
+            case 28:
+                startActivity(new Intent(this, ExpandableListActivity.class));
+                break;
+            case 29:
+                startActivity(new Intent(this, SendSMSActivity.class));
                 break;
             default:
                 break;
