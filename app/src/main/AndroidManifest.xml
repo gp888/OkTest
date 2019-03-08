@@ -125,6 +125,7 @@
         <activity android:name=".database.SqliteActivity"/>
 
         <activity android:name=".longconnect.LongConnectActivity"/>
+        <activity android:name=".GestureActivity"/>
     </application>
 
 </manifest>

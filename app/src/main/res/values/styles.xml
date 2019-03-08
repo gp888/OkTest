@@ -99,4 +99,24 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="common_button" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="btn_large" parent="@style/common_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dimens_40</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">@dimen/dimens_8</item>
+        <item name="android:layout_marginRight">@dimen/dimens_8</item>
+    </style>
+
+    <style name="btn_large_orange_line" parent="@style/btn_large">
+        <item name="android:background">@drawable/bg_btn_click_orange_line</item>
+        <item name="android:textColor">@android:color/holo_orange_dark</item>
+    </style>
+
 </resources>

@@ -128,6 +128,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("sendsms", 29));
         typeBeans.add(new TypeBean("SqliteActivity", 30));
         typeBeans.add(new TypeBean("longconnect", 31));
+        typeBeans.add(new TypeBean("GestureActivity", 32));
         return typeBeans;
     }
 
@@ -312,6 +313,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 31:
                 startActivity(new Intent(this, LongConnectActivity.class));
+                break;
+            case 32:
+                startActivity(new Intent(this, GestureActivity.class));
                 break;
             default:
                 break;

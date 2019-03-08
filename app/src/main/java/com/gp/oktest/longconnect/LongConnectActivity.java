@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 
 import com.gp.oktest.base.BaseActivity;
 
-import static android.content.Context.BIND_AUTO_CREATE;
 
 public class LongConnectActivity extends BaseActivity {
 
@@ -18,7 +17,7 @@ public class LongConnectActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = new Intent(this, TcpService.class);
-        bindService(intent, connection,BIND_AUTO_CREATE);
+        bindService(intent, connection, BIND_AUTO_CREATE);
     }
 
     ServiceConnection connection = new ServiceConnection() {
