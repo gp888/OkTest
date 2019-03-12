@@ -1,20 +1,18 @@
 package com.gp.oktest;
 
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gp.oktest.adapter.RecyclerAdapter;
+import com.gp.oktest.model.RecyclerItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,7 @@ import java.util.List;
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    List<Item> data = new ArrayList<>();
+    List<RecyclerItem> data = new ArrayList<>();
     RecyclerAdapter adapter;
 
     @Override
@@ -39,7 +37,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         for(int i = 0; i < 10; i++) {
-            Item item = new Item();
+            RecyclerItem item = new RecyclerItem();
             item.str = i + "";
             item.pic = "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1089772378,1178709717&fm=173&s=AC9021DC5212A58EEB1D3863010030E2&w=580&h=330&img.JPEG";
             data.add(item);
@@ -54,7 +52,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 //                    data.get(0).pic = "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1809824937,886401976&fm=173&s=04106033199F44CA54DCA5DE0000C0B3&w=580&h=727&img.JPG";
 //                    adapter.notifyItemChanged(0);
 
-                    Item item = new Item();
+                    RecyclerItem item = new RecyclerItem();
                     item.str = "33"; item.pic = "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1809824937,886401976&fm=173&s=04106033199F44CA54DCA5DE0000C0B3&w=580&h=727&img.JPG";
                     data.add(position + 1,item);
                     adapter.notifyItemInserted(position + 1);
@@ -77,9 +75,30 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 }
             }
         });
+
         //为RecyclerView添加默认动画效果，测试不写也可以
         mRecyclerView.setItemAnimator(new EidtItemAnimator());//DefaultItemAnimator(), NoAlphaItemAnimator
         mRecyclerView.setAdapter(adapter);
 //        mRecyclerView.scrollToPosition(0);
+
+        //监听手势，判断click longclick
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return super.onInterceptTouchEvent(rv, e);
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                super.onTouchEvent(rv, e);
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+                super.onRequestDisallowInterceptTouchEvent(disallowIntercept);
+            }
+        });
     }
 }

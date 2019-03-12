@@ -7,11 +7,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 
 import com.gp.oktest.App;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Locale;
 
 public class AppUtils {
 
@@ -76,4 +82,80 @@ public class AppUtils {
             return false;
         }
     }
+
+
+    //原签名信息
+    private static final String SIGNATURE = "478yYkKAQF+KST8y4ATKvHkYibo=";
+    private static final int VALID = 0;
+    private static final int INVALID = 1;
+
+    public static int checkAppSignature(Context context) {
+       try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(),PackageManager.GET_SIGNATURES);
+
+         for (Signature signature : packageInfo.signatures) {
+            byte[] signatureBytes = signature.toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            md.update(signature.toByteArray());
+
+            final String currentSignature = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+
+            Log.d("REMOVE_ME", "Include this string as a value for SIGNATURE:" + currentSignature);
+
+            //compare signatures
+            if (SIGNATURE.equals(currentSignature)){
+                return VALID;
+            };
+         }
+       } catch (Exception e) {
+             //assumes an issue in checking signature., but we let the caller decide on what to do.
+       }
+       return INVALID;
+    }
+
+
+    //校验签名
+    // 获取当前上下文
+    Context context = App.Companion.getGlobalContext();
+    // 发布apk时用来签名的keystore中查看到的sha1值，改成自己的
+    String cert_sha1 = "937FF2936CDB81EEF4A776290EA9E076B3BC03A9";
+    // 调用isOrgApp()获取比较结果
+    boolean is_org_app = isOrgApp(context,cert_sha1);
+    // 如果比较初始从证书里查看到的sha1，与代码获取到的当前证书中的sha1不一致，那么就自我销毁
+//    if(!is_org_app){
+//        android.os.Process.killProcess(android.os.Process.myPid());
+//    }
+
+    // 此函数用于返回比较结果
+    public static boolean isOrgApp(Context context,String cert_sha1){
+        String current_sha1 = getAppSha1(context);
+        // 返回的字符串带冒号形式，用replace去掉
+        current_sha1 = current_sha1.replace(":","");
+        return current_sha1.equals(cert_sha1);
+    }
+    // 此函数用于获取当前APP证书中的sha1值
+    public static String getAppSha1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i]).toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            String result = hexString.toString();
+            return result.substring(0, result.length()-1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

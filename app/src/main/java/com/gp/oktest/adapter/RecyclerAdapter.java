@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,15 +10,17 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.gp.oktest.model.RecyclerItem;
+import com.gp.oktest.R;
 
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
-    private List<Item> data;
+    private List<RecyclerItem> data;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
 
-    public RecyclerAdapter(List<Item> data) {
+    public RecyclerAdapter(List<RecyclerItem> data) {
         this.data = data;
     }
 
