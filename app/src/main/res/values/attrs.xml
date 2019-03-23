@@ -6,4 +6,15 @@
         <attr name="textMarginRight" format="dimension"/>
         <attr name="textMarginLeft" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="RoundCornerImageView">
+        <attr name="rciv_radius" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+
 </resources>

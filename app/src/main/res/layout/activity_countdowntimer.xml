@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/scroll" xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:id="@+id/scroll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:scrollbars="none"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/ll"
@@ -32,6 +33,23 @@
             android:gravity="center"
             android:background="@color/grey_accent"
             android:layout_marginBottom="20dp"/>
+
+        <com.gp.oktest.view.RoundCornerImageView2
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/span_cheetah"/>
+
+        <com.gp.oktest.view.RoundCornerImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:rciv_radius="8dp"
+            android:src="@drawable/span_cheetah"/>
+
+        <com.gp.oktest.view.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/span_cheetah"
+            app:radius="50dp"/>
 
     </LinearLayout>
 
