@@ -1,8 +1,11 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.gp.oktest.GitHubService;
+import com.gp.oktest.GitModel;
 import com.gp.oktest.base.BaseActivity;
 import java.io.IOException;
 import okhttp3.ResponseBody;

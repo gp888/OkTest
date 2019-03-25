@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.gp.oktest.MainActivity;
+import com.gp.oktest.activity.MainActivity;
 import com.gp.oktest.R;
 
 import java.util.Random;

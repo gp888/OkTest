@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.Manifest;
 import android.animation.Animator;
@@ -22,6 +22,9 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.gp.oktest.AlipayHome;
+import com.gp.oktest.AppCompatPopupWin;
+import com.gp.oktest.R;
 import com.gp.oktest.adapter.BaseAdapter;
 import com.gp.oktest.adapter.MainAdapter;
 import com.gp.oktest.aidltest.AidlActivity;

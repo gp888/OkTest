@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.content.Context;
 import android.graphics.Rect;

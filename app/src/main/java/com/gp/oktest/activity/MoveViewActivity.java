@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.gp.oktest.R;
 
 /**
  * Created by guoping on 2017/12/11.

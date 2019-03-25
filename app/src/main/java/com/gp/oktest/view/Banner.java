@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.gp.oktest.CountDownTimerActivity;
+import com.gp.oktest.activity.CountDownTimerActivity;
 import com.gp.oktest.R;
 import com.gp.oktest.utils.DeviceUtils;
 import com.tmall.ultraviewpager.UltraViewPager;

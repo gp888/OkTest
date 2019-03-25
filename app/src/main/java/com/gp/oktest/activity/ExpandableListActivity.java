@@ -1,10 +1,11 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.gp.oktest.R;
 import com.gp.oktest.adapter.MyExpandableListViewAdapter;
 import com.gp.oktest.base.BaseActivity;
 

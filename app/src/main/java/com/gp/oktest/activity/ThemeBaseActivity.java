@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.gp.oktest.PreferenceUtils;
+import com.gp.oktest.R;
 import com.gp.oktest.utils.ThemeUtils;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -16,6 +16,7 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.SpanUtils;
 import com.gp.oktest.utils.ToastUtil;

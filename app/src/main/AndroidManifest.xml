@@ -40,45 +40,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoadNetImageActivity"
+        <activity android:name=".activity.LoadNetImageActivity"
             android:theme="@style/themeExplode"/>
 
-        <activity android:name=".CountDownTimerActivity"
+        <activity android:name=".activity.CountDownTimerActivity"
             android:theme="@style/themeFade"/>
 
-        <activity android:name=".RecyclerViewActivity"
+        <activity android:name=".activity.RecyclerViewActivity"
             android:theme="@style/themeSlide"/>
 
-        <activity android:name=".MoveViewActivity"/>
-        <activity android:name=".PhotosActivity"/>
-        <activity android:name=".RxPermissionActivity"/>
-        <activity android:name=".ThemeBaseActivity"
+        <activity android:name=".activity.MoveViewActivity"/>
+        <activity android:name=".activity.PhotosActivity"/>
+        <activity android:name=".activity.RxPermissionActivity"/>
+        <activity android:name=".activity.ThemeBaseActivity"
             android:theme="@style/RedTheme"/>
-        <activity android:name=".KeyBoardAvtivity"/>
-        <activity android:name=".PopupWindowActivity"/>
-        <activity android:name=".SpannableActivity" />
+        <activity android:name=".activity.KeyBoardAvtivity"/>
+        <activity android:name=".activity.PopupWindowActivity"/>
+        <activity android:name=".activity.SpannableActivity" />
         <service android:name=".service.ForegroundService"/>
         <service android:name=".service.AsycnService"/>
 
-        <activity android:name=".FileProvider7Activity"/>
-        <activity android:name=".ServiceActivity"/>
+        <activity android:name=".activity.FileProvider7Activity"/>
+        <activity android:name=".activity.ServiceActivity"/>
         <activity android:name=".handlerthread.HandlerThreadActivity"/>
-        <activity android:name=".ImageCacheActivity"/>
-        <activity android:name=".RetrofitActivity"/>
+        <activity android:name=".activity.ImageCacheActivity"/>
+        <activity android:name=".activity.RetrofitActivity"/>
         <activity android:name=".camera.CameraPreviewActivity"/>
         <activity android:name=".camera.CameraActivity2"/>
         <activity android:name=".recordplaypcm.PcmRecordPlay"/>
         <activity android:name=".minivideo.MiniVideoActivity"/>
         <activity android:name=".minivideo.MiniVideoPlayActivity"/>
         <activity android:name=".minivideo.MiniVideoRecordActivity"/>
-        <activity android:name=".StickMenuActivity"/>
+        <activity android:name=".activity.StickMenuActivity"/>
         <activity android:name=".mp4player.Mp4PlayActivity"/>
 
         <activity android:name=".androidmedia.H264EncodeActivity"/>
@@ -117,15 +117,15 @@
         <activity android:name=".AlipayHome"/>
         <activity android:name=".kotlintest.SecondActivity"/>
         <activity android:name=".kotlintest.BitmapOptionsActivity"/>
-        <activity android:name=".DrawableButtonActivity"/>
-        <activity android:name=".ExpandableListActivity"/>
+        <activity android:name=".activity.DrawableButtonActivity"/>
+        <activity android:name=".activity.ExpandableListActivity"/>
 
         <receiver android:name=".receiver.SMSReceiver"/>
         <activity android:name=".receiver.SendSMSActivity"/>
         <activity android:name=".database.SqliteActivity"/>
 
         <activity android:name=".longconnect.LongConnectActivity"/>
-        <activity android:name=".GestureActivity"/>
+        <activity android:name=".activity.GestureActivity"/>
     </application>
 
 </manifest>

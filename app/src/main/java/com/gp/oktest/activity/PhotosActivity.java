@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gp.oktest.Constant;
+import com.gp.oktest.R;
 import com.gp.oktest.utils.DeviceUtils;
 
 import java.io.ByteArrayOutputStream;

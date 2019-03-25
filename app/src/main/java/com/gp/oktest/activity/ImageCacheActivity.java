@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.ImageUtils;
 

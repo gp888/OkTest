@@ -1,5 +1,6 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 
 import android.support.v4.view.PagerAdapter;

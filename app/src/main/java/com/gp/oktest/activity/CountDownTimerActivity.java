@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.view.Banner;
 

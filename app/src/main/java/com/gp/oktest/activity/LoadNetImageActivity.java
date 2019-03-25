@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -23,6 +23,8 @@ import android.transition.TransitionInflater;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.gp.oktest.R;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

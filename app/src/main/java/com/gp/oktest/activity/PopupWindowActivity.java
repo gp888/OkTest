@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.gp.oktest.R;
 
 /**
  * Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：

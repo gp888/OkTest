@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.service.AsycnService;
 import com.gp.oktest.service.ForegroundService;
