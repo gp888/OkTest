@@ -46,9 +46,7 @@
 
             </android.support.v7.widget.Toolbar>
 
-
         </android.support.design.widget.CollapsingToolbarLayout>
-
 
     </android.support.design.widget.AppBarLayout>
 
@@ -64,4 +62,5 @@
             android:src="@drawable/alipay_home_bg" />
 
     </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>

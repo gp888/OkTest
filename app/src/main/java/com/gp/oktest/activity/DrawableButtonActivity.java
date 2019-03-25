@@ -3,6 +3,7 @@ package com.gp.oktest.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 
 public class DrawableButtonActivity extends BaseActivity {

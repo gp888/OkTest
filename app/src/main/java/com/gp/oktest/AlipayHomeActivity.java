@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.gp.oktest.base.BaseActivity;
 
-public class AlipayHome extends BaseActivity implements AppBarLayout.OnOffsetChangedListener {
+public class AlipayHomeActivity extends BaseActivity implements AppBarLayout.OnOffsetChangedListener {
 
 
     private AppBarLayout mAppBarLayout;

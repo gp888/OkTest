@@ -114,7 +114,7 @@
             android:exported="true"
             android:process=":music_service" />
 
-        <activity android:name=".AlipayHome"/>
+        <activity android:name=".AlipayHomeActivity"/>
         <activity android:name=".kotlintest.SecondActivity"/>
         <activity android:name=".kotlintest.BitmapOptionsActivity"/>
         <activity android:name=".activity.DrawableButtonActivity"/>

@@ -27,10 +27,11 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:nestedScrollingEnabled="true">
 
         <TextView
             android:id="@+id/tvData"
@@ -39,5 +40,21 @@
             android:gravity="center"
             android:text="我是哈哈哈"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </ListView>
+
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvData"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="我是哈哈哈"/>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
 </android.support.design.widget.CoordinatorLayout>

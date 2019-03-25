@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.gp.oktest.AlipayHome;
+import com.gp.oktest.AlipayHomeActivity;
 import com.gp.oktest.AppCompatPopupWin;
 import com.gp.oktest.R;
 import com.gp.oktest.adapter.BaseAdapter;
@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("MiniVideoActivity", 22));
         typeBeans.add(new TypeBean("PcmToWavActivity", 23));
         typeBeans.add(new TypeBean("Mp4PlayActivity", 24));
-        typeBeans.add(new TypeBean("AlipayHome", 25));
+        typeBeans.add(new TypeBean("AlipayHomeActivity", 25));
         typeBeans.add(new TypeBean("BitmapOptions", 26));
         typeBeans.add(new TypeBean("DrawableButtonActivity", 27));
         typeBeans.add(new TypeBean("ExpandListView", 28));
@@ -297,7 +297,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 startActivity(new Intent(this, Mp4PlayActivity.class));
                 break;
             case 25:
-                startActivity(new Intent(this, AlipayHome.class));
+                startActivity(new Intent(this, AlipayHomeActivity.class));
                 break;
             case 26:
                 startActivity(new Intent(this, BitmapOptionsActivity.class));

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gp.oktest.R;
 import com.gp.oktest.utils.ToastUtil;
 import com.gp.testlibrary.FileProvider7Util;
 
