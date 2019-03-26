@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:id="@+id/root">
 
-    <com.gp.oktest.DragView
+    <com.gp.oktest.view.DragView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/ic_launcher_background"
@@ -21,4 +21,9 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:imeOptions="actionSearch"/>
+
+    <com.gp.oktest.view.MoveView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/grey_accent"/>
 </LinearLayout>

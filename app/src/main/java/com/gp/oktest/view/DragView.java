@@ -1,19 +1,12 @@
-package com.gp.oktest;
+package com.gp.oktest.view;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Scroller;
-import android.widget.TextView;
 
 /**
  * Created by guoping on 2017/12/11.
@@ -108,9 +101,7 @@ public class DragView extends AppCompatImageView {
         super.computeScroll();
         // 判断Scroller是否执行完毕
         if (mScroller.computeScrollOffset()) {
-            ((View) getParent()).scrollTo(
-                    mScroller.getCurrX(),
-                    mScroller.getCurrY());
+            ((View) getParent()).scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             // 通过重绘来不断调用computeScroll
             invalidate();
         }
