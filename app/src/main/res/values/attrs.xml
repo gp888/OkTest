@@ -17,4 +17,16 @@
     </declare-styleable>
 
 
+    <!--属性声明-->
+    <attr name="mText" format="string"></attr>
+    <attr name="mTextColor" format="color"></attr>
+    <attr name="mTextSize" format="dimension"></attr>
+    <!--属性使用-->
+    <declare-styleable name="MyTextView">
+        <attr name="mText"></attr>
+        <attr name="mTextColor"></attr>
+        <attr name="mTextSize"></attr>
+    </declare-styleable>
+
+
 </resources>
