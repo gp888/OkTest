@@ -126,12 +126,13 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("Mp4PlayActivity", 24));
         typeBeans.add(new TypeBean("AlipayHomeActivity", 25));
         typeBeans.add(new TypeBean("BitmapOptions", 26));
-        typeBeans.add(new TypeBean("DrawableButtonActivity", 27));
+        typeBeans.add(new TypeBean("DrawableButtonAndOverlayActivity", 27));
         typeBeans.add(new TypeBean("ExpandListView", 28));
         typeBeans.add(new TypeBean("sendsms", 29));
-        typeBeans.add(new TypeBean("SqliteActivity", 30));
+        typeBeans.add(new TypeBean("Sqlite", 30));
         typeBeans.add(new TypeBean("longconnect", 31));
-        typeBeans.add(new TypeBean("GestureActivity", 32));
+        typeBeans.add(new TypeBean("Gesture", 32));
+        typeBeans.add(new TypeBean("Coordinate", 33));
         return typeBeans;
     }
 
@@ -303,7 +304,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 startActivity(new Intent(this, BitmapOptionsActivity.class));
                 break;
             case 27:
-                startActivity(new Intent(this, DrawableButtonActivity.class));
+                startActivity(new Intent(this, DrawableButtonAndOverlayActivity.class));
                 break;
             case 28:
                 startActivity(new Intent(this, ExpandableListActivity.class));
@@ -319,6 +320,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 32:
                 startActivity(new Intent(this, GestureActivity.class));
+                break;
+            case 33:
+                startActivity(new Intent(this, CoordinateActivity.class));
                 break;
             default:
                 break;

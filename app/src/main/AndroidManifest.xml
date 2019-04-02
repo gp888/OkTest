@@ -32,6 +32,8 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -117,7 +119,7 @@
         <activity android:name=".AlipayHomeActivity"/>
         <activity android:name=".kotlintest.SecondActivity"/>
         <activity android:name=".kotlintest.BitmapOptionsActivity"/>
-        <activity android:name=".activity.DrawableButtonActivity"/>
+        <activity android:name=".activity.DrawableButtonAndOverlayActivity"/>
         <activity android:name=".activity.ExpandableListActivity"/>
 
         <receiver android:name=".receiver.SMSReceiver"/>
@@ -126,6 +128,7 @@
 
         <activity android:name=".longconnect.LongConnectActivity"/>
         <activity android:name=".activity.GestureActivity"/>
+        <activity android:name=".activity.CoordinateActivity"/>
     </application>
 
 </manifest>

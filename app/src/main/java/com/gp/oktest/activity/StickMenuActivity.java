@@ -28,9 +28,13 @@ public class StickMenuActivity extends BaseActivity {
         setContentView(R.layout.activity_sticky_menu);
         viewPager = findViewById(R.id.viewpager);
         tvData = findViewById(R.id.tvData);
+
         initList();
-        initVp();//初始化viewpager
-        initEvent();//初始化点击事件
+        initVp();
+        initEvent();
+//        String schools[] = {"山东大学","山东理工大学","山东科技大学","山东农业大学"};
+//        ArrayAdapter arrayadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, schools);
+//        listview.setAdapter(arrayadapter);
     }
 
 

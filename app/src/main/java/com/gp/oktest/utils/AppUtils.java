@@ -1,13 +1,19 @@
 package com.gp.oktest.utils;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -156,6 +162,16 @@ public class AppUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestDrawOverLays(Context context) {
+        if (!Settings.canDrawOverlays(context)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + context.getPackageName()));
+            ((Activity)context).startActivityForResult(intent, 0);
+        }
     }
 
 }

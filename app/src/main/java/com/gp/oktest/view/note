@@ -1,0 +1,36 @@
+
+LayoutParams are used by views to tell their parents how they want to be laid out.
+1. FILL_PARENT (renamed MATCH_PARENT in API Level 8 and higher), which means that the view wants to be as big as its parent (minus padding)
+2. WRAP_CONTENT, which means that the view wants to be just big enough to enclose its content (plus padding)
+3. an exact number
+
+EXACTLY(完全)，父元素决定子元素的确切大小，子元素将被限定在给定的边界里而忽略它本身大小--match_parent, 50dp
+AT_MOST(至多)，子元素至多达到指定大小的值--wrap_content
+
+
+
+
+创建一个View(执行构造方法)的时候不需要测量控件的大小，只有将这个view放入一个容器（父控件）中的时候才需要测量，
+而这个测量方法就是父控件唤起调用的。当控件的父控件要放置该控件的时候，父控件会调用子控件的onMeasure方法询问子控件：
+“你有多大的尺寸，我要给你多大的地方才能容纳你？”，然后传入两个参数（widthMeasureSpec和heightMeasureSpec），
+这两个参数就是父控件告诉子控件可获得的空间以及关于这个空间的约束条件（好比我在思考需要多大的碗盛菜的时候我要看一下碗柜里最大的碗有多大，
+菜的分量不能超过这个容积，这就是碗对菜的约束），子控件拿着这些条件就能正确的测量自身的宽高了。
+
+
+clip:
+clipToPadding影响的是绘制的时候是否绘制padding里的子view内容。可以这么理解，clipToPadding对measure和layout无影响，
+只会影响draw阶段。无论clipToPadding是true还是false，滚的时候，都会滚到padding里去，
+但是clipToPadding为true，就会clip，这样padding里的部分就看不到了
+
+clipChildren，这个的作用是，如果子view比parent大的时候，是否裁剪，默认为true裁剪。也是在绘制阶段作用的。
+
+
+MarginLayoutParams:
+LinearLayout的源码中的静态内部类LinearLayout.LayoutParams->ViewGroup.MarginLayoutParams->ViewGroup.LayoutParams,
+在ViewGroup.MarginLayoutParams中系统自定义了margin属性，所以在其他容器（LinearLayout，RelativeLayout）中margin属性都有效，因为
+LinearLayout.LayoutParams继承了ViewGroup.MarginLayoutParams，并且增加了weight,gravity两个属性，
+而RelativeLayout.LayoutParams也继承了ViewGroup.MarginLayoutParams，并且增加了对齐属性，
+如left_to,right_to,above,below,align_baseline,align_left,align_top,align_right等等
+
+
+

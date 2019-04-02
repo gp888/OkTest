@@ -29,4 +29,8 @@
     </declare-styleable>
 
 
+    <declare-styleable name="Follow">
+        <attr name="target" format="reference"/>
+    </declare-styleable>
+
 </resources>

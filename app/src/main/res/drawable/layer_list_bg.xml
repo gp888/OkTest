@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <!--当angle=0时，渐变色是从左向右。 -->
+            <!--然后逆时针方向转，当angle=90时为从下往上。-->
+            <!--gradient的几种式样：linear是线性渐变，从左到右或从上到下；-->
+            <!--sweep径向渐变，是圆心到圆边；radial是角度渐变，按照角度来变换颜色。-->
+            <gradient
+            android:startColor="#FF8A00"
+            android:endColor="#FF6E00"
+            android:angle="45" />
+        </shape>
+    </item>
+
+    <item
+        android:top="@dimen/dimens_30">
+        <shape>
+            <solid android:color="#f8f8f8"/>
+        </shape>
+    </item>
+
+</layer-list>

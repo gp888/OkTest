@@ -7,4 +7,30 @@
     <!--首行缩进setText(“\u3000\u3000”+xxxxx);-->
     <string name="shsj">"\u3000\u3000"</string>
     <!--%.2f, %2f-->
+
+
+
+    <string-array name = "list">
+        <item>山东大学</item>
+        <item>山东科技大学</item>
+        <item>山东理工大学</item>
+        <item>山东建筑大学</item>
+        <item>山东农业大学</item>
+        <item>济南大学</item>
+        <item>烟台大学</item>
+        <item>鲁东大学</item>
+        <item>临沂大学</item>
+        <item>聊城大学</item>
+
+        <item>山东大学</item>
+        <item>山东科技大学</item>
+        <item>山东理工大学</item>
+        <item>山东建筑大学</item>
+        <item>山东农业大学</item>
+        <item>济南大学</item>
+        <item>烟台大学</item>
+        <item>鲁东大学</item>
+        <item>临沂大学</item>
+        <item>聊城大学</item>
+    </string-array>
 </resources>

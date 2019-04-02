@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:fillViewport="true"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+    <!--<com.gp.oktest.view.MyListView-->
+    <!--android:id="@+id/listview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:entries="@array/list">-->
+
+    <!--</com.gp.oktest.view.MyListView>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="#888888"-->
+        <!--android:text="  Follow  "-->
+        <!--android:layout_gravity="top|left"-->
+        <!--app:layout_behavior="com.gp.oktest.view.Behavior1" />-->
+
+    <!--<com.gp.oktest.view.MoveView-->
+        <!--android:text="Main"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_gravity="top"-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="#666666" />-->
+
+
+
+    <!--<com.gp.oktest.view.MoveView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="#666666"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_gravity="top|right"-->
+        <!--android:text="Main" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="#888888"-->
+        <!--android:text="  Dodo Below  "-->
+        <!--app:layout_behavior="com.gp.oktest.view.Behavior2" />-->
+
+
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:id="@+id/ns0"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="top|right"-->
+        <!--android:background="#666666">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/TextAppearance.AppCompat.Display3"-->
+            <!--android:text="A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ"/>-->
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:id="@+id/ns1"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="top|center_horizontal"-->
+        <!--android:background="#009900">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/TextAppearance.AppCompat.Display3"-->
+            <!--android:text="A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ"/>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:id="@+id/ns2"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="top|left"-->
+        <!--android:background="#888888"-->
+        <!--app:layout_behavior="com.gp.oktest.view.Behavior3">-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/TextAppearance.AppCompat.Display3"-->
+            <!--android:text="A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ"/>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/ns0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|right"
+        android:background="#666666">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Display3"
+            android:text="A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ"/>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:background="#888888"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="  Dodo Follow  "
+        app:layout_behavior="com.gp.oktest.view.Behavior4" />
+
+</android.support.design.widget.CoordinatorLayout>
