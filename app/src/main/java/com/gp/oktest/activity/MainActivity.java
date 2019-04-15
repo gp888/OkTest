@@ -11,6 +11,7 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,8 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -48,6 +51,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.flutter.facade.Flutter;
 
 import static android.text.format.DateUtils.FORMAT_24HOUR;
 import static android.text.format.DateUtils.FORMAT_ABBREV_ALL;
@@ -133,6 +137,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("longconnect", 31));
         typeBeans.add(new TypeBean("Gesture", 32));
         typeBeans.add(new TypeBean("Coordinate", 33));
+        typeBeans.add(new TypeBean("FlutterActivity", 34));
         return typeBeans;
     }
 
@@ -323,6 +328,23 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 33:
                 startActivity(new Intent(this, CoordinateActivity.class));
+                break;
+            case 34:
+//                View flutterView = Flutter.createView(
+//                        MainActivity.this,
+//                        getLifecycle(),
+//                        "route1"
+//                );
+//                FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                layout.gravity = Gravity.CENTER;
+//                addContentView(flutterView, layout);
+
+                //flutter fragment
+//                FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+//                tx.replace(R.id.someContainer, Flutter.createFragment("route1"));
+//                tx.commit();
+
+                startActivity(new Intent(this, MyFlutterActivity.class));
                 break;
             default:
                 break;
