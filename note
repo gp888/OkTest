@@ -12,14 +12,23 @@ android{
         }
     }
 }
+
 flutter create -t module my_flutter
 git submodule add https://github.com/gp888/flutter.git
 git submodule update
 
-在根目录的settings.gradle中添加如下配置
+在根目录的settings.gradle中添加如下配置，
+//Application同目录
 setBinding(new Binding([gradle: this]))
 evaluate(new File(
   'flutter_moudle/.android/include_flutter.groovy'
+))
+
+//app同目录
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'my_flutter/.android/include_flutter.groovy'
 ))
 
 
@@ -38,3 +47,12 @@ dart sdk path:D:\flutter\bin\cache\dart-sdk
 git submodule init && git submodule update
 执行flutter packages get (有时候可能出现无法运行可以进入.ios和.android中分别执行pod install 和 gradle assembleDebug,或者flutter build ios,flutter build apk等命令构建一次)
 Run...
+
+1. Import flutter module to your HOST app(set binding, implementation, and instantiate view/fragment)
+2. When you clean/rebuild from HOST app, flutter module does not generate properly
+3. You need to open your flutter module in a separate AS
+4. flutter clean
+5. cd .android
+6. gradlew clean
+7. gradlew assembleDebug
+8. Return to host app and run app(do not sync or rebuild) :)
