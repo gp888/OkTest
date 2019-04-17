@@ -56,3 +56,7 @@ Run...
 6. gradlew clean
 7. gradlew assembleDebug
 8. Return to host app and run app(do not sync or rebuild) :)
+
+
+
+MethodChannel是flutter端主动请求，拿到了数据，而，EventChannel可能理解为是从原生主动推送过去的
