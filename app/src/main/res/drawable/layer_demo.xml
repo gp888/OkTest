@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:Android="http://schemas.android.com/apk/res/android">
+
+    <item  Android:id="@+id/t6" Android:drawable="@drawable/ic_contact"/>
+    <item  Android:id="@+id/t5" Android:drawable="@drawable/ic_launcher_foreground"
+        Android:left="@dimen/dimens_10" Android:right="@dimen/dimens_10"
+        Android:bottom="@dimen/dimens_10" Android:top="@dimen/dimens_10"/>
+
+</layer-list>
