@@ -1,0 +1,983 @@
+1 单聊协议
+
+
+<!--1.1 文本消息 -->
+<message id="812Q8-29" from="test002@domain" to="test001@domain" type="chat">
+<body>1</body>
+<nxin xmlns="www.nxin.com">
+<m type="1" content="你好，一定要马上有房哦!(base64)"></m>
+</nxin>
+</message>
+
+<!--1.2 语音协议 -->
+<message id="812Q8-31" from="test002@domain" to="test001@domain" type="chat">
+<body>1</body>
+<nxin xmlns="www.nxin.com">
+<m type="2" url="http://www.dbn.com.cn/chat/11.amr"(base64) property="60"(base64)></m>
+</nxin>
+</message>
+
+<!--1.3 图片协议 -->
+<message id="812Q8-32" from="test002@domain" to="test001@domain" type="chat">
+<body>1</body>
+<nxin xmlns="www.nxin.com">
+<m type="3" url="http://www.dbn.com.cn/chat/11.jpg"(base64) property="http://www.dbn.com.cn/chat/11.jpg(缩略图地址)"(base64)></m>
+</nxin>
+</message>
+
+<!--1.4 地理位置协议 -->
+<message id="812Q8-33" from="test001@domain" to="test002@domain"
+type="chat">
+<body>1</body>
+<nxin xmlns="www.nxin.com">
+<m type="4" lng="经度"(base64) lat="纬度"(base64) property="位置详细描述"(base64)></m>
+</nxin>
+</message>
+
+<!--1.5 json协议 -->
+<message id="812Q8-34" from="test001@domain" to="test002@domain"
+type="chat">
+<body>1</body>
+<!--   -->
+<nxin xmlns="www.nxin.com">
+<m type="5" content="json(base64)"  property="属性(base64)" ></m>
+</nxin>
+</message>
+<!--1.6 网页端文本消息  发送给自己添加isOwn=“true”-->
+<message id="812Q8-29" from="test002@domain" to="test001@domain"
+type="chat">
+<body>1</body>
+<nxin xmlns="www.nxin.com">
+<m type="1" isOwn="true" content="你好，一定要马上有房哦!(base64)"></m>
+</nxin>
+</message>
+<!--1.7 单聊陌生人增加extra属性 isJoined属性-->
+<message id="H0I9u-482" to="01399422595930370@im.t.nxin.com" from="0144048795881335@im.t.nxin.com/DBN_Android" type="chat">
+<body>1</body>
+<nxin  xmlns=www.nxin.com><m content="消息内容(base64)" type="1" extra="陌生人信息(base64)" isJoined="0(是陌生人0,否1)"></m>
+</nxin>
+</message>
+<!-- 视频消息 -->
+<message id="812Q8-31" from="test002@domain" to="test001@domain" type="chat">
+	<body>1</body>
+	<nxin xmlns="www.nxin.com">
+		<m type="24" content="url(base64)"(缩面图) url="http://www.dbn.com.cn/chat/11.mp4"(base64视频地址)  property="6"(base64，秒)   ratio="1.778(高宽比)">
+		</m>
+	</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 群聊协议
+
+<!-- 1 创建房间 -->
+<!-- 上行消息 -->
+<message id="812Q8-35" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- toJID中的jid可以省略域名 -->
+<nxin xmlns="www.nxin.com">
+<m type="6" toJID="test002,test003" content="xxx创建了xxx群"(base加密) topic="测试聊天室"(base加密) groupLabels="生猪,水产" description="描述"></m>
+</nxin>
+</message>
+<!-- 下行邀请消息 -->
+<message id="812Q8-36" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="7" roomId="22222" fromJID="test001" content="xxx创建了xxx群"(base加密) roomIcon="url"(base64) topic="测试聊天室"(base加密) groupLabels="生猪,水产" description="描述"></m>
+</nxin>
+</message>
+
+<!-- 2 邀请成员 -->
+<!-- 上行消息 -->
+<message id="812Q8-37" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="7" roomId="22222" toJID="test004,test005" topic="测试聊天室"(base加密) content="xxx邀请xxx加入xxx群"(base加密)></m>
+</nxin>
+</message>
+<!-- 下行邀请消息 -->
+<message id="812Q8-38" from="domain" to="test004@domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="7" roomId="22222" fromJID="test001" content="xxx邀请xxx加入xxx群"(base加密) roomIcon="url"(base64) topic="测试聊天室"(base加密)></m>
+</nxin>
+</message>
+
+<!--3.1 文本消息 -->
+<!-- 上行消息 -->
+<message id="812Q8-39" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="1" roomId="22222" memberName="base64" memberIcon="base64" content="一定要幸福哦(base64)"></m>
+</nxin>
+</message>
+<!-- 下行消息   服务端过滤发送给自己的消息       -->
+<message id="812Q8-40" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="1" fromMsgId=“群消息原始消息ID，用户撤回消息” roomId="22222" fromJID="test001" memberName="base64" memberIcon="base64" content="一定要幸福哦(base64)"></m>
+</nxin>
+</message>
+
+<!--3.2 语音消息 -->
+<!-- 上行消息 -->
+<message id="812Q8-41" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="2" roomId="22222" memberName="base64" memberIcon="base64" url="base64加密" property="base64加密"></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-42" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="2" fromJID="test001" roomId="22222" fromMsgId=“群消息原始消息ID，用户撤回消息” memberName="base64" memberIcon="base64" url="base64加密" property="base64加密"></m>
+</nxin>
+</message>
+
+<!--3.3 图片消息 -->
+<!-- 上行消息 -->
+<message id="812Q8-43" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="3" roomId="22222"  memberName="base64" memberIcon="base64" url="base64加密" property="base64加密"></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-44" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="3" fromJID="test002" roomId="22222" fromMsgId=“群消息原始消息ID，用户撤回消息” memberName="base64" memberIcon="base64" url="base64加密" property="base64加密"></m>
+</nxin>
+</message>
+
+<!--3.4 地理位置消息 -->
+<!-- 上行消息 -->
+<message id="812Q8-45" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="4" roomId="22222" memberName="base64" memberIcon="base64" lng="经度"(base64) lat="纬度"(base64)
+property="位置详细描述" ( base加密 )></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-46" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="4" fromJID="test001" roomId="22222" fromMsgId=“群消息原始消息ID，用户撤回消息” memberName="base64" memberIcon="base64" lng="经度"(base64) lat="纬度"(base64) property="位置详细描述" ( base加密 )></m>
+</nxin>
+</message>
+
+<!--3.5 json协议 -->
+<!-- 上行消息 -->
+<message id="812Q8-47" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="5" roomId="1420699740054694" content="base64加密" property="标题类描述" ( base加密 )></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-48" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="5" fromJID="test001" roomId="1420699740054694" content="base64加密" property="标题类描述" ( base加密 )></m>
+</nxin>
+</message>
+
+<!-- 4 退出房间 -->
+<!-- 上行消息 -->
+<message id="812Q8-49" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="8" roomId="22222" ></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-50" from="domain" to="test002@domain"
+type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="8" roomIcon="url"(base64) roomId="22222" fromJID="test001"></m>
+</nxin>
+</message>
+
+<!-- 5 踢人 -->
+<!-- 上行消息 -->
+<message id="812Q8-51" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="9" roomId="22222" toJID="test002"></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-52" from="domain" to="test003@domain"
+type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="9" roomIcon="url"(base64) fromJID="test001" toJID="test002" roomId="22222"></m>
+</nxin>
+</message>
+
+<!--6 解散群 -->
+<!-- 上行消息 -->
+<message id="812Q8-53" from="test001@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="10" roomId="22222"></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-54" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="10" roomId="22222" fromJID="test001"></m>
+</nxin>
+</message>
+
+<!--7 更新群名称 -->
+<!-- 上行消息 -->
+<message id="812Q8-55" from="test001@domain" to="nxingroup.domain"
+type="chat">
+<body>2</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="11" roomId="22222" topic="修改群名称"(base64) content="XXX修改了群名称"></m>
+</nxin>
+</message>
+<!-- 下行消息 -->
+<message id="812Q8-56" from="domain" to="test002@domain"
+type="chat">
+<body>2</body>
+<!-- content="XXX修改了群名称" -->
+<nxin xmlns="www.nxin.com">
+<m type="11" roomId="22222" fromJID="test001" topic="修改群名称"(base64) content="XXX修改了群名称"></m>
+</nxin>
+</message>
+
+<!--8 群文件上传通知 -->
+<!-- 下行消息 -->
+<message id="812Q8-81" from="domain" to="test002@domain" type="chat">
+<body>2</body>
+<!-- 项目节点  type="notify"-->
+<nxin xmlns="www.nxin.com">
+<m type="12" roomId="1434594942311313" fromJID="test001"
+content="base64" />
+</nxin>
+</message>
+
+<!--9 群免打扰 -->
+<!-- 上行消息 -->
+<message id="812Q8-81" from="songguopei@domain" to="nxingroup.domain" type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="22" roomId="1434594942311313" content="0/1"(base64加密处理  0:为正常接受消息;1:为免打扰模式)/></nxin>
+</message>
+<!-- 免打扰回执消息 -->
+<message from="im.t.nxin.com" id="12365897456" to="0145282541404521@im.t.nxin.com" type="chat">
+  <body>2</body>
+  <nxin xmlns="www.nxin.com">
+    <m type="22" id="C5NKf-14" roomId="1456293000242562" fromJID="songguopei"/>
+  </nxin>
+</message>
+
+
+
+
+
+
+
+
+
+3 通知协议
+
+<!--1 踢人通知 -->
+<message id="812Q8-58" from="admin.domain" to="test001@domain" type="chat">
+<body>3</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="9" content="base64加密" deviceId="base64加密"></m>
+</nxin>
+</message>
+
+<!--2 网页端下线通知 -->
+<message id="812Q8-59" from="test001@domain/web" to="test001@domain" type="chat">
+<body>3</body>
+<!-- content="base64加密" 是否能省略 -->
+<nxin xmlns="www.nxin.com">
+<m type="13"></m>
+</nxin>
+</message>
+<message id="812Q8-58" from="admin.domain" to="test001@domain" type="chat">
+<body>3</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="23" content="base64加密"></m>
+</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+
+
+4 token协议
+<!--1 上传token -->
+<message id="812Q8-60" from="test001@domain" to="admin@domain" type="chat">
+<body>4</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="14" v_source="0" token="440dba705ca9295ddd0a61d718aa2094c18349737057b665bd83658a44dc960e"></m>
+</nxin>
+</message>
+
+<!--2 删除token -->
+<message id="812Q8-61" from="test001@domain" to="admin@domain" type="chat">
+<body>4</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="15" token="440dba705ca9295ddd0a61d718aa2094c18349737057b665bd83658a44dc960e"></m>
+</nxin>
+</message>
+
+
+
+
+
+5 公共帐号协议
+<!--1 公共账号指令 -->
+<message id="812Q8-62" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="16" content="base64内容" publicId="32435"></m>
+</nxin>
+</message>
+
+<!--1 公共账号指令 补充 -->
+ 消息示例：
+ <message id="6EF25B95A2764E2D863074D7217CFF4A" from="0146009190392534@im.nxin.com/DBN_IOS" to="yejichaxun@im.nxin.com" type="chat"><body>5</body><nxin xmlns="www.nxin.com
+
+"><m type="16" content="eHNSZXBvcnQ=" publicId="35"/></nxin></message>
+ 1、消息的body为"5" m type为"16"
+ 2、上行消息：公共账号配置了菜单"menuType"字段表示
+  (1)menuType=1 查看公共账号资料
+  (2)menuType=2 发送公共账号配置菜单中"commandValue"值 如消息示例中配置"xsReport"命令
+  (3)menuType=3 表示跳转到网页 网页链接为"commandValue"值
+  (4)2.8.8版本增加地理位置信息上报（签到打卡），"commandValue"值为"location"时，客户端需要单独判断，增加如下json格式消息上报，服务器做相应解析
+ json命令示例：
+ {
+    "commandKey": "location",
+     lng:"12.255112",
+     lat:"136.452145"
+ }
+ 3、网页H5点击链接的解析(相当于下行消息)
+ {
+    "type": "1",
+    "commandName":"userinfo"
+    "commandValue": "xxxxx"
+ }
+ 目前解析了 type=1 commandName="userinfo"并且commandType="chat"时 客户端去archiveID值为commandValue聊天界面（企联网需求）
+ type=2 发送上行commandValue值消息
+ type=3 去往Url为commandValue值的网页
+ type=4 加载Url为commandValue的弹出框
+
+<!--2 公共账号消息-文本 -->
+<message id="812Q8-63" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="1" content="base64内容" publicId="32435"></m>
+</nxin>
+</message>
+
+<!--3 公共账号消息-语音 -->
+<message id="812Q8-64" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="2" url="http://www.dbn.com.cn/chat/11.amr"(base64内容) property="120"(base64内容) publicId="32435"></m>
+</nxin>
+</message>
+
+<!--4 公共账号消息-图片 -->
+<message id="812Q8-65" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="3" url="http://www.dbn.com.cn/chat/11.jpg"(base64内容) property="http://www.dbn.com.cn/chat/11.jpg(缩略图地址)"(base64内容) publicId="32435"></m>
+</nxin>
+</message>
+
+<!--5 公共账号消息-地理位置 -->
+<message id="812Q8-66" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="4" lat="base64" lng="base64" property="位置详细描述"(base64内容) publicId="32435"></m>
+</nxin>
+</message>
+
+<!--6 公共账号json -->
+<message id="812Q8-67" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="5" content="base64内容" property="base64内容" publicId="32435"></m>
+</nxin>
+</message>
+
+<!--7 公共账号下行消息 -->
+<message id="812Q8-68" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="17" content="base64内容(json数据)" publicId="9" ></m>
+</nxin>
+</message>
+<!--8 公共账号下行消息 -->
+<message id="812Q8-68" from="test001@domain" to="test002@domain" type="chat">
+<body>5</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="21" content="base64内容(时间戳)" publicId="9" ></m>
+</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6 广播协议
+<!--1 消息群发 -->
+<message id="812Q8-69" from="test001@domain" to="admin@domain" type="chat">
+<body>6</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="1" content="你好，一定要马上有房哦!(base64)" toJID="test002，test003"></m>
+</nxin>
+</message>
+<!-- 消息群发下行消息 -->
+<message id="812Q8-70" from="test001@domain" to="test002@domain"
+type="chat">
+<body>1</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+    <m type="1" content="你好，一定要马上有房哦!(base64)"></m>
+</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+
+7 添加好友协议
+<!--1. 发送验证通知 -->
+<!--1 验证通知 -->
+<message id="812Q8-71" from="test001@domain" to="test002@domain"
+type="chat">
+<body>7</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="18"></m>
+</nxin>
+</message>
+
+
+<!--2 验证通过通知 -->
+<message id="812Q8-72" from="test001@domain" to="test002@domain"
+type="chat">
+<body>7</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="19" extra="好友信息josn(base64加密)" content="content（base64加密）"></m>
+</nxin>
+</message>
+
+<message id="812Q8-73" to="test002@domain" from="test001@domain"
+type="chat">
+<body>7</body>
+<!-- 项目节点 -->
+ <nxin xmlns="www.nxin.com">
+ <m type="19" extra="好友信息josn(base64加密)" content="content（base64加密）"></m>
+ </nxin>
+</message>
+
+<!--3. 删除好友通知 -->
+<message id="812Q8-74" from="test001@domain" to="test002@domain" type="chat">
+    <body>7</body>
+    <!-- 项目节点 -->
+    <nxin xmlns="www.nxin.com">
+            <!--功能节点 type为业务属性-->
+            <m type="20">
+            </m>
+    </nxin>
+</message>
+<!--4 感兴趣的人推荐 -->
+<message id="812Q8-71" from="nxincomponent.domain" to="test001@domain" type="chat">
+<body>7</body>
+<nxin xmlns="www.nxin.com">
+<m type="25" content="感兴趣的人推荐/通讯录好友推荐 json数据(base64)"></m>
+</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+
+
+8 回执协议
+<!--8 回执协议 -->
+<服务器发给客户端>
+<message id="7468665e0ec6a14" from="dbn-pc" to="songguopei@domain" type="chat">
+  <body>0</body>
+  <nxin xmlns="www.nxin.com">
+    <m type="1" id="xxh4O-4"/>
+  </nxin>
+</message>
+<客户端发给服务器 from 跟to都是自己>
+<message id="7468665e0ec6a14" from="songguopei@domain" to="songguopei@domain" type="chat">
+  <body>0</body>
+  <nxin xmlns="www.nxin.com">
+    <m type="1" id="xxh4O-4"/>
+  </nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+9 错误消息
+<message id="75ad270409d34a6789cafc20842898f6" from="im.t.nxin.com" to="1141947505482936@im.t.nxin.com" type="chat">
+<body>2</body>
+<nxin>
+<m type="50" content="576k57uE5bey57uP6Kej5pWj" code="405" roomId="1419901903958468" id="LwCdWb5"/>
+</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+
+
+
+13 农信货联上报轨迹信息
+<!-- 下行消息 -->
+<message id="812Q8-48" from="nxincomponent.domain" to="test002@domain" type="chat">
+<body>8</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="5" content="base64加密"></m>
+</nxin>
+</message>
+
+
+
+
+
+
+
+
+
+
+10 数字字典
+body：
+0：received
+1：nxChat
+2：nxGroup
+3：nxNotify
+4：token
+5：nxPublic
+6：nxBrodcast
+7：nxNormal
+8：nxShop
+9: nxOrganization   type对应(1加入，4删除，3解散，2退出)
+
+
+type ：
+1：text
+2：audio
+3：img
+4：location
+5：json
+6：creaty
+7：invite
+8：quit
+9：kick
+10：dismiss
+11：update
+12：notify
+13：webqiut
+14：add
+15：delete
+16：command
+17: menu
+18：verifyuser
+19：verified
+20: delfriend
+21: extend(圈子动态)
+22：disturb(免打扰)
+23：dynamic(新版圈子动态2.7.5)
+24：video(视频)
+25: interested(感兴趣的人、通讯录好友推荐)
+28: 修改群介绍　（下行　　nxin_scanCode_into_group）
+30: 加群确认（下行　nxin_scanCode_into_group）
+31: 更新群状态（下行　nxin_scanCode_into_group）
+32: 撤回消息
+33: @消息
+50：error
+
+error:
+400:您不是群组成员
+401:创建群组失败
+402:已经是群组成员，操作失败
+403:您不是群主，无法操作
+404:群组不存在
+405:是群组已经解散
+
+>>>>>> 解散  主动退出不要推送
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+011 json 协议
+1、超文本消息（Html类型消息）
+   格式示例：
+{
+    "type": "html",
+    "data": {
+        "content": "An inline link may display a modified version of the content; for instance, instead of an image, a <a href='/wiki/Thumbnail' title='Thumbnail'>thumbnail</a>, <a href='/wiki/Image_resolution' title='Image resolution'>low resolution</a> <a href='/wiki/Preview_(computing)' title='Preview (computing)'>preview</a>, <a href='/wiki/Cropping_(image)' title='Cropping (image)'>cropped</a> section, or <a href='/wiki/Magnification' title='Magnification'>magnified</a> section may be shown. The full content will then usually be available on demand, as is the case with <a href='/wiki/Desktop_publishing' title='Desktop publishing'>print publishing</a> software – e.g. with an external link. This allows for smaller file sizes and quicker response to changes when the full linked content is not needed, as is the case when rearranging a <a href='/wiki/Page_layout' title='Page layout'>page layout</a>."
+    }
+}
+
+
+ 消息限制：
+content：发出去的内容最多500字 标签不显示不计算 （不能为空或空串）
+
+
+2、转发消息（forwarding类型消息）
+
+（1）、网页url的转发（跳转H5页面）
+   格式示例：
+{
+    "type": “forwarding",
+    "data": {
+        "title": "金庸经典语录－－李莫愁《神雕侠侣》",
+        "content": "问世间，情是何物，直教生死相许?天南地北双飞客，老翅几回寒暑。欢乐趣、离别苦，就中更有痴儿女。君应有语，渺万里层云，千山暮雪，只影向谁去。",
+        " imgurl ": " http://img.6niu.com/allimg/1206/2-12061Q33946234.jpg",
+        "url": "http: // www.lkong.net/forum.php?mod=viewthread&tid=758173&page=1"
+    }
+}
+
+（2）、文件的url的转发  （跳转原生的文件下载页面）
+
+  格式示例：
+
+{
+"type": " forwarding ",
+"childType": “file",   ／／备注："childType": “file”  代表是一个文件，客户端根据这个跳转到文件下载页面
+    "data": {
+        "title": "文件-固定",
+        "content": "文件名称",
+        " imgurl ": " 文件类型图片",
+        "url": "文件下载URL地址"
+"size": "文件大小"
+
+    }
+}
+
+
+
+
+3、notice类型消息
+
+ 格式示例：
+<!-- 二次加密 -->
+ {
+    "type": “notice”,
+    "card": {
+        "function":"1"    // 1、语音 2、文字语音
+        "expand":"";
+        "topTitle": "《神雕侠侣》(base64加密)",
+        "centerTopTxt": "李莫愁(base64加密)",
+        "centerImg": "http://img5.imgtn.bdimg.com/it/u=2149004977,390563146&fm=21&gp=0.jpg",
+        "centerBottomTxt": "问世间，情是何物，直教生死相许?天南地北双飞客，老翅几回寒暑。欢乐趣、离别苦，就中更有痴儿女。君应有语，渺万里层云，千山暮雪，只影向谁去。(base64加密)",
+        "bottomTitle": "详细信息(base64加密)",
+        "url": "http://baike.baidu.com/view/94234.htm?fr=aladdin"
+    }
+}
+
+ 消息限制：
+centerBottomTxt：200个字 （不能为空）
+bottomTitle :15个字 （不能为空）
+topTitle ：32个字 （不能为空）
+url:（不能为空）
+centerTopTxt:（能为空 节点必须有）
+centerImg: （能为空 节点必须有）
+
+3.1拓展协议<--评论-->
+{
+    "type": "system",
+
+   “data”:{
+         “id”:”123456”,    // 功能id
+          “function”:“1”    // 1、代表评论   // 2、入选精华通知 //3.帖子加精  //4.跳到我的店  // 5.猪小惠，收到赞的通知
+          "content":"您的评论收到了智农通xxx的回复，赶快去看看吧/恭喜，你的贴子入选精华贴！
+精华贴奖励20积分！",
+          "url":"url",
+          "title":"系统通知：收到一条新消息",
+          "time":"时间戳"
+     }
+}
+
+4、文章列表消息（push类型消息）
+
+ 格式示例：
+
+{
+    "type": "push",
+    "data": [
+        {
+            "bigImg":"", // 只有一个有（如果没有大图就不传这个属性，）[带有大图消息列表]
+            "imgurl": " http://e.hiphotos.baidu.com/image/w%3D2048/sign=d3ffc55d8735e5dd902ca2df42fea6ef/810a19d8bc3eb135afc792b4a41ea8d3fd1f44b8.jpg",
+            "title": "相机真心很漂亮啊，我真的好像容有一个！嘎嘎嘎嘎！",
+            "url": " http://e.hiphotos.baidu.com/image/w%3D2048/sign=d3ffc55d8735e5dd902ca2df42fea6ef/810a19d8bc3eb135afc792b4a41ea8d3fd1f44b8.jpg"
+        },
+        {
+            "imgurl": " http://h.hiphotos.baidu.com/image/w%3D2048/sign=60ace31199504fc2a25fb705d1e5e611/d058ccbf6c81800a565ae617b33533fa828b476f.jpg",
+            "title": "相机真心很漂亮啊，我真的好像容有一个！嘎嘎嘎嘎！",
+            "url": " http://h.hiphotos.baidu.com/image/w%3D2048/sign=60ace31199504fc2a25fb705d1e5e611/d058ccbf6c81800a565ae617b33533fa828b476f.jpg"
+        },
+        {
+            "imgurl": " http://b.hiphotos.baidu.com/image/w%3D2048/sign=20b88903c45c1038247ec9c286299213/9a504fc2d56285352c355b3892ef76c6a6ef63d6.jpg",
+            "title": "相机真心很漂亮啊，我真的好像容有一个！嘎嘎嘎嘎！",
+            "url": " http://b.hiphotos.baidu.com/image/w%3D2048/sign=20b88903c45c1038247ec9c286299213/9a504fc2d56285352c355b3892ef76c6a6ef63d6.jpg"
+        }
+    ]
+}
+
+ 消息限制：
+title：32个字符（不能为空）
+imgurl：（不能为空）
+url：（不能为空）
+
+
+
+5、名片消息（card类型消息）
+
+{
+    "type": “card",
+    "data": {
+        "title": "个人名片或公共账号名片标题（一行3-6个字）",
+        "content": "个人昵称或用户名或公共账号名称（两行）"
+        " imgurl ": " http://img.6niu.com/allimg/1206/2-12061Q33946234.jpg",
+        "id": "个人或公共账号档案ID"
+        "cardType": "名片类型（1：个人名片  2：公共账号名片  3：。。。）"
+    }
+}
+
+6.农信货联上报轨迹信息
+{
+    "content": "eyJ0eXBlIjoiaHRtbCIsImRhdGEiOnsiY29udGVudCI6IuWwiuaVrOeahOminOW+t++8jOaCqOeUs+ivt+eahOWFu+eMqui0tygyMDE3MDExMzAwMSnvvIzlt7Lkuo4yMDE35bm0MDHmnIgxM+aXpeWPkeaUvuWIsOaMh+WumuS+m+W6lOWVhuiRo+WonzPvvIzph5Hpop02MDAuMDHlhYPjgILjgJDlhpzkv6Hph5Hono3jgJEifX0=",
+    "from": "nxincomponent",
+    "msgType": "json",
+    "to": "0147692608722804",
+    "token": "is32ufhwehf9h9asfisdg8BHYU8",
+    "type": "nxShop"
+}
+
+7.通讯录好友推荐（7,25/2.7.8以上推送）
+{
+    "type": "recommend_contact_new",
+    "data": {
+		"archiveId":"",
+		"phone":"18000000000"
+	}
+}
+8.好友推荐，可能感兴趣的人（7,25/2.7.8以上推送）
+{
+    "type": "recommend_contact_interest",
+    "data": [
+        {
+			"id": "1",
+			"icon": "0df38f3179180bfb8c1aa8afaa999223",
+			"name": "1432540172565"
+		},
+		{
+			"id": "1",
+			"icon": "0df38f3179180bfb8c1aa8afaa999223",
+			"name": "1432540172565"
+		}
+    ]
+}
+9群通知协议　
+{
+"data": {
+"content": ""18567791012"邀请"这个月"加入10111群",
+"id": "1059",
+"time": "1501208298694",
+"title": "",
+"nickName": "1012",
+"roomId": "1501206136614677",
+"url": "https://files.t.nxin.com/mobile/jiagong/2017/4/7/0e/cb9e163c-e2d3-42a4-b234-e79011f1d0a7_m.jpg",
+"function": "8"
+},
+"type": "system"
+}
+10 群通知审核通过协议
+{
+"data": {
+"content": "你申请的10111已审核通过,快去管理你的群吧！",
+"time": "1501208829379",
+"title": "群认证通知",
+"function": "9"
+},
+"type": "system"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+012 规范admin协议
+002群聊 上行消息
+<message id="812Q8-35" from="test001@domain" to="nxincomponent.domain" type="chat">
+<body>2</body>
+<nxin xmlns="www.nxin.com">
+<m type="6" toJID="test002,test003" content="xxx创建了xxx群"(base加密) topic="测试聊天室"(base加密)></m>
+</nxin>
+</message>
+
+003 通知协议
+<!--1 踢人通知 -->
+<message id="812Q8-58" from="nxincomponent.domain" to="test001@domain" type="chat">
+<body>3</body>
+<!-- 项目节点 -->
+<nxin xmlns="www.nxin.com">
+<m type="9" content="base64加密" deviceId="base64加密"></m>
+</nxin>
+</message>
+
+<!--2 网页端下线通知 -->
+<message id="812Q8-59" from="nxincomponent.domain" to="test001@domain" type="chat">
+<body>3</body>
+<nxin xmlns="www.nxin.com">
+<m type="13"></m>
+</nxin>
+</message>
+
+openfire判断用户是否在线有改为http请求，原有通过rmi发送下线通知废弃，判断用户是否在线接口如下：
+http://10.211.253.120:9090/plugins/remote/service
+求情参数如下
+String tojid = "1234564531";
+String content = "踢人提示消息内容（base64）";
+String deviceId = "12323123";
+String type = "presence"
+  请求参数保持只需要传递这四个参数   参数值跟以前一样     只有type改为  presence
+返回值为0表示没有该用户    1为用户在线  由openfire发送下线通知     2为用户不在线   不用发送下线通知
+
+
+
+
+
+
+
+
+
+
+
+014苹果推送消息
+id="消息唯一ID",
+aps={
+	sound = "default", //通知剩余
+	alert = "您有一条新的审批单", //通知提示文字
+	badge = "10", //消息计数，多少条未读
+	params {
+		property = "消息内容", //base(内容)，目前没什么场景使用
+		fromId = "发送人ID", //发送人的JID
+		msgType = "single" //single、room、public
+	}
+}
