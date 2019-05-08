@@ -71,12 +71,13 @@ public class AppUtils {
         }
     }
 
+    //权限
     private static boolean hasExternalStoragePermission(Context context) {
         int perm = context.checkCallingOrSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         return perm == PackageManager.PERMISSION_GRANTED;
     }
 
-
+    //权限
     private static boolean checkPermission(Context context, String permName, String pkgName){
         PackageManager pm = context.getPackageManager();
         if(PackageManager.PERMISSION_GRANTED == pm.checkPermission(permName, pkgName)){
@@ -88,7 +89,6 @@ public class AppUtils {
             return false;
         }
     }
-
 
     //原签名信息
     private static final String SIGNATURE = "478yYkKAQF+KST8y4ATKvHkYibo=";

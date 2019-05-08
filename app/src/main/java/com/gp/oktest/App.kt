@@ -1,6 +1,8 @@
 package com.gp.oktest
 
 import android.app.Application
+import android.content.Context
+import android.content.pm.PackageManager
 import com.facebook.stetho.Stetho
 import com.gp.oktest.networklistener.NetChangeObserver
 import com.gp.oktest.networklistener.NetStateReceiver
@@ -27,6 +29,14 @@ class App : Application() {
         //andfix
         AndFixManager.getAndFixManager().initAndFix(this)
         Stetho.initializeWithDefaults(this)
+    }
+
+    //权限判断
+    val EXTERNAL_STORAGE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE"
+
+    fun hasExternalStoragePermission(context: Context) : Boolean{
+        var perm = checkCallingOrSelfPermission (EXTERNAL_STORAGE_PERMISSION);
+        return perm == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
@@ -66,4 +76,5 @@ class App : Application() {
         //解注册广播接受者,
         NetworkUtil.unRegisterNetStateReceiver(this, netStateReceiver)
     }
+
 }
