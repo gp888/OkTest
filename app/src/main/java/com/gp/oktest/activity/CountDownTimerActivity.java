@@ -38,6 +38,16 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
 
     /**
      * CountDownTimer 实现倒计时
+     * 计时不准确问题 将总的倒计时时长额外延长 0.5 秒即可，也就是 500 毫秒
+     * 应该将 CountDownTimer 定义成全局变量，然后在 Activity 销毁时取消倒计时
+     * @Override
+     * protected void onDestroy() {
+     *     super.onDestroy();
+     *     if (timer != null) {
+     *         timer.cancel();
+     *     }
+     * }
+     * 主要是移除 Handler 相关联 Message 队列中的延时 Message 对象
      */
     private CountDownTimer countDownTimer = new CountDownTimer(TOTAL_TIME, ONECE_TIME) {
         @Override
