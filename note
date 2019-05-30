@@ -45,7 +45,7 @@ dart sdk path:D:\flutter\bin\cache\dart-sdk
 
 拉取代码
 git submodule init && git submodule update
-执行flutter packages get (有时候可能出现无法运行可以进入.ios和.android中分别执行pod install 和 gradle assembleDebug,或者flutter build ios,flutter build apk等命令构建一次)
+执行flutter packages get (有时候可能出现无法运行,可以进入.ios和.android中分别执行pod install 和 gradle assembleDebug,或者flutter build ios,flutter build apk等命令构建一次)
 Run...
 
 1. Import flutter module to your HOST app(set binding, implementation, and instantiate view/fragment)
