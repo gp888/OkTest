@@ -6,6 +6,8 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +32,8 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
 
     @BindView(R.id.tv)
     TextView tv;
+    @BindView(R.id.textview)
+    TextView textView;
 
     @BindView(R.id.colorList)
     TextView colorTextView;
@@ -86,6 +90,8 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
         Banner banner = new Banner(this);
         banner.setData();
         ll.addView(banner);
+
+//        textView.setMovementMethod(ScrollingMovementMethod.getInstance());//LinkMovementMethod.getInstance()
     }
 
     private ColorStateList createColorStateList(int normal, int pressed, int unable, int select) {
