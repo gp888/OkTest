@@ -51,7 +51,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.flutter.facade.Flutter;
 
 import static android.text.format.DateUtils.FORMAT_24HOUR;
 import static android.text.format.DateUtils.FORMAT_ABBREV_ALL;
