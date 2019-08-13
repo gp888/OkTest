@@ -47,6 +47,9 @@ import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -99,6 +102,26 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
         }
 
+        exeCommand("ps");//ps, ps | grep com.gp.oktest
+
+    }
+
+    /**
+     * 进程信息
+     * @param command
+     */
+    private void exeCommand(String command){
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process proc = runtime.exec(command);
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private ArrayList<TypeBean> getData() {

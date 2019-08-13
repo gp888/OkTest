@@ -5,22 +5,22 @@ public class JavaTest {
 
     public static void main(String[] args) {
         String str = new String("乳猪浓缩" + "\n" +"料乳猪浓" + "\n" + "缩料");
-        System.out.print("heheh" + str);
+        System.out.println("heheh" + str);
 
         //是否是素数
         double m = 1000;
         double k = Math.sqrt(m);
         for(int i = 2; i <= k; i++) {
             if (m % i == 0) {
-                System.out.print(i + "");
+                System.out.println(i + "");
                 break;
             }
         }
 
         //冒泡排序
         int [] a = {2, 3, 4, 5, 6, 7, 8, 9};
-        for(int j = 0; j < a.length; j ++) {
-            for(int i = 0; i < a.length - j; i++) {
+        for(int j = 0; j < a.length - 1; j ++) {
+            for(int i = 0; i < a.length - j - 1; i++) {
                 if(a[i] > a[i + 1]) {
                     int t = a[i];
                     a[i] = a[i + 1];
@@ -50,7 +50,18 @@ public class JavaTest {
         }
 
         int[] heights = {0,1,0,2,1,0,1,3,2,1,2,1};
-        System.out.print(trappWater(heights));
+        System.out.println(trappWater(heights));
+
+        //打印乘法口诀
+        for (int i = 1,j=1; j <= 9; i++) {
+            System.out.printf("%d * %d = %d %s",i,j,i*j,"\t");
+            // NSLog(@"%d * %d = %d",i,j,i*j);
+            if(i == j){
+                i =0;j++;
+                // NSLog(@"%@",@"\n");
+                System.out.printf("%s","\n");
+            }
+        }
 
     }
 
