@@ -130,6 +130,8 @@
         <activity android:name=".activity.GestureActivity"/>
         <activity android:name=".activity.CoordinateActivity"/>
         <activity android:name=".activity.MyFlutterActivity"/>
+        
+        <service android:name=".service.MusicService"/>
     </application>
 
 </manifest>

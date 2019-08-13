@@ -11,7 +11,6 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,8 +19,6 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -46,6 +43,7 @@ import com.gp.oktest.receiver.SendSMSActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
+import com.gp.oktest.service.MusicService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -367,9 +365,18 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 //                tx.commit();
 
                 startActivity(new Intent(this, MyFlutterActivity.class));
+
+//                if(isAudioFocus){
+//                    stopService(new Intent(MainActivity.this,MusicService.class));
+//                    isAudioFocus = false;
+//                } else {
+//                    startService(new Intent(MainActivity.this, MusicService.class));
+//                    isAudioFocus = true;
+//                }
                 break;
             default:
                 break;
         }
     }
+    boolean isAudioFocus;
 }
