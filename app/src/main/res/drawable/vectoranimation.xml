@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/vector_drawable">
+    <target
+        android:name="star"
+        android:animation="rr" />
+</animated-vector>
+    <!--定义AnimatedVectorDrawableCompat的xml-->
