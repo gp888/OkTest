@@ -1,0 +1,22 @@
+<!--VectorDrawableCompat的xml-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="33"
+    android:width="500px"
+    android:height="500px"
+    android:viewportHeight="500"
+    android:viewportWidth="500"><!-- 画布的大小 -->
+    <!-- 用来把多个path或者subgroup组合起来，group提供了一些属性比如旋转、缩放、平移。这些属性值的变化会反应在它内部的path和subgroup元素上-->
+    <group
+        android:scaleX="5.0"
+        android:scaleY="5.0"
+        android:rotation="45.0"><!--图像旋转角度-->
+            <!-- 这里group和path有一个name属性，这个属性用来在使用动画时指定动画要驱动的对象 -->
+        <path
+        android:name="star"
+            android:fillColor="#00BB9C"
+            android:strokeColor="@color/colorAccent"
+            android:strokeWidth="2"
+
+            android:pathData="M15,46h58.8L45.9,18.1c-1.2,-1.2 -1.2,-3.1 0,-4.2c1.2,-1.2 3.1,-1.2 4.2,0l33,33c0.1,0.1 0.3,0.3 0.4,0.5c0,0.1 0.1,0.2 0.1,0.2c0.1,0.1 0.1,0.2 0.1,0.3c0,0.1 0.1,0.2 0.1,0.3c0,0.1 0.1,0.2 0.1,0.2c0,0.2 0.1,0.4 0.1,0.6l0,0l0,0c0,0.2 0,0.4 -0.1,0.6c0,0.1 0,0.2 -0.1,0.2c0,0.1 -0.1,0.2 -0.1,0.3c0,0.1 -0.1,0.2 -0.1,0.3c0,0.1 -0.1,0.2 -0.1,0.2c-0.1,0.2 -0.2,0.3 -0.4,0.5l-33,33c-1.2,1.2 -3.1,1.2 -4.2,0c-1.2,-1.2 -1.2,-3.1 0,-4.2L73.8,52H15c-1.7,0 -3,-1.3 -3,-3C12,47.3 13.3,46 15,46z"/>
+    </group>
+</vector>
