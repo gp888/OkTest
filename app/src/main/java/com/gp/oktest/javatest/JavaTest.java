@@ -63,9 +63,12 @@ public class JavaTest {
             }
         }
 
+
+       System.out.println(Integer.toBinaryString(-2));//负数用补码表示
+       System.out.println(NumberOf2(-2));
     }
 
-    //收集雨水
+    //收集雨水，分别算出左右的最高点，减去当前高度
     int[] heights;
     public static int trappWater(int[] heights) {
     int max = 0;
@@ -89,4 +92,110 @@ public class JavaTest {
 
     return volumn;
     };
+
+
+    //输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示
+    //第一版：
+    public static  int NumberOf1(int n) {
+        //return Integer.bitCount(n);
+        int count =0;
+        String str = Integer.toBinaryString(n);
+        char[] chararr = str.toCharArray();
+        for(int i=0;i<chararr.length;i++){
+            if(chararr[i]=='1'){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //通过每次将数字n除以2来判断每一位是否为1
+    public static int NumberOf2(int n) {
+        int numOfOne = 0;
+        for(int i = 0; i < 32; i ++){
+            if(((n >> i ) & 1) == 1){
+                numOfOne ++;
+            }
+        }
+        return numOfOne;
+    }
+
+    public static  int NumberOf3(int n) {
+        int count = 0;
+        if(n < 0) {
+            n = n & 0x7FFFFFFF;
+            count ++;
+        }
+        while(n!=0){
+            if(n%2!=0){
+                count++;
+            }
+            n/=2;
+        }
+        return count;
+    }
+
+    //一直运算到n等于0时的运算次数即为
+    public static int NumberOf4(int n) {
+        int count=0;
+        while(n!=0){
+            count++;
+            //n&(n-1)的运算结果会把数字n的二进制数的最右面的1变为0
+            n=n&(n-1);
+        }
+        return count;
+    }
+
+    public static  int NumberOf5(int n) {
+        return Integer.bitCount(n);
+    }
+
+    //判断二进制中0的个数
+    public static int findZero(int n) {
+        int count = 0;
+        while(n != 0) {
+            if((n&1)!=1)
+                count++;
+            n>>>=1;
+        }
+        return count;
+    }
+
+
+//    二进制高位连续0的个数
+    public static int numberOfLeadingZeros0(int i){
+        if(i == 0)
+            return 32;
+        int n = 0;
+        int mask = 0x80000000;
+        int j = i & mask;
+        while(j == 0){
+            n++;
+            i <<= 1;
+            j = i & mask;
+        }
+        return n;
+    }
+
+    //二叉搜索树第k个结点，递归中序遍历方式
+    class TreeNode{
+        public TreeNode left;
+        public TreeNode right;
+    }
+
+    int count = 0;
+    TreeNode KthNode(TreeNode pRoot, int k) {
+        if(pRoot != null) {
+            TreeNode leftNode = KthNode(pRoot.left, k);
+            if(leftNode != null)
+                return leftNode;
+            count++;
+            if(count == k)
+                return pRoot;
+            TreeNode rightNode = KthNode(pRoot.right, k);
+            if(rightNode != null)
+                return rightNode;
+        }
+        return null;
+    }
 }

@@ -10,6 +10,10 @@ import android.util.Log;
 
 public class MusicService extends Service {
 
+//    Intent i = new Intent("com.android.music.musicservicecommand.pause");
+//        i.putExtra("command", "pause");
+//        sendBroadcast(i);
+
     private final String TAG = "MusicService";
     /**
      * 音频管理类
