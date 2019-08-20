@@ -1,6 +1,11 @@
 package com.gp.oktest.javatest;
 
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class JavaTest {
 
     public static void main(String[] args) {
@@ -93,7 +98,7 @@ public class JavaTest {
     return volumn;
     };
 
-
+/****************************位运算*************************************************/
     //输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示
     //第一版：
     public static  int NumberOf1(int n) {
@@ -162,7 +167,7 @@ public class JavaTest {
     }
 
 
-//    二进制高位连续0的个数
+//    判断二进制高位连续0的个数
     public static int numberOfLeadingZeros0(int i){
         if(i == 0)
             return 32;
@@ -177,12 +182,19 @@ public class JavaTest {
         return n;
     }
 
-    //二叉搜索树第k个结点，递归中序遍历方式
+    /************************二叉树**********************************************/
     class TreeNode{
+        int val = 0;
         public TreeNode left;
         public TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+
+        }
     }
 
+    //二叉搜索树第k小个结点，递归中序遍历方式。5 / \ 3 7 /\ /\ 2 4 6 8，二叉搜索树的中序遍历就是排序的
     int count = 0;
     TreeNode KthNode(TreeNode pRoot, int k) {
         if(pRoot != null) {
@@ -197,5 +209,84 @@ public class JavaTest {
                 return rightNode;
         }
         return null;
+    }
+
+    //栈的方式
+    TreeNode KthNode1(TreeNode pRoot, int k) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        if(pRoot==null||k==0) return null;
+        int t=0;
+        while(pRoot!=null ||stack.size()>0){
+            while(pRoot!=null){
+                stack.push(pRoot);
+                pRoot = pRoot.left;
+            }
+            if(stack.size()>0){
+                pRoot= stack.pop();
+                t++;
+                if(t==k) return pRoot;
+                pRoot= pRoot.right;
+            }
+        }
+        return null;
+    }
+
+    //从上往下打印二叉树，同层节点从左至右打印
+    public class Solution {
+        /**
+         * 1.根节点放到队列里面，队列不空，就打印队列头，打印这个节点，马上把这个节点的左右子节点放到队列中。
+         * 2.再要访问一个节点，把这个节点的左右放入，此时队头是同层的，队尾是打印出来的左右。依次先入先出就可以得到结果。
+         * @param root
+         * @return
+         */
+        public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
+            ArrayList<Integer> layerList = new ArrayList<Integer>();
+            if (root == null)
+                return layerList;
+            LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                layerList.add(node.val);
+                if (node.left != null)
+                    queue.addLast(node.left);
+                if (node.right != null)
+                    queue.addLast(node.right);
+            }
+            return layerList;
+        }
+    }
+    //二叉树打印成多行，同一层结点从左至右输出。每一层输出一行
+    static ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        if(pRoot == null)
+            return res;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        TreeNode last = pRoot;
+        TreeNode nlast =null;
+        queue.offer(pRoot);
+        ArrayList<Integer> tmp = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            pRoot = queue.poll();
+            tmp.add(pRoot.val);//出队列，就把他左右孩子入队列，
+            //此时，下一层的最右要跟着更新
+            if (pRoot.left!=null) {
+                queue.offer(pRoot.left);
+                nlast = pRoot.left;
+            }
+            if (pRoot.right!=null) {
+                queue.offer(pRoot.right);
+                nlast = pRoot.right;
+            }
+            //如果到了本层的最右，就把这一层结果放入。注意最后一层时，isempty不成立，
+            //最后一层的结果要单独放入。
+            if (pRoot == last && !queue.isEmpty()) {
+                res.add(new ArrayList<>(tmp));
+                last = nlast;
+                tmp.clear();
+            }
+        }
+        res.add(new ArrayList<>(tmp));
+        return res;
     }
 }

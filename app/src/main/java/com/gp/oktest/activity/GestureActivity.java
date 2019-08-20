@@ -13,6 +13,23 @@ import android.widget.TextView;
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 
+
+//mScroller = new Scroller(getContext());
+// mScroller.forceFinished(true);
+
+//scrollTo（int x,int y）：xy偏移量
+//移动view到坐标点（100，100），那么我的偏移量就是(0,，0)  - （100，100） = （-100 ，-100）  ，
+// 我就要执行view.scrollTo(-100,-100),达到这个效果。
+
+//scrollBy（int x,int y）
+//相对我们当前位置偏移
+
+//getScrollX横向滑动距离
+//mScrollX：表示离视图起始位置的x水平方向的偏移量
+//mScrollY：表示离视图起始位置的y垂直方向的偏移量
+//分别通过getScrollX() 和getScrollY()方法获得。
+//向右滑，getScrollX()为负值
+//注意：mScrollX和mScrollY指的并不是坐标，而是偏移量。
 public class GestureActivity extends BaseActivity {
     Button bt;
     RelativeLayout rl;
@@ -116,13 +133,6 @@ public class GestureActivity extends BaseActivity {
         }
 
         @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            // 完成一次单击，并确定没有二击事件后触发（300ms），e为down时的MotionEvent
-            Log.d("markgpp", "onSingleTapConfirmed:");
-            return super.onSingleTapConfirmed(e);
-        }
-
-        @Override
         public boolean onDoubleTap(MotionEvent e) {
             //第二次单击down时触发，e为第一次down时的MotionEven
             Log.d("markgpp", "onDoubleTap");
@@ -144,9 +154,13 @@ public class GestureActivity extends BaseActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             // 手指在触摸屏上迅速移动，并松开的动作,velocityX速度
-            if (e1.getX() - e2.getX() > 50) {
+            //velocityX > 0  正向，向右滑
+
+            final int FLING_MIN_DISTANCE=100;//X或者y轴上移动的距离(像素)
+            final int FLING_MIN_VELOCITY=200;//x或者y轴上的移动速度(像素/秒)
+            if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE && Math.abs(velocityX)>FLING_MIN_VELOCITY) {
                 //从右往左滑动
-            } else if (e2.getX() - e1.getX() > 50) {
+            } else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE && Math.abs(velocityX)>FLING_MIN_VELOCITY) {
                 //从左往右滑动
             }
             return super.onFling(e1, e2, velocityX, velocityY);
@@ -165,14 +179,20 @@ public class GestureActivity extends BaseActivity {
             }else{
                 //右  点击区域在右执行的方法
             }
-
             return super.onSingleTapUp(e);
         }
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            //// 第二次单击down,move和up时都触发，e为不同时机下的MotionEvent
+            // 第二次单击down,move和up时都触发，e为不同时机下的MotionEvent
             return super.onDoubleTapEvent(e);
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            // 完成一次单击，并确定300ms内没有二击事件后触发，e为down时的MotionEvent
+            Log.d("markgpp", "onSingleTapConfirmed:");
+            return super.onSingleTapConfirmed(e);
         }
     }
 }

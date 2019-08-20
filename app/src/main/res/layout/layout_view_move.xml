@@ -15,11 +15,10 @@
     <!--shared element-->
 
 
-    <EditText
+    <com.gp.oktest.view.MutilineImeOptionsEditText
         android:id="@+id/emoji"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
         android:imeOptions="actionSearch"/>
 
     <com.gp.oktest.view.MoveView
