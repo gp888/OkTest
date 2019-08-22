@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
-                System.out.println(line);
+                System.out.println("ps--" + line);
             }
         } catch (IOException e) {
             e.printStackTrace();

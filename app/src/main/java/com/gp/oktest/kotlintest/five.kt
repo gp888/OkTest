@@ -104,7 +104,7 @@ class BaiLing:Bird(){
 fun call(bird:Bird){
     //java 写法
     if(bird is BaiLing){
-//        val newBaiLing = bird as BaiLing //as 强制类型转换
+//        val newBaiLing = bird as BaiLing //as 强制类型转换 as?可空转换，转换失败时返回null
 //        newBaiLing.jiJi()
         bird.jiJi()//一但判断出类型之后，自动转换
     }
