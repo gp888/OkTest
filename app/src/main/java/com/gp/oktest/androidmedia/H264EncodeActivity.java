@@ -91,7 +91,7 @@ public class H264EncodeActivity extends BaseActivity implements SurfaceHolder.Ca
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        Log.w("MainActivity", "enter surfaceCreated method");
+        Log.w("H264EncodeActivity", "enter surfaceCreated method");
         // 目前设定的是，当surface创建后，就打开摄像头开始预览
         camera = Camera.open();
         camera.setDisplayOrientation(90);
@@ -114,12 +114,12 @@ public class H264EncodeActivity extends BaseActivity implements SurfaceHolder.Ca
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-        Log.w("MainActivity", "enter surfaceChanged method");
+        Log.w("H264EncodeActivity", "enter surfaceChanged method");
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        Log.w("MainActivity", "enter surfaceDestroyed method");
+        Log.w("H264EncodeActivity", "enter surfaceDestroyed method");
 
         // 停止预览并释放资源
         if (camera != null) {

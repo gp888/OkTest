@@ -41,6 +41,11 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+
+    //启用 DataBinding
+    dataBinding {
+        enabled = true
+    }
 }
 
 //统一替换SupportVersion版本

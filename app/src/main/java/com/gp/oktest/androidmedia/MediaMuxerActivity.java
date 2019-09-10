@@ -73,18 +73,18 @@ public class MediaMuxerActivity extends AppCompatActivity implements SurfaceHold
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        Log.w("MainActivity", "enter surfaceCreated method");
+        Log.w("MediaMuxerActivity", "enter surfaceCreated method");
         this.surfaceHolder = surfaceHolder;
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-        Log.w("MainActivity", "enter surfaceChanged method");
+        Log.w("MediaMuxerActivity", "enter surfaceChanged method");
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        Log.w("MainActivity", "enter surfaceDestroyed method");
+        Log.w("MediaMuxerActivity", "enter surfaceDestroyed method");
         MediaMuxerThread.stopMuxer();
         stopCamera();
 

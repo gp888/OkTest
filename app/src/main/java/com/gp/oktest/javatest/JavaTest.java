@@ -590,7 +590,70 @@ public class JavaTest {
         if (Math.abs(left - right) > 1)
             isBalance = false;
         return Math.max(left, right) + 1;
+    }
 
+
+    //给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。
+    // 注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针
+    public class TreeLinkNode {
+        int val;
+        TreeLinkNode left = null;
+        TreeLinkNode right = null;
+        TreeLinkNode next = null;
+        TreeLinkNode(int val) {
+            this.val = val;
+        }
+    }
+    /** 主要分三种：
+     * 1.如果有右孩子，后继节点就是右子树最左边的
+     * 2.如果没有右孩子，判断是否是父节点的左孩子，是的话，返回
+     * 3.找不到就是null
+     * @param pNode
+     * @return
+     */
+
+    public TreeLinkNode GetNext(TreeLinkNode pNode) {
+        if(pNode == null)
+            return null;
+        // 如果有右子树，则找右子树的最左节点
+        if (pNode.right != null) {
+            pNode = pNode.right;
+            // 如果此时pNode没有左子树，那么它就是下一个结点 ，就是最左边的了
+            //如果有左子树，那就在左子树找最左边的
+            while(pNode.left != null)
+                pNode = pNode.left;
+            return pNode;
+
+        }
+        // 非根结点，并且没有右子树
+        while(pNode.next != null) {
+            // 该结点是其父亲的左孩子,找到就是返回父节点作为后记
+            if (pNode.next.left == pNode)
+                return pNode.next;
+            //找不到这个左孩子的，就继续往上，next其实是parent
+            pNode = pNode.next;
+        }
+        return null;
+    }
+
+    //判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的
+//利用递归进行判断，
+    //若左子树的左孩子等于右子树的右孩子且左子树的右孩子等于右子树的左孩子，
+    //并且左右子树节点的值相等，则是对称的。
+    boolean isSymmetrical(TreeNode pRoot) {
+        if (pRoot == null)
+            return true;
+        return isCommon(pRoot.left,pRoot.right);
+    }
+    public boolean isCommon(TreeNode leftNode, TreeNode rightNode) {
+        if (leftNode == null && rightNode == null)
+            return true;
+        if (leftNode != null && rightNode != null) {
+            return leftNode.val == rightNode.val &&
+                    isCommon(leftNode.left, rightNode.right) &&
+                    isCommon(leftNode.right, rightNode.left);
+        }
+        return false;
     }
 }
 

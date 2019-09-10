@@ -132,6 +132,9 @@
         <activity android:name=".activity.MyFlutterActivity"/>
         
         <service android:name=".service.MusicService"/>
+
+        <activity android:name=".ZoomImageView.ImageEntranceActivity"/>
+        <activity android:name=".ZoomImageView.ImageActivity"/>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--位移动画：1为持续时长；2为X轴起始位置；3为X轴到达位置-->
+    <!--2为Y轴起始位置；3为y轴到达位置-->
     <!--X轴相对左右方向，Y轴相对上下方向-->
+    <!--android:toYDelta=”100%”,表示自身的100%,也就是从View自己的位置开始。-->
+    <!--android:toXDelta=”80%p”,表示父层View的80%,是以它父层View为参照的。-->
     <translate
         android:duration="500"
         android:fromYDelta="-100"

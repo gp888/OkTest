@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.gp.oktest.AlipayHomeActivity;
 import com.gp.oktest.AppCompatPopupWin;
 import com.gp.oktest.R;
+import com.gp.oktest.ZoomImageView.ImageEntranceActivity;
 import com.gp.oktest.adapter.BaseAdapter;
 import com.gp.oktest.adapter.MainAdapter;
 import com.gp.oktest.aidltest.AidlActivity;
@@ -158,6 +159,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("Gesture", 32));
         typeBeans.add(new TypeBean("Coordinate", 33));
         typeBeans.add(new TypeBean("FlutterActivity", 34));
+        typeBeans.add(new TypeBean("ZoomImageActivity", 35));
         return typeBeans;
     }
 
@@ -373,6 +375,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 //                    startService(new Intent(MainActivity.this, MusicService.class));
 //                    isAudioFocus = true;
 //                }
+                break;
+            case 35:
+                startActivity(new Intent(this, ImageEntranceActivity.class));
                 break;
             default:
                 break;

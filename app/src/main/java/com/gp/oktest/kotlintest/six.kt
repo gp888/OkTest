@@ -290,13 +290,21 @@ fun main(args: Array<String>) {
 
 }
 
-//listOf不可变集合，不能添加不可修改
-val list1 = listOf<String>("33", "37", "55", "88")
+//listOf函数来构建一个不可变的List(只读的List,不能添加不可修改)
+//创建的List都是是只读的，不可变的、可序列化的
+//listOf()用于创建没有元素的空List
+//listOf(vararg elements: T)用于创建拥有多个元素的List
+//listOf(element: T)用于创建只有一个元素的List
+
+val list1 : List<String> = listOf<String>("33", "37", "55", "88")
 //mutableListOf可变集合
-val list2 = mutableListOf<String>("55", "77", "2355")
+// mutableListOf(): MutableList
+//arrayListOf(): ArrayList
+//新增了add/addAll、remove/removeAll/removeAt、set、clear、retainAll等更新修改的操作函数。
+val list2 : MutableList<String> = mutableListOf<String>("55", "77", "2355")
 val list4 = mutableListOf<Int>(44, 99, 1009)
 
-val list3 = arrayListOf("5t", "y6", "h4")
+val list3 : ArrayList<String> = arrayListOf("5t", "y6", "h4")
 //通过构造方法创造集合
 val mulist = MutableList(10){
     "33";"666"
