@@ -243,7 +243,7 @@ set(value) {
     name = value
 }
 
-//object关键字，单例
+//object关键字，饿汉式单例，线程安全
 //不创建建当前对象
 //直接类.属性，访问字段
 object Data{
