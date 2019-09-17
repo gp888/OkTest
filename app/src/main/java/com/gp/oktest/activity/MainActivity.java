@@ -160,6 +160,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("Coordinate", 33));
         typeBeans.add(new TypeBean("FlutterActivity", 34));
         typeBeans.add(new TypeBean("ZoomImageActivity", 35));
+        typeBeans.add(new TypeBean("RecyclerViewPager", 36));
         return typeBeans;
     }
 
@@ -378,6 +379,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 35:
                 startActivity(new Intent(this, ImageEntranceActivity.class));
+                break;
+            case 36:
+                startActivity(new Intent(this, RecyclerViewPagerActivity.class));
                 break;
             default:
                 break;

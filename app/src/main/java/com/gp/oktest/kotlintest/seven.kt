@@ -11,7 +11,11 @@ import java.time.LocalTime
 //另一方面，内联函数会把我们调用这个函数的地方替换掉，所以它不需要为此生成一个内部的对象。
 
 
+//lateinit 的意思是：告诉编译器我没法第一时间就初始化，但我肯定会在使用它之前完成初始化的。
+//它的作用就是让 IDE 不要对这个变量检查初始化和报错。
 
+//field 本质上确实是一个 Java 中的 field，但对于 Kotlin 的语法来讲，
+// 它和 Java 里面的 field 完全不是一个概念。在 Kotlin 里，它相当于每一个 var 内部的一个变量
 
 
 //kotlin默认为public
@@ -79,7 +83,7 @@ class Sample{
 //val list = listOf("a", "b", "c")
 //list.asSequence()
 
-//val sequence = generateSequence(0) { it + 1 }
+val sequence = generateSequence(0) { it + 1 }
 // 👆 lambda 表达式，负责生成第二个及以后的元素，it 表示前一个元素
 
 
@@ -115,52 +119,47 @@ val xx = x.b.xx;
 
 //分别用 Array、IntArray、List 实现 「保存 1-100_000 的数字，
 // 并求出这些数字的平均值」，打印出这三种数据结构的执行时间
-val uu = arrayOf(100000);
-val range = IntRange(1, 100000)
-val ii = range.forEachIndexed { index, i ->
-    uu[index] = i
-}
 
-
-
-val hh : Array<Int> = arrayOf(1, 100000);
-val jj : IntArray = intArrayOf(1, 100000)
-
-class Sample{
+//IntArray背后是基本数据类型int的数组，最快是由于没有拆装箱
+//List背后是ArrayList
+//Array背后是Interger类型的数组
+//由于求平均值的函数底层实现不同
+fun main(args: Array<String>) {
     val maxCount = 100_000
     //Array 方式
     var timeArrayStart = LocalTime.now()
     var array = Array(maxCount) { i -> (i + 1) }
-    var totalArray = 0
-    val q = array.forEach {
-        totalArray += it
+    var sum = 0
+    array.forEach {
+        sum += it
     }
-//    val w = println(array.average())
-    val avgArray = BigDecimal(totalArray).divide(BigDecimal(array.size))
+//    val avgArray = array.average()
+    val avgArray = BigDecimal(sum).divide(BigDecimal(array.size))
     val durationArray = Duration.between(timeArrayStart, LocalTime.now())
-    val e = Log.e("tags", "Array 平均值=$avgArray 用时=$durationArray")
+    Log.e("tags", "Array 平均值=$avgArray 用时=$durationArray")
 
     //IntArray 方式
     var timeIntArrStart = LocalTime.now()
     var intArray = IntArray(maxCount) { i -> (i + 1) }
-    var totalIntArr = 0
-    val r = intArray.forEach {
-        totalIntArr += it
+    var sum1 = 0
+    intArray.forEach {
+        sum1 += it
     }
-//    val y = println(intArray.average())
-    val avgIntArr = BigDecimal(totalIntArr).divide(BigDecimal(intArray.size))
+//    val avgIntArr = intArray.average()
+    val avgIntArr = BigDecimal(sum1).divide(BigDecimal(intArray.size))
     val durationIntArr = Duration.between(timeIntArrStart, LocalTime.now())
-    val t = Log.e("tags", "IntArray 平均值=$avgIntArr 用时=$durationIntArr")
+    Log.e("tags", "IntArray 平均值=$avgIntArr 用时=$durationIntArr")
 
     //List 方式
     var timeListStart = LocalTime.now()
     var list = List(maxCount) { i -> (i + 1) }
-    var totalList = 0
-    var u = list.forEach {
-        totalList += it
+    var sum2 = 0
+    list.forEach {
+        sum2 += it
     }
-    val avgList = BigDecimal(totalList).divide(BigDecimal(list.size))
+//    val avgList = list.average()
+    val avgList = BigDecimal(sum2).divide(BigDecimal(list.size))
     val durationList = Duration.between(timeListStart, LocalTime.now())
-    val i = Log.e("tags", "List 平均值=$avgList 用时=$durationList")
+    Log.e("tags", "List 平均值=$avgList 用时=$durationList")
 }
 
