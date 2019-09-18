@@ -19,27 +19,29 @@ import java.time.LocalTime
 
 
 //kotlin默认为public
-class User{
+class User {
     init {
-        //初始化代码块，实例化时执行，先于构造器执行，java 不需要加init
+        //初始化代码块，实例化时执行，先于次器执行，java 不需要加init
     }
 
-    constructor(){
+    constructor() {
 
     }
 }
 //kotlin函数参数默认是val
 
-val size:Int
-get(){return 5}
+val size: Int
+    get() {
+        return 5
+    }
 
 //object 创建一个类，并创建这个类对象，既有class 关键字功能，又实现单例。
 //object: 创建匿名类
 
 //一个类最多有一个伴生对象，可以有多个嵌套对象（object）。静态变量和方法companion object
 
-class Sample{
-    companion object{
+class Sample {
+    companion object {
         init {
             //静态初始化
         }
@@ -63,12 +65,8 @@ class Sample{
 //Map 存储 键-值 对的数据集合，键互不相等，但不同的键可以对应相同的值。
 
 
-
-
-
 //在一些性能需求比较苛刻的场景，并且元素类型是基本类型时，用数组好一点。不过这里要注意一点，
 // Kotlin 中要用专门的基本类型数组类 (IntArray FloatArray LongArray) 才可以免于装箱。
-
 
 
 //kotlin 数组不支持协变，List Set支持。java 数组支持List不支持
@@ -87,8 +85,6 @@ val sequence = generateSequence(0) { it + 1 }
 // 👆 lambda 表达式，负责生成第二个及以后的元素，it 表示前一个元素
 
 
-
-
 //internal：内部，仅对 module 内可见。
 //Kotlin 中如果不写可见性修饰符，就表示公开，和 Java 中 public 修饰符具有相同效果
 
@@ -99,22 +95,22 @@ val sequence = generateSequence(0) { it + 1 }
 //Maven project
 
 
-
 //创建一个 Kotlin 类，这个类需要禁止外部通过构造器创建实例，并提供至少一种实例化方式。
-class x{
+class x {
 
-    private constructor(){
+    private constructor() {
 
     }
 
-    companion object b{
+    companion object b {
         val xx = x()
     }
 
-    fun newInstance(): x{
+    fun newInstance(): x {
         return x()
     }
 }
+
 val xx = x.b.xx;
 
 //分别用 Array、IntArray、List 实现 「保存 1-100_000 的数字，
@@ -163,3 +159,69 @@ fun main(args: Array<String>) {
     Log.e("tags", "List 平均值=$avgList 用时=$durationList")
 }
 
+
+//Kotlin 中一个类最多只能有 1 个主构造器（也可以没有），而次构造器是没有个数限制
+class User1 constructor(name: String) {
+    //                  👇 这里与构造器中的 name 是同一个
+    var name: String = name
+
+    //类的属性 name 可以引用构造器中的参数 name
+    init {
+        this.name = name
+    }
+}
+//init 代码块是紧跟在主构造器之后执行的，init 代码块就充当了主构造器代码体的功能
+//创建类的对象时，不管使用哪个构造器，都需要主构造器的参与
+//在类的初始化过程中，首先执行的就是主构造器
+
+//使用次构造器创建对象时，init 代码块是先于次构造器执行的
+
+
+//主构造器里声明属性
+
+class User2(var name: String) {
+}
+// 等价于：
+class User3(name: String) {
+    var name: String = name
+}
+
+
+
+//本地函数（嵌套函数）
+//kotlin 内置的require函数
+
+val intArray = intArrayOf(1, 2, 3)
+//对每个元素进行过滤操作
+val newList: List<Int> = intArray.filter { i ->
+    i != 1 // 👈 过滤掉数组中等于 1 的元素
+}
+//遍历每个元素并执行给定表达式
+val newList1: List<Int> = intArray.map { i ->
+    i + 1 // 👈 每个元素加 1
+}
+//遍历每个元素，并为每个元素创建新的集合，最后合并到一个集合中
+val newList2 = intArray.flatMap { i ->
+    listOf("${i + 1}", "a") // 👈 生成新集合
+}
+
+//以上操作list也有
+
+
+
+//IntRange ，CharRange  LongRange。
+fun main() {
+//Sequence 又被称为「惰性集合操作」
+    val sequence1 = sequenceOf(1, 2, 3, 4)
+    val result1: Sequence<Int> = sequence
+            .map { i ->
+                println("Map $i")
+                i * 2
+            }
+            .filter { i ->
+                println("Filter $i")
+                i % 3  == 0
+            }
+//👇
+    println(result1.first()) // 👈 只取集合的第一个元素
+}

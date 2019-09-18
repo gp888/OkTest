@@ -31,11 +31,14 @@ fun main(args: Array<String>) {
 
     //\n换行
 
+    //raw string原生字符串
     var ss = """|我
             |喝
         |茶"""//原样输出字符串
 
-    ss.trimMargin("|")
+    ss.trimMargin("|")//trimMargin()
+    //| 符号为默认的边界前缀，前面只能有空格，否则不会生效
+    //输出时 | 符号以及它前面的空格都会被删除
 
     var sss = "444"
 

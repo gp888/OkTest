@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.util.Log
-import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +33,10 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
     private var lastIsPlayState = false
     private var realPosition = -1
 
+    init {
+        mRecyclerHandler = Handler(Looper.getMainLooper(), this)
+    }
+
     companion object {
         private val TASK_TIMEOUT: Long = 3000
     }
@@ -44,10 +47,6 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
             return linearLayoutManager.findFirstVisibleItemPosition()
         }
         set(position) = setCurrentItem(position, true)
-
-    init {
-        mRecyclerHandler = Handler(Looper.getMainLooper(), this)
-    }
 
     fun setOnPageChangeListener(onPageChangeListener: OnPageChangeListener) {
         this.onPageChangeListener = onPageChangeListener
@@ -69,7 +68,6 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
             smoothScrollToPosition(position)
         }
     }
-
 
     override fun fling(velocityX: Int, velocityY: Int): Boolean {
 
