@@ -33,6 +33,7 @@ import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.database.SqliteActivity;
+import com.gp.oktest.dialog.EveryDaySignInDialog;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.kotlintest.BitmapOptionsActivity;
 import com.gp.oktest.longconnect.LongConnectActivity;
@@ -381,7 +382,11 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 startActivity(new Intent(this, ImageEntranceActivity.class));
                 break;
             case 36:
-                startActivity(new Intent(this, RecyclerViewPagerActivity.class));
+//                startActivity(new Intent(this, RecyclerViewPagerActivity.class));
+//                overridePendingTransition(R.anim.activity_in, 0);
+
+                EveryDaySignInDialog dialog = new EveryDaySignInDialog(this);
+                dialog.show();
                 break;
             default:
                 break;

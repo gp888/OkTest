@@ -6,6 +6,7 @@
 
     <color name="light_blue">#4ABAF4</color>
     <color name="light_green">#2FCA43</color>
+    <color name="white">#ffffff</color>
 
 <!--多主题-->
     <color name="red_primary">#F44336</color>
@@ -70,4 +71,5 @@
     <color name="aliPay_bar_color">#1983d1</color>
 
     <color name="aliPay_search_bg_color">#11222222</color>
+    <color name="translucent">#66000000</color>
 </resources>

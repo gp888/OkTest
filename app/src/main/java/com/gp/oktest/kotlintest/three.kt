@@ -131,7 +131,7 @@ fun todo1(age:Int):String{
 
 
     val result = when(age) {
-        in 7..11-> {
+        !in 7..11-> {
             println("chifna")
             "吃饭"//返回最后一行
         }
