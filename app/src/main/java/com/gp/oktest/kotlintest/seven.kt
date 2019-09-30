@@ -244,3 +244,52 @@ fun main() {
 
 //?:
 //Java 中的 equals ，在 Kotlin 中与之相对应的是 ==
+
+
+
+
+
+//Java 里的数组是支持协变的，而 Kotlin 中的数组 Array 不支持协变。
+//
+//这是因为在 Kotlin 中数组是用 Array 类来表示的，这个 Array 类使用泛型就和集合类一样，所以不支持协变。
+//
+//Java 中的 List 接口不支持协变，而 Kotlin 中的 List 接口支持协变。
+//
+//Java 中的 List 不支持协变，原因在上文已经讲过了，需要使用泛型通配符来解决。
+//
+//在 Kotlin 中，实际上 MutableList 接口才相当于 Java 的 List。Kotlin 中的 List 接口实现了只读操作，
+// 没有写操作，所以不会有类型安全上的问题，自然可以支持协变。
+
+
+fun <T> fill(array : Array<in T>, any : T) {
+    array.set(0, any)
+}
+
+fun <T> copy(srcArray :Array<out T>, desArray : Array<in T>){
+    for(i in srcArray.indices){
+        desArray[i] = srcArray[i]
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
