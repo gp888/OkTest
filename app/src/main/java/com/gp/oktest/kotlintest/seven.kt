@@ -1,7 +1,13 @@
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.util.Log
+import kotlinx.coroutines.*
+import java.lang.Runnable
 import java.math.BigDecimal
+import java.net.URL
 import java.time.Duration
 import java.time.LocalTime
+import javax.net.ssl.HttpsURLConnection
 
 //内联函数 inline
 //
@@ -273,23 +279,112 @@ fun <T> copy(srcArray :Array<out T>, desArray : Array<in T>){
 
 
 
+// Kotlin 中，协程的一个典型的使用场景就是线程控制。就像 Java 中的 Executor 和 Android 中的 AsyncTask，
+// Kotlin 中的协程也有对 Thread API 的封装，不用关注多线程就能够很方便地写出并发操作。
+
+
+//val executor = Executors.newCachedThreadPool()
+//executor.execute({
+//
+//})
+
+
+//object : AsyncTask<T0, T1, T2> {
+//    override fun doInBackground(vararg args: T0): String { ... }
+//    override fun onProgressUpdate(vararg args: T1) { ... }
+//    override fun onPostExecute(t3: T3) { ... }
+//}
+
+
+val th = Thread(object : Runnable {
+    override fun run() {
+
+    }
+}).start()
+
+val th1 = Thread({
+
+})
+​
+
+val th2 = Thread {
+
+}
 
 
 
+//非阻塞式挂起
+
+//用同步的方式写异步的代码
 
 
 
+//协程的基本使用
+// 方法一，使用 runBlocking 顶层函数
+//runBlocking {
+//    getImage(imageId)
+//}
+​
+// 方法二，使用 GlobalScope 单例对象
+//            👇 可以直接调用 launch 开启协程
+//GlobalScope.launch {
+//    getImage(imageId)
+//}
+​
+// 方法三，自行通过 CoroutineContext 创建一个 CoroutineScope 对象
+//                                    👇 需要一个类型为 CoroutineContext 的参数
+//val coroutineScope = CoroutineScope(context)
+//coroutineScope.launch {
+//    getImage(imageId)
+//}
+
+
+/*
+方法一通常适用于单元测试的场景，而业务开发中不会用到这种方法，因为它是线程阻塞的。
+方法二和使用 runBlocking 的区别在于不会阻塞线程。但在 Android 开发中同样不推荐这种用法，因为它的生命周期会和 app 一致，
+且不能取消（什么是协程的取消后面的文章会讲）。
+方法三是比较推荐的使用方法，我们可以通过 context 参数去管理和控制协程的生命周期（这里的 context 和 Android
+里的不是一个东西，是一个更通用的概念，会有一个 Android 平台的封装来配合使用）。*/
 
 
 
+fun main() {
+    suspend fun getImage(imageId: Int) = withContext(Dispatchers.IO) {
+
+    }
+
+    //创建一个新的协程，并在指定的线程上运行它
+    val coroutineScope = CoroutineScope(Dispatchers.Main)
+    val cc = coroutineScope.launch {
+        print(Thread.currentThread().name)
+        val image = getImage(33)
+//        avatarIv.setImageBitmap(image)
+    }
 
 
 
+    GlobalScope.launch(Dispatchers.Main) {
+        val bitmapDrawable = withContext(Dispatchers.IO) {
+            println("1,name:${Thread.currentThread().name}")
+
+            val httpURLConnection: HttpsURLConnection = URL("https://pic1.zhimg.com/50/v2-41e15cd04c4f8633d106e927680dc0ae_hd.jpg")
+                    .openConnection() as HttpsURLConnection
+            var bitmapDrawable: Drawable? = null
+            if (httpURLConnection.responseCode == 200) {
+                bitmapDrawable =
+                        BitmapDrawable.createFromStream(httpURLConnection.inputStream, "sdf.png")
+            }
+            bitmapDrawable
+        }
+//        mImageView.background = bitmapDrawable
+        println("2,name:${Thread.currentThread().name}")
+    }
+
+
+}
 
 
 
+//代码执行到 suspend 函数的时候会『挂起』，并且这个『挂起』是非阻塞式的，它不会阻塞你当前的线程
 
-
-
-
-
+//协程，线程框架
