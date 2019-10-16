@@ -296,20 +296,20 @@ fun <T> copy(srcArray :Array<out T>, desArray : Array<in T>){
 //}
 
 
-val th = Thread(object : Runnable {
-    override fun run() {
+//val th = Thread(object : Runnable {
+//    override fun run() {
+//
+//    }
+//}).start()
 
-    }
-}).start()
-
-val th1 = Thread({
-
-})
-​
-
-val th2 = Thread {
-
-}
+//val th1 = Thread({
+//
+//})
+//​
+//
+//val th2 = Thread {
+//
+//}
 
 
 
@@ -323,14 +323,12 @@ val th2 = Thread {
 // 方法一，使用 runBlocking 顶层函数
 //runBlocking {
 //    getImage(imageId)
-//}
-​
+//}​
 // 方法二，使用 GlobalScope 单例对象
 //            👇 可以直接调用 launch 开启协程
 //GlobalScope.launch {
 //    getImage(imageId)
-//}
-​
+//}​
 // 方法三，自行通过 CoroutineContext 创建一个 CoroutineScope 对象
 //                                    👇 需要一个类型为 CoroutineContext 的参数
 //val coroutineScope = CoroutineScope(context)
@@ -348,7 +346,7 @@ val th2 = Thread {
 
 
 
-fun main() {
+fun main1() {
     suspend fun getImage(imageId: Int) = withContext(Dispatchers.IO) {
 
     }

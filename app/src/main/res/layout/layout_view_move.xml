@@ -25,4 +25,19 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/grey_accent"/>
+
+
+
+    <Button
+        android:id="@+id/butten"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:text="vector"
+        android:background="@drawable/select_vector" />
+
+    <ImageView
+        android:id="@+id/vectorImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

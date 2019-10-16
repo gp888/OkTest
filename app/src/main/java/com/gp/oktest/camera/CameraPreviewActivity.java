@@ -2,6 +2,7 @@ package com.gp.oktest.camera;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +16,15 @@ import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 
 import java.io.IOException;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder.Callback{
 
+    @BindView(R.id.surface_view)
+    SurfaceView mSurface;
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
@@ -28,27 +35,43 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        SurfaceView surface = findViewById(R.id.surface_view);
-        mHolder = surface.getHolder();
+
+        mHolder = mSurface.getHolder();
+        mHolder.setFormat(PixelFormat.TRANSPARENT);
+        mHolder.setKeepScreenOn(true);
+        mHolder.setFixedSize(screenWidth, screenHeight);
+
+        // 设置 Surface 类型
+        // 参数：
+        //        SURFACE_TYPE_NORMAL       : 用 RAM 缓存原生数据的普通 Surface
+        //        SURFACE_TYPE_HARDWARE     : 适用于 DMA(Direct memory access )引擎和硬件加速的Surface
+        //        SURFACE_TYPE_GPU          : 适用于 GPU 加速的 Surface
+        //        SURFACE_TYPE_PUSH_BUFFERS ：表明该 Surface 不包含原生数据，Surface用到的数据由其他对象提供
+        // 在 Camera 图像预览中就使用 SURFACE_TYPE_PUSH_BUFFERS 类型的 Surface，由 Camera 负责提供给预览 Surface 数据，这样图像预览会比较流
+        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         mHolder.addCallback(this);
 
         DisplayMetrics dm = getResources().getDisplayMetrics();
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;
 
+        if (mCamera == null) {
+            mCamera = getCamera(mCameraId);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mCamera == null) {
-            mCamera = getCamera(mCameraId);
-            if (mHolder != null) {
-                startPreview(mCamera, mHolder);
-            }
-        }
+//        if (mCamera == null) {
+//            mCamera = getCamera(mCameraId);
+//            if (mHolder != null) {
+//                startPreview(mCamera, mHolder);
+//            }
+//        }
     }
 
     @Override
@@ -57,11 +80,22 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         releaseCamera();
     }
 
+    /**
+     *  在 Surface 首次创建时被立即调用
+     * @param holder 当前 Surface 的 SurfaceHolder 对象
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         startPreview(mCamera, holder);
     }
 
+    /**
+     *  在 Surface 格式 和 大小发生变化时会立即调用，可以在这个方法中更新 Surface
+     * @param holder   当前 Surface 的 SurfaceHolder 对象
+     * @param format          surface 的新格式
+     * @param width           surface 的新宽度
+     * @param height          surface 的新高度
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         mCamera.stopPreview();
@@ -92,10 +126,15 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
      */
     private void setupCamera(Camera camera) {
         Camera.Parameters parameters = camera.getParameters();
-        parameters.getSupportedPreviewSizes();
-        if (parameters.getSupportedFocusModes().contains(
-                Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+        List<String> focusMode = parameters.getSupportedFocusModes();
+        if (focusMode.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            mCamera.cancelAutoFocus();
+        }
+
+        if (focusMode.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)){
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+            mCamera.cancelAutoFocus();
         }
 
         Camera.Size previewSize = CameraUtil.getInstance().getPropSizeForHeight(parameters.getSupportedPreviewSizes(), screenHeight, screenWidth * 4 / 5);
@@ -104,6 +143,10 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         Camera.Size pictrueSize = CameraUtil.getInstance().getPropSizeForHeight(parameters.getSupportedPictureSizes(), screenHeight, screenWidth * 4 / 5);
         parameters.setPictureSize(pictrueSize.width, pictrueSize.height);
 
+
+        parameters.setPictureFormat(PixelFormat.RGB_888);//设置照片的格式
+        parameters.setJpegQuality(85);//设置照片的质量
+        parameters.setPictureSize(screenHeight, screenWidth);//设置照片的大小，默认是和屏幕一样大
         camera.setParameters(parameters);
     }
 

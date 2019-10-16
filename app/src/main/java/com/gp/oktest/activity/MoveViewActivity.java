@@ -1,11 +1,14 @@
 package com.gp.oktest.activity;
 
+import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gp.oktest.R;
@@ -17,6 +20,7 @@ import com.gp.oktest.R;
 public class MoveViewActivity extends AppCompatActivity {
 
     EditText editText;
+    ImageView vectorImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class MoveViewActivity extends AppCompatActivity {
 
             }
         });
+
+        initVectorAnim();
     }
 
     /**
@@ -63,4 +69,13 @@ public class MoveViewActivity extends AppCompatActivity {
         return false;
     }
 
+
+    private void initVectorAnim() {
+        vectorImage  = findViewById(R.id.vectorImage);
+        AnimatedVectorDrawableCompat animatedVectorDrawableCompat = AnimatedVectorDrawableCompat.create(
+                this, R.drawable.vector_anim
+        );
+        vectorImage.setImageDrawable(animatedVectorDrawableCompat);
+        ((Animatable) vectorImage.getDrawable()).start();
+    }
 }

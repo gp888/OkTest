@@ -75,7 +75,6 @@
         <activity android:name=".activity.ImageCacheActivity"/>
         <activity android:name=".activity.RetrofitActivity"/>
         <activity android:name=".camera.CameraPreviewActivity"/>
-        <activity android:name=".camera.CameraActivity2"/>
         <activity android:name=".recordplaypcm.PcmRecordPlay"/>
         <activity android:name=".minivideo.MiniVideoActivity"/>
         <activity android:name=".minivideo.MiniVideoPlayActivity"/>
