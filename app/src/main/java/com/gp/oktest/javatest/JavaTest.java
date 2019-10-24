@@ -1,10 +1,16 @@
 package com.gp.oktest.javatest;
 
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
@@ -655,5 +661,482 @@ public class JavaTest {
         }
         return false;
     }
+
+
+    //实现两个函数，分别用来序列化和反序列化二叉树
+    //二叉树转文件，文件转二叉树
+    //通过先序遍历实现序列化和反序列化，通过层遍历实现这两种
+
+    String Serialize(TreeNode root) {
+        if(root == null)
+            return "#!";
+        String res = root.val + "!";
+        res = res + Serialize(root.left);
+        res = res + Serialize(root.right);
+        return res;
+    }
+
+    TreeNode Deserialize(String str) {
+        String [] values = str.split("!");
+        Queue<String> queue = new LinkedList<String>();
+        for (int i = 0; i < values.length; i++) {
+            queue.offer(values[i]);
+        }
+        return reconPre(queue);
+    }
+    TreeNode reconPre(Queue<String> queue) {
+        String value = queue.poll();
+        if(value.equals("#"))
+            return null;
+        TreeNode head = new TreeNode(Integer.valueOf(value));
+        head.left = reconPre(queue);
+        head.right = reconPre(queue);
+        return head;
+    }
+
+    //实现一个函数用来匹配包括'.'和'*'的正则表达式。模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（包含0次）
+    /*
+      当模式中的第二个字符不是“*”时：
+      1、如果字符串第一个字符和模式中的第一个字符相匹配，
+      那么字符串和模式都后移一个字符，然后匹配剩余的。
+      2、如果字符串第一个字符和模式中的第一个字符相不匹配，直接返回false。
+      而当模式中的第二个字符是“*”时：
+      如果字符串第一个字符跟模式第一个字符不匹配，则模式后移2个字符，继续匹配。
+      如果字符串第一个字符跟模式第一个字符匹配，可以有3种匹配方式：
+      1、模式后移2字符，相当于x*被忽略；
+      2、字符串后移1字符，模式后移2字符； 相当于x*算一次
+      3、字符串后移1字符，模式不变，即继续匹配字符下一位，因为*可以匹配多位，相当于算多次
+      这里需要注意的是：Java里，要时刻检验数组是否越界。
+      */
+    public class Zhengze {
+        public boolean match(char[] str, char[] pattern) {
+            if (str == null || pattern == null) {
+                return false;
+            }
+            int strIndex = 0;
+            int patternIndex = 0;
+            return matchCore(str, strIndex, pattern, patternIndex);
+        }
+
+        public boolean matchCore(char[] str, int strIndex, char[] pattern, int patternIndex) {
+            // 有效性检验：str到尾，pattern到尾，匹配成功
+            if (strIndex == str.length && patternIndex == pattern.length)
+                return true;
+            // pattern先到尾，匹配失败
+            if (strIndex != str.length && patternIndex == pattern.length)
+                return false;
+            // 模式第2个是*，且字符串第1个跟模式第1个匹配,分3种匹配模式；如不匹配，模式后移2位
+            if (patternIndex + 1 < pattern.length && pattern[patternIndex + 1] == '*') {
+                if ((strIndex != str.length && pattern[patternIndex] == str[strIndex])
+                        || (pattern[patternIndex] == '.' && strIndex != str.length)) {
+                    return // 模式后移2，视为x*匹配0个字符
+                            matchCore(str, strIndex, pattern, patternIndex + 2)
+                                    // 视为模式匹配1个字符
+                                    || matchCore(str, strIndex + 1, pattern, patternIndex + 2)
+                                    // *匹配1个，再匹配str中的下一个
+                                    || matchCore(str, strIndex + 1, pattern, patternIndex);
+
+                } else {
+                    return matchCore(str, strIndex, pattern, patternIndex + 2);
+                }
+            } // 模式第2个不是*，且字符串第1个跟模式第1个匹配，则都后移1位，否则直接返回false
+            if ((strIndex != str.length && pattern[patternIndex] == str[strIndex])
+                    || (pattern[patternIndex] == '.' && strIndex != str.length)) {
+                return matchCore(str, strIndex + 1, pattern, patternIndex + 1);
+            }
+            return false;
+        }
+    }
+
+
+    //判断字符串是否表示数值（包括整数和小数）。例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。
+    // 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
+
+    //如果第一位是+或-，就后移一位。
+    //
+    //如果是数字，索引后移，数字表示1.
+
+    //如果是点，要判断至此点的数量和e的数量是否已经有了，因为java 中e要求后面为整数，如果有了肯定false。索引后移，dotnum增加。
+
+    //如果是e，判断是否重复e，或者前面没有数字返回false。enum++， 索引++，此时还要判断最后一位是不是e或者+或者-，如果是false。
+
+    /*例子：
+     * 110   1a1   1.1.1  2.2  12e
+     *
+     * */
+    public  static boolean isNumeric(char[] str) {
+        if(str == null)
+            return false;
+        int length = str.length;
+        int dotNum = 0;//记录点的数量
+        int index = 0;//索引
+        int eNum = 0;//记录e的数量
+        int num = 0;//记录数字的数量
+        if (str[0] == '+' || str[0] == '-') {
+            index++;
+        }
+        while (index < length) {
+            if(str[index]>='0' && str[index]<='9') {
+                index++;
+                num = 1;
+                // .前面可以没有数字,所以不需要判断num是否为0
+            }else if(str[index]=='.') {
+                // e后面不能有.,e的个数不能大于1.java科学计数要求aeb，b为整数
+                if(dotNum >0 || eNum >0)
+                    return false;
+                dotNum++;
+                index++;
+            }else if(str[index] == 'e' || str[index] == 'E') {
+                // 重复e或者e前面没有数字
+                if(eNum > 0 || num ==0)
+                    return false;
+                eNum++;
+                index++;
+                // 符号不能在最后一位
+                if(index < length &&(str[index]=='+'||str[index]=='-'))
+                    index++;
+                // 表示e或者符号在最后一位
+                if(index == length)
+                    return false;
+            }else {
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+    //第一个只出现一次的字符
+    //一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.
+    public int FirstNotRepeatingChar(String str) {
+        //这个hashmap有序，所以用这个
+        LinkedHashMap<Character, Integer> map= new LinkedHashMap<>();
+        //遍历字符串，第一次设为1 否则就加
+        for (int i = 0; i < str.length(); i++) {
+            if (!map.containsKey(str.charAt(i))) {
+                map.put(str.charAt(i), 1);
+            }
+            else
+                map.put(str.charAt(i),map.get(str.charAt(i))+1);
+        }
+        //找出现次数为1的
+        for (int i = 0; i < str.length(); i++) {
+            if (map.get(str.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    //字符流中第一个不重复的字符
+    //当从字符流中只读出前两个字符"go"时，第一个只出现一次的字符是"g"。当从该字符流中读出前六个字符“google"时，
+    // 第一个只出现一次的字符是"l"。如果当前字符流没有存在出现一次的字符，返回#字符
+
+    HashMap<Character, Integer> map = new HashMap<>();//记录字符出现次数
+    ArrayList<Character> list1 = new ArrayList<>();//记录当前的所有的字符
+    //Insert one char from stringstream
+    public void Insert(char ch) {
+        if(map.containsKey(ch))
+            map.put(ch, map.get(ch)+1);
+        else
+            map.put(ch,1);
+        list1.add(ch);
+    }
+    //return the first appearence once char in current stringstream
+    public char FirstAppearingOnce() {
+        for(char c:list1) {
+            if(map.get(c)==1)
+                return c;
+        }
+        return '#';
+    }
+
+    //字符数组的方法：
+
+    //char类型和int类型数值在 0-255之内的可以通用
+
+    char [] chars = new char[256];//ascii字符共128，其他字符非中文认为256个，
+
+    StringBuffer sb = new StringBuffer();
+    //Insert one char from stringstream
+    public void Insert1(char ch) {
+        sb.append(ch);
+        chars[ch]++;//如果字符是1，那么就是在字符1对应的下标的地方
+        //也就是49的下标处，ascii加1.此时如果输出chars[ch],里面存ascii值
+        //为1，所以是一个不可显示的字符。
+    }
+    //return the first appearence once char in current stringstream
+    public char FirstAppearingOnce1()
+    {
+        char [] str = sb.toString().toCharArray();
+        for(char c:str) {
+            if(chars[c] == 1)//判断这个字符数组中在这个字符下标处值是否为1.
+                return c;
+        }
+        return '#';
+    }
+
+
+
+    //翻转字符串
+    //第一种方法，用空格将字符串切分，
+    //倒着往stringbuffer里面插入。
+    public String ReverseSentence1(String str) {
+        if (str == null || str.trim().length() == 0) {
+            return str;
+        }
+        String[] strs =str.split(" ");//str = "i love you"则strs[0]=i strs[1]=love
+        StringBuffer sb = new StringBuffer();
+        for (int i = strs.length -1; i >= 0; i--) {
+            sb.append(strs[i]);
+            if (i>0) {//最后一个不添加空格
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
+    //第二种思路，先将整个字符串反转，再逐个单词反转
+    public String ReverseSentence(String str) {
+        if (str == null || str.length() == 0)
+            return str;
+        if (str.trim().length() == 0)
+            return str;
+        StringBuilder sb = new StringBuilder();
+        String re = reverse(str);
+        String[] s = re.split(" ");
+        for (int i = 0; i < s.length - 1; i++) {
+            sb.append(reverse(s[i]) + " ");
+        }
+        sb.append(reverse(s[s.length-1]));
+        return String.valueOf(sb);
+    }
+
+    public String reverse(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0 ; i--) {
+            sb.append(str.charAt(i));
+        }
+        return String.valueOf(sb);
+    }
+
+    //循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”
+
+    public String LeftRotateString(String str,int n) {
+        if (str == null || str.trim().length() == 0) {
+            return str;
+        }
+        int len = str.length();
+        n = n % len;// 当len=3，n=4，其实相当于左旋转1位，所以需要取余
+        char[] charstr = str.toCharArray();
+        //先旋转前面的
+        reverse(charstr, 0, n-1);
+        //再旋转后面的字符串
+        reverse(charstr, n, len -1);
+        //最后整体反转
+        reverse(charstr, 0, len-1);
+        return String.valueOf(charstr);
+    }
+    //实现的是charstrs从i到j的反转，也可以使用上题中stringbuffer的反转方式
+    private void reverse(char[] charStrs, int i, int j) {
+        while(i<j) {
+            char temp = charStrs[i];
+            charStrs[i] =charStrs[j];
+            charStrs[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    //将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0
+    public int StrToInt(String str) {
+        if (str == null || str.length() == 0)
+            return 0;
+        int mark = 0;
+        int number = 0;
+        char[] chars = str.toCharArray();
+        if (chars[0] == '-')
+            mark = 1;//第一位如果是-号，则从第二位开始循环
+        else if(chars[0] == '+')
+            mark = 0;
+        for (int i = mark; i < chars.length; i++) {
+            if(chars[i]<48 || chars[i]>57)
+                return 0;
+            number = number * 10 + chars[i] - 48;
+        }
+        return mark==0?number:-number;//最后根据mark标记的正负号来决定数字正负
+    }
+
+
+    //输入一个字符串,按字典序打印出该字符串中字符的所有排列。
+    // 例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,
+
+    //输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母
+
+    /**
+     * 基于回溯的递归实现
+     * @param str
+     * @return
+     */
+    public ArrayList<String> Permutation(String str) {
+        List<String> res = new ArrayList<String>();
+        if(!TextUtils.isEmpty(str)){
+            PermutationHelp(str.toCharArray(),0,res);
+            Collections.sort(res); //按字典序 输出字符串数组。
+        }
+
+        return (ArrayList)res;
+    }
+    private void PermutationHelp(char[] chars, int index, List<String> list) {
+        if(index == chars.length -1){ //当递归交换到最后一个位置的时候，就看看list有么有这个字符串，没有的话就放进去。
+            String val = String.valueOf(chars);
+            if (!list.contains(val)) {//如果最后list没有这个string，因为可能交换后有重复的
+                list.add(val);
+            }
+        } else {
+            for (int i = index; i < chars.length; i++) { //循环来执行交换操作，先交换，然后固定这个，下一个交换。最后要交换回来不要影响执行
+                swap(chars, index, i);
+                PermutationHelp(chars, index+1, list);//依次固定一个
+                swap(chars, index, i);
+            }
+        }
+    }
+    private void swap(char[] chars,int i, int j) {//交换数组中的两个位置中的值
+        char temp =chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+
+    }
+
+    //在一个长度为n的数组里的所有数字都在0到n-
+    //数组中的数字为0到n-1的范围内。如果这个数组中没有重复的数字，则对应的i位置的数据也为i。可以重排此数组，
+
+    //比较好的解决方式,时间复杂度O(n),空间复杂度O(1)
+    //数组中的数字为0到n-1的范围内。
+    //如果这个数组中没有重复的数字，则对应的i位置的数据也为i。可以重排此数组
+    public boolean duplicate3(int numbers[],int length,int [] duplication) {
+        if(numbers == null || numbers.length ==0) {
+            duplication[0] = -1;
+            return false;
+        }
+        for (int i = 0; i < length; i++) {
+            if (numbers[i] < 0 || numbers[i] > length - 1) {
+                duplication[0] = -1;
+                return false;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            while(numbers[i] != i) {
+                if(numbers[i] == numbers[numbers[i]]) {
+                    duplication[0] = numbers[i];
+                    return true;
+                }
+                else {
+                    int tmp = numbers[i];
+                    numbers[i] = numbers[tmp];
+                    numbers[tmp] = tmp;
+                }
+
+            }
+        }
+        return false;
+    }
+
+
+    //给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
+    //思路：用矩阵的方式，先计算左下三角，再计算右上三角
+
+    // 新建一个新数组B， 对A数组i项左侧自上往下累乘，
+    // 对A数组i项右侧自下往上累乘 时间复杂度O(n)
+    public int[] multiply(int[] A) {
+        // 将B拆分为A[0] *...* A[i-1]和A[n-1]*...*A[i+1] 两部分
+        if(A == null || A.length ==0)
+            return A;
+        int length = A.length;
+        int [] B = new int[length];
+        B[0] = 1;
+        // 先计算左下三角形，此时B[0]只有一个元素，舍为1，
+        // B[0]不包括A[0]
+        for (int i = 1; i < length; i++) {
+            B[i] = B[i-1]*A[i-1];
+        }
+        int tmp =1;
+        //计算右上三角形
+        for (int i = length -1; i >=0; i--) {
+            //最终的B[i]是之前乘好的再乘以右边的
+            B[i] *=tmp;
+            tmp *= A[i];
+        }
+        return B;
+    }
+
+
+
+    //在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。
+    // 请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数
+
+    //从右上角开始，若小，向下走，删除一行，若大，向左走，删除一列
+
+    public boolean Find(int target, int [][] array) {
+        int row = 0;
+        int col = array[0].length -1;
+        while(row < array.length && col >= 0) {
+            if (array[row][col]==target) {
+                return true;
+            } else if (array[row][col] < target) {
+                row++;
+            } else {
+                col--;
+            }
+        }
+        return false;
+    }
+
+    //数组中只出现一次的数字
+    //一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字
+    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) {
+        int eO = 0,eOne = 0;
+        for(int num:array)
+            eO ^=num;
+        int firstOne = eO &(~eO +1);//求得二进制中第一位1，比如101和011得到010
+        for(int cur:array)
+            if ((cur&firstOne) !=0) {//把第k位是1的一组找出来进行异或
+                eOne ^=cur;
+            }//最终结果就是第k位是1且落单的那个
+        num1[0] = eOne;
+        num2[0] = eOne^eO;//异或结果的运算规则。
+    }
+
+    //和为S的两个数
+    //输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。
+    public ArrayList<Integer> FindNumbersWithSum(int [] array,int sum) {
+        ArrayList<Integer> list = new ArrayList<>();
+        if(array == null || array.length <2)
+            return list;
+        int low = 0;
+        int high = array.length -1;
+        while(low < high) {
+            int small = array[low];
+            int big = array[high];
+            if(small + big == sum) {
+                list.add(small);
+                list.add(big);
+                break;
+            }
+            else if (small+big < sum)
+                low++;
+            else
+                high--;
+
+
+        }
+        return list;
+    }
+
+
+    //和为S的连续正数序列
+
+
+
 }
 
