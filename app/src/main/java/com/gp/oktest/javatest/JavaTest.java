@@ -1135,6 +1135,363 @@ public class JavaTest {
 
 
     //和为S的连续正数序列
+    /*
+     *初始化small=1，big=2;
+     *small到big序列和小于sum，big++;大于sum，small++;
+     *当small增加到(1+sum)/2是停止
+     */
+    public ArrayList<ArrayList<Integer> > FindContinuousSequence(int sum) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        if(sum < 3) //不重复，最少有两个数字
+            return res;
+        int small = 1;
+        int big = 2;
+        //因为是两个数，假设small是这个
+        //，big假设也是这个，和为sum+1，所以到此就可以停了，后面肯定更大
+        while(small !=(sum+1)/2) {
+            int cursum = SumOfList(small, big);
+            if(cursum == sum) {
+                for (int i = small; i <= big; i++) {
+                    list.add(i);
+                }
+                res.add(list);
+                list.clear();//清理掉
+                big++;//找到一组，继续big++，找下一组满足要求的。
+            } else if (cursum > sum) {
+                small++;
+            } else {
+                big++;
+            }
+        }
+        return res;
+    }
+    //计算list内的数据的和
+    public int SumOfList(int small, int big) {
+        int sum = 0;
+        for (int i = small; i <= big; i++) {
+            sum +=i;
+        }
+        return sum;
+    }
+
+    //调整数组顺序使奇数位于偶数前面
+    //实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，
+    // 所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
+
+    public void reOrderArray(int [] array) {
+        ArrayList<Integer> jlist = new ArrayList<Integer>();
+        ArrayList<Integer> olist = new ArrayList<Integer>();
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0)
+                olist.add(Integer.valueOf(array[i]));
+            else
+                jlist.add(Integer.valueOf(array[i]));//valueOf 是将int转换为Integer
+            //intValue是反过来
+
+        }
+        jlist.addAll(olist);
+        int temp = 0;
+        for (int i = 0; i < jlist.size(); i++) {
+            //System.out.println(jlist.get(i));
+            array[temp] = jlist.get(i).intValue();
+            temp++;
+        }
+    }
+
+    //数组中出现次数超过一半的数字
+
+    /**自己的空间复杂度的思路，哈希表记录。
+     * 此外：博客，基于快排、基于阵地。此处采用基于防守阵地的方式来进行。
+     * 一次再数组中删除两个不同的数，最后剩下的数   有可能    是超过一半的。所以要检验一下。 一个数出现次数大于一半，他肯定会被剩下来，但是剩下来的缺不一定满足。
+     * 算法步骤：
+     * 如果times为0，就把候选设为当前值。
+     * 如果下个数和候选一样，times就++。
+     * 如果下个数和候选不一样，times就--。相当于对子，同归于尽。因为超过一半的数肯定超过剩下的所有数。所以和这个数对，这个数肯定会剩下来。
+     * 但是剩下的数不一定是，比如 1 2 3 剩下3 比如 1 2 1 3 3 3 2 2 也是剩下3.所以要余外的判断，看是否这个数真的超过。
+     * @param array
+     * @return
+     */
+    public int MoreThanHalfNum_Solution(int [] array) {
+        int cand = 0;
+        int times = 0;
+        for (int i = 0; i < array.length; i++) {
+            if(times == 0){
+                cand = array[i];
+                times = 1;
+            } else if (array[i] == cand) {
+                times++;
+            } else {
+                times--;
+            }
+        }
+        times = 0;
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == cand)
+                times++;
+        }
+        if (times * 2 > array.length) {
+            return cand;
+        }
+        else
+            return 0;
+    }
+
+
+    //连续子数组的最大和，数组有负数
+    /**
+     * 不是看当前的值，而是看当前的累计值，如果当前累计为负数，那么加上现在这个数，
+     * 肯定和就小了，所以继续从当前开始累计，如果为正，那就继续加，
+     * 但是要时刻保存下最大值来，因为后面的累计有可能小。
+     * @param array
+     * @return
+     */
+    public int FindGreatestSumOfSubArray(int[] array) {
+        if(array.length == 0)
+            return 0;
+        int total = array[0];//当前的前面的和累计
+        int maxsum = array[0];//记录可能的最大值
+        for (int i = 1; i < array.length; i++) {
+            if(total >= 0)//
+                total = total + array[i];
+            else
+                total = array[i];
+            if(total > maxsum)
+                maxsum = total;
+        }
+        return maxsum;
+    }
+
+    //把数组排成最小的数
+
+    /**
+     * 主要就是规则的制定，将两个数字转换为字符串，防止溢出
+     * 假设两个数字m和n，拼接有mn和nm
+     * 如果mn>nm, 我们打印nm，此时定义n小于m。（此处小于是我们定义的）
+     * 不是m和n的大小关系，
+     * 而是看拼了之后的大小，来决定m和n的大小。
+     * 如果mn<nm 那么就是m小于n。
+     *
+     * @param numbers
+     * @return
+     */
+    public String PrintMinNumber(int [] numbers) {
+        if(numbers == null || numbers.length == 0)
+            return "";
+        int len = numbers.length;
+        String[] str = new String[len];
+        StringBuffer sb = new StringBuffer();
+        //将数字型的放在字符串数组中。
+        for (int i = 0; i < len; i++) {
+            str[i] = String.valueOf(numbers[i]);
+        }
+        //根据定义的规则重新堆str进行升序排序
+        Arrays.sort(str, new Comparator<String>() {
+
+            @Override
+            public int compare(String s1, String s2) {
+                String c1 = s1 + s2;
+                String c2 = s2 + s1;
+
+                return c1.compareTo(c2);
+            }
+
+        });
+        //根据规则排好序，将结果依次放入stringbuffer中就行了
+        for (int i = 0; i < len; i++) {
+            sb.append(str[i]);
+        }
+
+        return sb.toString();
+    }
+
+
+    //在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。
+    // 输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007
+
+    /**用了归并排序，用count来记录数量
+     * 所不同的是用的--而不是++
+     * 每一次归并之前，记录当前有的个数，
+     * @param array
+     * @return
+     * 不明白
+     */
+    int count2 = 0;
+    public int InversePairs(int [] array) {
+        if(array == null || array.length ==0)
+            return 0;
+        mergeSort(array, 0, array.length -1);
+        return count2;
+
+    }
+    public void mergeSort(int []array, int start, int end) {
+        if(start < end) {
+            int mid = (start + end)/2;
+            mergeSort(array, start, mid);
+            mergeSort(array, mid + 1, end);
+            merge(array, start, mid, mid+ 1, end);
+        }
+    }
+    public void merge(int []array,int start1,int end1, int start2, int end2) {
+        int i = end1;
+        int j = end2;
+        int k = end2 - start1 ;
+        int [] temp = new int[end2- start1 +1];
+        while(i >= start1 && j >=start2) {
+            if(array[i] > array[j]) {
+                //假设此时两个归并的是17 19 22 || 16 18 21
+                //那么22大于21，所以可以看出对应22
+                //有三个，22 16 22 18 22 21
+                temp[k--] = array[i--];
+                count2 = count2 + j - start2 +1;
+                count2 %= 1000000007;
+            }
+            else
+                temp[k--] = array[j--];
+        }
+        while(i >= start1)
+            temp[k--] = array[i--];
+        while(j >= start2)
+            temp[k--] = array[j--];
+
+        int m = start1;
+        for(int element:temp)
+            array[m++] = element;
+    }
+
+
+    //数字在排序数组中出现的次数
+
+    /**
+     * 首先用递归二分法找到第一个k和最后一个k，然后得到个数
+     * @param array
+     * @param k
+     * @return
+     */
+    public int GetNumberOfK(int [] array , int k) {
+        int num = 0;
+        if (array != null && array.length >0) {
+            int firstk = getFirstK(array, k,0, array.length-1);
+            int lastk = getLastK(array, k,0, array.length-1);
+            if (firstk > -1 && lastk > -1)
+                num = lastk -firstk +1;
+
+
+        }
+        return num;
+    }
+    /*
+     * 找到第一个出现的数字的下标
+     */
+    public int getFirstK(int [] array, int k,int start, int end) {
+        if(start > end)
+            return -1;
+        int midindex = (start + end)/2;
+        int middata = array[midindex];
+        if (middata == k) {
+            //判断是不是第一个K，前一个不等于K，就是第一个K
+            if(midindex > 0 && array[midindex - 1]!=k||midindex == 0)
+                return midindex;
+            else
+                end = midindex -1;//如果不是第一个k，那么肯定是在前面找，所以end要往前放
+
+        } else if (middata > k) {
+            end = midindex -1; //二分，如果这个大于k，所以要在前面找
+        } else
+            start = midindex + 1;// 如果小于k，说明要往后找
+        return getFirstK(array,k, start, end);
+    }
+
+    /*
+     * 找到最后一个出现的数字的下标
+     */
+    public int getLastK(int [] array, int k,int start, int end) {
+        if(start > end)
+            return -1;
+        int midindex = (start + end)/2;
+        int middata = array[midindex];
+        if(middata == k) {
+            //判断是不是最后一个K，后一个不等于K，就是最后一个K
+            if(midindex < array.length-1 && array[midindex + 1]!= k||midindex ==array.length -1)
+                return midindex;
+            else
+                start = midindex + 1;
+        } else if (middata > k) {
+            end = midindex - 1;
+        }
+        else
+            start = midindex +1;
+        return getLastK(array, k,start, end);
+    }
+
+
+    //求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+
+    //思路：巧用递归，用了短路，使递归结束。
+
+// &&两侧的表达式结果必须为boolean型，
+
+// &&右侧要用一个无关变量a判断是否与result相等，
+
+// 让右侧的表达式返回boolean型
+
+// 我们的目的仅仅是让&&右侧的表达式执行。
+
+// &&连接的表达式，必须要将最终的boolean结果赋给变量，否则编译报错！
+
+//    一直执行递归，当n=0时，短路，不执行，开始执行result+n，一直回溯就把n给加上来。
+
+
+    public int Sum_Solution(int n) {
+        int result =0;
+        int temp = 0;
+        boolean flag = (n>0) && temp == (result = Sum_Solution(n-1));
+        result += n;
+        return result;
+    }
+
+    //不用加减乘除做加法
+
+    //写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
+
+    //思路：
+
+    //首先看十进制是如何做的： 5+7=12，三步走
+
+    //第一步：相加各位的值，不算进位，得到2。
+
+    //第二步：计算进位值，得到10. 如果这一步的进位值为0，那么第一步得到的值就是最终结果。
+
+    //第三步：重复上述两步，只是相加的值变成上述两步的得到的结果2和10，得到12。
+
+    //同样我们可以用三步走的方式计算二进制值相加： 5-101，7-111 第一步：相加各位的值，不算进位，得到010，二进制每位相加就相当于各位做异或操作，101^111。
+
+    //第二步：计算进位值，得到1010，相当于各位做与操作得到101，再向左移一位得到1010，(101&111)<<1。
+
+    //第三步重复上述两步， 各位相加 010^1010=1000，进位值为100=(010&1010)<<1。
+    //继续重复上述两步：1000^100 = 1100，进位值为0，跳出循环，1100为最终结果。
+
+
+    public int Add(int num1,int num2) {
+        int sum = num1;//保证当num2为0时候返回num1
+        int carry = 0;
+        while(num2 != 0) {
+            sum = num1 ^ num2;
+            carry = (num1 & num2) << 1;
+            num1 = sum;
+            num2 = carry;
+
+        }
+        return sum;
+    }
+
+    //递归
+    public int Add1(int num1, int num2) {
+        if (num2 == 0)
+            return num1;
+        return Add(num1 ^ num2, (num1 & num2) << 1);
+    }
+
 
 
 
