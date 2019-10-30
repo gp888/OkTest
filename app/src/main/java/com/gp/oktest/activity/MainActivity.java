@@ -10,9 +10,9 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -33,7 +33,6 @@ import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.database.SqliteActivity;
-import com.gp.oktest.dialog.EveryDaySignInDialog;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.kotlintest.BitmapOptionsActivity;
 import com.gp.oktest.longconnect.LongConnectActivity;
@@ -45,7 +44,6 @@ import com.gp.oktest.receiver.SendSMSActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
-import com.gp.oktest.service.MusicService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -382,11 +380,11 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 startActivity(new Intent(this, ImageEntranceActivity.class));
                 break;
             case 36:
-//                startActivity(new Intent(this, RecyclerViewPagerActivity.class));
-//                overridePendingTransition(R.anim.activity_in, 0);
+                startActivity(new Intent(this, RecyclerViewPagerActivity.class));
+                overridePendingTransition(R.anim.activity_in, 0);
 
-                EveryDaySignInDialog dialog = new EveryDaySignInDialog(this);
-                dialog.show();
+//                EveryDaySignInDialog dialog = new EveryDaySignInDialog(this);
+//                dialog.show();
                 break;
             default:
                 break;

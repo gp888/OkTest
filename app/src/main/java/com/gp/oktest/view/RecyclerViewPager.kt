@@ -13,8 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.gp.oktest.R
 import android.widget.TextView
+import com.gp.oktest.R
 
 
 /*ViewPager有个天生的缺陷是View无法重用，此外ViewPager的滑动过程会频繁requestLayout，
@@ -82,10 +82,10 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
         val firstView = linearLayoutManager.findViewByPosition(firstVisibleItemPosition)
 
         // distance we need to scroll
-        val leftMargin = (screenWidth - lastView.width) / 2
-        val rightMargin = (screenWidth - firstView.width) / 2 + firstView.width
+        val leftMargin = (screenWidth - lastView!!.width) / 2
+        val rightMargin = (screenWidth - firstView!!.width) / 2 + firstView!!.width
         val leftEdge = lastView.left
-        val rightEdge = firstView.right
+        val rightEdge = firstView!!.right
         val scrollDistanceLeft = leftEdge - leftMargin
         val scrollDistanceRight = rightMargin - rightEdge
 
@@ -150,10 +150,10 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
             val firstView = linearLayoutManager.findViewByPosition(firstVisibleItemPosition)
 
             // distance we need to scroll
-            val leftMargin = (screenWidth - lastView.width) / 2
-            val rightMargin = (screenWidth - firstView.width) / 2 + firstView.width
-            val leftEdge = lastView.left
-            val rightEdge = firstView.right
+            val leftMargin = (screenWidth - lastView!!.width) / 2
+            val rightMargin = (screenWidth - firstView!!.width) / 2 + firstView!!.width
+            val leftEdge = lastView!!.left
+            val rightEdge = firstView!!.right
             val scrollDistanceLeft = leftEdge - leftMargin
             val scrollDistanceRight = rightMargin - rightEdge
             var targetPosition = -1
@@ -216,8 +216,8 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
         mRecyclerHandler.sendEmptyMessageDelayed(MSG_PLAY_NEXT, TASK_TIMEOUT)
     }
 
-    override fun setAdapter(adapter: RecyclerView.Adapter<*>) {
-        super.setAdapter(adapter)
+    fun setAdapter1(adapter: Adapter<ViewPageHolder>) {
+        setAdapter(adapter)
 
         if (canRecyclePlaying()) {
             if (realPosition == -1) {
