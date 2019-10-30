@@ -2,13 +2,16 @@ package com.gp.oktest.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.gp.oktest.R;
 
 
 public class MyBottomSheetDialog extends BottomSheetDialog {
@@ -97,7 +100,7 @@ public class MyBottomSheetDialog extends BottomSheetDialog {
             return mBottomSheetBehavior;
         }
 
-        View view = mWindow.findViewById(android.support.design.R.id.design_bottom_sheet);
+        View view = mWindow.findViewById(R.id.design_bottom_sheet);
         // setContentView() 没有调用
         if (view == null) {
             return null;

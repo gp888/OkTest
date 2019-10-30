@@ -4,12 +4,12 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.gp.oktest.R;
 
 /**
@@ -41,7 +41,7 @@ public class FullSheetDialogFragment extends BottomSheetDialogFragment {
         //需要点击一次才能消失。原因是设置为0，滑动到看不见时，其实是处于中间状态，并没有完全关闭dialog。
         mBehavior.setPeekHeight(height);
 
-        dialog.getWindow().findViewById(android.support.design.R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         return dialog;
     }
