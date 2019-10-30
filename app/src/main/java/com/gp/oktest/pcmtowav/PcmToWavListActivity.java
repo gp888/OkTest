@@ -1,7 +1,7 @@
 package com.gp.oktest.pcmtowav;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.gp.oktest.R;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by HXL on 16/8/11.
  */
-public class PcmToWavListActivity extends Activity {
+public class PcmToWavListActivity extends AppCompatActivity {
     ListView listView;
     List<File> list = new ArrayList<>();
     FileListAdapter adapter;

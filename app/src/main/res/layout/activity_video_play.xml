@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_video_play"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -22,7 +23,7 @@
             android:paddingRight="10dp"
             android:paddingTop="15dp"
             android:onClick="videoPlayClick"
-            android:src="@drawable/title_left_arrow_white"/>
+            app:srcCompat="@drawable/title_left_arrow_white"/>
 
         <TextView
             android:id="@+id/libPlayVideo_tv_title"
@@ -43,7 +44,7 @@
             android:paddingLeft="13dp"
             android:paddingRight="13dp"
             android:paddingTop="15dp"
-            android:src="@drawable/title_more_white"/>
+            app:srcCompat="@drawable/title_more_white"/>
     </RelativeLayout>
     <VideoView
         android:id="@+id/libPlayVideo_videoView"

@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@drawable/alipay_home_bg" />
+            app:srcCompat="@drawable/alipay_home_bg" />
 
     </android.support.v4.widget.NestedScrollView>
 

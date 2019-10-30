@@ -1,7 +1,7 @@
 package com.gp.oktest.utils;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -9,13 +9,13 @@ public class KeyBoardUtil {
 
     // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-    public static void openImm(Activity activity){//打开
+    public static void openImm(AppCompatActivity activity){//打开
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
         imm.showSoftInput(activity.getCurrentFocus(),InputMethodManager.SHOW_FORCED);
     }
 
-    public static void closeImm(Activity activity){//关闭
+    public static void closeImm(AppCompatActivity activity){//关闭
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
@@ -28,13 +28,13 @@ public class KeyBoardUtil {
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    public static void toggleImm(Activity activity){//切换
+    public static void toggleImm(AppCompatActivity activity){//切换
         //1.得到InputMethodManager对象
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         //2.调用toggleSoftInput方法，实现切换显示软键盘的功能。
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
-    public static boolean getImmStatus(Activity activity){//获得状态
+    public static boolean getImmStatus(AppCompatActivity activity){//获得状态
         //1.得到InputMethodManager对象
         InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         //获取状态信息

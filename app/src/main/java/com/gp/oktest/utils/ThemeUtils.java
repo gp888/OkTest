@@ -1,7 +1,7 @@
 package com.gp.oktest.utils;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 import com.gp.oktest.PreferenceUtils;
 import com.gp.oktest.R;
@@ -11,7 +11,7 @@ import com.gp.oktest.R;
  */
 
 public class ThemeUtils {
-    public static void changTheme(Activity activity, Theme theme) {
+    public static void changTheme(AppCompatActivity activity, Theme theme) {
         if (activity == null)
             return;
         int style = R.style.RedTheme;

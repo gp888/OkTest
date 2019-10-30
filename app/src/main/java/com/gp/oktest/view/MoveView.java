@@ -2,13 +2,12 @@ package com.gp.oktest.view;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.TextView;
 
 
-public class MoveView extends TextView {
+public class MoveView extends AppCompatTextView {
 
     private int lastX;
     private int lastY;

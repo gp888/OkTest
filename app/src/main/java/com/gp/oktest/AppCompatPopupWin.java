@@ -3,6 +3,7 @@ package com.gp.oktest;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +30,10 @@ public class AppCompatPopupWin extends PopupWindow{
         pop = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, (int) mContext.getResources().getDimension(R.dimen.chat_forward_width));
 //        ListView listView = (ListView) contentView.findViewById(R.id.list);
         // 产生背景变暗效果
-        WindowManager.LayoutParams lp = ((Activity)mContext).getWindow().getAttributes();
+        WindowManager.LayoutParams lp = ((AppCompatActivity)mContext).getWindow().getAttributes();
         lp.alpha = 0.4f;
-        ((Activity)mContext).getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        ((Activity)mContext).getWindow().setAttributes(lp);
+        ((AppCompatActivity)mContext).getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        ((AppCompatActivity)mContext).getWindow().setAttributes(lp);
         pop.setTouchable(true);
         pop.setFocusable(true);
         pop.setBackgroundDrawable(new BitmapDrawable());

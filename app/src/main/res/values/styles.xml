@@ -94,7 +94,7 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
@@ -115,14 +115,14 @@
     </style>
 
     <style name="btn_large_orange_line" parent="@style/btn_large">
-        <item name="android:background">@drawable/bg_btn_click_orange_line</item>
+        <item name="background">@drawable/bg_btn_click_orange_line</item>
         <item name="android:textColor">@android:color/holo_orange_dark</item>
     </style>
 
 
     <style name="li_gAlertDialogTheme">
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowBackground">@drawable/li_alpha</item>
         <item name="android:windowContentOverlay">@null</item>

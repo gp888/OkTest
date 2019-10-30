@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/accent"
-        android:src="@mipmap/ic_launcher"
+        app:srcCompat="@mipmap/ic_launcher"
         app:layout_constraintDimensionRatio="16:8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

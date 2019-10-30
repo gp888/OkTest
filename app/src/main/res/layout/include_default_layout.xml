@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_scan" />
+                app:srcCompat="@drawable/ic_scan" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_payment" />
+                app:srcCompat="@drawable/ic_payment" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_transfer" />
+                app:srcCompat="@drawable/ic_transfer" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_card" />
+                app:srcCompat="@drawable/ic_card" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -1,10 +1,10 @@
 package com.gp.oktest.camera;
 
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Surface;
 
 import java.util.Collections;
@@ -65,7 +65,7 @@ public class CameraUtil {
      * @param cameraId
      * @param camera
      */
-    public void setCameraDisplayOrientation(Activity activity, int cameraId, Camera camera) {
+    public void setCameraDisplayOrientation(AppCompatActivity activity, int cameraId, Camera camera) {
         Camera.CameraInfo info = new Camera.CameraInfo();
         Camera.getCameraInfo(cameraId, info);
         int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();

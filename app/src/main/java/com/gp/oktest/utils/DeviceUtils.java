@@ -1,6 +1,5 @@
 package com.gp.oktest.utils;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.ComponentCallbacks;
 import android.content.Context;
@@ -16,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
 import com.gp.oktest.App;
@@ -49,7 +49,7 @@ public class DeviceUtils {
             //将拍取的照片保存到指定URI
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             Constant.PHOTOFILEPATH = Constant.IMAGE_TEMP_PATH + filename;
-            ((Activity) mContext).startActivityForResult(intent, Constant.CHOICE_CMARE);
+            ((AppCompatActivity) mContext).startActivityForResult(intent, Constant.CHOICE_CMARE);
         } else {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             File dir = new File(Constant.IMAGE_TEMP_PATH);
@@ -59,7 +59,7 @@ public class DeviceUtils {
             // 下面这句指定调用相机拍照后的照片存储的路径
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Constant.IMAGE_TEMP_PATH, filename)));
             Constant.PHOTOFILEPATH = Constant.IMAGE_TEMP_PATH + filename;
-            ((Activity) mContext).startActivityForResult(intent, Constant.CHOICE_CMARE);
+            ((AppCompatActivity) mContext).startActivityForResult(intent, Constant.CHOICE_CMARE);
         }
     }
 
@@ -151,7 +151,7 @@ public class DeviceUtils {
      */
     private static float sNoncompatDensity;
     private static float sNoncompatScaledDensity;
-    private static void setCustomDensity(@NonNull Activity activity, @NonNull final Application application) {
+    private static void setCustomDensity(@NonNull AppCompatActivity activity, @NonNull final Application application) {
         DisplayMetrics appDisplayMetrics = application.getResources().getDisplayMetrics();
         if (sNoncompatDensity == 0) {
             sNoncompatDensity = appDisplayMetrics.density;

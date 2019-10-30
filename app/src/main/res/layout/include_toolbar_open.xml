@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@color/aliPay_bar_color"
@@ -19,7 +20,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_search" />
+            app:srcCompat="@drawable/ic_search" />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,7 +41,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:src="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add" />
 
     <ImageView
         android:id="@+id/open_contact_iv"
@@ -49,7 +50,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/open_add_iv"
-        android:src="@drawable/ic_contact" />
+        app:srcCompat="@drawable/ic_contact" />
 
     <View
         android:id="@+id/toolbar_open_bg_view"
