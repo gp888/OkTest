@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,7 +13,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * 可缩放图片的ImageView，可双击缩放或多指缩放，与ViewPager兼容+

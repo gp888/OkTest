@@ -5,12 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * 圆角的imageview
  */
-public class RoundCornerImageView2 extends android.support.v7.widget.AppCompatImageView {
+public class RoundCornerImageView2 extends androidx.appcompat.widget.AppCompatImageView {
     public RoundCornerImageView2(Context context) {
         super(context);
     }

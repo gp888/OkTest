@@ -4,7 +4,7 @@ package com.gp.oktest.camera;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Surface;
 
 import java.util.Collections;

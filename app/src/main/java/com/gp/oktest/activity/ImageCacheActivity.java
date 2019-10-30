@@ -3,8 +3,8 @@ package com.gp.oktest.activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.util.LruCache;
+import androidx.annotation.Nullable;
+import androidx.collection.LruCache;
 import android.widget.ImageView;
 
 import com.gp.oktest.R;

@@ -1,7 +1,7 @@
 package com.gp.oktest.utils;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gp.oktest.PreferenceUtils;
 import com.gp.oktest.R;

@@ -5,8 +5,6 @@ import android.content.res.Resources
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.gp.oktest.R
 
 
@@ -22,7 +21,7 @@ import com.gp.oktest.R
 但在ListView和RecyclerView中仍然达不到最好的效果。因此，使用一种新的方式十分必要*/
 
 class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0)
-    : RecyclerView(context, attrs, defStyle), Handler.Callback {
+    : androidx.recyclerview.widget.RecyclerView(context, attrs, defStyle), Handler.Callback {
 
     private lateinit var onPageChangeListener: OnPageChangeListener
 
@@ -43,7 +42,7 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
 
     var currentItem: Int
         get() {
-            val linearLayoutManager = layoutManager as LinearLayoutManager
+            val linearLayoutManager = layoutManager as androidx.recyclerview.widget.LinearLayoutManager
             return linearLayoutManager.findFirstVisibleItemPosition()
         }
         set(position) = setCurrentItem(position, true)
@@ -71,7 +70,7 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
 
     override fun fling(velocityX: Int, velocityY: Int): Boolean {
 
-        val linearLayoutManager = layoutManager as LinearLayoutManager
+        val linearLayoutManager = layoutManager as androidx.recyclerview.widget.LinearLayoutManager
 
         val screenWidth = Resources.getSystem().displayMetrics.widthPixels
 
@@ -138,9 +137,9 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
     override fun onScrollStateChanged(state: Int) {
         super.onScrollStateChanged(state)
 
-        if (state == RecyclerView.SCROLL_STATE_IDLE) {
+        if (state == androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE) {
 
-            val linearLayoutManager = layoutManager as LinearLayoutManager
+            val linearLayoutManager = layoutManager as androidx.recyclerview.widget.LinearLayoutManager
 
             val screenWidth = Resources.getSystem().displayMetrics.widthPixels
 
@@ -193,7 +192,7 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
         val adapter = adapter
 //        var currentItem = currentItem
         if (adapter != null && adapter.itemCount > 0) {
-            if (currentItem == RecyclerView.NO_POSITION) {
+            if (currentItem == androidx.recyclerview.widget.RecyclerView.NO_POSITION) {
                 currentItem = 0
             } else {
                 currentItem = currentItem + 1
@@ -251,11 +250,11 @@ class RecyclerViewPager @JvmOverloads constructor(context: Context, attrs: Attri
     }
 }
 
-abstract class OnPageChangeListener : RecyclerView.OnScrollListener() {
+abstract class OnPageChangeListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
     abstract fun onPageSelection(position: Int)
 }
 
-class BannerAdapter constructor(val imagelist : MutableList<String>) : RecyclerView.Adapter<ViewPageHolder>() {
+class BannerAdapter constructor(val imagelist : MutableList<String>) : androidx.recyclerview.widget.RecyclerView.Adapter<ViewPageHolder>() {
     override fun onBindViewHolder(holder: ViewPageHolder, position: Int) {
         holder.image.setImageResource(R.mipmap.ic_launcher)
     }
@@ -270,7 +269,7 @@ class BannerAdapter constructor(val imagelist : MutableList<String>) : RecyclerV
     }
 }
 
-class ViewPageHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ViewPageHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     var image: ImageView
     init {
         image = view.findViewById(R.id.image)

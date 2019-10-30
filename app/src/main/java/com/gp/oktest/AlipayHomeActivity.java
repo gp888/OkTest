@@ -2,8 +2,8 @@ package com.gp.oktest;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
 import android.util.Log;
 import android.view.View;
 

@@ -2,8 +2,8 @@ package com.gp.oktest.activity
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gp.oktest.R
 import com.gp.oktest.view.BannerAdapter
 import com.gp.oktest.view.PagerChangeListener
@@ -16,7 +16,7 @@ class RecyclerViewPagerActivity:AppCompatActivity() {
         setContentView(R.layout.activity_recycler_viewpager)
 
 
-        val lm = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        val lm = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
         recycler_pager.setLayoutManager(lm)
         val imagelist = mutableListOf<String>("banner_t1", "banner_t3", "banner_t3", "banner_t4")
         recycler_pager.setAdapter1(BannerAdapter(imagelist))

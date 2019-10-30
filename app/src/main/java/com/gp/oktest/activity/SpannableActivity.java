@@ -8,8 +8,8 @@ import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Layout;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
@@ -21,7 +21,6 @@ import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.SpanUtils;
 import com.gp.oktest.utils.ToastUtil;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.BindView;

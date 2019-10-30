@@ -1,7 +1,7 @@
 package com.gp.oktest.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.gp.oktest.GitHubService;
