@@ -7,30 +7,18 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-/**
- * drawableright，drawable和文字居中应该这么写
- * Created by guoping on 2017/5/18.
- */
+public class LeftDrawableButton extends AppCompatButton {
 
-public class RightDrawableButton1 extends AppCompatButton {
-
-    private final static String TAG = "RightDrawableButton";
     private Drawable[] drawables;
-    private float textWidth;
     private float bodyWidth;
 
-    public RightDrawableButton1(Context context) {
+    public LeftDrawableButton(Context context) {
         super(context);
         init();
     }
 
-    public RightDrawableButton1(Context context, AttributeSet attrs) {
+    public LeftDrawableButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
-    }
-
-    public RightDrawableButton1(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
         init();
     }
 
@@ -41,14 +29,14 @@ public class RightDrawableButton1 extends AppCompatButton {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        textWidth = getPaint().measureText(getText().toString());
-        Drawable drawableRight = drawables[2];
+        float textWidth = getPaint().measureText(getText().toString());
+        Drawable drawableLeft = drawables[0];
         int totalWidth = getWidth();
-        if (drawableRight != null) {
-            int drawableWidth = drawableRight.getIntrinsicWidth();
+        if (drawableLeft != null) {
+            int drawableWidth = drawableLeft.getIntrinsicWidth();
             int drawablePadding = getCompoundDrawablePadding();
             bodyWidth = textWidth + drawableWidth + drawablePadding;
-            setPadding(0,0,(int)(totalWidth - bodyWidth),0);
+            setPadding(0,0, (int)(totalWidth - bodyWidth),0);
         }
     }
 

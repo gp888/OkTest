@@ -3,7 +3,6 @@ package com.gp.oktest.utils;
 import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gp.oktest.PreferenceUtils;
 import com.gp.oktest.R;
 
 /**

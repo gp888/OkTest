@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -11,21 +11,28 @@
         android:layout_height="wrap_content"
         android:text="一带一路开会中!"
         android:drawableRight="@drawable/register_delete_ic"
-        android:drawablePadding="20dp"/>
+        android:drawablePadding="10dp"/>
 
     <com.gp.oktest.view.RightDrawableButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="一带一路开会中!"
         android:drawableRight="@drawable/register_delete_ic"
-        android:drawablePadding="20dp"/>
+        android:drawablePadding="10dp"/>
 
     <com.gp.oktest.view.RightDrawableButton1
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="一带一路开会中!"
         android:drawableRight="@drawable/register_delete_ic"
-        android:drawablePadding="20dp"/>
+        android:drawablePadding="10dp"/>
+
+    <com.gp.oktest.view.LeftDrawableButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一带一路开会中!"
+        android:drawableLeft="@drawable/register_delete_ic"
+        android:drawablePadding="10dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -2,8 +2,6 @@ package com.gp.oktest.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +12,11 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.gp.oktest.PreferenceUtils;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.gp.oktest.R;
+import com.gp.oktest.utils.PreferenceUtils;
 import com.gp.oktest.utils.ThemeUtils;
 
 import java.util.Arrays;
