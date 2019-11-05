@@ -1,13 +1,20 @@
 package com.gp.oktest.activity;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.gp.oktest.GitHubService;
 import com.gp.oktest.GitModel;
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.utils.SoftKeyBroadManager;
+import com.gp.oktest.utils.ToastUtil;
+
 import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,14 +32,33 @@ public class RetrofitActivity extends BaseActivity{
 
     private String loginName = "gp888";
 
+    private SoftKeyBroadManager.SoftKeyboardStateListener softKeyboardStateListener = new
+            SoftKeyBroadManager.SoftKeyboardStateListener() {
+
+                @Override
+                public void onSoftKeyboardOpened(int keyboardHeightInPx) {
+                    ToastUtil.showToastShort("键盘打开" + keyboardHeightInPx);
+                }
+
+                @Override
+                public void onSoftKeyboardClosed() {
+                    ToastUtil.showToastShort("键盘关闭");
+                }
+            };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_retrofit);
         httpGithubString();
         httpGithubJson();
         httpGithubResponseBody();
         httpGithubRxjava();
+
+
+        ConstraintLayout root = findViewById(R.id.root);
+        SoftKeyBroadManager softKeyBroadManager = new SoftKeyBroadManager(root);
+        softKeyBroadManager.addSoftKeyboardStateListener(softKeyboardStateListener);
     }
 
     private void httpGithubString() {
