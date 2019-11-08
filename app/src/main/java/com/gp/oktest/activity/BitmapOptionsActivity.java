@@ -1,4 +1,4 @@
-package com.gp.oktest.kotlintest;
+package com.gp.oktest.activity;
 
 import android.annotation.TargetApi;
 import android.app.DownloadManager;
@@ -16,15 +16,19 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.core.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.kotlintest.FirstClass;
+import com.gp.oktest.kotlintest.SecondActivity;
+import com.gp.oktest.kotlintest.Student;
 
 import java.util.Timer;
 import java.util.TimerTask;

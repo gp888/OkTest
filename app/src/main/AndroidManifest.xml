@@ -117,7 +117,7 @@
 
         <activity android:name=".AlipayHomeActivity"/>
         <activity android:name=".kotlintest.SecondActivity"/>
-        <activity android:name=".kotlintest.BitmapOptionsActivity"/>
+        <activity android:name=".activity.BitmapOptionsActivity"/>
         <activity android:name=".activity.DrawableButtonAndOverlayActivity"/>
         <activity android:name=".activity.ExpandableListActivity"/>
 

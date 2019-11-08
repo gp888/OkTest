@@ -1,8 +1,10 @@
 package com.gp.oktest
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Bundle
 import com.facebook.stetho.Stetho
 import com.gp.oktest.networklistener.NetChangeObserver
 import com.gp.oktest.networklistener.NetStateReceiver
@@ -77,4 +79,30 @@ class App : Application() {
         NetworkUtil.unRegisterNetStateReceiver(this, netStateReceiver)
     }
 
+
+    fun registerActivityLifecycle() {
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+
+            override fun onActivityCreated(activity : Activity, savedInstanceState : Bundle) {
+            }
+
+            override fun onActivityStarted(activity : Activity) {
+            }
+
+            override fun onActivitySaveInstanceState(activity : Activity, savedInstanceState : Bundle) {
+            }
+
+            override fun onActivityResumed(activity : Activity) {
+            }
+
+            override fun onActivityPaused(activity : Activity) {
+            }
+
+            override fun onActivityStopped(activity : Activity) {
+            }
+
+            override fun onActivityDestroyed(activity : Activity) {
+            }
+        })
+    }
 }

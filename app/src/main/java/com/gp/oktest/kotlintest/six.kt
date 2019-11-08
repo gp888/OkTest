@@ -74,7 +74,7 @@ fun main(args: Array<String>) {
     println("age倒序：" + humanList2)
 
     //自定义比较器，匿名类
-    val newHuman = humanList.sortedWith(object:Comparator<Human1>{
+    val newHuman = humanList.sortedWith(object : Comparator<Human1>{
         override fun compare(o1: Human1, o2: Human1): Int {
             val o1Age = o1.age
             val o2Age = o2.age
