@@ -3,6 +3,7 @@ package com.gp.oktest.utils
 import android.text.InputFilter
 import android.text.LoginFilter
 import android.text.Spanned
+import android.widget.EditText
 import java.util.regex.Pattern
 
 /**
@@ -50,6 +51,10 @@ class MyLoginFilter : LoginFilter.UsernameFilterGMail() {
     override fun isAllowed(c: Char): Boolean {
         return c in '0'..'9' || c in 'a'..'z' || c in 'A'..'Z'
     }
+}
+
+fun setP(et: EditText) {
+    et.filters = arrayOf(InputFilter.LengthFilter(16))
 }
 
 class PwdFilter : InputFilter{
