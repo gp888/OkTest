@@ -2,16 +2,19 @@ package com.gp.oktest.activity;
 
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+
 import com.gp.oktest.R;
+import com.gp.oktest.view.ScrollViewGroup;
 
 /**
  * Created by guoping on 2017/12/11.
@@ -21,6 +24,10 @@ public class MoveViewActivity extends AppCompatActivity {
 
     EditText editText;
     ImageView vectorImage;
+    ScrollViewGroup mCusScrollView;
+
+    int[] images = { R.drawable.qiju_gift_show_1, R.drawable.qiju_gift_show_2, R.drawable.qiju_gift_show_3,
+            R.drawable.qiju_gift_show_4, R.drawable.qiju_gift_show_5 };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +59,17 @@ public class MoveViewActivity extends AppCompatActivity {
         });
 
         initVectorAnim();
+
+
+        mCusScrollView = findViewById(R.id.cusScrollView);
+        for (int i = 0; i < images.length; i++) {
+            ImageView mImageView = new ImageView(this);
+            mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            mImageView.setImageResource(images[i]);
+            mImageView.setLayoutParams(new ViewGroup.LayoutParams(
+                    50, 50));
+            mCusScrollView.addView(mImageView);
+        }
     }
 
     /**

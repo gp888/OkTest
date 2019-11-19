@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
     private ArrayList<TypeBean> typeBeans = new ArrayList<>();
 
     MainAdapter adapter;
+    boolean isAudioFocus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +127,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("CountDownTimer倒计时", 0));
         typeBeans.add(new TypeBean("LoadNetImage", 1));
         typeBeans.add(new TypeBean("RecyclerView", 2));
-        typeBeans.add(new TypeBean("MoveView", 3));
+        typeBeans.add(new TypeBean("MoveViewActivity", 3));
         typeBeans.add(new TypeBean("PhotosActivity", 4));
         typeBeans.add(new TypeBean("RxPermissionActivity", 5));
         typeBeans.add(new TypeBean("ThemeBaseActivity", 6));
@@ -390,5 +391,22 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
         }
     }
-    boolean isAudioFocus;
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        //获取view高度，位置等
+
+        int[] location = new int[2];
+        recyclerView.getLocationInWindow(location);
+        int x = location[0]; // view距离window 左边的距离（即x轴方向）
+        int y = location[1]; // view距离window 顶边的距离（即y轴方向）
+
+
+
+        int[] location1 = new int[2];
+        recyclerView.getLocationOnScreen(location1);
+        int x1 = location[0]; // view距离 屏幕左边的距离（即x轴方向）
+        int y1 = location[1]; // view距离 屏幕顶边的距离（即y轴方向）
+    }
 }
