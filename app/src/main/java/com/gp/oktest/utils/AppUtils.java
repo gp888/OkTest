@@ -13,10 +13,11 @@ import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gp.oktest.App;
 
@@ -95,13 +96,19 @@ public class AppUtils {
     private static final int VALID = 0;
     private static final int INVALID = 1;
 
+    /**
+     * 校验签名
+     * @param context
+     * @return
+     */
     public static int checkAppSignature(Context context) {
        try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(),PackageManager.GET_SIGNATURES);
 
          for (Signature signature : packageInfo.signatures) {
-            byte[] signatureBytes = signature.toByteArray();
-            MessageDigest md = MessageDigest.getInstance("SHA");
+            byte[] signatureBytes = signature.toByteArray();//signatureBytes to HexString
+            MessageDigest md = MessageDigest.getInstance("SHA");//SHA-1
+             //使用sha-1算法获取摘要
             md.update(signature.toByteArray());
 
             final String currentSignature = Base64.encodeToString(md.digest(), Base64.DEFAULT);
@@ -111,23 +118,22 @@ public class AppUtils {
             //compare signatures
             if (SIGNATURE.equals(currentSignature)){
                 return VALID;
-            };
+            }
          }
        } catch (Exception e) {
-             //assumes an issue in checking signature., but we let the caller decide on what to do.
+           e.printStackTrace();
        }
        return INVALID;
     }
 
 
     //校验签名
-    // 获取当前上下文
     Context context = App.Companion.getGlobalContext();
-    // 发布apk时用来签名的keystore中查看到的sha1值，改成自己的
+    // 发布apk时用来签名的keystore中的sha1值
     String cert_sha1 = "937FF2936CDB81EEF4A776290EA9E076B3BC03A9";
     // 调用isOrgApp()获取比较结果
     boolean is_org_app = isOrgApp(context,cert_sha1);
-    // 如果比较初始从证书里查看到的sha1，与代码获取到的当前证书中的sha1不一致，那么就自我销毁
+    // 如果比较证书里的sha1，与代码获取到的当前证书中的sha1不一致，那么就自我销毁
 //    if(!is_org_app){
 //        android.os.Process.killProcess(android.os.Process.myPid());
 //    }
