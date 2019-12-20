@@ -1,0 +1,30 @@
+同步是一种高开销的操作，因此应该尽量减少同步的内容。
+通常没有必要同步整个方法，使用synchronized代码块同步关键代码即可
+
+
+synchronized跟ReentrantLock相比，有几点局限性：
+
+
+1. 加锁的时候不能设置超时。ReentrantLock有提供tryLock方法，可以设置超时时间，
+如果超过了这个时间并且没有获取到锁，就会放弃，而synchronized却没有这种功能；
+2. ReentrantLock可以使用多个Condition，而synchronized却只能有1个
+3. 不能中断一个试图获得锁的线程；
+4. ReentrantLock可以选择公平锁和非公平锁；
+5. ReentrantLock可以获得正在等待线程的个数，计数器等；
+
+
+
+Lock提供多种方式获取锁，有Lock、ReadWriteLock接口，以及实现这两个接口的ReentrantLock类、ReentrantReadWriteLock
+
+
+
+
+
+关于Lock对象和synchronized关键字选择的考量：
+
+
+最好两个都不用，使用一种java.util.concurrent包提供的机制，能够帮助用户处理所有与锁相关的代码。
+如果synchronized关键字能满足用户的需求，就用synchronized，因为它能简化代码。
+如果需要更高级的功能，就用ReentrantLock类，此时要注意及时释放锁，否则会出现死锁，通常在finally代码释放锁。
+
+如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized

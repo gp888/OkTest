@@ -1,4 +1,4 @@
-package com.gp.oktest.javatest;
+package com.gp.oktest.ThreadSynchronization;
 
 
 public class AtomicIntegerTest {
