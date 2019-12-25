@@ -2,7 +2,7 @@
 通常没有必要同步整个方法，使用synchronized代码块同步关键代码即可
 
 
-synchronized跟ReentrantLock相比，有几点局限性：
+synchronized跟ReentrantLock相比，点局限性：
 
 
 1. 加锁的时候不能设置超时。ReentrantLock有提供tryLock方法，可以设置超时时间，
@@ -28,3 +28,7 @@ Lock提供多种方式获取锁，有Lock、ReadWriteLock接口，以及实现�
 如果需要更高级的功能，就用ReentrantLock类，此时要注意及时释放锁，否则会出现死锁，通常在finally代码释放锁。
 
 如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized
+
+
+wait/notifyAll方式跟ReentrantLock/Condition方式的原理是一样的。
+Java中每个对象都拥有一个内置锁，在内置锁中调用wait，notify方法相当于调用锁的Condition条件对象的await和signalAll方法。

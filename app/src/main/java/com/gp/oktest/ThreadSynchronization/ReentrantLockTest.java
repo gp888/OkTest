@@ -33,18 +33,8 @@ public class ReentrantLockTest {
 
     public static void main(String[] args) {
         ReentrantLockTest reentrantLockTest = new ReentrantLockTest();
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                reentrantLockTest.execute();
-            }
-        });
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                reentrantLockTest.execute();
-            }
-        });
+        Thread thread1 = new Thread(() -> reentrantLockTest.execute());
+        Thread thread2 = new Thread(() -> reentrantLockTest.execute());
         thread1.start();
         thread2.start();
     }
