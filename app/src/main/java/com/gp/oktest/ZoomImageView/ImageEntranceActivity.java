@@ -35,16 +35,13 @@ public class ImageEntranceActivity extends AppCompatActivity {
         drawables.add(BitmapFactory.decodeResource(getResources(), R.drawable.holyroodpark, options));
         drawables.add(BitmapFactory.decodeResource(getResources(), R.drawable.praha, options));
 
-        GridView gridView = (GridView) findViewById(R.id.grid_view);
+        GridView gridView = findViewById(R.id.grid_view);
         GridViewAdapter gridViewAdapter = new GridViewAdapter(this, drawables);
         gridView.setAdapter(gridViewAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ImageEntranceActivity.this, ImageActivity.class);
-                intent.putExtra("mPosition", position);
-                startActivity(intent);
-            }
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(ImageEntranceActivity.this, ImageActivity.class);
+            intent.putExtra("mPosition", position);
+            startActivity(intent);
         });
     }
 

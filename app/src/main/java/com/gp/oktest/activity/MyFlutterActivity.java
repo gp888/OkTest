@@ -18,7 +18,7 @@ public class MyFlutterActivity extends AppCompatActivity {
         final FlutterView flutterView = Flutter.createView(
                 this,
                 getLifecycle(),
-                "route1"
+                "route2"
         );
         final FrameLayout layout = findViewById(R.id.flutter_container);
         layout.addView(flutterView);

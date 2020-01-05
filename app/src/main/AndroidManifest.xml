@@ -136,6 +136,8 @@
         <activity android:name=".ZoomImageView.ImageActivity"/>
         <activity android:name=".activity.RecyclerViewPagerActivity"
             android:persistableMode="persistAcrossReboots"/>
+
+        <activity android:name=".searchview.SearchviewActivity"/>
     </application>
 
 </manifest>

@@ -32,3 +32,16 @@ Lock提供多种方式获取锁，有Lock、ReadWriteLock接口，以及实现�
 
 wait/notifyAll方式跟ReentrantLock/Condition方式的原理是一样的。
 Java中每个对象都拥有一个内置锁，在内置锁中调用wait，notify方法相当于调用锁的Condition条件对象的await和signalAll方法。
+
+
+
+
+ThreadLocal与同步机制的对比：
+
+ThreadLocal与同步机制都是 为了解决多线程中相同变量的访问冲突问题。
+前者采用以 "空间换时间" 的方法，后者采用以 "时间换空间" 的方式。
+
+
+
+
+原子操作就是指将读取变量值、修改变量值、保存变量值看成一个整体来操作 即-这几种行为要么同时完成，要么都不完成。

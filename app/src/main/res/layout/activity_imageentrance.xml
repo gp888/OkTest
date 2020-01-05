@@ -14,5 +14,6 @@
         android:horizontalSpacing="4dp"
         android:verticalSpacing="4dp"
         android:numColumns="3"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:stretchMode="columnWidth"/>
 </LinearLayout>

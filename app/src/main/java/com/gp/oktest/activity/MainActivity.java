@@ -18,8 +18,10 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +44,7 @@ import com.gp.oktest.mp4player.Mp4PlayActivity;
 import com.gp.oktest.pcmtowav.PcmToWavActivity;
 import com.gp.oktest.receiver.SendSMSActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
+import com.gp.oktest.searchview.SearchviewActivity;
 import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
 
@@ -52,6 +55,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.flutter.facade.Flutter;
 
 import static android.text.format.DateUtils.FORMAT_24HOUR;
 import static android.text.format.DateUtils.FORMAT_ABBREV_ALL;
@@ -70,6 +74,8 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 
     MainAdapter adapter;
     boolean isAudioFocus;
+    @BindView(R.id.root)
+    ConstraintLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +167,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("FlutterActivity", 34));
         typeBeans.add(new TypeBean("ZoomImageActivity", 35));
         typeBeans.add(new TypeBean("RecyclerViewPager", 36));
+        typeBeans.add(new TypeBean("gridviewTest", 37));
         return typeBeans;
     }
 
@@ -363,11 +370,11 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 //                addContentView(flutterView, layout);
 
                 //flutter fragment
-//                FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-//                tx.replace(R.id.someContainer, Flutter.createFragment("route1"));
-//                tx.commit();
+                FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+                tx.replace(R.id.root, Flutter.createFragment("route1"));
+                tx.commit();
 
-                startActivity(new Intent(this, MyFlutterActivity.class));
+//                startActivity(new Intent(this, MyFlutterActivity.class));
 
 //                if(isAudioFocus){
 //                    stopService(new Intent(MainActivity.this,MusicService.class));
@@ -386,6 +393,10 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 
 //                EveryDaySignInDialog dialog = new EveryDaySignInDialog(this);
 //                dialog.show();
+                break;
+
+            case 37:
+                startActivity(new Intent(this, SearchviewActivity.class));
                 break;
             default:
                 break;
