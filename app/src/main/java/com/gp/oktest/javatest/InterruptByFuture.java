@@ -24,6 +24,8 @@ public class InterruptByFuture {
         } finally {
             boolean mayInterruptIfRunning = true;
             task.cancel(mayInterruptIfRunning);
+
+            es.shutdown();
         }
     }
 
