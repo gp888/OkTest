@@ -20,6 +20,8 @@ public class JavaTest {
     public static void main(String[] args) {
         String str = new String("乳猪浓缩" + "\n" +"料乳猪浓" + "\n" + "缩料");
         System.out.println("heheh" + str);
+        System.out.println(Integer.SIZE + "," + (-1 << 29) + ","  + (2 << 29));
+
 
         //是否是素数
         double m = 1000;
