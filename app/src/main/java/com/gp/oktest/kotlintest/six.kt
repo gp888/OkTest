@@ -239,7 +239,7 @@ fun main(args: Array<String>) {
     //apply里面传递的是一个函数T.()->Unit 这个函数是T 这个对象的扩展函数
     //this代表list集合
     //调用集合里面方法可以直接调用
-    //apply函数返回的即是当前结合对象
+    //apply函数返回的即是当前集合对象
     list8.apply {
         this//代表list8集合
         add("u8")

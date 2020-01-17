@@ -168,6 +168,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("ZoomImageActivity", 35));
         typeBeans.add(new TypeBean("RecyclerViewPager", 36));
         typeBeans.add(new TypeBean("gridviewTest", 37));
+        typeBeans.add(new TypeBean("FlowLayout", 38));
         return typeBeans;
     }
 
@@ -397,6 +398,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 
             case 37:
                 startActivity(new Intent(this, SearchviewActivity.class));
+                break;
+            case 38:
+                startActivity(new Intent(this, FlowLayoutActivity.class));
                 break;
             default:
                 break;

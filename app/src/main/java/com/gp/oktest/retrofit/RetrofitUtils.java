@@ -1,10 +1,10 @@
-package com.gp.oktest.utils;
+package com.gp.oktest.retrofit;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RetrofitUtils {
+
 
     /**
      * 获取Retrofit对象
@@ -30,8 +30,6 @@ public class RetrofitUtils {
 
         return tempRetrofit;
     }
-
-
 
 
 }

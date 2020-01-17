@@ -1,0 +1,199 @@
+
+
+ViewPager
+子view高度宽度 = 父vie的高度宽度
+先measure父view，在调子view高度
+
+// Page views next.
+        size = getChildCount();
+        for (int i = 0; i < size; ++i) {
+            final View child = getChildAt(i);
+            if (child.getVisibility() != GONE) {
+                if (DEBUG) {
+                    Log.v(TAG, "Measuring #" + i + " " + child + ": " + mChildWidthMeasureSpec);
+                }
+
+                final LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                if (lp == null || !lp.isDecor) {
+                    final int widthSpec = MeasureSpec.makeMeasureSpec(
+                            (int) (childWidthSize * lp.widthFactor), MeasureSpec.EXACTLY);
+                    child.measure(widthSpec, mChildHeightMeasureSpec);
+                }
+            }
+        }
+
+viewpager高度无效
+重写onmeasure先测量子view
+
+
+
+viewpager，listview recyclerview linearlayout
+
+height=200dp,container不为空
+
+
+minHeight
+
+包一层，子view撑起来
+
+addView(子view)
+子view lp无效
+
+
+LayoutInflate流程
+
+四合一方法调用
+
+
+
+
+public class WaterfallFlowLayout2 extends ViewGroup{
+
+private boolean isFlag;
+
+//保存行高的列表
+private List<Integer> lstLineHegiht=new ArrayList<>();
+//保存每一行view的列表
+private List<List<View>> lstLineView=new ArrayList<>();
+
+
+public WaterfallFlowLayout2(Context context, AttributeSet attrs) {
+super(context, attrs);
+}
+
+public WaterfallFlowLayout2(Context context, AttributeSet attrs, int defStyleAttr) {
+super(context, attrs, defStyleAttr);
+}
+
+@Override
+public LayoutParams generateLayoutParams(AttributeSet attrs){
+return new MarginLayoutParams(getContext(),attrs);
+}
+
+@Override
+protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+if (isFlag){
+return;
+}
+isFlag=true;
+//先获取父容器宽高 即 WaterfallFlowLayout2的外层ViewGroup
+int widthSize=MeasureSpec.getSize(widthMeasureSpec);
+int heightSize=MeasureSpec.getSize(heightMeasureSpec);
+
+Log.i("hbin","widthSize="+widthSize+" heightSize="+heightSize);
+
+//先获取父容器模式
+int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+
+Log.i("hbin","widthMode="+widthMode+" heightMode="+heightMode);
+
+//当前控件的宽高
+int measureWidth=0;
+int measureHeight=0;
+
+//当前行宽，高的一个实际使用大小
+int iCurLineW=0;//记录当前行的所有控件的宽度
+int iCurLineH=0;//记录当前行 高度最高的哪个控件
+
+if (widthMode==MeasureSpec.EXACTLY && heightMode==MeasureSpec.EXACTLY){
+measureWidth=widthSize;
+measureHeight=heightSize;
+Log.i("hbin","EXACTLY模式");
+}else {
+//当前View宽高
+int iChildWidth=0;
+int iChildHeight=0;
+//获取子view个数
+int childCount=getChildCount();
+List<View> viewList=new ArrayList<>();
+for (int i=0;i<childCount;i++){
+View childAt=getChildAt(i);
+//测量自己 测量WaterfallFlowLayout2 中包含的子view的宽高
+measureChild(childAt,widthMeasureSpec,heightMeasureSpec);
+//获取getLayoutParams 即XMl资源中定义的参数
+MarginLayoutParams layoutParams=(MarginLayoutParams)childAt.getLayoutParams();
+//获取实际宽度和高度
+iChildWidth=childAt.getMeasuredWidth()+layoutParams.leftMargin+layoutParams.rightMargin;
+iChildHeight=childAt.getMeasuredHeight()+layoutParams.topMargin+layoutParams.bottomMargin;
+
+//是否需要换行
+if (iChildWidth+iCurLineW>widthSize){
+measureWidth=Math.max(measureWidth,iCurLineW);
+measureHeight+=iCurLineH;
+
+lstLineHegiht.add(iCurLineH);
+//把上一行的所有VIEW先保存起来
+lstLineView.add(viewList);
+
+//记录新的行信息
+//新的宽高
+iCurLineW=iChildWidth;
+iCurLineH=iChildHeight;
+
+//新开一个list 并保存第一个元素
+viewList=new ArrayList<View>();
+viewList.add(childAt);
+}else{
+iCurLineW+=iChildWidth;
+iCurLineH=Math.max(iCurLineH,iChildHeight);
+
+//添加当前行View
+viewList.add(childAt);
+}
+
+//6 如果正好是最后一行需要换行
+if (i==childCount-1){
+//6.1 记录当前行的最大宽度，高度累加
+measureWidth=Math.max(measureWidth,iCurLineW);
+measureHeight+=iCurLineH;
+
+//6.2.将当前行的viewList添加至总的mViewsList，将行高添加至总的行高List
+lstLineView.add(viewList);
+lstLineHegiht.add(iCurLineH);
+}
+}
+}
+}
+
+@Override
+protected void onLayout(boolean changed, int l, int t, int r, int b) {
+//开始布局
+//取得所有视图信息
+//与之当前组件上下左右四个边距
+int left,top,right,bottom;
+//当前顶部高度和左边间距
+int curTop=0;
+int curLeft=0;
+//开始迭代
+int lineCount=lstLineView.size();
+for (int i=0;i<lineCount;i++){//总共多少行
+List<View> viewList=lstLineView.get(i);
+int lineViewSize=viewList.size();
+for (int j=0;j<lineViewSize;j++){//每一行的view
+View childView=viewList.get(j);
+MarginLayoutParams layoutParams=(MarginLayoutParams)
+childView.getLayoutParams();
+
+//https://blog.csdn.net/alex01550/article/details/83013423
+left=curLeft+layoutParams.leftMargin;
+top=curTop+layoutParams.topMargin;
+right=left+childView.getMeasuredWidth();
+bottom=top+childView.getMeasuredHeight();
+
+//同理 通过调用自身的layout进行布局
+childView.layout(lef
+
+
+
+fragment有默认缓存 viewpager缓存
+setOffScreenPageLimit()
+最少有一帧缓存
+
+setOffScreenPageLimit = 2---左右各两帧缓存+当前页面
+
+populate()
+
+
+setUserVisibleHint()

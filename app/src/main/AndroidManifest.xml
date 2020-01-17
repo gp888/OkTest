@@ -138,6 +138,8 @@
             android:persistableMode="persistAcrossReboots"/>
 
         <activity android:name=".searchview.SearchviewActivity"/>
+
+        <activity android:name=".activity.FlowLayoutActivity"/>
     </application>
 
 </manifest>
