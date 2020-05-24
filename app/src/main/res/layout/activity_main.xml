@@ -4,15 +4,24 @@
 
     <data class="MainActivityBinding">
         <import type="com.gp.oktest.model.Student" />
-        <!--<import-->
-            <!--alias="TempStudent"-->
-            <!--type="com.gp.oktest.model2.Student" />-->
+<!--        <import-->
+<!--            alias="TempStudent"-->
+<!--            type="com.gp.oktest.model2.Student" />-->
         <variable
             name="studentInfo"
             type="Student" />
-        <!--<variable-->
-            <!--name="tempStudentInfo"-->
-            <!--type="TempStudent" />-->
+<!--        <variable-->
+<!--            name="tempStudentInfo"-->
+<!--            type="TempStudent" />-->
+
+<!--        转义泛型-->
+        <variable
+            name="list"
+            type="java.util.List&lt;String&gt;"/>
+
+        <variable
+            name="action"
+            type="android.view.View.OnClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +40,10 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:id="@+id/tv_studentName"-->
             <!--android:text="@{studentInfo.name}" />-->
+        <TextView
+            android:onClick="@{action}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

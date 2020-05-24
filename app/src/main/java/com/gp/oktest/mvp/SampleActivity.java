@@ -69,6 +69,6 @@ public class SampleActivity extends AppCompatActivity implements SampleContract.
 
     @Override
     public void setPresenter(SampleContract.Presenter presenter) {
-
+        this.mPresenter = presenter;
     }
 }
