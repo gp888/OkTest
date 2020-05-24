@@ -169,6 +169,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("RecyclerViewPager", 36));
         typeBeans.add(new TypeBean("gridviewTest", 37));
         typeBeans.add(new TypeBean("FlowLayout", 38));
+        typeBeans.add(new TypeBean("Animator", 39));
         return typeBeans;
     }
 
@@ -222,6 +223,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 Toast.makeText(MainActivity.this, "动画重复", Toast.LENGTH_SHORT).show();
             }
         });
+        valueAnimator.start();
     }
 
     private String getTimeStr() {
@@ -401,6 +403,10 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 38:
                 startActivity(new Intent(this, FlowLayoutActivity.class));
+                break;
+
+            case 39:
+                startActivity(new Intent(this, AnimatorTest.class));
                 break;
             default:
                 break;

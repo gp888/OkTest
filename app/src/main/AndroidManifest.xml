@@ -140,6 +140,7 @@
         <activity android:name=".searchview.SearchviewActivity"/>
 
         <activity android:name=".activity.FlowLayoutActivity"/>
+        <activity android:name=".activity.AnimatorTest"/>
     </application>
 
 </manifest>
