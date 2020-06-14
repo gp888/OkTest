@@ -25,42 +25,35 @@ import butterknife.ButterKnife;
 
 public class CountDownTimerActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.ll)
-    LinearLayout ll;
+    @BindView(R.id.llParent)
+    LinearLayout llParent;
 
-    @BindView(R.id.tv)
-    TextView tv;
+    @BindView(R.id.tvCountDown)
+    TextView tvCountDown;
+
     @BindView(R.id.textview)
     TextView textView;
 
     @BindView(R.id.colorList)
     TextView colorTextView;
 
-    long TOTAL_TIME = 10000, ONECE_TIME = 1000;
+    private long TOTAL_TIME = 10000, ONECE_TIME = 1000;
 
     /**
      * CountDownTimer 实现倒计时
      * 计时不准确问题 将总的倒计时时长额外延长 0.5 秒即可，也就是 500 毫秒
      * 应该将 CountDownTimer 定义成全局变量，然后在 Activity 销毁时取消倒计时
-     * @Override
-     * protected void onDestroy() {
-     *     super.onDestroy();
-     *     if (timer != null) {
-     *         timer.cancel();
-     *     }
-     * }
-     * 主要是移除 Handler 相关联 Message 队列中的延时 Message 对象
      */
     private CountDownTimer countDownTimer = new CountDownTimer(TOTAL_TIME, ONECE_TIME) {
         @Override
         public void onTick(long millisUntilFinished) {
             String value = String.valueOf((int) (millisUntilFinished / 1000));
-            tv.setText(value);
+            tvCountDown.setText(value);
         }
 
         @Override
         public void onFinish() {
-            tv.setText("down");
+            tvCountDown.setText("down");
         }
     };
 
@@ -70,11 +63,11 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_countdowntimer);
         ButterKnife.bind(this);
 
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tv.getLayoutParams();
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tvCountDown.getLayoutParams();
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         lp.width = metric.widthPixels * 9 / 10;
-        tv.setLayoutParams(lp);
+        tvCountDown.setLayoutParams(lp);
 
         //调用 CountDownTimer 对象的 start() 方法开始倒计时，也不涉及到线程处理
         countDownTimer.start();
@@ -87,9 +80,18 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
 
         Banner banner = new Banner(this);
         banner.setData();
-        ll.addView(banner);
+        llParent.addView(banner);
 
 //        textView.setMovementMethod(ScrollingMovementMethod.getInstance());//LinkMovementMethod.getInstance()
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //移除 Handler 相关联 Message 队列中的延时 Message 对象
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
     }
 
     private ColorStateList createColorStateList(int normal, int pressed, int unable, int select) {

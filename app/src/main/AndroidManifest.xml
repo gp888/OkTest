@@ -2,36 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gp.oktest">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
-    <!--模糊定位权限：一般用于网络定位-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 模糊定位权限：一般用于网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--精确位置基于gps和网络-->
+    <!-- 精确位置基于gps和网络 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-    <!--网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-    <!--适配8.0允许未知来源安装应用程序-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 适配8.0允许未知来源安装应用程序 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
-    <!--<uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>-->
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <!-- <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/> -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
-
-    <!--开机广播-->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- 开机广播 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
@@ -49,98 +43,96 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoadNetImageActivity"
-            android:theme="@style/themeExplode"/>
-
-        <activity android:name=".activity.CountDownTimerActivity"
-            android:theme="@style/themeFade"/>
-
-        <activity android:name=".activity.RecyclerViewActivity"
-            android:theme="@style/themeSlide"/>
-
-        <activity android:name=".activity.MoveViewActivity"/>
-        <activity android:name=".activity.PhotosActivity"/>
-        <activity android:name=".activity.RxPermissionActivity"/>
-        <activity android:name=".activity.ThemeBaseActivity"
-            android:theme="@style/RedTheme"/>
-        <activity android:name=".activity.KeyBoardAvtivity"/>
-        <activity android:name=".activity.PopupWindowActivity"/>
+        <activity
+            android:name=".activity.LoadNetImageActivity"
+            android:theme="@style/themeExplode" />
+        <activity
+            android:name=".activity.CountDownTimerActivity"
+            android:theme="@style/themeFade" />
+        <activity
+            android:name=".activity.RecyclerViewActivity"
+            android:theme="@style/themeSlide" />
+        <activity android:name=".activity.MoveViewActivity" />
+        <activity android:name=".activity.PhotosActivity" />
+        <activity android:name=".activity.RxPermissionActivity" />
+        <activity
+            android:name=".activity.ThemeBaseActivity"
+            android:theme="@style/RedTheme" />
+        <activity android:name=".activity.KeyBoardAvtivity" />
+        <activity android:name=".activity.PopupWindowActivity" />
         <activity android:name=".activity.SpannableActivity" />
-        <service android:name=".service.ForegroundService"/>
-        <service android:name=".service.AsycnService"/>
 
-        <activity android:name=".activity.FileProvider7Activity"/>
-        <activity android:name=".activity.ServiceActivity"/>
-        <activity android:name=".handlerthread.HandlerThreadActivity"/>
-        <activity android:name=".activity.ImageCacheActivity"/>
-        <activity android:name=".activity.RetrofitActivity"/>
-        <activity android:name=".camera.CameraPreviewActivity"/>
-        <activity android:name=".recordplaypcm.PcmRecordPlay"/>
-        <activity android:name=".minivideo.MiniVideoActivity"/>
-        <activity android:name=".minivideo.MiniVideoPlayActivity"/>
-        <activity android:name=".minivideo.MiniVideoRecordActivity"/>
-        <activity android:name=".activity.StickMenuActivity"/>
-        <activity android:name=".mp4player.Mp4PlayActivity"/>
+        <service android:name=".service.ForegroundService" />
+        <service android:name=".service.AsycnService" />
 
-        <activity android:name=".androidmedia.H264EncodeActivity"/>
-        <activity android:name=".androidmedia.MediaMuxerActivity"/>
-
-        <activity android:name=".pcmtowav.PcmToWavActivity"/>
-        <activity android:name=".pcmtowav.PcmToWavListActivity"/>
-
-
+        <activity android:name=".activity.FileProvider7Activity" />
+        <activity android:name=".activity.ServiceActivity" />
+        <activity android:name=".handlerthread.HandlerThreadActivity" />
+        <activity android:name=".activity.ImageCacheActivity" />
+        <activity android:name=".activity.RetrofitActivity" />
+        <activity android:name=".camera.CameraPreviewActivity" />
+        <activity android:name=".recordplaypcm.PcmRecordPlay" />
+        <activity android:name=".minivideo.MiniVideoActivity" />
+        <activity android:name=".minivideo.MiniVideoPlayActivity" />
+        <activity android:name=".minivideo.MiniVideoRecordActivity" />
+        <activity android:name=".activity.StickMenuActivity" />
+        <activity android:name=".mp4player.Mp4PlayActivity" />
+        <activity android:name=".androidmedia.H264EncodeActivity" />
+        <activity android:name=".androidmedia.MediaMuxerActivity" />
+        <activity android:name=".pcmtowav.PcmToWavActivity" />
+        <activity android:name=".pcmtowav.PcmToWavListActivity" />
 
         <service android:name=".keepalive.DoubleProcessLiveService" />
-        <service android:name=".keepalive.StepService" android:exported="true">
-
-        </service>
+        <service
+            android:name=".keepalive.StepService"
+            android:exported="true"/>
         <service
             android:name=".keepalive.GuardService"
             android:process=":guard_service" />
-        <activity android:name=".keepalive.DoubleProcessTestActivity"/>
 
+        <activity android:name=".keepalive.DoubleProcessTestActivity" />
 
         <service
             android:name=".aidltest.MyAidlService"
             android:enabled="true"
             android:exported="true"
-            android:process=":aidl"/>
-        <activity android:name=".aidltest.AidlActivity"/>
+            android:process=":aidl" />
 
-        <service android:name=".service.ForegroundService1"/>
+        <activity android:name=".aidltest.AidlActivity" />
 
+        <service android:name=".service.ForegroundService1" />
         <service
             android:name=".keepalive.PlayerMusicService"
             android:enabled="true"
             android:exported="true"
             android:process=":music_service" />
 
-        <activity android:name=".AlipayHomeActivity"/>
-        <activity android:name=".kotlintest.SecondActivity"/>
-        <activity android:name=".activity.BitmapOptionsActivity"/>
-        <activity android:name=".activity.DrawableButtonAndOverlayActivity"/>
-        <activity android:name=".activity.ExpandableListActivity"/>
+        <activity android:name=".AlipayHomeActivity" />
+        <activity android:name=".kotlintest.SecondActivity" />
+        <activity android:name=".activity.BitmapOptionsActivity" />
+        <activity android:name=".activity.DrawableButtonAndOverlayActivity" />
+        <activity android:name=".activity.ExpandableListActivity" />
 
-        <receiver android:name=".receiver.SMSReceiver"/>
-        <activity android:name=".receiver.SendSMSActivity"/>
-        <activity android:name=".database.SqliteActivity"/>
+        <receiver android:name=".receiver.SMSReceiver" />
 
-        <activity android:name=".longconnect.LongConnectActivity"/>
-        <activity android:name=".activity.GestureActivity"/>
-        <activity android:name=".activity.CoordinateActivity"/>
-        <activity android:name=".activity.MyFlutterActivity"/>
-        
-        <service android:name=".service.MusicService"/>
+        <activity android:name=".receiver.SendSMSActivity" />
+        <activity android:name=".database.SqliteActivity" />
+        <activity android:name=".longconnect.LongConnectActivity" />
+        <activity android:name=".activity.GestureActivity" />
+        <activity android:name=".activity.CoordinateActivity" />
+        <activity android:name=".activity.MyFlutterActivity" />
 
-        <activity android:name=".ZoomImageView.ImageEntranceActivity"/>
-        <activity android:name=".ZoomImageView.ImageActivity"/>
-        <activity android:name=".activity.RecyclerViewPagerActivity"
-            android:persistableMode="persistAcrossReboots"/>
+        <service android:name=".service.MusicService" />
 
-        <activity android:name=".searchview.SearchviewActivity"/>
-
-        <activity android:name=".activity.FlowLayoutActivity"/>
-        <activity android:name=".activity.AnimatorTest"/>
+        <activity android:name=".ZoomImageView.ImageEntranceActivity" />
+        <activity android:name=".ZoomImageView.ImageActivity" />
+        <activity
+            android:name=".activity.RecyclerViewPagerActivity"
+            android:persistableMode="persistAcrossReboots" />
+        <activity android:name=".searchview.SearchviewActivity" />
+        <activity android:name=".activity.FlowLayoutActivity" />
+        <activity android:name=".activity.AnimatorTest" />
+        <activity android:name=".hencoder.HencoderActivity"/>
     </application>
 
 </manifest>

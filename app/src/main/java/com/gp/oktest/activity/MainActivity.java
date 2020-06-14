@@ -37,6 +37,7 @@ import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.database.SqliteActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
+import com.gp.oktest.hencoder.HencoderActivity;
 import com.gp.oktest.longconnect.LongConnectActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
@@ -170,6 +171,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("gridviewTest", 37));
         typeBeans.add(new TypeBean("FlowLayout", 38));
         typeBeans.add(new TypeBean("Animator", 39));
+        typeBeans.add(new TypeBean("Hencoder", 40));
         return typeBeans;
     }
 
@@ -407,6 +409,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 
             case 39:
                 startActivity(new Intent(this, AnimatorTest.class));
+                break;
+            case 40:
+                startActivity(new Intent(this, HencoderActivity.class));
                 break;
             default:
                 break;

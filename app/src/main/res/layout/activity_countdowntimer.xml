@@ -7,7 +7,7 @@
     android:scrollbars="none">
 
     <LinearLayout
-        android:id="@+id/ll"
+        android:id="@+id/llParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -15,12 +15,10 @@
         android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/tvCountDown"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
             android:background="@color/grey_accent"
-            android:layout_weight="1"
             android:layout_marginBottom="20dp"
             android:gravity="center"/>
 
@@ -28,7 +26,6 @@
             android:id="@+id/colorList"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@color/grey_accent"
@@ -76,7 +73,6 @@
         塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲⑼上奏着的名曲。"
             android:textIsSelectable="true" />
 
-        <!--android:textIsSelectable="true"     表示文字是否可以选中-->
     </LinearLayout>
 
 </ScrollView>

@@ -9,8 +9,7 @@
     <!--%.2f, %2f-->
 
 
-
-    <string-array name = "list">
+    <string-array name="list">
         <item>山东大学</item>
         <item>山东科技大学</item>
         <item>山东理工大学</item>
