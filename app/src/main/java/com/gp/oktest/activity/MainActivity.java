@@ -56,7 +56,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.flutter.facade.Flutter;
 
 import static android.text.format.DateUtils.FORMAT_24HOUR;
 import static android.text.format.DateUtils.FORMAT_ABBREV_ALL;
@@ -375,9 +374,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
 //                addContentView(flutterView, layout);
 
                 //flutter fragment
-                FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-                tx.replace(R.id.root, Flutter.createFragment("route1"));
-                tx.commit();
+//                FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+//                tx.replace(R.id.root, Flutter.createFragment("route1"));
+//                tx.commit();
 
 //                startActivity(new Intent(this, MyFlutterActivity.class));
 
