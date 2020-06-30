@@ -19,7 +19,7 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
 
     //ItemView左边的间距
     private float mOffsetLeft;
-    //ItemView右边的间距
+    //ItemView上边的间距
     private float mOffsetTop;
     //时间轴结点的半径
     private float mNodeRadius;
@@ -36,9 +36,7 @@ public class ItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-
-        //通过复写 getItemOffsets() 方法，然后指定
-        // outRect 中的 top、left、right、bottom 就可以控制各个方向的间隔了
+        // outRect 中的 top、left、right、bottom 控制各个方向的间隔了
         if (parent.getChildAdapterPosition(view) != 0){
             outRect.top = 1;
             mDividerHeight = 1;
