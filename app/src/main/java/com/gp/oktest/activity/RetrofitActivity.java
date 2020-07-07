@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.gp.oktest.GitHubService;
-import com.gp.oktest.GitModel;
+import com.gp.oktest.model.GitModel;
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.SoftKeyBroadManager;

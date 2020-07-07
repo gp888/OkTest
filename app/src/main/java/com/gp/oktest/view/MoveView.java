@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 

@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import android.util.Log;
 import android.view.View;
 
+import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
 
 public class AlipayHomeActivity extends BaseActivity implements AppBarLayout.OnOffsetChangedListener {

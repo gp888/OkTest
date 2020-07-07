@@ -11,7 +11,11 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import com.gp.oktest.R;
 
@@ -96,4 +100,17 @@ public class CircleImageView extends AppCompatImageView {
 
         return bitmap;
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                Log.d("CircleImageView", "ACTION_CANCEL");
+                break;
+        }
+        return true;
+    }
+
 }

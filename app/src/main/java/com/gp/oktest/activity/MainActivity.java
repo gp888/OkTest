@@ -21,11 +21,9 @@ import android.widget.Toast;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gp.oktest.AlipayHomeActivity;
 import com.gp.oktest.AppCompatPopupWin;
 import com.gp.oktest.R;
 import com.gp.oktest.ZoomImageView.ImageEntranceActivity;

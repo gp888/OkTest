@@ -19,7 +19,7 @@ public class StickMenuActivity extends BaseActivity {
 
     private ViewPager viewPager;
     private List<ImageView> list;
-    private int[] a = new int[]{R.drawable.www555, R.drawable.tt3366, R.drawable.wzryfx, R.mipmap.ic_launcher};
+    private int[] a = new int[]{R.drawable.www555, R.drawable.tt3366, R.drawable.wzryfx};
     private TextView tvData;
 
     @Override

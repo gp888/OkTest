@@ -1,4 +1,4 @@
-package com.gp.oktest;
+package com.gp.oktest.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

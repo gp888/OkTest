@@ -1,5 +1,7 @@
 package com.gp.oktest;
 
+import com.gp.oktest.model.GitModel;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
