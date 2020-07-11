@@ -42,7 +42,8 @@ fun main(args: Array<String>) {
 
     var sss = "444"
 
-    ss === sss//引用地址(指向同一对象)，equals. == 值(结构)相等
+    ss !== sss
+    ss === sss//引用地址(是不是指向同一对象)，equals == != 值(结构)是否相等
 
     //元组数据
     //二元元组 Pair  2个数据
