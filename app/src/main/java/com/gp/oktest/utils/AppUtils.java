@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class AppUtils {
+
+    private static final String TAG = AppUtils.class.getSimpleName();
 
     /**
      * 判断app是否处于前台
@@ -178,6 +181,47 @@ public class AppUtils {
                     Uri.parse("package:" + context.getPackageName()));
             ((AppCompatActivity)context).startActivityForResult(intent, 0);
         }
+    }
+
+    public static void clearMemory(Context context){
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> infoList = am.getRunningAppProcesses();
+        List<ActivityManager.RunningServiceInfo> serviceInfos = am.getRunningServices(100);
+
+        ActivityManager.MemoryInfo memory = new ActivityManager.MemoryInfo();
+        am.getMemoryInfo(memory);
+        //Formatter.formatFileSize(context, mi.availMem);// 将获取的内存大小规格化
+        //当前系统的可用内存
+        long beforeMem = memory.availMem / (1024 * 1024);
+
+
+        Log.e(TAG, "-----------before memory info : " + beforeMem);
+        int count = 0;
+        if (infoList != null) {
+            for (int i = 0; i < infoList.size(); ++i) {
+                ActivityManager.RunningAppProcessInfo appProcessInfo = infoList.get(i);
+                Log.e(TAG, "process name : " + appProcessInfo.processName);
+                //importance 该进程的重要程度  分为几个级别，数值越低就越重要。
+                Log.e(TAG, "importance : " + appProcessInfo.importance);
+
+                // 一般数值大于RunningAppProcessInfo.IMPORTANCE_SERVICE的进程都长时间没用或者空进程了
+                // 一般数值大于RunningAppProcessInfo.IMPORTANCE_VISIBLE的进程都是非可见进程，也就是在后台运行着
+                if (appProcessInfo.importance > ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
+                    String[] pkgList = appProcessInfo.pkgList;
+                    for (int j = 0; j < pkgList.length; ++j) {//pkgList 得到该进程下运行的包名
+                        Log.e(TAG, "It will be killed, package name : " + pkgList[j]);
+                        am.killBackgroundProcesses(pkgList[j]);
+                        count++;
+                    }
+                }
+            }
+        }
+
+        am.getMemoryInfo(memory);
+        long afterMem = memory.availMem / (1024 * 1024);
+        Log.e(TAG, "----------- after memory info : " + afterMem);
+        Toast.makeText(context, "clear " + count + " process, "
+                + (afterMem - beforeMem) + "M", Toast.LENGTH_LONG).show();
     }
 
 }
