@@ -1,3 +1,4 @@
+include ':testdaynight'
 include ':app', ':testlibrary'
 //setBinding(new Binding([gradle: this]))
 //evaluate(new File(
