@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gp.oktest.R;
+import com.gp.oktest.databinding.ActivityBaseBinding;
 import com.gp.oktest.utils.PreferenceUtils;
 import com.gp.oktest.utils.ThemeUtils;
 
@@ -27,12 +28,16 @@ import java.util.List;
  */
 
 public class ThemeBaseActivity extends AppCompatActivity {
+
     private Button changeTheme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         initTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        ActivityBaseBinding mBinding = ActivityBaseBinding.inflate(LayoutInflater.from(this));
+        setContentView(mBinding.getRoot());
 
         changeTheme = findViewById(R.id.changeTheme);
         changeTheme.setOnClickListener(new View.OnClickListener() {

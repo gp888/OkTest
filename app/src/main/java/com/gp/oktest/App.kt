@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.gp.oktest.networklistener.NetChangeObserver
 import com.gp.oktest.networklistener.NetStateReceiver
@@ -12,7 +13,7 @@ import com.gp.oktest.networklistener.NetworkType
 import com.gp.oktest.networklistener.NetworkUtil
 import com.gp.oktest.utils.ToastUtil
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     companion object {
         lateinit var globalContext: Application

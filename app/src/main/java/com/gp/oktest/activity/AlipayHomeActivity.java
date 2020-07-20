@@ -76,4 +76,9 @@ public class AlipayHomeActivity extends BaseActivity implements AppBarLayout.OnO
         super.onDestroy();
         mAppBarLayout.removeOnOffsetChangedListener(this);
     }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+    }
 }

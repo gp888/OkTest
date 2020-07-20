@@ -14,11 +14,12 @@
     <androidx.appcompat.widget.ButtonBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:id="@+id/publish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="second"/>
+
     </androidx.appcompat.widget.ButtonBarLayout>
 
 </LinearLayout>

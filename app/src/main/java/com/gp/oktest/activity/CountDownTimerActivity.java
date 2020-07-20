@@ -7,17 +7,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.databinding.ActivityCountdowntimerBinding;
 import com.gp.oktest.view.Banner;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by guoping on 2017/11/15.
@@ -25,19 +21,8 @@ import butterknife.ButterKnife;
 
 public class CountDownTimerActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.llParent)
-    LinearLayout llParent;
-
-    @BindView(R.id.tvCountDown)
-    TextView tvCountDown;
-
-    @BindView(R.id.textview)
-    TextView textView;
-
-    @BindView(R.id.colorList)
-    TextView colorTextView;
-
     private long TOTAL_TIME = 10000, ONECE_TIME = 1000;
+    ActivityCountdowntimerBinding mBinding;
 
     /**
      * CountDownTimer 实现倒计时
@@ -48,39 +33,39 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
         @Override
         public void onTick(long millisUntilFinished) {
             String value = String.valueOf((int) (millisUntilFinished / 1000));
-            tvCountDown.setText(value);
+            mBinding.tvCountDown.setText(value);
         }
 
         @Override
         public void onFinish() {
-            tvCountDown.setText("down");
+            mBinding.tvCountDown.setText("down");
         }
     };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_countdowntimer);
-        ButterKnife.bind(this);
+        mBinding = ActivityCountdowntimerBinding.inflate(LayoutInflater.from(this));
+        setContentView(mBinding.getRoot());
 
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tvCountDown.getLayoutParams();
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mBinding.tvCountDown.getLayoutParams();
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         lp.width = metric.widthPixels * 9 / 10;
-        tvCountDown.setLayoutParams(lp);
+        mBinding.tvCountDown.setLayoutParams(lp);
 
         //调用 CountDownTimer 对象的 start() 方法开始倒计时，也不涉及到线程处理
         countDownTimer.start();
 
 
-        colorTextView.setText("Sodino\nNormal:0xffffffff\nPressed:0xffffff00\nFocused:0xff0000ff\nUnable:0xffff0000");
-        colorTextView.setTextColor(createColorStateList(0xffffffff, 0xffffff00, 0xffff0000, 0xff0000ff));
-        colorTextView.setOnClickListener(this);
+        mBinding.colorList.setText("Sodino\nNormal:0xffffffff\nPressed:0xffffff00\nFocused:0xff0000ff\nUnable:0xffff0000");
+        mBinding.colorList.setTextColor(createColorStateList(0xffffffff, 0xffffff00, 0xffff0000, 0xff0000ff));
+        mBinding.colorList.setOnClickListener(this);
 
 
         Banner banner = new Banner(this);
         banner.setData();
-        llParent.addView(banner);
+        mBinding.llParent.addView(banner);
 
 //        textView.setMovementMethod(ScrollingMovementMethod.getInstance());//LinkMovementMethod.getInstance()
     }
@@ -119,9 +104,9 @@ public class CountDownTimerActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (v == colorTextView) {
-//            colorTextView.setEnabled(false);
-            colorTextView.setSelected(true);
+        if (v == mBinding.colorList) {
+//            mBinding.colorList.setEnabled(false);
+            mBinding.colorList.setSelected(true);
         }
     }
 }

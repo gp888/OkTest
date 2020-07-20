@@ -26,7 +26,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
-import com.gp.oktest.kotlintest.FirstClass;
 import com.gp.oktest.kotlintest.SecondActivity;
 import com.gp.oktest.kotlintest.Student;
 
@@ -86,13 +85,6 @@ public class BitmapOptionsActivity extends BaseActivity {
 //        options.inDensity = 320;//8309760
         Bitmap ii_bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ii, options);
         Log.i("hehe", "ii_bitmap.size = " + ii_bitmap.getByteCount());
-
-        FirstClass f = new FirstClass("");
-        String[] b = new String[]{};
-        f.main(b);
-
-        Student s = new Student("1", "xiaoming");
-        s.study();
 
 
 //        下载完成时，发送的广播。

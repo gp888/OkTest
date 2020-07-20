@@ -3,16 +3,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'//不用findview了
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.gp.oktest"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a","armeabi","x86"
         }
+        multiDexEnabled true
+    }
+
+    viewBinding {
+        enabled = true
     }
 
     signingConfigs {
@@ -62,6 +67,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation project(':testlibrary')
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -104,9 +110,9 @@ dependencies {
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
 
     //  协程                                     👇 依赖协程核心库
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1"
     //                                       👇 依赖当前平台所对应的平台库
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.1"
 
     implementation "org.java-websocket:Java-WebSocket:1.4.0"
 }

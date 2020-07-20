@@ -1,8 +1,8 @@
 import kotlin.reflect.KProperty
 
 fun main(args: Array<String>) {
-    val son = Son()
-    son.sayHello()
+//    val son = Son()
+//    son.sayHello()
 
     val dog:Animal = Dog()
     dog.call()//智能类型推断
@@ -39,8 +39,8 @@ fun main(args: Array<String>) {
     val bigSon1 = BigSon()
     println(bigSon1.money)
 
-    val human = HuMan()
-    human.eat()
+//    val human = HuMan()
+//    human.eat()
 
     val view:View = Button()
     view.showOff()
@@ -79,9 +79,7 @@ interface CallBack{
     }
 }
 
-class Son:CallBack{
-
-}
+class Son : CallBack
 
 open abstract class Animal{
     abstract fun call()
