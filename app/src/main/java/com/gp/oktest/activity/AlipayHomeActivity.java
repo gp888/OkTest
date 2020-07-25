@@ -12,7 +12,6 @@ import com.gp.oktest.base.BaseActivity;
 
 public class AlipayHomeActivity extends BaseActivity implements AppBarLayout.OnOffsetChangedListener {
 
-
     private AppBarLayout mAppBarLayout;
     private View mToolbarOpenBgView;
     private View mToolbarCloseBgView;
