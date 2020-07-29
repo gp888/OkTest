@@ -5,6 +5,9 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 import com.gp.oktest.networklistener.NetChangeObserver
@@ -106,4 +109,19 @@ class App : MultiDexApplication() {
             }
         })
     }
+
+
+    class AppLifecycleOwner : LifecycleOwner {
+        val registry : LifecycleRegistry = LifecycleRegistry(this)
+
+        override fun getLifecycle(): Lifecycle {
+            return  registry
+        }
+
+        fun init(application : Application): Unit{
+            //利用application的  ActivityLifecycleCallbacks 去监听每一个  Activity的onstart,onStop事件。
+            //计算出可见的Activity数量，从而计算出当前处于前台还是后台。然后分发  给每个观察者
+        }
+    }
+
 }

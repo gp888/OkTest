@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.databinding.ActivityBaseBinding;
 import com.gp.oktest.utils.PreferenceUtils;
 import com.gp.oktest.utils.ThemeUtils;
@@ -27,7 +28,7 @@ import java.util.List;
  * Created by guoping on 2018/1/5.
  */
 
-public class ThemeBaseActivity extends AppCompatActivity {
+public class ThemeBaseActivity extends BaseActivity {
 
     private Button changeTheme;
 

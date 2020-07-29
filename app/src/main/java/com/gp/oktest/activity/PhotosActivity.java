@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.gp.oktest.Constant;
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.DeviceUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -26,7 +27,7 @@ import java.io.ByteArrayOutputStream;
  * Created by guoping on 2017/12/19.
  */
 
-public class PhotosActivity extends AppCompatActivity {
+public class PhotosActivity extends BaseActivity {
 
     ImageView photos;
 

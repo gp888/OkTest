@@ -9,10 +9,11 @@ import com.gp.oktest.R
 import com.gp.oktest.animator.Point
 import com.gp.oktest.animator.PointEvaluator
 import com.gp.oktest.animator.SpringInterceptor
+import com.gp.oktest.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_animatortest.*
 import kotlinx.android.synthetic.main.activity_minivideo.view.*
 
-class AnimatorTest : AppCompatActivity(){
+class AnimatorTest : BaseActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

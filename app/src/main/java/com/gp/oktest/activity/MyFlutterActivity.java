@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 
 
-public class MyFlutterActivity extends AppCompatActivity {
+public class MyFlutterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

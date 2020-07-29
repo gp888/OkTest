@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by guoping on 2018/3/27.
  */
 
-public class KeyBoardAvtivity extends AppCompatActivity {
+public class KeyBoardAvtivity extends BaseActivity {
 
     @BindView(R.id.etIntput) EditText etIntput;
 

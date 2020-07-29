@@ -14,13 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.view.ScrollViewGroup;
 
 /**
  * Created by guoping on 2017/12/11.
  */
 
-public class MoveViewActivity extends AppCompatActivity {
+public class MoveViewActivity extends BaseActivity {
 
     EditText editText;
     ImageView vectorImage;

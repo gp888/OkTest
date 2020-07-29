@@ -5,11 +5,12 @@ import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gp.oktest.R
+import com.gp.oktest.base.BaseActivity
 import com.gp.oktest.view.BannerAdapter
 import com.gp.oktest.view.PagerChangeListener
 import kotlinx.android.synthetic.main.activity_recycler_viewpager.*
 
-class RecyclerViewPagerActivity:AppCompatActivity() {
+class RecyclerViewPagerActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)

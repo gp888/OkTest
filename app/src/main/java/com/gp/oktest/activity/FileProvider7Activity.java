@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.ToastUtil;
 import com.gp.testlibrary.FileProvider7Util;
 
@@ -32,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FileProvider7Activity extends AppCompatActivity {
+public class FileProvider7Activity extends BaseActivity {
 
     private static final int REQUEST_CODE_TAKE_PHOTO = 0x110;
     private static final int REQ_PERMISSION_CODE_SDCARD = 0X111;

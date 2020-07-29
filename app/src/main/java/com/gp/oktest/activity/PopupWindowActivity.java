@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 
 /**
  * Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：
@@ -30,7 +31,7 @@ import com.gp.oktest.R;
  * •showAtLocation(View parent,int gravity,int x,int y)：相对于父控件的位置
  * （例如正中央Gravity.CENTER，下方Gravity.BOTTOM等），可以设置偏移或无偏移
  */
-public class PopupWindowActivity extends AppCompatActivity implements View.OnClickListener{
+public class PopupWindowActivity extends BaseActivity implements View.OnClickListener{
 
     private TextView anchor;
     private TextView mMainView;

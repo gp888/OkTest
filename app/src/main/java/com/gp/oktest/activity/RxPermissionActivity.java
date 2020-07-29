@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
@@ -15,7 +16,7 @@ import rx.functions.Action1;
  * Created by guoping on 2017/12/21.
  */
 
-public class RxPermissionActivity extends AppCompatActivity{
+public class RxPermissionActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -10,13 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.view.FlowLayout1;
 import com.gp.oktest.view.FlowLayout2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlowLayoutActivity extends AppCompatActivity {
+public class FlowLayoutActivity extends BaseActivity {
 
     private String mNames[] = {
             "welcome","android","TextView",

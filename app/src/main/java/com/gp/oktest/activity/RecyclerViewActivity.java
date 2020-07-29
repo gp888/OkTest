@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gp.oktest.EidtItemAnimator;
 import com.gp.oktest.R;
 import com.gp.oktest.adapter.RecyclerAdapter;
+import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.model.RecyclerItem;
 import com.gp.oktest.utils.DeviceUtils;
 
@@ -31,7 +32,7 @@ import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_SETTLING;
  * Created by guoping on 2017/12/6.
  */
 
-public class RecyclerViewActivity extends AppCompatActivity {
+public class RecyclerViewActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     List<RecyclerItem> data = new ArrayList<>();

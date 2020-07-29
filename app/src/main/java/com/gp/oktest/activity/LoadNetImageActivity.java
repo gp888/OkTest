@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gp.oktest.R;
+import com.gp.oktest.base.BaseActivity;
 
 import java.io.IOException;
 
@@ -34,7 +35,7 @@ import okhttp3.Response;
  * Created by guoping on 2017/11/15.
  */
 
-public class LoadNetImageActivity extends AppCompatActivity {
+public class LoadNetImageActivity extends BaseActivity {
 
     ImageView iv2;
 
