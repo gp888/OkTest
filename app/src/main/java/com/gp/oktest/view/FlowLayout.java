@@ -81,19 +81,19 @@ public class FlowLayout extends ViewGroup {
                 lineWidthUsed = 0;
                 lineHeight = 0;
 
-            }else {
-                if(i == childCount - 1) {
-                    allLines.add(lineViews);
-                    heights.add(lineHeight);
-
-                    parentNeededHeight = parentNeededHeight + lineHeight + mVerticalSpacing;
-                    parentNeededWidth = Math.max(parentNeededWidth, lineWidthUsed + mHorizontalSpacing);
-                }
             }
 
             lineViews.add(childView);
             lineWidthUsed = lineWidthUsed + childMeasureWidth + mHorizontalSpacing;
             lineHeight = Math.max(lineHeight, childMeasureHeight);
+
+            if(i == childCount - 1) {
+                allLines.add(lineViews);
+                heights.add(lineHeight);
+
+                parentNeededHeight = parentNeededHeight + lineHeight + mVerticalSpacing;
+                parentNeededWidth = Math.max(parentNeededWidth, lineWidthUsed + mHorizontalSpacing);
+            }
         }
 
 

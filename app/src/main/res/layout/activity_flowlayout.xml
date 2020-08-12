@@ -1,128 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <com.gp.oktest.view.FlowLayout
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/aliPay_bar_color">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.gp.oktest.view.FlowLayout
+            android:id="@+id/flowlayout0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="图书角哦哦第哦啊金佛" />
+            android:background="@color/light_green">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="图书角哦哦第哦啊金佛" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="99" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="pfpfpfpfpf" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="san" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="水果味孕妇奶粉" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="儿童洗衣机" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="洗衣机全自动" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="小度" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="儿童汽车可坐人" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="抽真空收纳袋" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="儿童滑板车" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="稳压器 电容" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="羊奶粉" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="奶粉1段" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="我" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="寻你" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_cornor"
+                android:text="老式" />
+
+        </com.gp.oktest.view.FlowLayout>
+
+        <com.gp.oktest.view.FlowLayout1
+            android:id="@+id/flowlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.gp.oktest.view.FlowLayout2
+            android:id="@+id/flowlayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="99" />
+            android:background="#e8e8e8"
+            android:padding="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="pfpfpfpfpf" />
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="san" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="水果味孕妇奶粉" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="儿童洗衣机" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="洗衣机全自动" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="小度" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="儿童汽车可坐人" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="抽真空收纳袋" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="儿童滑板车" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="稳压器 电容" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="羊奶粉" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="奶粉1段" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="我" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="寻你" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_cornor"
-            android:text="老式" />
-
-    </com.gp.oktest.view.FlowLayout>
-
-    <com.gp.oktest.view.FlowLayout1
-        android:id="@+id/flowlayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <com.gp.oktest.view.FlowLayout2
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#e8e8e8"
-        android:padding="5dp"
-        android:id="@+id/flowlayout2"/>
-
-</LinearLayout>
+</ScrollView>

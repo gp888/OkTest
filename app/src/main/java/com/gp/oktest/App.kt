@@ -2,9 +2,13 @@ package com.gp.oktest
 
 import android.app.Activity
 import android.app.Application
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -21,9 +25,13 @@ class App : MultiDexApplication() {
     companion object {
         lateinit var globalContext: Application
             private set
+        val TAG = App::class.simpleName
     }
+
     lateinit var mNetType: NetworkType;
     lateinit var netStateReceiver: NetStateReceiver;
+
+    var count = 0 //记录Activity的总个数
 
     override fun onCreate() {
         super.onCreate()
@@ -35,6 +43,21 @@ class App : MultiDexApplication() {
         //andfix
         AndFixManager.getAndFixManager().initAndFix(this)
         Stetho.initializeWithDefaults(this)
+
+        //app前后台监控
+        ForegroundCallbacks.init(this)
+        ForegroundCallbacks.get().addListener(object : ForegroundCallbacks.Listener {
+            override fun onBecameForeground() {
+                Log.d(TAG, "当前程序切换到前台")
+//                val intent = Intent(applicationContext, CheckGesPwdActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+//                startActivity(intent)
+            }
+
+            override fun onBecameBackground() {
+                Log.d(TAG, "当前程序切换到后台")
+            }
+        })
     }
 
     //权限判断
@@ -84,33 +107,6 @@ class App : MultiDexApplication() {
     }
 
 
-    fun registerActivityLifecycle() {
-        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-
-            override fun onActivityCreated(activity : Activity, savedInstanceState : Bundle) {
-            }
-
-            override fun onActivityStarted(activity : Activity) {
-            }
-
-            override fun onActivitySaveInstanceState(activity : Activity, savedInstanceState : Bundle) {
-            }
-
-            override fun onActivityResumed(activity : Activity) {
-            }
-
-            override fun onActivityPaused(activity : Activity) {
-            }
-
-            override fun onActivityStopped(activity : Activity) {
-            }
-
-            override fun onActivityDestroyed(activity : Activity) {
-            }
-        })
-    }
-
-
     class AppLifecycleOwner : LifecycleOwner {
         val registry : LifecycleRegistry = LifecycleRegistry(this)
 
@@ -124,4 +120,54 @@ class App : MultiDexApplication() {
         }
     }
 
+    fun register(){
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, bundle: Bundle) {
+                Log.i(TAG, "onActivityCreated()")
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+                Log.i(TAG, "onActivityStarted()")
+
+                if (count == 0) { //后台切换到前台
+                    Log.v(TAG, ">>>>>>>>>>>>>>>>>>>App切到前台");
+                }
+                count++;
+            }
+
+            override fun onActivityResumed(activity: Activity) {
+                Log.i(TAG, "onActivityResumed()")
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+                Log.i(TAG, "onActivityPaused()")
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+                Log.i(TAG, "onActivityStopped()")
+                count--;
+                if (count == 0) { //前台切换到后台
+                    Log.v(TAG, ">>>>>>>>>>>>>>>>>>>App切到后台");
+                }
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {
+                Log.i(TAG, "onActivitySaveInstanceState()")
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
+                Log.i(TAG, "onActivityDestroyed()")
+            }
+        })
+
+        //推荐注册手机电源按键的监听一起使用，这样可以完美监听，手机的状态
+        val screenStateFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
+        registerReceiver(object : BroadcastReceiver() {
+
+            override fun onReceive(context: Context, intent: Intent) {
+//                isBackground = true
+//                notifyBackground()
+            }
+        }, screenStateFilter)
+    }
 }
