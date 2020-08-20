@@ -2,11 +2,9 @@ package com.gp.oktest
 
 import android.app.Activity
 import android.app.Application
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Lifecycle
@@ -141,6 +139,11 @@ class App : MultiDexApplication() {
 
             override fun onActivityPaused(activity: Activity) {
                 Log.i(TAG, "onActivityPaused()")
+//                在 onActivityPaused() 方法的时候 postDelayed() 一个 Runnable，大概延迟 500 毫秒，
+//                然后在 onActivityResumed() 的时候，移除掉此 Runnable。
+//                原理就是，如果正常的页面跳转，一个 Activity 走到了 onActivityPaused() ，应该马上就有另外一个 Activity 走到了 onActivityResume() ，
+//                这是一个正常的页面跳转，反之，则认为是退出到后台了。
+
             }
 
             override fun onActivityStopped(activity: Activity) {
@@ -169,5 +172,39 @@ class App : MultiDexApplication() {
 //                notifyBackground()
             }
         }, screenStateFilter)
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        if(level == TRIM_MEMORY_UI_HIDDEN) {
+            //app进入后台
+        }
+    }
+
+    fun register2(){
+        registerComponentCallbacks(object:ComponentCallbacks2{
+            override fun onLowMemory() {
+            }
+
+            override fun onConfigurationChanged(newConfig: Configuration) {
+            }
+
+            //4.0
+            override fun onTrimMemory(level: Int) {
+                if(level == TRIM_MEMORY_UI_HIDDEN) {
+                    //app进入后台
+
+//                    TRIM_MEMORY_UI_HIDDEN：App 的所有 UI 界面被隐藏，最常见的就是 App 被 home 键或者 back 键，置换到后台了。
+//                    TRIM_MEMORY_RUNNING_MODERATE：表示 App 正常运行，并且不会被杀掉，但是目前手机内存已经有点低了，系统可能会根据 LRU List 来开始杀进程。
+//                    TRIM_MEMORY_RUNNING_LOW：表示 App正常运行，并且不会被杀掉。但是目前手机内存已经非常低了。
+//                    TRIM_MEMORY_RUNNING_CRITICAL：表示 App 正在正常运行，但是系统已经开始根据 LRU List 的缓存规则杀掉了一部分缓存的进程。这个时候应该尽可能的释放掉不需要的内存资源，否者系统可能会继续杀掉其他缓存中的进程。
+//                    TRIM_MEMORY_BACKGROUND：表示 App 退出到后台，并且已经处于 LRU List 比较靠后的位置，暂时前面还有一些其他的 App 进程，暂时不用担心被杀掉。
+//                    TRIM_MENORY_MODERATE：表示 App 退出到后台，并且已经处于 LRU List 中间的位置，如果手机内存仍然不够的话，还是有被杀掉的风险的。
+//                    TRIM_MEMORY_COMPLETE：表示 App 退出到后台，并且已经处于 LRU List 比较考靠前的位置，并且手机内存已经极低，随时都有可能被系统杀掉。
+
+                }
+            }
+
+        })
     }
 }
