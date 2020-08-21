@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:maxLevel="1" android:minLevel="1">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item >
+                <bitmap android:src="@drawable/logo"/>
+            </item>
+
+            <item android:width="5dp" android:height="5dp" android:gravity="right|top">
+                <shape android:shape="oval">
+                    <solid android:color="@color/red_accent"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:maxLevel="0" android:minLevel="0" android:drawable="@drawable/logo"/>
+
+</level-list>
+
+<!--    setImageLevel()-->
