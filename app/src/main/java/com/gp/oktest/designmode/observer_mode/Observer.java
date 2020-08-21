@@ -5,5 +5,5 @@ package com.gp.oktest.designmode.observer_mode;
  *
  */
 public interface Observer {
-    void  update(Subject subject);
+    void update(Subject subject);
 }

@@ -8,39 +8,40 @@ public class PrintTreeNode {
 
     //二叉树遍历
 
-    /**@Description: 递归前序遍历 DLR*/
+    /**递归前序遍历 DLR*/
     private static void frontOrder(TreeNode<String> treeNode){
         if (treeNode == null){
             return;
         }
-        System.out.printf(treeNode.data);
+        System.out.print(treeNode.data);
         frontOrder(treeNode.leftNode);
         frontOrder(treeNode.rightNode);
     }
 
-    /**@Description: 递归中序遍历 LDR*/
+    /**递归中序遍历 LDR*/
     private static void middleOrder(TreeNode<String> treeNode){
         if(treeNode == null){
             return;
         }
         middleOrder(treeNode.leftNode);
-        System.out.printf(treeNode.data);
+        System.out.print(treeNode.data);
         middleOrder(treeNode.rightNode);
     }
 
-    /**@Description: 递归后序遍历 LRD*/
+    /**递归后序遍历 LRD*/
     private static void afterOrder(TreeNode<String> treeNode){
         if (treeNode == null){
             return;
         }
         afterOrder(treeNode.leftNode);
         afterOrder(treeNode.rightNode);
-        System.out.printf(treeNode.data);
+        System.out.print(treeNode.data);
     }
+
+    //二叉树非递归遍历
 
 
     //多叉树遍历
-
     List<MultiTreeNode<String>> treeArray = new ArrayList<>();
     // 递归先序遍历
     private void recurDLR(MultiTreeNode<String> node) {
