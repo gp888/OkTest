@@ -1,11 +1,13 @@
 package com.example.testdaynight
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * API23后，Android就有自带的api能够实现夜间模式与白天模式的切换，
@@ -48,6 +50,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClick(view: View) {
+        val intent = Intent(this, SingleTaskActivity::class.java)
+        startActivity(intent)
+        return;
+
         //MODE_NIGHT_FOLLOW_SYSTEM 与 MODE_NIGHT_AUTO
         if(isNight) {
             //夜间 切换 日间
@@ -59,6 +65,8 @@ class MainActivity : AppCompatActivity() {
 //        getWindow().setWindowAnimations(R.style.OutInAnimation);
         recreate()
         isNight = !isNight
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

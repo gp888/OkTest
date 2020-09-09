@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.eventbus.myeventbus.MethodInfo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

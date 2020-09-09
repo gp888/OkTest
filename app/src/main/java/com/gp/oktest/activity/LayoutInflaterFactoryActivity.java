@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +56,28 @@ public class LayoutInflaterFactoryActivity extends AppCompatActivity {
         LayoutInflaterCompat.setFactory2(getLayoutInflater(), getLayoutFactory());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_inflaterfacotry);
+
+        //onCreate()中的宽度和高度将为零，因为尚未执行ImageView的绘图...您可以在onWindowFocusChanged()中检查这些值。
+        // 并且您的onPreDrawListener回调将在绘制时调用宽度和高度值将正确，因为ImageView已经在绘制之前进行了测量和布局
+
+        //即将绘制视图树时执行的回调函数。这时所有的视图都测量完成并确定了框架。 客户端可以使用该方法来调整滚动边框，甚至可以在绘制之前请求新的布局。
+        //
+        //综上，ViewTreeObserver是用来帮助我们监听某些View的某些变化的。
+        //
+        //其中最常用的地方就是我们在onDraw的其他地方获取View的长宽测量值。
+        ImageView img = (ImageView) findViewById(R.id.iv);
+        ViewTreeObserver vto = img.getViewTreeObserver();
+        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            public boolean onPreDraw() {
+                // at this point, true width and height are already determined
+                int width = img.getMeasuredWidth();
+                int height = img.getMeasuredHeight();
+                System.out.println(width);// it return value correctly
+                System.out.println(height);// it return value correctly
+                img.getViewTreeObserver().removeOnPreDrawListener(this);
+                return false;
+            }
+        });
     }
 
     public CustomFontCompatDelegate getLayoutFactory(){
