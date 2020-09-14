@@ -71,6 +71,7 @@ dependencies {
     implementation project(':testlibrary')
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.palette:palette:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
@@ -125,4 +126,6 @@ dependencies {
 
     //huawei 扫一扫
     implementation 'com.huawei.hms:scanplus:1.1.1.301'
+    //zip
+    implementation 'net.lingala.zip4j:zip4j:2.6.2'
 }

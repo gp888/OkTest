@@ -38,7 +38,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ScanActivity"
+        <activity android:name=".activity.PasswrodActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
             <intent-filter>
@@ -143,6 +143,9 @@
         <!--扫一扫-->
         <activity android:name="com.huawei.hms.hmsscankit.ScanKitActivity" />
 <!--        <activity android:name=".activity.ScanActivity"/>-->
+
+<!--        <activity android:name=".activity.PasswrodActivity"-->
+<!--            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>-->
     </application>
 
 </manifest>
