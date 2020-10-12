@@ -9,8 +9,10 @@ public class DynamicProxyTest {
         // 在工程目录下生成 $Proxy0 的 class 文件
         System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
 
-        Buyer1 buyer1 = new Buyer1(); //创建目标对象的对象
-        InvocationHandlerImpl invocationHandlerImpl1 = new InvocationHandlerImpl(buyer1); //创建调用处理类对象
+        //创建目标对象的对象
+        ISubject buyer1 = new Buyer1();
+        //创建调用处理类对象
+        InvocationHandlerImpl invocationHandlerImpl1 = new InvocationHandlerImpl(buyer1);
 
         //（4）反射生成代理类对象
         ISubject buyer1Proxy = (ISubject) Proxy.newProxyInstance(buyer1.getClass().getClassLoader(), buyer1.getClass().getInterfaces(), invocationHandlerImpl1);
@@ -21,7 +23,9 @@ public class DynamicProxyTest {
         System.out.println("目标对象1：" + buyer1.getClass());
         System.out.println("代理对象1：" + buyer1Proxy.getClass());
 
-        Buyer2 buyer2 = new Buyer2();
+
+
+        ISubject buyer2 = new Buyer2();
         InvocationHandlerImpl invocationHandlerImpl2 = new InvocationHandlerImpl(buyer2);
         ISubject buyer2Proxy = (ISubject) Proxy.newProxyInstance(buyer2.getClass().getClassLoader(), buyer2.getClass().getInterfaces(), invocationHandlerImpl2);
         buyer2Proxy.buy();

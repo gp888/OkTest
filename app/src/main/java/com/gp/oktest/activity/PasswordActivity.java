@@ -2,7 +2,6 @@ package com.gp.oktest.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -17,11 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 
 import com.gp.oktest.R;
+import com.gp.oktest.utils.SDCardInfo;
 
-public class PasswrodActivity extends AppCompatActivity {
+public class PasswordActivity extends AppCompatActivity {
 
 
-    String TAG = PasswrodActivity.class.getSimpleName();
+    String TAG = PasswordActivity.class.getSimpleName();
     CheckBox mCbDisplayPassword;
     EditText etPassword;
 
@@ -50,10 +50,12 @@ public class PasswrodActivity extends AppCompatActivity {
             @Override
             public void onGenerated(Palette palette) {
                 Palette.Swatch swatch=palette.getVibrantSwatch();
-                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(swatch.getRgb()));
+//                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(swatch.getRgb()));
 
             }
         });
+
+        Log.d(TAG, SDCardInfo.getSDCardInfo());
     }
 
 
