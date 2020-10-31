@@ -30,6 +30,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -38,7 +40,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PasswordActivity"
+        <activity android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
             <intent-filter>

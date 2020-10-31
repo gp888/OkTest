@@ -23,8 +23,9 @@ public class randomTest {
 
 
         /*解密代码*/
-        for(int i=0; i < a.length() ;i++)
-            c[i] = (char)(c[i] ^ b.charAt(i));
+        for(int i=0; i < a.length() ;i++) {
+            c[i] = (char) (c[i] ^ b.charAt(i));
+        }
         System.out.println(c);
     }
 }

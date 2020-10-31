@@ -4,16 +4,21 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -21,8 +26,10 @@ import android.widget.Toast;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.gp.oktest.AppCompatPopupWin;
 import com.gp.oktest.R;
@@ -50,6 +57,7 @@ import com.gp.oktest.utils.DeviceUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -185,12 +193,6 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
             return;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     private void initAnim() {
@@ -431,5 +433,36 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         recyclerView.getLocationOnScreen(location1);
         int x1 = location[0]; // view距离 屏幕左边的距离（即x轴方向）
         int y1 = location[1]; // view距离 屏幕顶边的距离（即y轴方向）
+    }
+
+
+    private MyHandler mHandler = new MyHandler(this);
+
+    private static class MyHandler extends Handler {
+        private WeakReference reference;
+        public MyHandler(Activity context) {
+            reference = new WeakReference<Activity>(context);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            MainActivity activity = (MainActivity) reference.get();
+            if(activity != null){
+                //处理message
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        //activity在栈顶，触摸点击，按home,back,menu键会触发此方法
+        Log.d(TAG, "===onUserInteraction===");
     }
 }

@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-//https://blog.csdn.net/u011240877/article/details/72765136
 public class AidlActivity extends BaseActivity {
 
     private IMyAidl mAidl;
