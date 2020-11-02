@@ -11,6 +11,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -21,9 +22,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  * Created by Cyrus on 2016/11/7.
  */
 
-public class ZoomImageView extends AppCompatImageView implements
-        ViewTreeObserver.OnGlobalLayoutListener,
-        ScaleGestureDetector.OnScaleGestureListener,
+public class ZoomImageView extends AppCompatImageView implements ViewTreeObserver.OnGlobalLayoutListener, ScaleGestureDetector.OnScaleGestureListener,
         View.OnTouchListener {
 
     /**
@@ -103,14 +102,14 @@ public class ZoomImageView extends AppCompatImageView implements
     public ZoomImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+//        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mMatrix = new Matrix();// 图片的矩阵
         setScaleType(ScaleType.MATRIX);// 在这里设置是屏蔽掉xml文件中设置的缩放模式
 
         mScaleGestureDetector = new ScaleGestureDetector(context, this);// 监听多指缩放手势
         setOnTouchListener(this);// 监听触摸事件
 
-        mGestureDetector = new GestureDetector(context, new GestureDetector
-                .SimpleOnGestureListener() {// 监听双击缩放
+        mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {// 监听双击缩放
             @Override
             public boolean onDoubleTap(MotionEvent e) {
                 if (mIsAutoScaling) {
@@ -247,6 +246,11 @@ public class ZoomImageView extends AppCompatImageView implements
 
     @Override
     public void onScaleEnd(ScaleGestureDetector detector) {
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
     }
 
     @Override
