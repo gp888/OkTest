@@ -42,6 +42,12 @@ android {
         }
     }
 
+    //在打包Release版本的时候进行检测
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
