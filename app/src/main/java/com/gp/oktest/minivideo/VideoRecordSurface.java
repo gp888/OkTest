@@ -31,7 +31,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
     private File mRecordFile;//存储的路径
     private MediaRecorder mMediaRecorder;
     private int mTimeCount = 1;//开启时间
-    public final int mRecordMaxTime = 6;//最大时间
+    public final int mRecordMaxTime = 17;//最大时间
     public final int mRecordMiniTime = 2;//最小时间
     private Timer mTimer;
     private OnRecordListener mOnRecordListener;
@@ -108,7 +108,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             freeCameraResource();
         }
         try {
-            mCamera = Camera.open();
+            mCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
             if (mCamera == null)
                 return;
             initParameters();
@@ -139,6 +139,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         size = mParams.getPreviewSize();
         List<String> focusModes = mParams.getSupportedFocusModes();
         if (focusModes.contains("continuous-video")) {
+            //自动对焦
             mParams.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
         }
         mCamera.setParameters(mParams);
@@ -168,7 +169,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
      * @author zwj
      * @date 2016-06-21
      */
-    public void record(final OnRecordListener onRecordListener,int orientationHintDegrees) {
+    public void record(final OnRecordListener onRecordListener, int orientationHintDegrees) {
         this.mOnRecordListener = onRecordListener;
         createRecordDir();
         try {

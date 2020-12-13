@@ -1,9 +1,11 @@
 package com.gp.oktest.camera;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
@@ -14,6 +16,7 @@ import android.view.WindowManager;
 
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.utils.ToastUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,6 +38,12 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, Manifest.permission.CAMERA}, 5);
+        }
+
         ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -63,21 +72,30 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         }
     }
 
+
     @Override
-    protected void onResume() {
-        super.onResume();
-//        if (mCamera == null) {
-//            mCamera = getCamera(mCameraId);
-//            if (mHolder != null) {
-//                startPreview(mCamera, mHolder);
-//            }
-//        }
+    protected void onDestroy() {
+        super.onDestroy();
+        releaseCamera();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        releaseCamera();
+        ToastUtil.showToastShort("pause");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ToastUtil.showToastShort("resume");
+        if (mCamera == null) {
+            mCamera = getCamera(mCameraId);
+            if (mHolder != null) {
+                startPreview(mCamera, mHolder);
+            }
+        }
     }
 
     /**
@@ -129,12 +147,13 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         List<String> focusMode = parameters.getSupportedFocusModes();
         if (focusMode.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-            mCamera.cancelAutoFocus();
+//            mCamera.cancelAutoFocus();
         }
 
         if (focusMode.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)){
+            //连续对焦
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-            mCamera.cancelAutoFocus();
+//            mCamera.cancelAutoFocus();
         }
 
         Camera.Size previewSize = CameraUtil.getInstance().getPropSizeForHeight(parameters.getSupportedPreviewSizes(), screenHeight, screenWidth * 4 / 5);
@@ -142,6 +161,8 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
 
         Camera.Size pictrueSize = CameraUtil.getInstance().getPropSizeForHeight(parameters.getSupportedPictureSizes(), screenHeight, screenWidth * 4 / 5);
         parameters.setPictureSize(pictrueSize.width, pictrueSize.height);
+
+//        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 
 
         parameters.setPictureFormat(PixelFormat.RGB_888);//设置照片的格式

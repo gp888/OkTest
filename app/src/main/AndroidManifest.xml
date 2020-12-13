@@ -16,6 +16,8 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -31,6 +33,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
 
     <application
         android:name=".App"
@@ -43,11 +46,7 @@
         <activity android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.LoadNetImageActivity"
@@ -160,6 +159,33 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="chicha" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".opengl.GLActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+
+        <activity android:name=".opengl.CameraTextureViewShowActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+        </activity>
+
+        <activity android:name=".opengl.CameraGlSurfaceShowActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
     </application>
 

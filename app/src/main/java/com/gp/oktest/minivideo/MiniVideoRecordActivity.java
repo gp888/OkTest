@@ -1,11 +1,14 @@
 package com.gp.oktest.minivideo;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +59,7 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
         }
         initView();
 
+        shutOffVolumn();
         videoRecordSurface = new VideoRecordSurface(this, videoSavePath);
         frameLayout.addView(videoRecordSurface);
         btnStart.setOnTouchListener(new View.OnTouchListener() {
@@ -70,7 +74,7 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
                     case MotionEvent.ACTION_DOWN: {
                         //按住事件发生后执行代码的区域
                         tvTips.setVisibility(View.VISIBLE);
-                        videoRecordSurface.record(MiniVideoRecordActivity.this,listener.getOrientationHintDegrees());
+                        videoRecordSurface.record(MiniVideoRecordActivity.this, listener.getOrientationHintDegrees());
                         videoProgressView.startProgress(videoRecordSurface.mRecordMaxTime);
                         break;
                     }
@@ -182,9 +186,33 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
      * @param videoPath 小视频录制后存储位置
      */
     public static Intent startRecordActivity(@NonNull String videoPath, AppCompatActivity activity) {
-        Intent intent = new Intent(activity,MiniVideoRecordActivity.class);
+        Intent intent = new Intent(activity, MiniVideoRecordActivity.class);
         intent.putExtra(kVideoSavePath, videoPath);
         return intent;
+    }
+
+    /**
+     * shut-off-the-sound-mediarecorder-plays-when-the-state-changes
+     * Android 7(API 24级)中,我的应用不允许静音手机(将铃声模式设置为静音)
+     */
+    private void shutOffVolumn(){
+
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        //勿扰权限
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.isNotificationPolicyAccessGranted()) {
+//            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+//            startActivity(intent);
+//        }
+//
+//
+//        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//
+//        audioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+//        audioManager.setStreamMute(AudioManager.STREAM_MUSIC,true);
+//        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, 0, 0);
+//        audioManager.setStreamVolume(AudioManager.STREAM_DTMF, 0, 0);
+//        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 0, 0);
+//        audioManager.setStreamVolume(AudioManager.STREAM_RING, 0, 0);
     }
 
 }

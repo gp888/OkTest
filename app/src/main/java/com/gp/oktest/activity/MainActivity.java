@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -154,7 +155,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("RetrofitActivity", 15));
         typeBeans.add(new TypeBean("CameraPreviewActivity", 16));
         typeBeans.add(new TypeBean("PcmRecordPlay", 17));
-        typeBeans.add(new TypeBean("miniVideo", 18));
+        typeBeans.add(new TypeBean("H264Encode", 18));
         typeBeans.add(new TypeBean("Aidl", 19));
         typeBeans.add(new TypeBean("handlerthead", 20));
         typeBeans.add(new TypeBean("StickMenuActivity", 21));

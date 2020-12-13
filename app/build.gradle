@@ -134,4 +134,5 @@ dependencies {
     implementation 'com.huawei.hms:scanplus:1.1.1.301'
     //zip
     implementation 'net.lingala.zip4j:zip4j:2.6.2'
+
 }
