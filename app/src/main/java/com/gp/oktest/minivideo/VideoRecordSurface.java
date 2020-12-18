@@ -1,5 +1,6 @@
 package com.gp.oktest.minivideo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
@@ -7,9 +8,12 @@ import android.media.CamcorderProfile;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaRecorder;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.gp.oktest.camera.CameraUtil;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -37,6 +41,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
     private OnRecordListener mOnRecordListener;
     private String basePath;//默认路径
     private Camera.Size size;
+    private int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
 
     public VideoRecordSurface(Context context, String videoSavePath) {
         this(context, null, videoSavePath);
@@ -69,9 +74,9 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         }
         try {
             mCamera.stopPreview();
-            mCamera.setDisplayOrientation(90);
-            mCamera.startPreview();
+            CameraUtil.setCameraDisplayOrientation((Activity) mContext, mCameraId, mCamera);
             mCamera.setPreviewDisplay(mSurfaceHolder);
+            mCamera.startPreview();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -108,11 +113,11 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             freeCameraResource();
         }
         try {
-            mCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            mCamera = Camera.open(mCameraId);
             if (mCamera == null)
                 return;
             initParameters();
-            mCamera.setDisplayOrientation(90);//竖屏显示
+            CameraUtil.setCameraDisplayOrientation((Activity) mContext, mCameraId, mCamera);
             mCamera.setPreviewDisplay(mSurfaceHolder);
             mCamera.startPreview();
             mCamera.unlock();
@@ -120,6 +125,15 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             e.printStackTrace();
             freeCameraResource();
         }
+    }
+
+    public void switchCamera(){
+        if(mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+        } else {
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+        }
+        initCamera();
     }
 
     private void initParameters() {
@@ -133,10 +147,17 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         //音频比特率，以位/秒为单位，
         //音频采样率
         //录制的音频通道数
-        CamcorderProfile mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
+//        CamcorderProfile mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
         Camera.Parameters mParams = mCamera.getParameters();
-        mParams.setPreviewSize(mProfile.videoFrameWidth, mProfile.videoFrameHeight);
-        size = mParams.getPreviewSize();
+//        mParams.setPreviewSize(mProfile.videoFrameWidth, mProfile.videoFrameHeight);
+//        size = mParams.getPreviewSize();
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        size = CameraUtil.getCloselyPreSize(dm.heightPixels, dm.widthPixels, mParams.getSupportedPreviewSizes());
+        mParams.setPreviewSize(size.width, size.height);
+        Log.d(TAG, "屏幕分辨率：w:" + dm.heightPixels + ",h:" + dm.widthPixels);
+        Log.d(TAG, "预览分辨率：w:" + size.width + ",h:" + size.height);
+
         List<String> focusModes = mParams.getSupportedFocusModes();
         if (focusModes.contains("continuous-video")) {
             //自动对焦
@@ -251,7 +272,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             //设置视频输出的格式和编码
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            CamcorderProfile mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
+            CamcorderProfile mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
             //设置视频的分辨率
             mMediaRecorder.setVideoSize(mProfile.videoFrameWidth, mProfile.videoFrameHeight);
             mMediaRecorder.setAudioEncodingBitRate(44100);
@@ -263,13 +284,13 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             mMediaRecorder.setVideoFrameRate(mProfile.videoFrameRate);
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-            if (orientationHintDegrees != 0   &&
-                    orientationHintDegrees != 90  &&
-                    orientationHintDegrees != 180 &&
-                    orientationHintDegrees != 270){
-                orientationHintDegrees = 90;
+
+            if(mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                mMediaRecorder.setOrientationHint(90);
+            } else {
+                mMediaRecorder.setOrientationHint(270);
             }
-            mMediaRecorder.setOrientationHint(orientationHintDegrees);// 输出旋转90度，保持竖屏录制
+
             //3.设置输出
             mMediaRecorder.setOutputFile(mRecordFile.getAbsolutePath());
             mMediaRecorder.prepare();
@@ -390,13 +411,18 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         void onRecordProgress(int progress);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        float ratio = 1f * size.height / size.width;
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = (int) (width / ratio);
-        int wms = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
-        int hms = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-        super.onMeasure(wms, hms);
-    }
+    /**
+     * surface大小根据 屏幕宽 和 比例尺 动态设置高度
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        float ratio = 1f * size.height / size.width;
+//        int width = MeasureSpec.getSize(widthMeasureSpec);
+//        int height = (int) (width / ratio);
+//        int wms = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
+//        int hms = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+//        super.onMeasure(wms, hms);
+//    }
 }

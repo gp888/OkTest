@@ -4,12 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.utils.FileUtils;
 
 import java.io.File;
 
@@ -29,12 +30,12 @@ public class MiniVideoActivity extends BaseActivity {
         }
 
         button = findViewById(R.id.btn_record_video);
-        File fpath = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/okTest/video");
+        videoPath = FileUtils.getFilesPath(this) + "/capturevideo";
+        File fpath = new File(videoPath);
         if (!fpath.exists()) {
             fpath.mkdirs();
         }
-
-        videoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/okTest/video/";
+        Log.d("MiniVideoActivity", videoPath);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

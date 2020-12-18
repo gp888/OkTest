@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
     protected VideoProgressView videoProgressView;
     //按钮提示
     protected TextView tvTips;
+    protected Button btnSwitch;
     private int iTime;
     private VideoRecordSurface videoRecordSurface;
     private String videoSavePath;
@@ -60,7 +62,7 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
         initView();
 
         shutOffVolumn();
-        videoRecordSurface = new VideoRecordSurface(this, videoSavePath);
+        videoRecordSurface = new VideoRecordSurface(MiniVideoRecordActivity.this, videoSavePath);
         frameLayout.addView(videoRecordSurface);
         btnStart.setOnTouchListener(new View.OnTouchListener() {
             private float moveY;
@@ -137,6 +139,13 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
         frameLayout = (FrameLayout) findViewById(R.id.libVideoRecorder_fl);
         videoProgressView = (VideoProgressView) findViewById(R.id.libVideoRecorder_progress);
         tvTips = (TextView) findViewById(R.id.libVideoRecorder_tv_tips);
+        btnSwitch = (Button) findViewById(R.id.btnSwitch);
+        btnSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                videoRecordSurface.switchCamera();
+            }
+        });
     }
 
     @Override

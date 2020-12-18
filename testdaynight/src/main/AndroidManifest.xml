@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.testdaynight">
+    package="com.gp.testdaynight">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -20,7 +20,9 @@
 
         </activity>
 
-        <activity android:name=".SingleTaskActivity" android:taskAffinity="com.gp.task" android:launchMode="singleTask"/>
+        <activity android:name=".SingleTaskActivity"
+            android:taskAffinity="com.gp.task"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

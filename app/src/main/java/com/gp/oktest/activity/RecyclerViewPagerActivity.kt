@@ -17,7 +17,7 @@ class RecyclerViewPagerActivity: BaseActivity() {
         setContentView(R.layout.activity_recycler_viewpager)
 
 
-        val lm = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
+        val lm = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recycler_pager.setLayoutManager(lm)
         val imagelist = mutableListOf<String>("banner_t1", "banner_t3", "banner_t3", "banner_t4")
         recycler_pager.setAdapter1(BannerAdapter(imagelist))

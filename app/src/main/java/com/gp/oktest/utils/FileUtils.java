@@ -1,5 +1,6 @@
 package com.gp.oktest.utils;
 
+import android.content.Context;
 import android.os.Environment;
 
 import com.gp.oktest.Constant;
@@ -68,4 +69,16 @@ public class FileUtils {
     public static boolean isSDCardAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
+
+    public static String getFilesPath( Context context ){
+        String filePath ;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            filePath = context.getExternalFilesDir(null).getPath();
+        }else {
+            filePath = context.getFilesDir().getPath() ;
+        }
+        return filePath ;
+    }
+
 }

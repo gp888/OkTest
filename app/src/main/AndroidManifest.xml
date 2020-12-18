@@ -45,8 +45,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.LoadNetImageActivity"
@@ -79,7 +82,8 @@
         <activity android:name=".recordplaypcm.PcmRecordPlay" />
         <activity android:name=".minivideo.MiniVideoActivity" />
         <activity android:name=".minivideo.MiniVideoPlayActivity" />
-        <activity android:name=".minivideo.MiniVideoRecordActivity" />
+        <activity android:name=".minivideo.MiniVideoRecordActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.StickMenuActivity" />
         <activity android:name=".mp4player.Mp4PlayActivity" />
         <activity android:name=".androidmedia.H264EncodeActivity" />
@@ -161,32 +165,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".opengl.GLActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-
-        </activity>
-
-        <activity android:name=".opengl.CameraTextureViewShowActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-
-        </activity>
-
-        <activity android:name=".opengl.CameraGlSurfaceShowActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+        <activity android:name=".opengl.CameraRecord"/>
+        <activity android:name=".opengl.SurfacePreviewActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".opengl.GLActivity"/>
+        <activity android:name=".opengl.CameraTextureViewShowActivity"/>
+        <activity android:name=".opengl.CameraGlSurfaceShowActivity"/>
     </application>
 
 </manifest>

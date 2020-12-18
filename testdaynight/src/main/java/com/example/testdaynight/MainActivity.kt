@@ -50,9 +50,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClick(view: View) {
-        val intent = Intent(this, SingleTaskActivity::class.java)
-        startActivity(intent)
-        return;
 
         //MODE_NIGHT_FOLLOW_SYSTEM 与 MODE_NIGHT_AUTO
         if(isNight) {
@@ -66,7 +63,8 @@ class MainActivity : AppCompatActivity() {
         recreate()
         isNight = !isNight
 
-
+        val intent = Intent(this, SingleTaskActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

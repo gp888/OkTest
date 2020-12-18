@@ -1,6 +1,7 @@
 package com.gp.oktest.camera;
 
 import android.Manifest;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
@@ -10,9 +11,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
@@ -23,16 +26,21 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder.Callback{
 
     @BindView(R.id.surface_view)
     SurfaceView mSurface;
+    @BindView(R.id.switch_camera)
+    Button switchCamera;
+
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
     private int screenWidth;
     private int screenHeight;
+    private Camera.Size size;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,19 +79,25 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
             mCamera = getCamera(mCameraId);
         }
     }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    @OnClick(R.id.switch_camera)
+    public void onSwitchCamera() {
         releaseCamera();
+        if(mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+        } else {
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+        }
+        mCamera = getCamera(mCameraId);
+        if (mHolder != null) {
+            startPreview(mCamera, mHolder);
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         ToastUtil.showToastShort("pause");
-
+        releaseCamera();
     }
 
     @Override
@@ -104,6 +118,9 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        if (mCamera == null) {
+            mCamera = getCamera(mCameraId);
+        }
         startPreview(mCamera, holder);
     }
 
@@ -132,7 +149,7 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         try {
             setupCamera(camera);
             camera.setPreviewDisplay(holder);
-            CameraUtil.getInstance().setCameraDisplayOrientation(this, mCameraId, camera);
+            CameraUtil.setCameraDisplayOrientation(this, mCameraId, camera);
             camera.startPreview();
         } catch (IOException e) {
             e.printStackTrace();
@@ -156,19 +173,26 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
 //            mCamera.cancelAutoFocus();
         }
 
-        Camera.Size previewSize = CameraUtil.getInstance().getPropSizeForHeight(parameters.getSupportedPreviewSizes(), screenHeight, screenWidth * 4 / 5);
+        /**
+         * surface大小根据 屏幕宽 和 比例尺 动态设置高度
+         */
+        Camera.Size previewSize = CameraUtil.getInstance().getPreviewSize(parameters.getSupportedPreviewSizes(), screenWidth, CameraUtil.getScreenScale(CameraPreviewActivity.this));
         parameters.setPreviewSize(previewSize.width, previewSize.height);
+        size = parameters.getPreviewSize();
 
-        Camera.Size pictrueSize = CameraUtil.getInstance().getPropSizeForHeight(parameters.getSupportedPictureSizes(), screenHeight, screenWidth * 4 / 5);
+        Camera.Size pictrueSize = CameraUtil.getInstance().getPictureSize(parameters.getSupportedPictureSizes(), screenWidth,  CameraUtil.getScreenScale(CameraPreviewActivity.this));
         parameters.setPictureSize(pictrueSize.width, pictrueSize.height);
 
 //        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 
 
-        parameters.setPictureFormat(PixelFormat.RGB_888);//设置照片的格式
-        parameters.setJpegQuality(85);//设置照片的质量
-        parameters.setPictureSize(screenHeight, screenWidth);//设置照片的大小，默认是和屏幕一样大
+//        parameters.setPictureFormat(PixelFormat.RGBA_8888);//设置照片的格式
+//        parameters.setJpegQuality(85);//设置照片的质量
+//        parameters.setPictureSize(screenHeight, screenWidth);//设置照片的大小，默认是和屏幕一样大
         camera.setParameters(parameters);
+
+
+
     }
 
     /**
@@ -178,7 +202,6 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
      */
     private Camera getCamera(int id) {
         Camera camera = null;
-
         try {
             camera = Camera.open(id);
         } catch (Exception e) {
@@ -222,4 +245,5 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
             }
         });
     }
+
 }

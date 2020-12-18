@@ -6,7 +6,6 @@ import android.animation.AnimatorInflater;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -15,11 +14,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -27,10 +24,8 @@ import android.widget.Toast;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.gp.oktest.AppCompatPopupWin;
 import com.gp.oktest.R;
@@ -48,6 +43,7 @@ import com.gp.oktest.longconnect.LongConnectActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
+import com.gp.oktest.opengl.CameraRecord;
 import com.gp.oktest.pcmtowav.PcmToWavActivity;
 import com.gp.oktest.receiver.SendSMSActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
@@ -178,6 +174,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("FlowLayout", 38));
         typeBeans.add(new TypeBean("Animator", 39));
         typeBeans.add(new TypeBean("Hencoder", 40));
+        typeBeans.add(new TypeBean("cameraPreview", 41));
         return typeBeans;
     }
 
@@ -412,6 +409,9 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 40:
                 startActivity(new Intent(this, HencoderActivity.class));
+                break;
+            case 41:
+                startActivity(new Intent(this, CameraRecord.class));
                 break;
             default:
                 break;
