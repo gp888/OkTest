@@ -22,6 +22,7 @@ import android.util.TypedValue;
 
 import com.gp.oktest.App;
 import com.gp.oktest.Constant;
+import com.gp.oktest.R;
 import com.gp.testlibrary.FileProvider7Util;
 
 import java.io.File;
@@ -189,5 +190,15 @@ public class DeviceUtils {
         activityDisplayMetrics.density = targetDensity;
         activityDisplayMetrics.scaledDensity = targetScaledDensity;
         activityDisplayMetrics.densityDpi = targetDensityDpi;
+    }
+
+    public static Bitmap getAvatar(Resources res, int width){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, R.drawable.brighton, options);
+        options.inJustDecodeBounds = false;
+        options.inDensity = options.outWidth;
+        options.inTargetDensity = width;
+        return BitmapFactory.decodeResource(res, R.drawable.brighton, options);
     }
 }

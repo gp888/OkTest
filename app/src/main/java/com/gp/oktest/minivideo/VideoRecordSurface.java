@@ -8,7 +8,6 @@ import android.media.CamcorderProfile;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaRecorder;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -34,9 +33,10 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
     private SurfaceHolder mSurfaceHolder;
     private File mRecordFile;//存储的路径
     private MediaRecorder mMediaRecorder;
-    private int mTimeCount = 1;//开启时间
-    public final int mRecordMaxTime = 17;//最大时间
-    public final int mRecordMiniTime = 2;//最小时间
+    public static final float mRecordMaxTime = 17 * 1000;//最大时间
+    public static final float mRecordMiniTime = 2 * 1000;//最小时间
+    private long recordTime;
+    private long videoDuration;
     private Timer mTimer;
     private OnRecordListener mOnRecordListener;
     private String basePath;//默认路径
@@ -152,11 +152,8 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
 //        mParams.setPreviewSize(mProfile.videoFrameWidth, mProfile.videoFrameHeight);
 //        size = mParams.getPreviewSize();
 
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        size = CameraUtil.getCloselyPreSize(dm.heightPixels, dm.widthPixels, mParams.getSupportedPreviewSizes());
+        size = CameraUtil.getCloselyPreSize(mParams.getSupportedPreviewSizes());
         mParams.setPreviewSize(size.width, size.height);
-        Log.d(TAG, "屏幕分辨率：w:" + dm.heightPixels + ",h:" + dm.widthPixels);
-        Log.d(TAG, "预览分辨率：w:" + size.width + ",h:" + size.height);
 
         List<String> focusModes = mParams.getSupportedFocusModes();
         if (focusModes.contains("continuous-video")) {
@@ -195,20 +192,22 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         createRecordDir();
         try {
             initRecord(orientationHintDegrees);
-            // 时间计数器重新赋值
-            mTimeCount = 1;
+            recordTime = System.currentTimeMillis();
             mTimer = new Timer();
             mTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
+                    long currentTime = System.currentTimeMillis();
+                    videoDuration += currentTime - recordTime;
+                    recordTime = currentTime;
                     // 设置进度条
-                    mOnRecordListener.onRecordProgress(mTimeCount);
-                    if (mTimeCount >= mRecordMaxTime) {// 达到指定时间，停止拍摄
+                    if (videoDuration <= mRecordMaxTime) {
+                        mOnRecordListener.onRecordProgress(videoDuration);
+                    } else {
                         stop();
                     }
-                    mTimeCount++;
                 }
-            }, 0, 1000);
+            }, 0, 20);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -251,7 +250,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
 
     /**
      * 初始化
-     *
+     *编码参数
      * @throws IOException
      * @author zwj
      * @date 2016-06-21
@@ -272,7 +271,13 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             //设置视频输出的格式和编码
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            CamcorderProfile mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
+
+            CamcorderProfile mProfile = null;
+            if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_1080P)) {
+                mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
+            } else if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_720P)) {
+                mProfile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
+            }
             //设置视频的分辨率
             mMediaRecorder.setVideoSize(mProfile.videoFrameWidth, mProfile.videoFrameHeight);
             mMediaRecorder.setAudioEncodingBitRate(44100);
@@ -285,11 +290,13 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
 
-            if(mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                mMediaRecorder.setOrientationHint(90);
-            } else {
-                mMediaRecorder.setOrientationHint(270);
+            if (orientationHintDegrees != 0   &&
+                    orientationHintDegrees != 90  &&
+                    orientationHintDegrees != 180 &&
+                    orientationHintDegrees != 270){
+                orientationHintDegrees = 90;
             }
+            mMediaRecorder.setOrientationHint(orientationHintDegrees);
 
             //3.设置输出
             mMediaRecorder.setOutputFile(mRecordFile.getAbsolutePath());
@@ -312,7 +319,8 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         stopRecord();
         releaseRecord();
         freeCameraResource();
-        if (mTimeCount > mRecordMiniTime) {
+        if (videoDuration > mRecordMiniTime) {
+            videoDuration = 0;
             saveBitmapFile(basePath, mRecordFile.getName() + ".jpg", getVideoThumbnail(getRecordDir()));
             if (mOnRecordListener != null) {
                 if(isFirst){
@@ -408,7 +416,7 @@ public class VideoRecordSurface extends SurfaceView implements SurfaceHolder.Cal
         /**
          * 录制进度
          */
-        void onRecordProgress(int progress);
+        void onRecordProgress(float progress);
     }
 
     /**

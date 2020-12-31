@@ -1,31 +1,34 @@
 package com.gp.oktest.minivideo;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.gp.oktest.R;
+import com.gp.oktest.opengl.ThumbnailsActivity;
 
 import java.io.File;
 
 public class MiniVideoPlayActivity extends AppCompatActivity {
 
-    TextView libPlayVideo_tv_title;
     VideoView videoView;
+    Button confirm;
     private boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
-        libPlayVideo_tv_title = (TextView) findViewById(R.id.libPlayVideo_tv_title);
-        libPlayVideo_tv_title.setText("视频播放");
-        videoView = (VideoView) findViewById(R.id.libPlayVideo_videoView);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        videoView = findViewById(R.id.libPlayVideo_videoView);
+        confirm = findViewById(R.id.confirm);
         videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -46,6 +49,14 @@ public class MiniVideoPlayActivity extends AppCompatActivity {
         } else {
             Log.e("tag","not found video " + mVideoPath);
         }
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MiniVideoPlayActivity.this, ThumbnailsActivity.class);
+                intent.putExtra("mp4Path", mVideoPath);
+                startActivity(intent);
+            }
+        });
     }
 
     public void setLoop(final String videoPath) {
@@ -65,16 +76,5 @@ public class MiniVideoPlayActivity extends AppCompatActivity {
                 videoView.start();
             }
         });
-    }
-
-    public void videoPlayClick(View view){
-        switch (view.getId()){
-            case R.id.libPlayVideo_tv_cancel:
-                finish();
-                break;
-            case R.id.libPlayVideo_tv_more:
-                Toast.makeText(this, "更多", Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 }

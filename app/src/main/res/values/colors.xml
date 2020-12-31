@@ -72,4 +72,10 @@
 
     <color name="aliPay_search_bg_color">#11222222</color>
     <color name="translucent">#66000000</color>
+
+
+    <color name="video_gray">#aadddddd</color>
+    <color name="blue">#1966FF</color>
+    <color name="startColor">#FA2764</color>
+    <color name="endColor">#FD8350</color>
 </resources>

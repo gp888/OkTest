@@ -16,7 +16,7 @@ import com.gp.oktest.animator.SpringInterceptor
 import com.gp.oktest.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_animatortest.*
 
-class AnimatorTest : BaseActivity(){
+class AnimatorTestActivity : BaseActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

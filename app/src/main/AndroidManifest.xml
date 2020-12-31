@@ -42,7 +42,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true" >
         <activity android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
@@ -140,7 +141,7 @@
             android:persistableMode="persistAcrossReboots" />
         <activity android:name=".searchview.SearchviewActivity" />
         <activity android:name=".activity.FlowLayoutActivity" />
-        <activity android:name=".activity.AnimatorTest" />
+        <activity android:name=".activity.AnimatorTestActivity" />
         <activity android:name=".hencoder.HencoderActivity"/>
 
 <!--        <activity android:name=".activity.NoteActivity"/>-->
@@ -165,12 +166,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".opengl.CameraRecord"/>
+        <activity android:name=".opengl.CameraRecordActivity"/>
         <activity android:name=".opengl.SurfacePreviewActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".opengl.GLActivity"/>
         <activity android:name=".opengl.CameraTextureViewShowActivity"/>
         <activity android:name=".opengl.CameraGlSurfaceShowActivity"/>
+        <activity android:name=".opengl.ThumbnailsActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity android:name=".activity.ScalableImageActivity"/>
     </application>
 
 </manifest>

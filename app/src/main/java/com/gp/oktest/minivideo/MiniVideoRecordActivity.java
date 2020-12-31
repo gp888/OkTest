@@ -1,40 +1,30 @@
 package com.gp.oktest.minivideo;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gp.oktest.R;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MiniVideoRecordActivity extends AppCompatActivity implements VideoRecordSurface.OnRecordListener{
 
-    //开始按钮
-    protected Button btnStart;
     protected FrameLayout frameLayout;
-    //播放进度
+    RecordedButton mRecordButton;
+    //拍摄进度
     protected VideoProgressView videoProgressView;
-    //按钮提示
-    protected TextView tvTips;
     protected Button btnSwitch;
-    private int iTime;
+    private float iTime;
     private VideoRecordSurface videoRecordSurface;
     private String videoSavePath;
     public static final String kVideoSavePath = "videoSavePath";
@@ -42,6 +32,8 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
     private OrientationSensorListener listener;
     private SensorManager sm;
     private Sensor sensor;
+    //是否在录制视频
+    private AtomicBoolean isRecordVideo = new AtomicBoolean(false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,84 +53,50 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
         }
         initView();
 
-        shutOffVolumn();
         videoRecordSurface = new VideoRecordSurface(MiniVideoRecordActivity.this, videoSavePath);
         frameLayout.addView(videoRecordSurface);
-        btnStart.setOnTouchListener(new View.OnTouchListener() {
-            private float moveY;
-            private float moveX;
-            Rect rect = new Rect();
-            boolean isInner = true;
+        mRecordButton.setOnGestureListener(new RecordedButton.OnGestureListener() {
+            @Override
+            public void onLongClick() {
+
+            }
 
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        //按住事件发生后执行代码的区域
-                        tvTips.setVisibility(View.VISIBLE);
-                        videoRecordSurface.record(MiniVideoRecordActivity.this, listener.getOrientationHintDegrees());
-                        videoProgressView.startProgress(videoRecordSurface.mRecordMaxTime);
-                        break;
+            public void onClick() {
+                if(isRecordVideo.get()){
+                    isRecordVideo.set(false);
+//                    videoProgressView.stopProgress();
+                    if (iTime <= videoRecordSurface.mRecordMiniTime) {
+                        Toast.makeText(MiniVideoRecordActivity.this, "录制时间太短", Toast.LENGTH_SHORT).show();
+                        videoRecordSurface.stopRecord();
+                        videoRecordSurface.repCamera();
+                    } else if(iTime < videoRecordSurface.mRecordMaxTime){
+                        videoRecordSurface.stop();
                     }
-                    case MotionEvent.ACTION_MOVE: {
-                        //移动事件发生后执行代码的区域
-                        if (rect.right == 0 && rect.bottom == 0) {
-                            btnStart.getFocusedRect(rect);
-                        }
-                        moveX = event.getX();
-                        moveY = event.getY();
-                        if (moveY > 0 && moveX > 0 && moveX <= rect.right && moveY <= rect.bottom) {
-                            //内
-                            isInner = true;
-                            if (!"移开取消".equals(tvTips.getText().toString().trim())) {
-                                tvTips.setBackgroundColor(Color.TRANSPARENT);
-                                tvTips.setTextColor(getResources().getColor(R.color.video_green));
-                                tvTips.setText("移开取消");
-                            }
-                            btnStart.setVisibility(View.INVISIBLE);
-                        } else {
-                            //外
-                            isInner = false;
-                            if (!"松开取消".equals(tvTips.getText().toString().trim())) {
-                                tvTips.setBackgroundColor(Color.RED);//getResources().getColor(android.R.color.holo_red_dark));
-                                tvTips.setTextColor(Color.WHITE);
-                                tvTips.setText("松开取消");
-                            }
-                        }
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        //松开事件发生后执行代码的区域
-                        tvTips.setVisibility(View.INVISIBLE);
-                        videoProgressView.stopProgress();
-                        if (iTime <= videoRecordSurface.mRecordMiniTime || (iTime < videoRecordSurface.mRecordMaxTime && !isInner)) {
-                            if (isInner) {
-                                Toast.makeText(MiniVideoRecordActivity.this, "录制时间太短", Toast.LENGTH_SHORT).show();
-                            } else {
-                                //
-                            }
-                            videoRecordSurface.stopRecord();
-                            videoRecordSurface.repCamera();
-                            btnStart.setVisibility(View.VISIBLE);
-                        } else if(iTime < videoRecordSurface.mRecordMaxTime){
-                            videoRecordSurface.stop();
-                        }
-                        break;
-                    }
-                    default:
-                        break;
+                } else {
+                    isRecordVideo.set(true);
+                    videoRecordSurface.record(MiniVideoRecordActivity.this, listener.getOrientationHintDegrees());
+//                    videoProgressView.startProgress(videoRecordSurface.mRecordMaxTime);
                 }
-                return false;
+            }
+
+            @Override
+            public void onLift() {
+
+            }
+
+            @Override
+            public void onOver() {
+
             }
         });
-
     }
 
     private void initView() {
-        btnStart = (Button) findViewById(R.id.libVideoRecorder_btn_start);
+        mRecordButton = (RecordedButton) findViewById(R.id.mRecodButton);
+        mRecordButton.setMax(VideoRecordSurface.mRecordMaxTime);
         frameLayout = (FrameLayout) findViewById(R.id.libVideoRecorder_fl);
         videoProgressView = (VideoProgressView) findViewById(R.id.libVideoRecorder_progress);
-        tvTips = (TextView) findViewById(R.id.libVideoRecorder_tv_tips);
         btnSwitch = (Button) findViewById(R.id.btnSwitch);
         btnSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +119,9 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
     }
 
 
+    /**
+     * 录制结束
+     */
     @Override
     public void onRecordFinish() {
         if (videoProgressView != null) {
@@ -184,8 +145,9 @@ public class MiniVideoRecordActivity extends AppCompatActivity implements VideoR
     }
 
     @Override
-    public void onRecordProgress(int progress) {
+    public void onRecordProgress(float progress) {
         iTime = progress;
+        mRecordButton.setProgress(progress);
     }
 
 

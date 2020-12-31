@@ -43,7 +43,7 @@ import com.gp.oktest.longconnect.LongConnectActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
-import com.gp.oktest.opengl.CameraRecord;
+import com.gp.oktest.opengl.CameraRecordActivity;
 import com.gp.oktest.pcmtowav.PcmToWavActivity;
 import com.gp.oktest.receiver.SendSMSActivity;
 import com.gp.oktest.recordplaypcm.PcmRecordPlay;
@@ -175,6 +175,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         typeBeans.add(new TypeBean("Animator", 39));
         typeBeans.add(new TypeBean("Hencoder", 40));
         typeBeans.add(new TypeBean("cameraPreview", 41));
+        typeBeans.add(new TypeBean("scalableImageView", 42));
         return typeBeans;
     }
 
@@ -405,13 +406,17 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
 
             case 39:
-                startActivity(new Intent(this, AnimatorTest.class));
+                startActivity(new Intent(this, AnimatorTestActivity.class));
                 break;
             case 40:
                 startActivity(new Intent(this, HencoderActivity.class));
                 break;
             case 41:
-                startActivity(new Intent(this, CameraRecord.class));
+                startActivity(new Intent(this, CameraRecordActivity.class));
+                break;
+            case 42:
+
+                startActivity(new Intent(this, ScalableImageActivity.class));
                 break;
             default:
                 break;

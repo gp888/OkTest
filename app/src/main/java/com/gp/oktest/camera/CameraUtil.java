@@ -8,11 +8,16 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Size;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
 
+import com.gp.oktest.App;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -21,6 +26,8 @@ import java.util.List;
  * 相机相关工具类
  */
 public class CameraUtil {
+
+    private static final long PREVIEW_SIZE_MIN = 720 * 480;
 
     private CameraSizeComparator sizeComparator = new CameraSizeComparator();
 
@@ -149,13 +156,14 @@ public class CameraUtil {
     /**
      * 支持的分辨率列表list，最小宽度，屏幕比例。返回合适的camera分辨率
      * @param list
-     * @param th
-     * @param scale
      * @return
      */
-    public Camera.Size getPreviewSize(List<Camera.Size> list, int th, float scale){
+    public Camera.Size getPreviewSize(List<Camera.Size> list){
         Collections.sort(list, sizeComparator);
 
+        float scale = getScreenScale();
+        DisplayMetrics dm = App.Companion.getGlobalContext().getResources().getDisplayMetrics();
+        int th = dm.widthPixels;
         int i = 0;
         for(Camera.Size s : list){
             if((s.width > th) && equalRate(s, scale)){
@@ -167,8 +175,12 @@ public class CameraUtil {
         return list.get(i);
     }
 
-    public Camera.Size getPictureSize(List<Camera.Size> list, int th, float scale){
+    public Camera.Size getPictureSize(List<Camera.Size> list){
         Collections.sort(list, sizeComparator);
+
+        float scale = getScreenScale();
+        DisplayMetrics dm = App.Companion.getGlobalContext().getResources().getDisplayMetrics();
+        int th = dm.widthPixels;
 
         int i = 0;
         for(Camera.Size s : list){
@@ -191,7 +203,7 @@ public class CameraUtil {
         }
     }
 
-    public class CameraSizeComparator implements Comparator<Camera.Size> {
+    public static class CameraSizeComparator implements Comparator<Camera.Size> {
         //按升序排列
         public int compare(Camera.Size lhs, Camera.Size rhs) {
             if(lhs.width == rhs.width){
@@ -201,31 +213,40 @@ public class CameraUtil {
             } else{
                 return -1;
             }
+
+//            return Long.signum((long) lhs.width * lhs.height -
+//                    (long) rhs.width * rhs.height);
         }
     }
 
-    public static float getScreenScale(Context context){
-        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        return (float) (display.getHeight()) / (float) (display.getWidth());
+    public static float getScreenScale(){
+        DisplayMetrics dm = App.Companion.getGlobalContext().getResources().getDisplayMetrics();
+        Log.i("CameraUtil", "屏幕宽高:w = " + dm.widthPixels + ",h = " + dm.heightPixels);
+        return (float) (dm.heightPixels) / (float) dm.widthPixels;
     }
-
 
 
     /**
      * 通过对比得到与宽高比最接近的尺寸（如果有相同尺寸，优先选择）
-     *
-     * @param surfaceWidth
-     *            需要被进行对比的原宽
-     * @param surfaceHeight
-     *            需要被进行对比的原高
      * @param preSizeList
      *            需要对比的预览尺寸列表
      * @return 得到与原宽高比例最接近的尺寸
      */
-    public static Camera.Size getCloselyPreSize(int surfaceWidth, int surfaceHeight, List<Camera.Size> preSizeList) {
+    public static Camera.Size getCloselyPreSize(List<Camera.Size> preSizeList) {
+
+        DisplayMetrics dm = App.Companion.getGlobalContext().getResources().getDisplayMetrics();
+        //dm.widthPixels = 1080h,   dm.heightPixels = 2030
+        int surfaceHeight = dm.heightPixels;
+        int surfaceWidth = dm.widthPixels;
 
         // 当屏幕为垂直的时候需要把宽高值进行调换，保证宽大于高
+        if(surfaceWidth < surfaceHeight) {
+            surfaceHeight = dm.widthPixels;
+            surfaceWidth = dm.heightPixels;
+        }
+
         //先查找preview中是否存在与surfaceview相同宽高的尺寸
+        //size.width = 1280h, size.height = 720
         for(Camera.Size size : preSizeList){
             if((size.width == surfaceWidth) && (size.height == surfaceHeight)){
                 return size;
@@ -245,7 +266,75 @@ public class CameraUtil {
                 retSize = size;
             }
         }
-
+        Log.d("CameraUtil", "屏幕分辨率：w:" + dm.heightPixels + ",h:" + dm.widthPixels);
+        Log.d("CameraUtil", "预览分辨率：w:" + retSize.width + ",h:" + retSize.height);
         return retSize;
+    }
+
+    /**
+     * 相机输出尺寸默认是横向的（宽>高），手机窗口一般是竖向的（不考虑旋转横置的情况），所以比较时将输出尺寸的 宽高比 与 预览窗口的 高宽比 进行比较。
+     * 录制视频的时候，为了预览和播放效果好（充满窗口），可以选择宽高比与预览窗口高宽比一致的输出尺寸。
+     * 如果没有宽高比一致的输出尺寸，则可以选择高宽比接近的。
+     * 但是如果上面选择的尺寸过小，则预览图像画质比较模糊，所以可以设定一个阈值，如果不满足阈值，则退而求其次选择和预览窗口面积最接近的输出尺寸。
+     * @param preSizeList
+     * @return
+     */
+    public static Camera.Size updateCameraPreview(List<Camera.Size> preSizeList){
+
+        DisplayMetrics dm = App.Companion.getGlobalContext().getResources().getDisplayMetrics();
+        //dm.widthPixels = 1080h,   dm.heightPixels = 2030
+        int surfaceHeight = dm.heightPixels;
+        int surfaceWidth = dm.widthPixels;
+        Log.d("CameraUtil", "1屏幕分辨率：w:" + dm.heightPixels + ",h:" + dm.widthPixels);
+
+        List<Camera.Size> sizes = new ArrayList<>();
+        //计算预览窗口高宽比，高宽比，高宽比
+        float ratio = ((float) surfaceHeight / surfaceWidth);
+
+        //首先选取宽高比与预览窗口高宽比一致且最大的输出尺寸
+        for (int i = 0; i < preSizeList.size(); i++){
+            if (((float)preSizeList.get(i).width) / preSizeList.get(i).height == ratio){
+                sizes.add(preSizeList.get(i));
+            }
+        }
+
+        Camera.Size previewSize = null;//预览尺寸
+        if (sizes.size() > 0){
+            previewSize = Collections.max(sizes, new CameraSizeComparator());
+            Log.d("CameraUtil", "1预览分辨率：w:" + previewSize.width + ",h:" + previewSize.height);
+            return previewSize;
+        }
+
+
+        //如果不存在宽高比与预览窗口高宽比一致的输出尺寸，则选择与其宽高比最接近的输出尺寸
+        sizes.clear();
+        float detRatioMin = Float.MAX_VALUE;
+        for (int i = 0; i < preSizeList.size(); i++){
+            Camera.Size size = preSizeList.get(i);
+            float curRatio = ((float)size.width) / size.height;
+            if (Math.abs(curRatio - ratio) < detRatioMin){
+                detRatioMin = curRatio;
+                previewSize = size;
+            }
+        }
+
+        if (previewSize.width * previewSize.height > PREVIEW_SIZE_MIN) {
+            Log.d("CameraUtil", "2预览分辨率：w:" + previewSize.width + ",h:" + previewSize.height);
+           return previewSize;
+        }
+
+        //如果宽高比最接近的输出尺寸太小，则选择与预览窗口面积最接近的输出尺寸
+        long area = surfaceWidth * surfaceHeight;
+        long detAreaMin = Long.MAX_VALUE;
+        for (int i = 0; i < preSizeList.size(); i++){
+            Camera.Size size = preSizeList.get(i);
+            long curArea = size.width * size.height;
+            if (Math.abs(curArea - area) < detAreaMin){
+                detAreaMin = curArea;
+                previewSize = size;
+            }
+        }
+        Log.d("CameraUtil", "3预览分辨率：w:" + previewSize.width + ",h:" + previewSize.height);
+        return previewSize;
     }
 }

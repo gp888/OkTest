@@ -38,8 +38,6 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
-    private int screenWidth;
-    private int screenHeight;
     private Camera.Size size;
 
     @Override
@@ -59,7 +57,6 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         mHolder = mSurface.getHolder();
         mHolder.setFormat(PixelFormat.TRANSPARENT);
         mHolder.setKeepScreenOn(true);
-        mHolder.setFixedSize(screenWidth, screenHeight);
 
         // 设置 Surface 类型
         // 参数：
@@ -70,10 +67,6 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         // 在 Camera 图像预览中就使用 SURFACE_TYPE_PUSH_BUFFERS 类型的 Surface，由 Camera 负责提供给预览 Surface 数据，这样图像预览会比较流
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         mHolder.addCallback(this);
-
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        screenWidth = dm.widthPixels;
-        screenHeight = dm.heightPixels;
 
         if (mCamera == null) {
             mCamera = getCamera(mCameraId);
@@ -176,11 +169,11 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
         /**
          * surface大小根据 屏幕宽 和 比例尺 动态设置高度
          */
-        Camera.Size previewSize = CameraUtil.getInstance().getPreviewSize(parameters.getSupportedPreviewSizes(), screenWidth, CameraUtil.getScreenScale(CameraPreviewActivity.this));
+        Camera.Size previewSize = CameraUtil.updateCameraPreview(parameters.getSupportedPreviewSizes());
         parameters.setPreviewSize(previewSize.width, previewSize.height);
         size = parameters.getPreviewSize();
 
-        Camera.Size pictrueSize = CameraUtil.getInstance().getPictureSize(parameters.getSupportedPictureSizes(), screenWidth,  CameraUtil.getScreenScale(CameraPreviewActivity.this));
+        Camera.Size pictrueSize = CameraUtil.getInstance().getPictureSize(parameters.getSupportedPictureSizes());
         parameters.setPictureSize(pictrueSize.width, pictrueSize.height);
 
 //        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
@@ -231,7 +224,7 @@ public class CameraPreviewActivity extends BaseActivity implements SurfaceHolder
             public void onPictureTaken(byte[] data, Camera camera) {
                 Bitmap saveBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                 //把bitmap缩放成想要的大小
-                saveBitmap = Bitmap.createScaledBitmap(saveBitmap, screenWidth * 4 / 5, screenHeight, true);
+//                saveBitmap = Bitmap.createScaledBitmap(saveBitmap, screenWidth * 4 / 5, screenHeight, true);
                 //保存图片,并把图片裁切成固定大小
 //                try {
 //                    ImageUtil.saveBitmapFile(saveBitmap, imgOrginalPath);

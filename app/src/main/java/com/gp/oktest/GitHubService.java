@@ -2,11 +2,11 @@ package com.gp.oktest;
 
 import com.gp.oktest.model.GitModel;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import rx.Observable;
 
 /**
  * Created by guoping on 2017/11/15.

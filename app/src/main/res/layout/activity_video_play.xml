@@ -1,53 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_video_play"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="#000">
-
-    <RelativeLayout
-        android:id="@+id/libTitle_RL"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
-
-        <ImageView
-            android:id="@+id/libPlayVideo_tv_cancel"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:background="@color/transparent"
-            android:paddingBottom="15dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="15dp"
-            android:onClick="videoPlayClick"
-            app:srcCompat="@drawable/title_left_arrow_white"/>
-
-        <TextView
-            android:id="@+id/libPlayVideo_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
-
-        <ImageView
-            android:id="@+id/libPlayVideo_tv_more"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingBottom="15dp"
-            android:onClick="videoPlayClick"
-            android:paddingLeft="13dp"
-            android:paddingRight="13dp"
-            android:paddingTop="15dp"
-            app:srcCompat="@drawable/title_more_white"/>
-    </RelativeLayout>
     <VideoView
         android:id="@+id/libPlayVideo_videoView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="56dp"
+        android:text="确定"
+        android:background="@drawable/shape_video_next"/>
+</RelativeLayout>

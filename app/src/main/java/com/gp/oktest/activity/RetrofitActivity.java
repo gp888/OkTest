@@ -13,20 +13,21 @@ import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.utils.SoftKeyBroadManager;
 import com.gp.oktest.utils.ToastUtil;
 
+
 import java.io.IOException;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class RetrofitActivity extends BaseActivity{
 
@@ -144,14 +145,14 @@ public class RetrofitActivity extends BaseActivity{
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(GitHubService.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);
         Observable<GitModel> obserable = service.rxUser(loginName);
         obserable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GitModel>() {
+                .subscribe(new DisposableObserver<GitModel>() {
 
                     @Override
                     public void onError(Throwable e) {
@@ -159,14 +160,15 @@ public class RetrofitActivity extends BaseActivity{
                     }
 
                     @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
                     public void onNext(GitModel gitModel) {
                         Log.d(TAG, "onNext: " + gitModel.getLogin());
                     }
 
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted: ");
-                    }
                 });
     }
 }
