@@ -8,6 +8,10 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
@@ -21,13 +25,23 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.cxp.learningvideo.SimplePlayerActivity;
 import com.gp.oktest.AppCompatPopupWin;
+import com.gp.oktest.GlideApp;
 import com.gp.oktest.R;
 import com.gp.oktest.ZoomImageView.ImageEntranceActivity;
 import com.gp.oktest.adapter.BaseAdapter;
@@ -54,11 +68,15 @@ import com.gp.oktest.utils.DeviceUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.internal.FastBlur;
 
 import static android.text.format.DateUtils.FORMAT_24HOUR;
 import static android.text.format.DateUtils.FORMAT_ABBREV_ALL;
@@ -415,8 +433,8 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 startActivity(new Intent(this, CameraRecordActivity.class));
                 break;
             case 42:
-
-                startActivity(new Intent(this, ScalableImageActivity.class));
+//                startActivity(new Intent(this, ScalableImageActivity.class));
+                startActivity(new Intent(this, SimplePlayerActivity.class));
                 break;
             default:
                 break;
@@ -470,5 +488,41 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         super.onUserInteraction();
         //activity在栈顶，触摸点击，按home,back,menu键会触发此方法
         Log.d(TAG, "===onUserInteraction===");
+
+//        GlideApp.with(context)
+//                .load(resouce)
+//                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)//缓存
+//
+//                .apply(RequestOptions.bitmapTransform(new BlurTransformation(5, 1)))
+//
+//                .transition(DrawableTransitionOptions.withCrossFade())//淡入淡出
+//
+//                .listener(new LoadListen())
+//                .into(imageView);
+
     }
+
+    //图片加载监听器
+    class LoadListen implements RequestListener<Drawable> {
+
+
+        @Override
+
+        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) {
+
+            return false;
+
+        }
+
+
+        @Override
+
+        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+
+            return false;
+
+        }
+
+    }
+
 }

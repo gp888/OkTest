@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gp.testdaynight.R;
+
 public class SingleTaskActivity extends AppCompatActivity {
 
     @Override

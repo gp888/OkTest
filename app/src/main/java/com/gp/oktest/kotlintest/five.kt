@@ -199,10 +199,10 @@ val lazyValue:String by lazy {
 }
 
 //扩展函数，不用定义新的类，而增加新的方法
-class HuMan
-fun HuMan.eat(){
-    println("敬业福")
-}
+//open class HuMan
+//fun HuMan.eat(){
+//    println("敬业福")
+//}
 
 //扩展函数是静态加载的
 open class View

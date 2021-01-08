@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'//不用findview了
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.gp.oktest"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         ndk {
@@ -93,7 +94,14 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    implementation ("com.github.bumptech.glide:glide:4.11.0") {
+        exclude group: "com.android.support"
+    }
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    //高斯模糊
+    implementation 'jp.wasabeef:glide-transformations:4.0.1'
     //状态栏
     //compile 'com.jaeger.statusbarutil:library:1.4.0'
 
@@ -101,7 +109,7 @@ dependencies {
     //AndFix
     implementation 'com.alipay.euler:andfix:0.5.0@aar'
     implementation 'com.jakewharton:butterknife:10.2.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true

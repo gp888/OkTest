@@ -37,7 +37,7 @@ public class RetrofitBuilder {
                     .baseUrl("NetURL.BASE_URL")
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
-            if(BuildConfig.APP_DEBUG_MODE) {
+            if(BuildConfig.DEBUG) {
                 builder = builder.addConverterFactory(DecodeConverterFactory.create());
             }else{
                 builder = builder.addConverterFactory(gsonConverterFactory);

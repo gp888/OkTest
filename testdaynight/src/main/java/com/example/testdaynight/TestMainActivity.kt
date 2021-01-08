@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.gp.testdaynight.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -30,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_main.*
     对于一些数据的保存与切换后的显示我们可以用savedInstanceState来保存与复原
     2.在切换后可以不调用recreate()，而是自己添加一个重启该Activity的方法，然后加个过度动画
  */
-class MainActivity : AppCompatActivity() {
+class TestMainActivity : AppCompatActivity() {
 
     val DAY_NIGHT_STATE = "day_night_state"
 

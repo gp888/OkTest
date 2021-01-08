@@ -2,6 +2,9 @@ package com.gp.oktest.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.cardview.widget.CardView;
 import android.util.DisplayMetrics;
@@ -15,8 +18,8 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.gp.oktest.activity.CountDownTimerActivity;
 import com.gp.oktest.R;
 import com.gp.oktest.utils.DeviceUtils;
@@ -56,13 +59,13 @@ public class Banner extends LinearLayout {
 
         for (int i = 0; i < mList.size(); i++) {
 
-            Glide.with(mContext).load(mList.get(i))
-                    .asBitmap()
+            Glide.with(mContext).asBitmap()
+                    .load(mList.get(i))
                     .dontAnimate()
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             mBitmaps.add(resource);
 
                             if (mBitmaps.size() >= 3 && ultraViewPager == null){

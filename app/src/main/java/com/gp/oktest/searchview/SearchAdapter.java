@@ -1,7 +1,7 @@
 package com.gp.oktest.searchview;
 
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.gp.oktest.App;
+import com.gp.oktest.GlideApp;
 import com.gp.oktest.R;
 import com.gp.oktest.utils.DeviceUtils;
 
-import java.io.File;
 import java.util.List;
 
 public class SearchAdapter extends BaseAdapter {
@@ -66,12 +64,13 @@ public class SearchAdapter extends BaseAdapter {
 
 
             //todo hehehe
-            Glide.with(holder.iv.getContext()).load(provinceBean.url)
+            GlideApp.with(holder.iv.getContext()).load(provinceBean.url)
 //                     .placeholder(R.mipmap.ic_launcher)
 //                    .error(R.drawable.wzryfx)
-                    .listener(new LoggingListener<String, GlideDrawable>())
+                    .listener(new LoggingListener<Drawable>())
                     .into(holder.iv);
 //            holder.iv.setImageResource(R.drawable.czech);
+
 
             ViewTreeObserver vto = holder.iv.getViewTreeObserver();
             ViewHolder finalHolder = holder;

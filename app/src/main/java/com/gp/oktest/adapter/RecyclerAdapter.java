@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.gp.oktest.model.RecyclerItem;
 import com.gp.oktest.R;
 
@@ -41,8 +42,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.str.setText(data.get(position).str);
         Glide.with(holder.pic.getContext())
                 .load(data.get(position).pic)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .placeholder(R.mipmap.ic_launcher)
                 .into(holder.pic);
          holder.itemView.setTag(position);

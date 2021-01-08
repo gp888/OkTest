@@ -118,7 +118,7 @@ open class Father{
 
 }
 
-class son:Father(){
+private class son:Father(){
     override var name: String = "5555"
     override var age: Int = 10
     override fun sayHello() {
