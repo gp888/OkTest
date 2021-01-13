@@ -177,7 +177,12 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity android:name=".activity.ScalableImageActivity"/>
-        <activity android:name="com.cxp.learningvideo.SimplePlayerActivity"/>
+
+
+        <activity android:name=".mediacodec.SimpleRenderActivity"/>
+        <activity android:name=".mediacodec.SimplePlayerActivity"/>
+        <activity android:name=".mediacodec.OpenGLPlayerActivity"/>
+        <activity android:name=".mediacodec.MultiOpenGLPlayerActivity"/>
     </application>
 
 </manifest>

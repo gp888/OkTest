@@ -100,8 +100,7 @@ public class Triangle {
         vertexBuffer.position(0);
 
 
-        ByteBuffer dd = ByteBuffer.allocateDirect(
-                color.length * 4);
+        ByteBuffer dd = ByteBuffer.allocateDirect(color.length * 4);
         dd.order(ByteOrder.nativeOrder());
         colorBuffer = dd.asFloatBuffer();
         colorBuffer.put(color);

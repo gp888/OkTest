@@ -35,8 +35,5 @@ public class GLActivity extends AppCompatActivity {
 
         OneGlSurfaceView glSurfaceView = new OneGlSurfaceView(this);
         setContentView(glSurfaceView);
-
-
-        setContentView(glSurfaceView);
     }
 }

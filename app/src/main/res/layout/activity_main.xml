@@ -30,10 +30,10 @@
         android:layout_height="match_parent"
         tools:context="com.gp.oktest.activity.MainActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <com.gp.oktest.view.FlowLayout
+            android:id="@+id/flowlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <!--<TextView-->
             <!--android:layout_width="wrap_content"-->

@@ -9,7 +9,8 @@ import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 
-//视频封装
+//音视频封装器
+
 class MMuxer {
 
     private val TAG = "MMuxer"

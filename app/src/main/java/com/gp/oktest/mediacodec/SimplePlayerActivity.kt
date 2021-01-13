@@ -1,4 +1,4 @@
-package com.cxp.learningvideo
+package com.gp.oktest.mediacodec
 
 import android.os.Bundle
 import android.view.View

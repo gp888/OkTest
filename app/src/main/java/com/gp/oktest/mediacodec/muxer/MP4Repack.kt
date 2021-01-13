@@ -7,7 +7,7 @@ import com.gp.oktest.mediacodec.extractor.AudioExtractor
 import com.gp.oktest.mediacodec.extractor.VideoExtractor
 import java.nio.ByteBuffer
 
-
+//MP4重打包工具
 class MP4Repack(path:String) {
 
     private val TAG = "MP4Repack"
@@ -77,7 +77,8 @@ class MP4Repack(path:String) {
             }
             mAExtractor.stop()
             mVExtractor.stop()
-            mMuxer.release()
+            mMuxer.releaseAudioTrack()
+            mMuxer.releaseVideoTrack()
             Log.i(TAG, "MP4 重打包完成")
         }.start()
     }

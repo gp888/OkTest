@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -39,7 +40,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.cxp.learningvideo.SimplePlayerActivity;
 import com.gp.oktest.AppCompatPopupWin;
 import com.gp.oktest.GlideApp;
 import com.gp.oktest.R;
@@ -54,6 +54,10 @@ import com.gp.oktest.database.SqliteActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.hencoder.HencoderActivity;
 import com.gp.oktest.longconnect.LongConnectActivity;
+import com.gp.oktest.mediacodec.MultiOpenGLPlayerActivity;
+import com.gp.oktest.mediacodec.OpenGLPlayerActivity;
+import com.gp.oktest.mediacodec.SimplePlayerActivity;
+import com.gp.oktest.mediacodec.SimpleRenderActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
@@ -64,6 +68,7 @@ import com.gp.oktest.recordplaypcm.PcmRecordPlay;
 import com.gp.oktest.searchview.SearchviewActivity;
 import com.gp.oktest.service.ForegroundService1;
 import com.gp.oktest.utils.DeviceUtils;
+import com.gp.oktest.view.FlowLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -72,9 +77,11 @@ import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.internal.FastBlur;
 
@@ -84,12 +91,9 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.text.format.DateUtils.FORMAT_SHOW_TIME;
 import static android.text.format.DateUtils.FORMAT_SHOW_YEAR;
 
-public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemClick {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int REQ_PERMISSION_CODE_FIND_LOCATION = 0X113;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
 
     private ArrayList<TypeBean> typeBeans = new ArrayList<>();
 
@@ -97,6 +101,8 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
     boolean isAudioFocus;
     @BindView(R.id.root)
     ConstraintLayout root;
+    @BindView(R.id.flowlayout)
+    FlowLayout flowLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +110,19 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-        adapter = new MainAdapter(MainActivity.this, getData());
-        adapter.setClickListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new MainAdapter(MainActivity.this, getData());
+//        adapter.setClickListener(this);
 //        recyclerView.addItemDecoration(new SuperDividerItemDecoration.Builder(this).build());
-        recyclerView.setAdapter(adapter);
 
+        List<TypeBean> views = getData();
+        for(TypeBean bean : views) {
+            TextView tv = new TextView(this);
+            tv.setText(bean.getTitle());
+            tv.setTag(bean.getType());
+            tv.setOnClickListener(this);
+            tv.setBackground(getDrawable(R.drawable.selector_main_text));
+            flowLayout.addView(tv);
+        }
 
 
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -151,7 +163,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
     }
 
     private ArrayList<TypeBean> getData() {
-        typeBeans.add(new TypeBean("CountDownTimer倒计时", 0));
+        typeBeans.add(new TypeBean("CountDownTimer", 0));
         typeBeans.add(new TypeBean("LoadNetImage", 1));
         typeBeans.add(new TypeBean("RecyclerView", 2));
         typeBeans.add(new TypeBean("MoveViewActivity", 3));
@@ -251,8 +263,27 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
     }
 
     @Override
-    public void onClick(View view, int position) {
-        switch (typeBeans.get(position).getType()) {
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        //获取view高度，位置等
+
+        int[] location = new int[2];
+        flowLayout.getLocationInWindow(location);
+        int x = location[0]; // view距离window 左边的距离（即x轴方向）
+        int y = location[1]; // view距离window 顶边的距离（即y轴方向）
+
+
+
+        int[] location1 = new int[2];
+        flowLayout.getLocationOnScreen(location1);
+        int x1 = location[0]; // view距离 屏幕左边的距离（即x轴方向）
+        int y1 = location[1]; // view距离 屏幕顶边的距离（即y轴方向）
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch ((int)v.getTag()) {
             case 0:
                 startActivity(new Intent(MainActivity.this, CountDownTimerActivity.class),
                         ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -267,7 +298,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 3:
                 startActivity(new Intent(MainActivity.this, MoveViewActivity.class),
-                        ActivityOptions.makeSceneTransitionAnimation(this, view, "sharedView").toBundle());
+                        ActivityOptions.makeSceneTransitionAnimation(this, v, "sharedView").toBundle());
                 break;
             case 4:
                 startActivity(new Intent(MainActivity.this, PhotosActivity.class));
@@ -279,12 +310,12 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 startActivity(new Intent(MainActivity.this, ThemeBaseActivity.class));
                 break;
             case 7:
-                PopupMenu popupMenu = new PopupMenu(this, view);
+                PopupMenu popupMenu = new PopupMenu(this, v);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     popupMenu.setGravity(Gravity.RIGHT);
                 }
                 popupMenu.getMenuInflater().inflate(R.menu.menu_navigationview, popupMenu.getMenu());
-                view.setOnTouchListener(popupMenu.getDragToOpenListener());
+                v.setOnTouchListener(popupMenu.getDragToOpenListener());
                 popupMenu.show();
                 break;
             case 8:
@@ -322,7 +353,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 16:
                 boolean isHasCamera = DeviceUtils.hasCameraDevice(MainActivity.this);
-                Log.d(TAG,  isHasCamera+ "");
+                Log.d(TAG, isHasCamera + "");
 
                 int cameras = Camera.getNumberOfCameras();
                 Log.d(TAG, cameras + "");
@@ -434,33 +465,15 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
                 break;
             case 42:
 //                startActivity(new Intent(this, ScalableImageActivity.class));
-                startActivity(new Intent(this, SimplePlayerActivity.class));
+//                startActivity(new Intent(this, SimplePlayerActivity.class));
+//                startActivity(new Intent(this, SimpleRenderActivity.class));
+//                startActivity(new Intent(this, OpenGLPlayerActivity.class));
+                startActivity(new Intent(this, MultiOpenGLPlayerActivity.class));
                 break;
             default:
                 break;
         }
     }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        //获取view高度，位置等
-
-        int[] location = new int[2];
-        recyclerView.getLocationInWindow(location);
-        int x = location[0]; // view距离window 左边的距离（即x轴方向）
-        int y = location[1]; // view距离window 顶边的距离（即y轴方向）
-
-
-
-        int[] location1 = new int[2];
-        recyclerView.getLocationOnScreen(location1);
-        int x1 = location[0]; // view距离 屏幕左边的距离（即x轴方向）
-        int y1 = location[1]; // view距离 屏幕顶边的距离（即y轴方向）
-    }
-
-
-    private MyHandler mHandler = new MyHandler(this);
 
     private static class MyHandler extends Handler {
         private WeakReference reference;
@@ -479,7 +492,7 @@ public class MainActivity extends BaseActivity implements BaseAdapter.onRVItemCl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacksAndMessages(null);
+//        mHandler.removeCallbacksAndMessages(null);
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
