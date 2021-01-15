@@ -49,6 +49,9 @@ class MultiOpenGLPlayerActivity: AppCompatActivity() {
             initPlayer(path2, Surface(it), true)
         }
         render.addDrawer(drawer)
+
+        //设置绘制器，用于触摸移动
+        gl_surface.addDrawer(drawer)
     }
 
     private fun initPlayer(path: String, sf: Surface, withSound: Boolean) {

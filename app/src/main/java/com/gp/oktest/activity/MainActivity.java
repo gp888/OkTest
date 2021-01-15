@@ -469,6 +469,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //                startActivity(new Intent(this, SimpleRenderActivity.class));
 //                startActivity(new Intent(this, OpenGLPlayerActivity.class));
                 startActivity(new Intent(this, MultiOpenGLPlayerActivity.class));
+//                startActivity(new Intent(this, PicMatrix.class));
                 break;
             default:
                 break;

@@ -88,6 +88,7 @@ class VideoDrawer : IDrawer {
         mTextureBuffer.position(0)
     }
 
+    //宽高的缩放系数
     private var mWidthRatio = 1f
     private var mHeightRatio = 1f
     private fun initDefMatrix() {
@@ -98,7 +99,13 @@ class VideoDrawer : IDrawer {
             var prjMatrix = FloatArray(16)
             val originRatio = mVideoWidth / mVideoHeight.toFloat()
             val worldRatio = mWorldWidth / mWorldHeight.toFloat()
+
+            //竖屏，视频横屏
+            //GLSurfaceView的宽高为1080x1920；视频的宽高为1000x500
+
+            //横屏
             if (mWorldWidth > mWorldHeight) {
+                //视频横长条
                 if (originRatio > worldRatio) {
                     mHeightRatio = originRatio / worldRatio
                     Matrix.orthoM(

@@ -183,6 +183,7 @@
         <activity android:name=".mediacodec.SimplePlayerActivity"/>
         <activity android:name=".mediacodec.OpenGLPlayerActivity"/>
         <activity android:name=".mediacodec.MultiOpenGLPlayerActivity"/>
+        <activity android:name=".activity.PicMatrix"/>
     </application>
 
 </manifest>
