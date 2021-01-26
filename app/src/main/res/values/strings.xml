@@ -32,4 +32,16 @@
         <item>临沂大学</item>
         <item>聊城大学</item>
     </string-array>
+
+    <string name="newcomer_countdown">距离过期还剩%s</string>
+    <string name="html"><string name="from_html_text">
+<![CDATA[
+<h1>Hello World</h1>
+Here is an
+[R.drawable.ic_delete]<i>octopus</i>.<br>
+And here is a
+<a href="http://d.android.com">link</a>.
+]]>
+</string></string>
+
 </resources>

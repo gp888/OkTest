@@ -78,4 +78,8 @@
     <color name="blue">#1966FF</color>
     <color name="startColor">#FA2764</color>
     <color name="endColor">#FD8350</color>
+    <color name="tvc">#999999</color>
+
+    <color name="c9374b">#FFF9374B</color>
+    <color name="c86648">#FFF86648</color>
 </resources>

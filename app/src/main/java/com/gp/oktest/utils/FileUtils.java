@@ -1,6 +1,9 @@
 package com.gp.oktest.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Environment;
 
 import com.gp.oktest.Constant;
@@ -9,6 +12,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.security.cert.CertificateException;
+import javax.security.cert.X509Certificate;
+
 
 /**
  * Created by guoping on 2017/12/19.
@@ -79,6 +88,29 @@ public class FileUtils {
             filePath = context.getFilesDir().getPath() ;
         }
         return filePath ;
+    }
+
+    /**
+     * 签名校验
+     * @param context
+     * @return
+     */
+    private byte[] getCertificateSHA1Fingerprint(Context context) {
+        PackageManager pm = context.getPackageManager();
+        String packageName = context.getPackageName();
+
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+            Signature[] signatures = packageInfo.signatures;
+            byte[] cert = signatures[0].toByteArray();
+            X509Certificate x509 = X509Certificate.getInstance(cert);
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            return md.digest(x509.getEncoded());
+        } catch (PackageManager.NameNotFoundException | CertificateException |
+                NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

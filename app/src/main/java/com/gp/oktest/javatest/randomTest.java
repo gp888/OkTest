@@ -27,5 +27,14 @@ public class randomTest {
             c[i] = (char) (c[i] ^ b.charAt(i));
         }
         System.out.println(c);
+
+
+        System.out.println("========");
+        float d = Float.parseFloat("225232.0148");
+        System.out.println(d + "");
+        float e = Float.parseFloat("2000.02163241");
+        System.out.println(e + "");
+        float f = Float.parseFloat("9.90");
+        System.out.println(f + "");
     }
 }

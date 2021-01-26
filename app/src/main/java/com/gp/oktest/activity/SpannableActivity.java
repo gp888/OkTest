@@ -1,25 +1,50 @@
 package com.gp.oktest.activity;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Html;
 import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.CharacterStyle;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.LineBackgroundSpan;
+import android.text.style.UpdateAppearance;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gp.oktest.BuildConfig;
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
+import com.gp.oktest.utils.DeviceUtils;
+import com.gp.oktest.utils.RadiusBackgroundSpan;
 import com.gp.oktest.utils.SpanUtils;
 import com.gp.oktest.utils.ToastUtil;
+import com.gp.oktest.view.IconTextSpan;
+import com.gp.oktest.view.LinearGradientFontSpan;
 
 import java.util.ArrayList;
 
@@ -30,6 +55,15 @@ public class SpannableActivity extends BaseActivity {
 
     @BindView(R.id.spannableText)
     TextView spannText;
+
+    @BindView(R.id.tvHtml)
+    TextView tvHtml;
+
+    @BindView(R.id.test)
+    TextView spanTest;
+
+    @BindView(R.id.test1)
+    TextView spanTest1;
 
     int lineHeight = 40;
 
@@ -118,6 +152,67 @@ public class SpannableActivity extends BaseActivity {
                 .appendLine()
                 .append("测试空格").appendSpace(30, Color.LTGRAY).appendSpace(50, Color.GREEN).appendSpace(100).appendSpace(30, Color.LTGRAY).appendSpace(50, Color.GREEN)
                 .create());
+
+
+        String html = getString(R.string.html);
+        /*让链接可点击*/
+        tvHtml.setMovementMethod(LinkMovementMethod.getInstance());
+        /*ResouroceImageGetter用来处理TextView中的图片*/
+        tvHtml.setText(Html.fromHtml(html, new ResouroceImageGetter(this), null));
+
+
+
+
+        spanTest.setTextColor(getResources().getColor(R.color.blue));
+        IconTextSpan iconTextSpan = new IconTextSpan(this, R.color.rainbow_blue, "计酸");
+        SpannableString spanna = new SpannableString("啊啊哈哈哈诶诶");
+        spanna.setSpan(iconTextSpan, 3, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spanTest.setText(spanna);
+
+
+        LinearGradientFontSpan span0 = new LinearGradientFontSpan(Color.GRAY, Color.LTGRAY);
+        SpannableString spannableString = new SpannableString("啊啊哈哈哈诶诶");
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#F9374B")), 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(span0 , 2 , 5 , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.WHITE) , 2 , 5 , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#F86648")), 5, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanTest.setText(spannableString);
+
+
+
+        RadiusBackgroundSpan span1 = new RadiusBackgroundSpan(Color.RED, Color.GREEN, DeviceUtils.dip2px(2));
+        RadiusBackgroundSpan span2 = new RadiusBackgroundSpan(Color.parseColor("#F9374B"), Color.parseColor("#F86648"), DeviceUtils.dip2px(2));
+        String str = String.format(getString(R.string.newcomer_countdown), "6天07:44:30");
+        int start = str.indexOf("天");
+        int start1 = str.indexOf(":");
+        int start2 = str.lastIndexOf(":");
+        SpannableStringBuilder builder = new SpannableStringBuilder(str);
+        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.tvc)), 0, start - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(span0, start - 1, start + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), start1, start1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setSpan(span1, start1 + 1, start1 + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), start2, start2 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setSpan(span2, start2+ 1, start2 + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), start2 + 1, start2 + 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanTest1.setText(builder);
+    }
+
+    private static class ResouroceImageGetter implements Html.ImageGetter {
+        Context context;
+        public ResouroceImageGetter(Context context) {
+            this.context = context;
+        }
+
+        public Drawable getDrawable(String source) {
+            int path = context.getResources().getIdentifier(source, "drawable", BuildConfig.APPLICATION_ID);
+            Drawable drawable = context.getResources().getDrawable(path);
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            return drawable;
+        }
     }
 
     private void testRemove() {
@@ -130,4 +225,54 @@ public class SpannableActivity extends BaseActivity {
             }
         }
     }
+
+    private static class MySpan implements LineBackgroundSpan {
+        private final int color;
+
+        public MySpan(int color) {
+            this.color = color;
+        }
+
+        @Override
+        public void drawBackground(Canvas c, Paint p, int left, int right, int top, int baseline, int bottom, CharSequence text, int start, int end, int lnum) {
+            final int paintColor = p.getColor();
+            p.setColor(color);
+            c.drawRect(new Rect(left, top, right, bottom), p);
+            p.setColor(paintColor);
+        }
+    }
+
+//    @ColorInt
+    class MyChractor extends CharacterStyle {
+
+        @Override
+        public void updateDrawState(TextPaint tp) {
+//            tp.bgColor
+//            tp.setShader()
+        }
+    }
+
+
+
+    private void startAnimation(TextView textView) {
+        Drawable[] drawables = textView.getCompoundDrawables();
+        for (Drawable drawable : drawables) {
+            if (drawable != null && drawable instanceof Animatable) {
+                ((Animatable) drawable).start();
+            }
+        }
+    }
+
+    public static float GetTextWidth(String text, float Size) { // 第一个参数是要计算的字符串，第二个参数是字体大小
+        TextPaint FontPaint = new TextPaint();
+        FontPaint.setTextSize(Size);
+        return FontPaint.measureText(text);
+    }
+
+    public static Rect getTextRect(Paint paint, String str) {
+        Rect rect = new Rect();
+        paint.getTextBounds(str, 0, str.length() - 1, rect);
+        return rect;
+    }
+
 }

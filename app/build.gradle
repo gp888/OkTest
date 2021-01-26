@@ -40,6 +40,13 @@ android {
             shrinkResources false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //so库release校验签名
+            ndk {
+                // release包定义RELEASE_MODE=1宏，so库中会使用
+                cFlags "-DRELEASE_MODE=1"
+            }
+
         }
     }
 
