@@ -18,7 +18,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.text.format.DateUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -104,6 +106,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.flowlayout)
     FlowLayout flowLayout;
 
+    @BindView(R.id.tv)
+    TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +146,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
         exeCommand("ps");//ps, ps | grep com.gp.oktest
+
+
+
+
+        tv.setText(Html.fromHtml("<a href='treasure9aefcdebb262d0952e92bc615d2d70e3://treasure.com'>CLICK THIS NODATA</a>"));
+        //激活链接
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 

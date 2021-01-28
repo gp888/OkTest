@@ -42,6 +42,7 @@
             <!--android:id="@+id/tv_studentName"-->
             <!--android:text="@{studentInfo.name}" />-->
         <TextView
+            android:id="@+id/tv"
             android:onClick="@{action}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
