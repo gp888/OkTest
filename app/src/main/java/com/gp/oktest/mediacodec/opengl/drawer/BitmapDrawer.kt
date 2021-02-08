@@ -1,4 +1,4 @@
-package com.cxp.learningvideo.opengl.drawer
+package com.gp.oktest.mediacodec.opengl.drawer
 
 import android.graphics.Bitmap
 import android.opengl.GLES20

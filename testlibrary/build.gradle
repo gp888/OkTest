@@ -12,6 +12,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        //主module在构建release，则给IS_RELEASE赋值为true
+        buildConfigField("boolean", "IS_RELEASE", "false")
+        gradle.startParameter.getTaskNames().each {task ->
+            if(task.contains("Release")){
+                buildConfigField("boolean", "IS_RELEASE", "true")
+            }
+        }
     }
 
     buildTypes {

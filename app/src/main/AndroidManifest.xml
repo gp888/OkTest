@@ -184,6 +184,7 @@
         <activity android:name=".mediacodec.OpenGLPlayerActivity"/>
         <activity android:name=".mediacodec.MultiOpenGLPlayerActivity"/>
         <activity android:name=".activity.PicMatrix"/>
+        <activity android:name=".mediacodec.EGLPlayerActivity"/>
     </application>
 
 </manifest>

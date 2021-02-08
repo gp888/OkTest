@@ -1,8 +1,6 @@
 package com.gp.oktest.mediacodec
 
 import android.media.MediaFormat
-import com.cxp.learningvideo.media.IDecoderProgress
-import com.cxp.learningvideo.media.IDecoderStateListener
 
 /**
  * 解码器定义

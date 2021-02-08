@@ -1,7 +1,4 @@
-package com.cxp.learningvideo.media
-
-import com.gp.oktest.mediacodec.BaseDecoder
-
+package com.gp.oktest.mediacodec
 
 /**
  * 解码状态回调接口

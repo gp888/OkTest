@@ -1,7 +1,7 @@
 package com.gp.oktest.mediacodec.extractor
 
 import android.media.MediaFormat
-import com.cxp.learningvideo.media.IExtractor
+import com.gp.oktest.mediacodec.IExtractor
 import java.nio.ByteBuffer
 
 class AudioExtractor(path: String): IExtractor {

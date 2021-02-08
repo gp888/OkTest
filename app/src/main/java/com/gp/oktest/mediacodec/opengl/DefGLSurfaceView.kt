@@ -1,11 +1,11 @@
-package com.cxp.learningvideo.opengl
+package com.gp.oktest.mediacodec
 
 import android.content.Context
 import android.graphics.PointF
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.view.MotionEvent
-import com.cxp.learningvideo.opengl.drawer.VideoDrawer
+import com.gp.oktest.mediacodec.opengl.drawer.VideoDrawer
 
 
 /**

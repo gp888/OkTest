@@ -1,4 +1,4 @@
-package com.cxp.learningvideo.media
+package com.gp.oktest.mediacodec
 
 import android.media.MediaCodec
 import java.nio.ByteBuffer

@@ -1,8 +1,8 @@
-package com.cxp.learningvideo.media.decoder
+package com.gp.oktest.mediacodec.decoder
 
 import android.media.*
-import com.cxp.learningvideo.media.IExtractor
 import com.gp.oktest.mediacodec.BaseDecoder
+import com.gp.oktest.mediacodec.IExtractor
 import com.gp.oktest.mediacodec.extractor.AudioExtractor
 import java.nio.ByteBuffer
 

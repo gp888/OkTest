@@ -1,4 +1,4 @@
-package com.cxp.learningvideo.opengl
+package com.gp.oktest.mediacodec.opengl.egl
 
 import android.opengl.GLES20
 

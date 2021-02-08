@@ -3,11 +3,10 @@ package com.gp.oktest.mediacodec
 import androidx.appcompat.app.AppCompatActivity
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import com.cxp.learningvideo.opengl.SimpleRender
-import com.cxp.learningvideo.opengl.drawer.BitmapDrawer
-import com.cxp.learningvideo.opengl.drawer.IDrawer
-import com.cxp.learningvideo.opengl.drawer.TriangleDrawer
 import com.gp.oktest.R
+import com.gp.oktest.mediacodec.opengl.drawer.BitmapDrawer
+import com.gp.oktest.mediacodec.opengl.drawer.IDrawer
+import com.gp.oktest.mediacodec.opengl.drawer.TriangleDrawer
 import kotlinx.android.synthetic.main.activity_simple_render.*
 
 

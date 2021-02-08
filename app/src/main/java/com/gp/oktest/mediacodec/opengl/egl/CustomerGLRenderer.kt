@@ -1,12 +1,12 @@
-package com.cxp.learningvideo.opengl.egl
+package com.gp.oktest.mediacodec.opengl.egl
 
 import android.opengl.GLES20
 import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
-import com.cxp.learningvideo.opengl.OpenGLTools
-import com.cxp.learningvideo.opengl.drawer.IDrawer
+import com.cxp.learningvideo.opengl.egl.EGLSurfaceHolder
+import com.gp.oktest.mediacodec.opengl.drawer.IDrawer
 import java.lang.ref.WeakReference
 
 
@@ -15,6 +15,25 @@ import java.lang.ref.WeakReference
  *
  * 包含EGL的初始化，线程与OpenGL上下文绑定，渲染循环，资源销毁等
  *
+ * 一个自定义的渲染线程RenderThread
+    一个SurfaceView的弱引用
+    一个绘制器列表
+    初始化时，启动渲染线程。然后就是将SurfaceView生命周期转发给渲染线程
+
+【1】在进入while(true)之前，initEGL使用EGLSurfaceHolder来初始化EGL。
+
+需要注意的是，initEGL只会调用一次，也就是说EGL只初始化一次，无论后面surface销毁和重建多少次。
+【2】有了可用的surface后，进入FRESH_SURFACE，调用EGLSurfaceHolder的createEGLSurface和makeCurrent来绑定线程、上下文和窗口。
+
+【3】根据surface窗口宽高，设置OpenGL窗口的宽高，然后自动进入RENDERING状态。这部分对应GLSurfaceView.Renderer中回调onSurfaceChanged方法。
+
+【4】进入循环渲染render，这里每隔20ms渲染一次画面。对应GLSurfaceView.Renderer中回调onDrawFrame方法。
+
+【5】如果surface被销毁（比如，进入后台），调用EGLSurfaceHolder的destroyEGLSurface销毁和解绑窗口。
+
+注：当页面重新回到前台时，会重新创建surface，这时只要重新创建EGLSurface，并绑定上下文和EGLSurface，就可以继续渲染画面，无需开启新的渲染线程。
+【6】SurfaceView被销毁（比如，页面finish），这时已经无需再渲染了，需要释放所有的EGL资源，并退出线程。
+
  * @author Chen Xiaoping (562818444@qq.com)
  * @since LearningVideo
  * @version LearningVideo
@@ -155,30 +174,36 @@ class CustomerGLRenderer : SurfaceHolder.Callback {
         }
 
         override fun run() {
+            // 【1】初始化EGL
             initEGL()
             while (true) {
                 when (mState) {
                     RenderState.FRESH_SURFACE -> {
+                        //【2】使用surface初始化EGLSurface，并绑定上下文
                         createEGLSurfaceFirst()
                         holdOn()
                     }
                     RenderState.SURFACE_CHANGE -> {
                         createEGLSurfaceFirst()
+                        //【3】初始化OpenGL世界坐标系宽高
                         GLES20.glViewport(0, 0, mWidth, mHeight)
                         configWordSize()
                         mState = RenderState.RENDERING
                     }
                     RenderState.RENDERING -> {
+                        //【4】进入循环渲染
                         render()
                         if (mRenderMode == RenderMode.RENDER_WHEN_DIRTY) {
                             holdOn()
                         }
                     }
                     RenderState.SURFACE_DESTROY -> {
+                        //【5】销毁EGLSurface，并解绑上下文
                         destroyEGLSurface()
                         mState = RenderState.NO_SURFACE
                     }
                     RenderState.STOP -> {
+                        //【6】释放所有资源
                         releaseEGL()
                         return
                     }

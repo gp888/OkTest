@@ -3,9 +3,9 @@ package com.gp.oktest.mediacodec
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.cxp.learningvideo.media.decoder.AudioDecoder
-import com.cxp.learningvideo.media.decoder.VideoDecoder
 import com.gp.oktest.R
+import com.gp.oktest.mediacodec.decoder.AudioDecoder
+import com.gp.oktest.mediacodec.decoder.VideoDecoder
 import com.gp.oktest.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_simple_player.*
 import java.io.File

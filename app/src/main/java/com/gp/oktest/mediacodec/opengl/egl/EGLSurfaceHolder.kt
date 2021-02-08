@@ -2,6 +2,7 @@ package com.cxp.learningvideo.opengl.egl
 
 import android.opengl.EGLContext
 import android.opengl.EGLSurface
+import com.gp.oktest.mediacodec.opengl.egl.EGLCore
 
 
 /**

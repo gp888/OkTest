@@ -1,9 +1,12 @@
 package com.gp.oktest.utils;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.ComponentCallbacks;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -13,10 +16,16 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -27,7 +36,11 @@ import com.gp.testlibrary.FileProvider7Util;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by guoping on 2017/12/19.
@@ -137,7 +150,6 @@ public class DeviceUtils {
      * 将dip或dp值转换为px值，保证尺寸大小不变
      *
      * @param dipValue
-     * @param scale
      *            （DisplayMetrics类中属性density）
      * @return
      */
@@ -200,5 +212,269 @@ public class DeviceUtils {
         options.inDensity = options.outWidth;
         options.inTargetDensity = width;
         return BitmapFactory.decodeResource(res, R.drawable.brighton, options);
+    }
+
+
+    /**
+     * 设备识别
+     * android 29(10)以下 deviceId mac
+     * @param context
+     * @return
+     */
+    public static String getDeviceInfo(Context context) {
+        try {
+            org.json.JSONObject json = new org.json.JSONObject();
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String device_id = null;
+            if (checkPermission(context, Manifest.permission.READ_PHONE_STATE)) {
+                device_id = tm.getDeviceId();
+            }
+            String mac = getMac(context);
+
+            json.put("mac", mac);
+            if (TextUtils.isEmpty(device_id)) {
+                device_id = mac;
+            }
+            if (TextUtils.isEmpty(device_id)) {
+                device_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            }
+            json.put("device_id", device_id);
+            return json.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getMac(Context context) {
+        String mac = "";
+        if (context == null) {
+            return mac;
+        }
+        if (Build.VERSION.SDK_INT < 23) {
+            mac = getMacBySystemInterface(context);
+        } else {
+            mac = getMacByJavaAPI();
+            if (TextUtils.isEmpty(mac)) {
+                mac = getMacBySystemInterface(context);
+            }
+        }
+        return mac;
+    }
+
+    @TargetApi(9)
+    private static String getMacByJavaAPI() {
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface netInterface = interfaces.nextElement();
+                if ("wlan0".equals(netInterface.getName()) || "eth0".equals(netInterface.getName())) {
+                    byte[] addr = netInterface.getHardwareAddress();
+                    if (addr == null || addr.length == 0) {
+                        return null;
+                    }
+                    StringBuilder buf = new StringBuilder();
+                    for (byte b : addr) {
+                        buf.append(String.format("%02X:", b));
+                    }
+                    if (buf.length() > 0) {
+                        buf.deleteCharAt(buf.length() - 1);
+                    }
+                    return buf.toString().toLowerCase(Locale.getDefault());
+                }
+            }
+        } catch (Throwable e) {
+        }
+        return null;
+    }
+
+    private static String getMacBySystemInterface(Context context) {
+        if (context == null) {
+            return "";
+        }
+        try {
+            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            if (checkPermission(context, Manifest.permission.ACCESS_WIFI_STATE)) {
+                WifiInfo info = wifi.getConnectionInfo();
+                return info.getMacAddress();
+            } else {
+                return "";
+            }
+        } catch (Throwable e) {
+            return "";
+        }
+    }
+
+    public static boolean checkPermission(Context context, String permission) {
+        boolean result = false;
+        if (context == null) {
+            return result;
+        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            try {
+                Class clazz = Class.forName("android.content.Context");
+                Method method = clazz.getMethod("checkSelfPermission", String.class);
+                int rest = (Integer) method.invoke(context, permission);
+                if (rest == PackageManager.PERMISSION_GRANTED) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            } catch (Throwable e) {
+                result = false;
+            }
+        } else {
+            PackageManager pm = context.getPackageManager();
+            if (pm.checkPermission(permission, context.getPackageName()) == PackageManager.PERMISSION_GRANTED) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+
+//===========================================
+    public static String getDeviceIdForGeneral(Context var0) {
+        String var1 = "";
+        if (var0 == null) {
+            return var1;
+        } else {
+            try {
+                if (Build.VERSION.SDK_INT < 23) {
+                    var1 = getIMEI(var0);
+                    if (TextUtils.isEmpty(var1)) {
+
+                        var1 = getMacBySystemInterface(var0);
+                        if (TextUtils.isEmpty(var1)) {
+                            var1 = Settings.Secure.getString(var0.getContentResolver(), "android_id");
+
+
+                            if (TextUtils.isEmpty(var1)) {
+                                var1 = getSerialNo();
+                            }
+                        }
+                    }
+                } else if (Build.VERSION.SDK_INT == 23) {
+                    var1 = getIMEI(var0);
+                    if (TextUtils.isEmpty(var1)) {
+                        var1 = getMacByJavaAPI();
+                        if (TextUtils.isEmpty(var1)) {
+//                            if (AnalyticsConstants.CHECK_DEVICE) {
+//                                var1 = getMacShell();
+//                            } else {
+                                var1 = getMacBySystemInterface(var0);
+//                            }
+                        }
+
+                        if (TextUtils.isEmpty(var1)) {
+                            var1 = Settings.Secure.getString(var0.getContentResolver(), "android_id");
+
+                            if (TextUtils.isEmpty(var1)) {
+                                var1 = getSerialNo();
+                            }
+                        }
+                    }
+                } else if (Build.VERSION.SDK_INT >= 29) {
+                    var1 = getOaid(var0);
+                    if (TextUtils.isEmpty(var1)) {
+//                        var1 = getIdfa(var0);
+                        if (TextUtils.isEmpty(var1)) {
+                            var1 = getAndroidId(var0);
+                            if (TextUtils.isEmpty(var1)) {
+                                var1 = getSerialNo();
+                                if (TextUtils.isEmpty(var1)) {
+                                    var1 = getMacByJavaAPI();
+                                    if (TextUtils.isEmpty(var1)) {
+                                        var1 = getMacBySystemInterface(var0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    var1 = getIMEI(var0);
+                    if (TextUtils.isEmpty(var1)) {
+                        var1 = getSerialNo();
+                        if (TextUtils.isEmpty(var1)) {
+                            var1 = Settings.Secure.getString(var0.getContentResolver(), "android_id");
+
+                            if (TextUtils.isEmpty(var1)) {
+                                var1 = getMacByJavaAPI();
+                                if (TextUtils.isEmpty(var1)) {
+                                    var1 = getMacBySystemInterface(var0);
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Throwable var3) {
+            }
+
+            return var1;
+        }
+    }
+    private static String getIMEI(Context var0) {
+        String var1 = "";
+        if (var0 == null) {
+            return var1;
+        } else {
+            TelephonyManager var2 = (TelephonyManager)var0.getSystemService(Context.TELEPHONY_SERVICE);
+            if (var2 != null) {
+                try {
+                    if (checkPermission(var0, "android.permission.READ_PHONE_STATE")) {
+                        var1 = var2.getDeviceId();
+                    }
+                } catch (Throwable var4) {
+
+                }
+            }
+
+            return var1;
+        }
+    }
+
+    private static String getSerialNo() {
+        String var0 = "";
+        if (Build.VERSION.SDK_INT >= 9) {
+            if (Build.VERSION.SDK_INT >= 26) {
+                try {
+                    Class var1 = Class.forName("android.os.Build");
+                    Method var2 = var1.getMethod("getSerial");
+                    var0 = (String)var2.invoke(var1);
+                } catch (Throwable var3) {
+                }
+            } else {
+                var0 = Build.SERIAL;
+            }
+        }
+
+        return var0;
+    }
+
+    private static String getOaid(Context var0) {
+        String var1 = "";
+
+        try {
+            SharedPreferences var2 = var0.getSharedPreferences("umeng_sp_oaid", 0);
+            if (var2 != null) {
+                var1 = var2.getString("key_umeng_sp_oaid", "");
+            }
+        } catch (Throwable var3) {
+        }
+
+        return var1;
+    }
+
+    public static String getAndroidId(Context var0) {
+        String var1 = null;
+        if (var0 != null) {
+            try {
+                var1 = Settings.Secure.getString(var0.getContentResolver(), "android_id");
+            } catch (Exception var3) {
+
+            }
+        }
+
+        return var1;
     }
 }

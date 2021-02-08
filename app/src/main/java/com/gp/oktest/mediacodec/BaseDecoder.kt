@@ -3,7 +3,6 @@ package com.gp.oktest.mediacodec
 import android.media.MediaCodec
 import android.media.MediaFormat
 import android.util.Log
-import com.cxp.learningvideo.media.*
 import java.io.File
 import java.nio.ByteBuffer
 

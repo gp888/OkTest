@@ -1,4 +1,4 @@
-package com.cxp.learningvideo.opengl.egl
+package com.gp.oktest.mediacodec.opengl.egl
 
 import android.graphics.SurfaceTexture
 import android.opengl.*
@@ -75,6 +75,7 @@ class EGLCore {
      * @param version EGL版本
      */
     private fun getConfig(flags: Int, version: Int): EGLConfig? {
+        //配置版本标志
         var renderableType = EGL14.EGL_OPENGL_ES2_BIT
         if (version >= 3) {
             // 配置EGL 3
@@ -84,6 +85,9 @@ class EGLCore {
         // The actual surface is generally RGBA or RGBX, so situationally omitting alpha
         // doesn't really help.  It can also lead to a huge performance hit on glReadPixels()
         // when reading into a GL_RGBA buffer.
+        // 配置数组，主要是配置RGBA位数和深度位数
+        // 两个为一对，前面是key，后面是value
+        // 数组必须以EGL14.EGL_NONE结尾
         val attrList = intArrayOf(
             EGL14.EGL_RED_SIZE, 8,
             EGL14.EGL_GREEN_SIZE, 8,
@@ -157,6 +161,7 @@ class EGLCore {
         return eglSurface
     }
 
+    //绑定OpenGL渲染线程与绘制上下文
     /**
      * 将当前线程与上下文进行绑定
      */

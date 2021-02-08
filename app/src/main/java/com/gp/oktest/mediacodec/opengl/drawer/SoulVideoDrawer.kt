@@ -1,11 +1,11 @@
-package com.cxp.learningvideo.opengl.drawer
+package com.gp.oktest.mediacodec.opengl.drawer
 
 import android.graphics.SurfaceTexture
 import android.opengl.GLES11
 import android.opengl.GLES11Ext
 import android.opengl.GLES20
 import android.opengl.Matrix
-import com.cxp.learningvideo.opengl.OpenGLTools
+import com.gp.oktest.mediacodec.opengl.egl.OpenGLTools
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

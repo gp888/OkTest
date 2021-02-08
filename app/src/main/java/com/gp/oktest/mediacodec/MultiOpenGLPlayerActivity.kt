@@ -1,14 +1,12 @@
 package com.gp.oktest.mediacodec
 
 import android.os.Bundle
-import android.os.Environment
 import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
-import com.cxp.learningvideo.media.decoder.AudioDecoder
-import com.cxp.learningvideo.media.decoder.VideoDecoder
-import com.cxp.learningvideo.opengl.SimpleRender
-import com.cxp.learningvideo.opengl.drawer.VideoDrawer
 import com.gp.oktest.R
+import com.gp.oktest.mediacodec.decoder.AudioDecoder
+import com.gp.oktest.mediacodec.decoder.VideoDecoder
+import com.gp.oktest.mediacodec.opengl.drawer.VideoDrawer
 import kotlinx.android.synthetic.main.activity_opengl_player.*
 import java.util.concurrent.Executors
 

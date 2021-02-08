@@ -1,8 +1,9 @@
-package com.cxp.learningvideo.opengl
+package com.gp.oktest.mediacodec
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import com.cxp.learningvideo.opengl.drawer.IDrawer
+import com.gp.oktest.mediacodec.opengl.drawer.IDrawer
+import com.gp.oktest.mediacodec.opengl.egl.OpenGLTools
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 

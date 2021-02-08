@@ -91,7 +91,7 @@ public class FileUtils {
     }
 
     /**
-     * 签名校验
+     * 获取应用签名
      * @param context
      * @return
      */
@@ -112,5 +112,4 @@ public class FileUtils {
         }
         return null;
     }
-
 }

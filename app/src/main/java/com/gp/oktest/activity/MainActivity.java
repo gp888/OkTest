@@ -56,6 +56,7 @@ import com.gp.oktest.database.SqliteActivity;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.hencoder.HencoderActivity;
 import com.gp.oktest.longconnect.LongConnectActivity;
+import com.gp.oktest.mediacodec.EGLPlayerActivity;
 import com.gp.oktest.mediacodec.MultiOpenGLPlayerActivity;
 import com.gp.oktest.mediacodec.OpenGLPlayerActivity;
 import com.gp.oktest.mediacodec.SimplePlayerActivity;
@@ -480,8 +481,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //                startActivity(new Intent(this, SimplePlayerActivity.class));
 //                startActivity(new Intent(this, SimpleRenderActivity.class));
 //                startActivity(new Intent(this, OpenGLPlayerActivity.class));
-                startActivity(new Intent(this, MultiOpenGLPlayerActivity.class));
+//                startActivity(new Intent(this, MultiOpenGLPlayerActivity.class));
 //                startActivity(new Intent(this, PicMatrix.class));
+                startActivity(new Intent(this, EGLPlayerActivity.class));
                 break;
             default:
                 break;
