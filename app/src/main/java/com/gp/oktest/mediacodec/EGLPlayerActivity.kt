@@ -7,7 +7,7 @@ import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
 import com.gp.oktest.R
 import com.gp.oktest.mediacodec.decoder.AudioDecoder
-import com.gp.oktest.mediacodec.decoder.DefDecoderStateListener
+import com.gp.oktest.mediacodec.decoder.DefDecodeStateListener
 import com.gp.oktest.mediacodec.decoder.VideoDecoder
 import com.gp.oktest.mediacodec.opengl.drawer.VideoDrawer
 import com.gp.oktest.mediacodec.opengl.egl.CustomerGLRenderer
@@ -67,7 +67,7 @@ class EGLPlayerActivity: AppCompatActivity() {
         val videoDecoder = VideoDecoder(path, null, sf)
         threadPool.execute(videoDecoder)
         videoDecoder.goOn()
-        videoDecoder.setStateListener(object : DefDecoderStateListener {
+        videoDecoder.setStateListener(object : DefDecodeStateListener {
             override fun decodeOneFrame(decodeJob: BaseDecoder?, frame: Frame) {
                 mRenderer.notifySwap(frame.bufferInfo.presentationTimeUs)
             }

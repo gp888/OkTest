@@ -61,6 +61,8 @@ import com.gp.oktest.mediacodec.MultiOpenGLPlayerActivity;
 import com.gp.oktest.mediacodec.OpenGLPlayerActivity;
 import com.gp.oktest.mediacodec.SimplePlayerActivity;
 import com.gp.oktest.mediacodec.SimpleRenderActivity;
+import com.gp.oktest.mediacodec.SoulPlayerActivity;
+import com.gp.oktest.mediacodec.SynthesizerActivity;
 import com.gp.oktest.minivideo.MiniVideoActivity;
 import com.gp.oktest.model.TypeBean;
 import com.gp.oktest.mp4player.Mp4PlayActivity;
@@ -483,7 +485,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //                startActivity(new Intent(this, OpenGLPlayerActivity.class));
 //                startActivity(new Intent(this, MultiOpenGLPlayerActivity.class));
 //                startActivity(new Intent(this, PicMatrix.class));
-                startActivity(new Intent(this, EGLPlayerActivity.class));
+//                startActivity(new Intent(this, EGLPlayerActivity.class));
+//                startActivity(new Intent(this, SoulPlayerActivity.class));
+                startActivity(new Intent(this, SynthesizerActivity.class));
                 break;
             default:
                 break;

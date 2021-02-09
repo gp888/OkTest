@@ -14,8 +14,10 @@ import java.nio.ByteBuffer
  *
  */
 class Frame {
+    //未编码数据
     var buffer: ByteBuffer? = null
 
+    //未编码数据信息
     var bufferInfo = MediaCodec.BufferInfo()
     private set
 

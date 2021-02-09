@@ -254,13 +254,15 @@ class SoulVideoDrawer : IDrawer {
     }
 
     private fun updateFBO() {
+        // 创建FBO纹理
         if (mSoulTextureId == -1) {
-            // 创建FBO纹理
             mSoulTextureId = OpenGLTools.createFBOTexture(mVideoWidth, mVideoHeight)
         }
+        // 【2，创建FBO】
         if (mSoulFrameBuffer == -1) {
             mSoulFrameBuffer = OpenGLTools.createFrameBuffer()
         }
+        // 【3，渲染到FBO】
         if (System.currentTimeMillis() - mModifyTime > 500) {
             mModifyTime = System.currentTimeMillis()
             // 绑定FBO

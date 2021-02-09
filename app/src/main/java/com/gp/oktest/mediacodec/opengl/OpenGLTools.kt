@@ -21,15 +21,20 @@ object OpenGLTools {
     }
 
     fun createFBOTexture(width: Int, height: Int): Int {
+        // 新建纹理ID
         val textures = IntArray(1)
         GLES20.glGenTextures(1, textures, 0)
+        // 绑定纹理ID
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0])
+        // 根据颜色参数，宽高等信息，为上面的纹理ID，生成一个2D纹理
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height,
             0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null)
+        // 设置纹理边缘参数
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST.toFloat())
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR.toFloat())
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE.toFloat())
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE.toFloat())
+        // 解绑纹理ID
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,0)
         return textures[0]
     }

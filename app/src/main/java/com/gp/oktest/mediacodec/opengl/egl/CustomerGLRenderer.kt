@@ -68,16 +68,19 @@ class CustomerGLRenderer : SurfaceHolder.Callback {
         })
     }
 
+    //设置Surface接口
     fun setSurface(surface: Surface, width: Int, height: Int) {
         mSurface = surface
         mThread.onSurfaceCreate()
         mThread.onSurfaceChange(width, height)
     }
 
+    //设置渲染模式
     fun setRenderMode(mode: RenderMode) {
         mThread.setRenderMode(mode)
     }
 
+//    通知更新画面
     fun notifySwap(timeUs: Long) {
         mThread.notifySwap(timeUs)
     }
@@ -298,7 +301,9 @@ class CustomerGLRenderer : SurfaceHolder.Callback {
     }
 
     enum class RenderMode {
+        // 自动循环渲染
         RENDER_CONTINUOUSLY,
+        // 由外部通过notifySwap通知渲染
         RENDER_WHEN_DIRTY
     }
 }

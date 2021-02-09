@@ -14,7 +14,7 @@ import com.gp.oktest.mediacodec.IDecoderStateListener
  * @Datetime 2020-05-28 20:18
  *
  */
-interface DefDecoderStateListener: IDecoderStateListener {
+interface DefDecodeStateListener: IDecoderStateListener {
     override fun decoderPrepare(decodeJob: BaseDecoder?) {}
 
     override fun decoderReady(decodeJob: BaseDecoder?) {}
