@@ -31,10 +31,22 @@
         android:layout_height="match_parent"
         tools:context="com.gp.oktest.activity.MainActivity">
 
+        <TextView
+            android:id="@+id/hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/flowlayout"
+            android:layout_marginTop="@dimen/dimens_8"
+            android:text="2020-2-19 AM"/>
+
         <com.gp.oktest.view.FlowLayout
             android:id="@+id/flowlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/hello" />
 
         <!--<TextView-->
             <!--android:layout_width="wrap_content"-->
@@ -42,7 +54,7 @@
             <!--android:id="@+id/tv_studentName"-->
             <!--android:text="@{studentInfo.name}" />-->
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/action"
             android:onClick="@{action}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

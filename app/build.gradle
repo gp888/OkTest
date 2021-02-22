@@ -12,9 +12,34 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-            abiFilters "armeabi-v7a","armeabi","x86"
+            abiFilters "armeabi-v7a"//,"armeabi","x86"
         }
         multiDexEnabled true
+
+        // 1) CMake 编译配置
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+    }
+
+    // 2) 配置 CMakeLists 路径
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libavcodec.so'
+        pickFirst 'lib/armeabi-v7a/libavdevice.so'
+        pickFirst 'lib/armeabi-v7a/libavfilter.so'
+        pickFirst 'lib/armeabi-v7a/libavformat.so'
+        pickFirst 'lib/armeabi-v7a/libavutil.so'
+        pickFirst 'lib/armeabi-v7a/libswresample.so'
+        pickFirst 'lib/armeabi-v7a/libswscale.so'
     }
 
     viewBinding {
@@ -150,4 +175,5 @@ dependencies {
     //zip
     implementation 'net.lingala.zip4j:zip4j:2.6.2'
 
+    implementation 'com.blankj:utilcodex:1.30.5'
 }

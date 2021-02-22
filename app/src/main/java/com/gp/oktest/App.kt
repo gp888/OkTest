@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.multidex.MultiDexApplication
+import com.blankj.utilcode.util.CrashUtils
 import com.facebook.stetho.Stetho
 import com.gp.oktest.networklistener.NetChangeObserver
 import com.gp.oktest.networklistener.NetStateReceiver
@@ -56,6 +57,7 @@ class App : MultiDexApplication() {
                 Log.d(TAG, "当前程序切换到后台")
             }
         })
+        CrashUtils.init()
     }
 
     //权限判断

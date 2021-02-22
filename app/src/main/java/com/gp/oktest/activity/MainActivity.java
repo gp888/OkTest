@@ -35,6 +35,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
@@ -109,8 +111,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.flowlayout)
     FlowLayout flowLayout;
 
-    @BindView(R.id.tv)
-    TextView tv;
+    @BindView(R.id.action)
+    TextView action;
+    @BindView(R.id.hello)
+    TextView hello;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,10 +157,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
 
-        tv.setText(Html.fromHtml("<a href='treasure9aefcdebb262d0952e92bc615d2d70e3://treasure.com'>CLICK THIS NODATA</a>"));
+        action.setText(Html.fromHtml("<a href='treasure9aefcdebb262d0952e92bc615d2d70e3://treasure.com'>CLICK THIS NODATA</a>"));
         //激活链接
-        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        action.setMovementMethod(LinkMovementMethod.getInstance());
 
+        action.setTextColor(getColor(R.color.blue));
+        action.setText(ffmpegInfo());
+
+        String am = TimeUtils.isAm() ? "上午好" : "下午好";
+        hello.setText(TimeUtils.getNowDate() + "， " + am);
+        BarUtils.isStatusBarLightMode(this);
+        BarUtils.setStatusBarLightMode(this, true);
     }
 
     /**
@@ -556,5 +567,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
     }
+
+    static {
+        System.loadLibrary("native-lib");
+    }
+
+    native String ffmpegInfo();
 
 }
