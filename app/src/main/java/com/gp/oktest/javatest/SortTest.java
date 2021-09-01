@@ -1,5 +1,6 @@
 package com.gp.oktest.javatest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,6 +48,10 @@ public class SortTest {
             }
         });
         System.out.println("给狗狗按名字字母顺序排序：" + list);
+
+
+        Double d = 0.0001d;
+        System.out.println(BigDecimal.valueOf(d).toPlainString());
     }
 
 

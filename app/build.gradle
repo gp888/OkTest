@@ -19,7 +19,8 @@ android {
         // 1) CMake 编译配置
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                //RTTI（Run-Time Type Identification)，运行时类型识别;对C++异常处理的支持
+                cppFlags "-std=c++11 -frtti -fexceptions"
             }
         }
     }
@@ -44,6 +45,10 @@ android {
 
     viewBinding {
         enabled = true
+    }
+
+    dataBinding {
+        enabled true
     }
 
     signingConfigs {
@@ -84,11 +89,6 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
-    }
-
-    //启用 DataBinding
-    dataBinding {
-        enabled = true
     }
 }
 
@@ -176,4 +176,5 @@ dependencies {
     implementation 'net.lingala.zip4j:zip4j:2.6.2'
 
     implementation 'com.blankj:utilcodex:1.30.5'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

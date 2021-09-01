@@ -10,3 +10,6 @@ keytool -v -list -keystore  rainy.jks路径
 
 生成keystore
 keytool -genkey -keystore test.keystore  -alias test -keyalg RSA -validity 10000
+
+keytool -genkey -alias StudyInUK -keypass 987654 -keyalg RSA -keysize 2048 -validity 36500 -keystore /Users/kaichi/AndroidStudioProjects/StudyInUK/app/student1.jks -storepass 987654
+keytool -importkeystore -srckeystore H:\hobby\bm_pm\bm.jks -destkeystore H:\hobby\bm_pm\bm.jks -deststoretype pkcs12

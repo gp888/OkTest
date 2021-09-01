@@ -3,9 +3,7 @@ package com.gp.oktest.jetpack
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.*
 
 //自定义 LifecycleOwner 的场景
 class AppLifecycleOwner : LifecycleOwner {

@@ -13,6 +13,8 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.multidex.MultiDexApplication
 import com.blankj.utilcode.util.CrashUtils
 import com.facebook.stetho.Stetho
+import com.gp.oktest.activity.MainActivity
+import com.gp.oktest.crash.CaocConfig
 import com.gp.oktest.networklistener.NetChangeObserver
 import com.gp.oktest.networklistener.NetStateReceiver
 import com.gp.oktest.networklistener.NetworkType
@@ -57,7 +59,10 @@ class App : MultiDexApplication() {
                 Log.d(TAG, "当前程序切换到后台")
             }
         })
+        //crash 日志写入
         CrashUtils.init()
+        //crash 日志捕捉
+        initCrash();
     }
 
     //权限判断
@@ -208,5 +213,20 @@ class App : MultiDexApplication() {
             }
 
         })
+    }
+
+    private fun initCrash() {
+        CaocConfig.Builder.create()
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //背景模式,开启沉浸式
+                .enabled(true) //是否启动全局异常捕获
+                .showErrorDetails(true) //是否显示错误详细信息
+                .showRestartButton(true) //是否显示重启按钮
+                .trackActivities(true) //是否跟踪Activity
+                .minTimeBetweenCrashesMs(2000) //崩溃的间隔时间(毫秒)
+                .errorDrawable(R.mipmap.ic_launcher) //错误图标
+                .restartActivity(MainActivity::class.java) //重新启动后的activity
+                //                .errorActivity(YourCustomErrorActivity.class) //崩溃后的错误activity
+                //                .eventListener(new YourCustomEventListener()) //崩溃后的错误监听
+                .apply()
     }
 }

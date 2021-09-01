@@ -79,4 +79,10 @@
     <dimen name="timeline_item_offset_left">100dp</dimen>
     <dimen name="timeline_item_node_radius">10dp</dimen>
 
+
+    <dimen name="customactivityoncrash_activity_horizontal_margin">16dp</dimen>
+    <dimen name="customactivityoncrash_activity_vertical_margin">16dp</dimen>
+
+    <dimen name="customactivityoncrash_error_activity_error_details_text_size">12sp</dimen>
+
 </resources>

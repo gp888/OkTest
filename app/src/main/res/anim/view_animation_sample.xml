@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="true"
+    android:fillAfter="true">
+
+<!--    <translate-->
+<!--        android:fromXDelta="float"-->
+<!--        android:toXDelta="float"-->
+<!--        android:fromYDelta="float"-->
+<!--        android:toYDelta="float"/>-->
+<!--    <scale-->
+<!--        android:fromXScale="float"-->
+<!--        android:toXScale="float"-->
+<!--        android:fromYScale="float"-->
+<!--        android:toYScale="float"-->
+<!--        android:pivotX="float"-->
+<!--        android:pivotY="float"/>-->
+<!--    <rotate-->
+<!--        android:fromDegrees="float"-->
+<!--        android:toDegrees="float"-->
+<!--        android:pivotY="float"-->
+<!--        android:pivotX="float"/>-->
+<!--    <alpha-->
+<!--        android:fromAlpha="float"-->
+<!--        android:toAlpha="float"/>-->
+
+</set>
+
+<!--    A.set:表示动画集合，对应AnimationSet类-->
+
+<!--    interpolator:表示动画集合所采用的插值器，影响动画的速度。可以不指定，默认是accelerate_decelerate_interpolate(加速减速插值器)。下文会详细介绍插值器的相关知识。-->
+<!--    shareInterpolator:表示集合中的动画是否和集合共享一个插值器。如果集合不指定插值器, 那么子动画就需要单独制定所需的插值器或者使用默认值。-->
+<!--    fillAfter：表示动画结束时是否保持动画结束时的状态-->
+<!--    B.translate：表示平移动画，对应TranslateAnimation类-->
+
+<!--    android:fromXDelta：动画起始时X坐标上的位置。-->
+<!--    android:toXDelta：动画结束时X坐标上的位置。-->
+<!--    android:fromYDelta：动画起始时Y坐标上的位置。-->
+<!--    android:toYDelta：动画结束时Y坐标上的位置。-->
+<!--    注意：以上四个属性以及后面几个类似属性的取值可能是数值、百分数、百分数p，各自含义是：-->
+
+<!--    50：以View左上角为原点沿坐标轴正方向偏移50px。-->
+<!--    50%：以View左上角为原点沿坐标轴正方向偏移View宽/高度的50%。-->
+<!--    50%p：以View左上角为原点沿坐标轴正方向偏移父（parent）控件宽/高度的50%。区别如图：-->
+
+<!--    C.scale：表示缩放动画，对应ScaleAnimation类-->
+
+<!--    fromXScale：动画起始时X坐标上的伸缩尺寸-->
+<!--    toXScale：动画结束时X坐标上的伸缩尺寸-->
+<!--    fromYScale：动画起始时Y坐标上的伸缩尺寸-->
+<!--    toYScale：属性为动画结束时Y坐标上的伸缩尺寸-->
+<!--    以上四个属性值的值含义：-->
+
+<!--    值=0.0 ：表示收缩到没有-->
+
+<!--    值＜1.0 ：表示收缩-->
+
+<!--    值=1.0 ：表示无伸缩-->
+
+<!--    值＞1.0 ：表示放大-->
+
+<!--    pivotX：动画相对于物件的X坐标的开始位置-->
+<!--    pivotY：动画相对于物件的Y坐标的开始位置-->
+<!--    以上两个属性值表示缩放的轴点：从0%-100%中取值。-->
+
+<!--    D.rotate：表示旋转动画，对应RotateAnimation类。-->
+
+<!--    fromDegrees：动画起始时物件的角度 (0度指X轴正方向所在方向)-->
+<!--    toDegrees：动画结束时物件旋转的角度-->
+<!--    以上两个属性共同确定旋转方向，原则是：当角度(to-from)为负数时表示逆时针旋转，反之。-->
+
+<!--    pivotY：动画旋转的轴点的X坐标-->
+<!--    pivotX：动画旋转的轴点的Y坐标-->
+
+<!--    E.alpha：表示透明度动画，对应AlphaAnimation类-->
+
+<!--    fromAlpha：动画起始时透明度-->
+<!--    toAlpha：动画结束时透明度-->
+<!--    以上两个属性值：从0-1中取值。注意：-->
+
+<!--    值=0.0 ：表示完全透明-->
+<!--    值=1.0 ：表示完全不透明-->
+
+<!--    共有属性 animation_value.png-->
+
+<!--    Animation animation = AnimationUtils.loadAnimation(this, R.anim.XXX);-->
+<!--    mView.startAnimation(animation);-->
+
+<!--    可通过Animation的setAnimationListener(new AnimationListener(){...})给动画添加过程监听，这样在动画开始、结束和每一次循环时都可在回调方法中监听到。接口代码如下：-->
+
+<!--    public static interface AnimationListener {-->
+<!--    //动画开始-->
+<!--    void onAnimationStart(Animator animation);-->
+<!--    //动画结束-->
+<!--    void onAnimationEnd(Animator animation);-->
+<!--    //动画重复-->
+<!--    void onAnimationRepeat(Animator animation);-->
+<!--    }-->
+
+
+<!--    通过Java代码动态创建-->
+
+<!--    具体步骤：-->
+<!--    创建TranslateAnimation、RotateAnimation、ScaleAnimation或AlphaAnimation对象。-->
+<!--    设置创建的动画对象的属性，如动画执行时间、延迟时间、起始位置、结束位置等-->
+<!--    通过View.startAnimation()方法开启动画-->
+<!--    可通过Animation.setAnimationListener()设置动画的监听器-->
+
+
+<!--    A1:平移：-->
+
+<!--    //法一：xml定义-->
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--    <translate xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:duration="2000"-->
+<!--    android:fromXDelta="0"-->
+<!--    android:fromYDelta="0"-->
+<!--    android:toXDelta="100%"-->
+<!--    android:toYDelta="100%">-->
+<!--    </translate>-->
+
+<!--    //在MainActivity中调用-->
+<!--    Animation translateAnim = AnimationUtils.loadAnimation(this, R.anim.view_anim_translate);-->
+<!--    mImageView.startAnimation(translateAnim);-->
+
+
+<!--    java代码创建 RELATIVE_TO_SELF表示相对自身View-->
+<!--    TranslateAnimation translateAnimation = new TranslateAnimation(-->
+<!--    Animation.RELATIVE_TO_SELF, 0,-->
+<!--    Animation.RELATIVE_TO_SELF, 1,-->
+<!--    Animation.RELATIVE_TO_SELF, 0,-->
+<!--    Animation.RELATIVE_TO_SELF, 1);-->
+<!--    translateAnimation.setDuration(2000);-->
+<!--    mImageView.startAnimation(translateAnimation);-->
+<!--    }-->
+
+<!--    A2:缩放：-->
+
+<!--    //法一：xml定义-->
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--    <scale xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:duration="2000"-->
+<!--    android:fromXScale="1.0"-->
+<!--    android:fromYScale="1.0"-->
+<!--    android:pivotX="50%"-->
+<!--    android:pivotY="50%"-->
+<!--    android:toXScale="0.5"-->
+<!--    android:toYScale="0.5">-->
+<!--    </scale>-->
+
+<!--    //在MainActivity中调用-->
+<!--    Animation scaleAnim = AnimationUtils.loadAnimation(this, R.anim.view_anim_scale);-->
+<!--    mImage.startAnimation(scaleAnim);-->
+<!--    复制代码-->
+<!--    //法二：java代码创建-->
+<!--    ScaleAnimation scaleAnimation = new ScaleAnimation(-->
+<!--    1, 0.5f,-->
+<!--    1, 0.5f,-->
+<!--    Animation.RELATIVE_TO_SELF, 0.5f,-->
+<!--    Animation.RELATIVE_TO_SELF, 0.5f);-->
+<!--    scaleAnimation.setDuration(2000);-->
+<!--    mImageView.startAnimation(scaleAnimation);-->
+
+
+<!--    A3: 旋转：-->
+
+<!--    //法一：xml定义-->
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--    <rotate xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:duration="2000"-->
+<!--    android:fillAfter="true"-->
+<!--    android:fromDegrees="0"-->
+<!--    android:toDegrees="360"-->
+<!--    android:pivotX="50%"-->
+<!--    android:pivotY="50%">-->
+<!--    </rotate>-->
+
+<!--    //在MainActivity中调用-->
+<!--    Animation rotateAnim = AnimationUtils.loadAnimation(this, R.anim.view_anim_rotate);-->
+<!--    mImageView.startAnimation(rotateAnim);-->
+<!--    复制代码-->
+<!--    //法二：java代码创建-->
+<!--    RotateAnimation rotateAnimation = new RotateAnimation(-->
+<!--    0, 360,-->
+<!--    Animation.RELATIVE_TO_SELF, 0.5f,-->
+<!--    Animation.RELATIVE_TO_SELF, 0.5f);-->
+<!--    rotateAnimation.setDuration(2000);-->
+<!--    mImageView.startAnimation(rotateAnimation);-->
+<!--    复制代码-->
+
+<!--    A4:透明度：-->
+
+<!--    //法一：xml定义-->
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--    <alpha xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:duration="2000"-->
+<!--    android:fromAlpha="1.0"-->
+<!--    android:toAlpha="0">-->
+<!--    </alpha>-->
+
+<!--    //在MainActivity中调用-->
+<!--    Animation alphaAnim = AnimationUtils.loadAnimation(this, R.anim.view_anim_alpha);-->
+<!--    mImageView.startAnimation(alphaAnim);-->
+<!--    复制代码-->
+<!--    //法二：java代码创建-->
+<!--    AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);-->
+<!--    alphaAnimation.setDuration(2000);-->
+<!--    mImageView.startAnimation(alphaAnimation);-->
+
+
+
+
+
+<!--    自定义补间动画-->
+<!--    1.继承Animation-->
+
+<!--    2.重写initialize()-&ndash;&gt;用于初始化-->
+
+<!--    3.重写applyTransformation()-&ndash;&gt;用于进行矩阵变换-->
+
+<!--    经常需要借助Camera来简化矩阵变换-->
+
+
+<!--    特殊使用场景-->
+<!--    View动画除了可作用在某个View对象上， 还可以用在特殊的场景，例如：-->
+
+<!--    控制ViewGroup的子View 的出场效果-->
+
+<!--    Activity的切换效果-->
+
+<!--    子View出场动画-->
+
+<!--    常用场景：ListView、GridView、RecyclerView-->
+<!--    对应类：LayoutAnimation-->
+<!--    该XML文件创建在res/anim/ 下-->
+<!--    根节点layoutAnimation，常用属性：-->
+<!--    layoutAnimation-->
+<!--    |- delay="float"-->
+<!--    |- animationOrder="[normal|reverse | random]"-->
+<!--    |- animation="[@anim/res_id]"-->
+<!--    复制代码-->
+<!--    ①delay：表示子元素开始动画的延迟时间。-->
+
+<!--    比如，子元素入场动画的时间周期是300ms，那么该属性值=0.5就表示每个子元素都需要延迟150ms才能播放入场动画。-->
+
+<!--    ②animationOrder ：表示子元素动画的播放顺序。可选模式：normal （正常顺序）、random（随机顺序）、reverse（倒序）。-->
+
+<!--    ③animation ：为子元素指定具体的入场动画。-->
+
+<!--    创建方法:-->
+<!--    法一：xml定义，分两步-->
+
+<!--    step1：定义layoutAnimation动画-->
+
+<!--    // res/anim/anim_layout.xml-->
+<!--    <layoutAnimation-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:animation="@anim/anim_item"-->
+<!--    android:delay="0.5"-->
+<!--    android:animationOrder="normal">-->
+<!--    </layoutAnimation>-->
+
+<!--        // res/anim/anim_item.xml    效果：子项从右边进入-->
+<!--    <set-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:duration="500"-->
+<!--    android:shareInterpolator="true"-->
+<!--    android:interpolator="@android:anim/accelerate_interpolator">-->
+<!--    <alpha-->
+<!--        android:fromAlpha="0"-->
+<!--        android:toAlpha="1" />-->
+<!--    <translate-->
+<!--        android:fromXDelta="100%"-->
+<!--        android:toXDelta="0"-->
+<!--        />-->
+<!--    </set>-->
+
+<!--    step2：为ViewGroup设置android:layoutAnimation属性， 这里假设为Listview：-->
+
+
+<!--    //activity_main.xml-->
+<!--    <ListView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:layoutAnimation="@anim/anim_layout"-->
+<!--    android:divider="#f1f1f1"-->
+<!--    android:dividerHeight="1dp"-->
+<!--    android:listSelector="?android:attr/selectableItemBackground"/>-->
+
+
+<!--    法二：java代码创建，通过LayoutAnimation类绑定-->
+
+
+
+<!--    // res/anim/anim_item.xml-->
+<!--    <set-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:duration="500"-->
+<!--    android:shareInterpolator="true"-->
+<!--    android:interpolator="@android:anim/accelerate_interpolator">-->
+<!--    <alpha-->
+<!--        android:fromAlpha="0"-->
+<!--        android:toAlpha="1" />-->
+<!--    <translate-->
+<!--        android:fromXDelta="100%"-->
+<!--        android:toXDelta="0"-->
+<!--        />-->
+<!--    </set>-->
+
+<!--    复制代码-->
+<!--    //main.java-->
+<!--    //和上述xml定义方法的效果相同-->
+<!--    Animation animation = AnimationUtils.loadLayoutAnimation(this, R.anim.anim_item);-->
+<!--    LayoutAnimationController controller = new LayoutAnimationController(animation);//对应android:animation属性-->
+<!--    controller.setDelay(0.5);//对应android:delay属性-->
+<!--    controller.setOrder(LayoutAnimationController.ORDER_NORMAL); //对应android:animationOrder属性-->
+<!--    listView.setLayoutAnimation(controller);//对应android:layoutAnimation属性-->
+
+
+<!--    A2:Activity的切换效果-->
+
+<!--    该xml文件创建在res/anim/ 下-->
+<!--    Activity默认是有切换效果的，若需要自定义切换效果，需要用到overridePendingTransition(int inAnim, int outAnim)方法-->
+<!--    参数含义：（进入的Activity所需进行的动画id，退出的Activity所需进行的动画id）-->
+<!--    该方法调用在startActivity()或finish()之后才生效。例如：-->
+<!--    startActivity(intent);-->
+<!--    overridePendingTransition(R.anim.enter_anim, R.anim.exit_anim);-->
+
+
+<!--    :帧动画的创建-->
+
+<!--    A1:通过xml定义：-->
+
+<!--    该xml文件创建在res/drawable/ 下。-->
+<!--    根节点animation-list，属性android:oneshot表示是否执行一次；子节点item 下可设置轮播的图片资源id和持续时间。例如：-->
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--    <animation-list  xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:oneshot="false">-->
+<!--    <item android:drawable="@drawable/xxx1" android:duration="500"/>-->
+<!--    <item android:drawable="@drawable/xxx2" android:duration="500"/>-->
+<!--    <item android:drawable="@drawable/xxx3" android:duration="500"/>-->
+<!--    <item android:drawable="@drawable/xxx4" android:duration="500"/>-->
+<!--    </animation-list>-->
+<!--    复制代码-->
+<!--    在XML声明好之后，将它作为View的背景并通过AnimationDrawable来播放即可。代码如下：-->
+
+<!--    mView.setBackgroundResource(R.drawable.XXX);-->
+<!--    AnimationDrawable animationDrawable = (AnimationDrawable)mView.getBackground();-->
+<!--    animationDrawable.start();-->
+<!--    复制代码-->
+<!--    A2：通过Java代码动态创建-->
+
+<!--    //和上述xml定义方法的效果相同-->
+<!--    AnimationDrawable ad = new AnimationDrawable();//1.创建AnimationDrawable对象-->
+<!--    for (int i = 0; i < 4; i++) {//2.添加Drawable对象及其持续时间-->
+<!--    Drawable drawable = getResources().getDrawable(getResources().getIdentifier("xxx" + i, "drawable", getPackageName()));-->
+<!--    ad.addFrame(drawable, 500);-->
+<!--    }-->
+<!--    ad.setOneShot(false);//3.设置是否执行一次-->
+<!--    mView.setBackgroundResource(ad);//4.将帧动画作为view背景-->
+<!--    ad.start();//5.播放动画-->
+<!--    复制代码-->
+<!--    注意：使用帧动画要注意不能使用尺寸过大的图片，否则容易造成OOM( 内存溢出)错误-->
+
+
+<!--    2.2 属性动画-->
+<!--    2.2.1 插值器和估值器-->
+<!--    用途：属性动画中的插值器和估值器可以实现非匀速动画-->
+
+<!--    1 插值器(Interpolator)-->
+<!--    作用：根据时间流逝的百分比计算出当前属性值改变的百分比。确定了动画效果变化的模式，如匀速变化、加速变化、减速变化等等。-->
+
+<!--    常用的系统内置插值器：-->
+
+<!--    a.线性插值器(LinearInterpolator)：匀速动画-->
+
+<!--    b.加速减速插值器(AccelerateDecelerateInterpolator)：动画两头慢中间快-->
+
+<!--    c.减速插值器(DecelerateInterpolator)：动画越来越慢-->
+
+<!--    可针对的对象:-->
+
+<!--    a.View动画：插值器对应的属性是android:interpolator-->
+
+<!--    b.属性动画：是实现非匀速动画的重要手段。-->
+
+<!--    自定义插值器方法：实现 Interpolator / TimeInterpolator接口 ，然后复写getInterpolation()-->
+
+<!--    补间动画实现 Interpolator接口、属性动画实现TimeInterpolator接口。-->
+<!--    TimeInterpolator接口是属性动画中新增的，用于兼容Interpolator接口。-->
+
+
+<!--    类型估值器(TypeEvaluator)-->
+<!--    作用：根据当前属性改变的百分比计算出改变后的属性值。-->
+<!--    常用的系统内置的估值器：-->
+<!--    整型估值器(IntEvaluator)-->
+<!--    浮点型估值器(FloatEvaluator)-->
+<!--    Color属性估值器(ArgbEvaluator)-->
+<!--    仅针对于属性动画，View动画不需要类型估值器。是属性动画实现非匀速动画的重要手段。-->
+<!--    自定义估值器方法：实现TypeEvaluator接口，然后复写evaluate()。-->
+
+<!--    属性动画与View动画异同-->
+<!--    View动画	属性动画-->
+<!--    实现方式	通过不断图形变换	通过动态改变对象属性-->
+<!--    作用对象	View	任何对象，甚至没有对象-->
+<!--    存放位置	anim	animator-->
+<!--    状态变化	未真正改变View位置	真正改变View位置-->
+
+
+<!--    实现方式-->
+<!--    1 通过XML-->
+<!--    在res/animator/下可创建属性动画的XML文件。其中，根节点set对应AnimatorSet类，子节点objectAnimator对应ObjectAnimator类、animator对应ValueAnimator类。常用属性：-->
+
+<!--    //animator/XX.xml-->
+<!--    <set-->
+<!--    android:ordering=["together" | "sequentially"]>-->
+
+<!--    <objectAnimator-->
+<!--    android:propertyName="string"-->
+<!--    android:duration="int"-->
+<!--    android:valueFrom="float | int | color"-->
+<!--    android:valueTo="float | int | color"-->
+<!--    android:startOffset="int"-->
+<!--    android:repeatCount="int"-->
+<!--    android:repeatMode=["repeat" | "reverse"]-->
+<!--        android:valueType=["intType" | "floatType"]/>-->
+
+<!--    <animator-->
+<!--    android:duration="int"-->
+<!--    android:valueFrom="float | int | color"-->
+<!--    android:valueTo="float | int | color"-->
+<!--    android:startOffset="int"-->
+<!--    android:repeatCount="int"-->
+<!--    android:repeatMode=["repeat" | "reverse"]-->
+<!--        android:valueType=["intType" | "floatType"]/>-->
+
+<!--    <set>-->
+<!--    ...-->
+<!--    </set>-->
+<!--        </set>-->
+
+<!--    //java-->
+<!--    AnimatorSet set= AnimatorInflater.loadAnimator(myContext,R.anim.xxx);-->
+<!--    set.setTarget(mBtn);-->
+<!--    set.start();-->
+
+
+<!--    首先介绍set标签下的常用属性：-->
+
+<!--    ordering：设置动画的时序关系。可选值：-->
+<!--    together：默认值。表示动画集合中的子动画同时播放-->
+<!--    equentially：表示动画集合中的子动画按照书写的先后顺序依次播放-->
+<!--    接下来具体介绍属性动画的实现方式：-->
+
+<!--    A.通过ObjectAnimator实现属性动画-->
+
+<!--    原理：通过直接对对象（object）的属性值进行改变操作，从而实现动画效果。-->
+<!--    对应根节点objectAnimator-->
+<!--    常用属性介绍：-->
+<!--    propertyName：属性动画作用的属性名称-->
+
+<!--    duration： 动画持续时长-->
+
+<!--    startOffset：设置动画执行之前的等待时长-->
+
+<!--    repeatCount：动画重复执行的次数；默认为0，表示只播放一次。设置为**-1或infinite**，表示无限重复。-->
+
+<!--    repeatMode：动画重复执行的模式。可选值：-->
+
+<!--    a.restart：表示连续重复，为默认值。-->
+
+<!--    b.reverse ：表示逆向重复-->
+
+<!--    valueFrom：动画初始值-->
+
+<!--    valueTo：动画结束值-->
+
+<!--    valueType：表示propertyName指定的属性值类型。可选值：-->
+
+<!--    a.intType ：以上两个value属性值为整型。-->
+
+<!--    b.floatType：即以上两个value属性值为浮点型，为默认值。-->
+
+<!--    c.color：若propertyName为color，则无需设置该属性。-->
+
+<!--    B.通过ValueAnimator实现属性动画-->
+
+<!--    原理：通过不断控制值（value）的变化，再不断手动赋给对象的属性，从而实现动画效果。-->
+<!--    ObjectAnimator与 ValueAnimator类的区别：-->
+
+<!--    ValueAnimator 类是先改变值，然后手动赋值给对象的属性从而实现动画；是间接对对象属性进行操作-->
+<!--    ObjectAnimator 类是先改变值，然后自动赋值给对象的属性从而实现动画；是直接对对象属性进行操作-->
+<!--    对应根节点animator-->
+<!--    常用属性比objectAnimator标签少一个android:propertyName属性，其他相同-->
+<!--    2 通过JAVA-->
+<!--    实际开发中建议用JAVA的方式来实现属性动画，原因：-->
+
+<!--    通过代码来实现比较简单-->
+<!--    很多时候属性的起始值无法提前确定-->
+<!--    A.ObjectAnimator-->
+
+<!--    注意：这里ObjectAnimator 作用的属性必须有set方法-->
+
+<!--    （get方法可选；当动画没有设置初始值的时候，get必须存在）-->
+
+<!--    方法：-->
+<!--    //第一个参数是对象，第二个是对象的属性名字，第3个是值的变化，可以是ofFloat或者是ofInt，根据参数的类型直接写-->
+<!--    ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(tv,"alpha",1,0,1);-->
+<!--    //设置持续时间-->
+<!--    objectAnimator.setDuration(2000);-->
+<!--    objectAnimator.start();-->
+
+<!--    .ValueAnimator-->
+
+<!--    ValueAnimator不提供任何动画效果，更像一个数值发生器，用来产生有一定规律的数字，从而让调用者控制动画的实现过程。-->
+<!--    一般在AnimatorUpdateListener/AnimatorListenerAdapter(在下文会详细介绍)中监听数值的变化，而完成动画的变换-->
+<!--    测试实例:-->
+
+<!--    //实现颜色的渐变-->
+<!--    ValueAnimator valueAnimator = ValueAnimator.ofArgb(0xFFFF5454, 0xFF5DDE5D, 0xFF5DBEDE);-->
+<!--    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {-->
+<!--    @Override-->
+<!--    public void onAnimationUpdate(ValueAnimator animation) {-->
+<!--    int color = (int) animation.getAnimatedValue();-->
+<!--    button.setBackgroundColor(color);-->
+<!--    }-->
+<!--    });-->
+<!--    valueAnimator.setDuration(2000);-->
+<!--    //记得start-->
+<!--    valueAnimator.start();-->
+<!--    复制代码-->
+<!--    C.组合动画-->
+
+<!--    C1.AnimatorSet-->
+
+<!--    可以实现有先后顺序的组合动画-->
+
+<!--    重点方法：-->
+<!--    play：传入一个 Animator 对象 ，会返回一个AnimatorSet.Builder的实例-->
+
+<!--    Builder中有4个方法：-->
+
+<!--    a.after(Animator)：将现有动画插入到传入的动画之后执行-->
+
+<!--    b.before(Animator)：将现有动画插入到传入的动画之前执行-->
+
+<!--    c.with(Animator)：将现有动画和传入的动画同时执行。-->
+
+<!--    d.after(Long)：将现有动画延迟指定毫秒后执行。-->
+
+
+<!--    ObjectAnimator alphaAnimator =ObjectAnimator.ofFloat(tv, "alpha", 1, 0, 1);-->
+<!--    ObjectAnimator rotateAnimator =ObjectAnimator.ofFloat(tv, "rotation", 0, 360, 0);-->
+<!--    rotateAnimator.setDuration(15000);-->
+<!--    ObjectAnimator scaleAnimator =ObjectAnimator.ofFloat(tv, "scaleX", 1, 2, 1);-->
+<!--    ObjectAnimator translateAnimator =ObjectAnimator.ofFloat(tv, "translationX", 0, 100, 0);-->
+
+<!--    AnimatorSet animatorSet = new AnimatorSet();-->
+<!--    animatorSet.play(alphaAnimator)-->
+<!--    .with(rotateAnimator)-->
+<!--    .after(scaleAnimator)-->
+<!--    .before(translateAnimator);-->
+<!--    animatorSet.setDuration(2000).start();-->
+
+
+<!--    PropertyValuesHolder-->
+
+<!--    可以实现同时执行的组合动画-->
+
+<!--    实例使用：-->
+<!--    //新建动画类-->
+<!--    PropertyValuesHolder valuesHolder1=PropertyValuesHolder.ofFloat("scaleX",1.0f,1.5f);-->
+<!--    PropertyValuesHolder valuesHolder2=PropertyValuesHolder.ofFloat("rotationX",0f,90.0f);-->
+<!--    //新建ObjectAnimator-->
+<!--    ObjectAnimator animator=ObjectAnimator.ofPropertyValuesHolder(view,valuesHolder1,valuesHolder2);-->
+<!--    //开启动画-->
+<!--    animator.setDuration(200).start();-->
+<!--    复制代码-->
+<!--    2.2.4 监听器-->
+<!--    属性动画主要使用两个接口：AnimatorUpdateListener&AnimatorListener来监听动画的播放过程。-->
+
+<!--    AnimatorListener：监听动画的开始、结束、取消以及重复播放。如下：-->
+<!--    public static interface AnimatorListener {-->
+<!--    void onAnimationStart(Animator animation); //动画开始-->
+<!--    void onAnimationEnd(Animator animation); //动画结束-->
+<!--    void onAnimationCancel(Animator animation); //动画取消-->
+<!--    void onAnimationRepeat(Animator animation); //动画重复播放-->
+<!--    }-->
+<!--    复制代码-->
+<!--    为方便开发，系统提供了AnimatorListenerAdapter类，它是AnimatorListener的适配器，如此可有选择复写上述四个方法。-->
+
+<!--    AnimatorUpdateListener:监听整个动画过程。每播放一帧,onAnimationUpdate()就会被调用一次，如下：-->
+<!--    public interface AnimatorUpdateListener {-->
+<!--    void onAnimationUpdate(ValueAnimator var1);//在属性动画的属性值变化是回调。-->
+<!--    }-->
+<!--    复制代码-->
+<!--    2.2.5 对任意属性做动画-->
+<!--    需满足的条件：-->
+<!--    对象必须提供set方法，若未传递初始值给动画，还需提供get方法（因为系统需要去取初始值）-->
+<!--    set方法对属性所做的改变必须能通过某种方式反映出来（例如：UI效果改变）-->
+<!--    解决方法：-->
+
+<!--    A.给对象加上get和set方法-->
+
+<!--    这个方法一般不可行，因为大多数的时候，我们没有权限-->
+
+<!--    ​ B.用包装类的方式，间接提供get和set方法-->
+
+<!--    实例：-->
+
+<!--    class MyView{-->
+<!--    private View mTarget;-->
+<!--    private MyView (View view){-->
+<!--    mTarget =view;-->
+<!--    }-->
+
+<!--    //属性的get方法-->
+<!--    public int getWidth(){-->
+<!--    return mTarget.getLayoutParams().width;-->
+<!--    }-->
+
+<!--    //属性的set方法-->
+<!--    public void setWidth(int width){-->
+<!--    mTarget.getLayoutParams().width=width;-->
+<!--    mTarget.requestLayout();-->
+<!--    }-->
+<!--    }-->
+<!--    复制代码-->
+<!--    MyView myView = new MyView(mButton);-->
+<!--    ObjectAnimator.ofInt(myView, "width", 500).setDuration(500).start();-->
+<!--    复制代码-->
+<!--    C.用ValueAnimator监听动画过程，自己改变属性-->
+
+<!--    测试实例：-->
+
+<!--    /**-->
+<!--    * 改变对象的宽度-->
+<!--    * @param target 对象-->
+<!--    * @param start 起始值-->
+<!--    * @param end 目标值-->
+<!--    */-->
+<!--    private void performAnimate(final View target, final int start, final int end) {-->
+<!--    ValueAnimator valueAnimator = ValueAnimator.ofInt(1, 100);-->
+<!--    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {-->
+<!--    @Override-->
+<!--    public void onAnimationUpdate(ValueAnimator animation) {-->
+<!--    //持有一个IntEvaluator对象，方便下面估值的时候使用-->
+<!--    IntEvaluator evaluator = new IntEvaluator();-->
+<!--    //得到当前动画的进度值-->
+<!--    float fraction = animation.getAnimatedFraction();-->
+<!--    //调用整型估值器，通过比例计算出宽度，然后设给Btn-->
+<!--    target.getLayoutParams().width = evaluator.evaluate(fraction, start, end);-->
+<!--    target.requestLayout();-->
+<!--    }-->
+<!--    });-->
+<!--    valueAnimator.setDuration(5000).start();-->
+<!--    }-->
+
+
+<!--    工作原理-->
+<!--    总体思路：在一定时间间隔内，通过不断对值进行改变，并不断将该值赋给对象的属性，从而实现该对象在该属性上的动画效果。-->
+<!--    具体体现在 ：-->
+
+<!--    创建属性动画时，若未设初值，则系统会通过该属性的get()方法获取初始值。故属性动画要求必须提供属性的get()方法-->
+<!--    在动画播放的过程中，利用时间插值器和类型估值器获取改变后的属性值-->
+<!--    将改变后的属性值通过set()方法设置到对象中。故属性动画要求必须提供属性的set()方法-->
+<!--    具体流程：-->
+<!--    get/set方法是通过反射调用的，笔者将带你深入属性动画的源码，探究其原因：-->
+
+
+<!--    内存泄漏-->
+<!--    属性动画中有一类无限循环的动画（repeatCount=-1），这类动画需要在Activity退出时及时停止，否则导致Activity无法释放造成内存泄漏-->
+<!--    View动画不存在这个问题-->
+<!--    View动画的问题-->
+<!--    View动画是对View的影像做动画，不是真正改变View的状态，有时候出现动画完成后View无法隐藏的现象（setVisibility(View.GONE)失效），需要调用view.clearAnimation()清除View动画-->
+
+<!--    不要使用px-->
+<!--    在进行动画的过程中，尽量使用dp，使用px会导致在不同的设备上有不同的效果-->
+
+<!--    Android4.0开始默认开启硬件加速-->

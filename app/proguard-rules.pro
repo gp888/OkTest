@@ -28,7 +28,7 @@
 #-keep class io.flutter.plugins.**  { *; }
 
 
-//huawei 扫一扫
+# huawei 扫一扫
 -ignorewarnings
 -keepattributes *Annotation*
 -keepattributes Exceptions

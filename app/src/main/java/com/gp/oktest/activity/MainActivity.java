@@ -572,6 +572,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         System.loadLibrary("native-lib");
     }
 
-    native String ffmpegInfo();
+    public native String ffmpegInfo();
+    public native void set(String str);
 
 }
