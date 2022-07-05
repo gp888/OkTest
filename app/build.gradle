@@ -17,21 +17,21 @@ android {
         multiDexEnabled true
 
         // 1) CMake 编译配置
-        externalNativeBuild {
-            cmake {
-                //RTTI（Run-Time Type Identification)，运行时类型识别;对C++异常处理的支持
-                cppFlags "-std=c++11 -frtti -fexceptions"
-            }
-        }
+//        externalNativeBuild {
+//            cmake {
+//                //RTTI（Run-Time Type Identification)，运行时类型识别;对C++异常处理的支持
+//                cppFlags "-std=c++11 -frtti -fexceptions"
+//            }
+//        }
     }
 
     // 2) 配置 CMakeLists 路径
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
-        }
-    }
+//    externalNativeBuild {
+//        cmake {
+//            path "src/main/cpp/CMakeLists.txt"
+//            version "3.10.2"
+//        }
+//    }
 
     packagingOptions {
         pickFirst 'lib/armeabi-v7a/libavcodec.so'
