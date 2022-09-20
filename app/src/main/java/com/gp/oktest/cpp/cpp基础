@@ -1,0 +1,185 @@
+
+#include <iostream>
+using namespace std;
+
+
+
+//冒泡排序函数
+void bubbleSort(int * arr, int len)  //int * arr 也可以写为int arr[]
+{
+    for (int i = 0; i < len - 1; i++)
+    {
+        for (int j = 0; j < len - 1 - i; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+//打印数组函数
+void printArray(int arr[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        cout << arr[i] << endl;
+    }
+}
+
+
+
+
+int main1(int argc, const char * argv[]) {
+
+//    int a = 10;
+//        int * p;
+//        p = &a; //指针指向数据a的地址
+//
+//        cout << *p << endl; //* 解引用
+//        cout << sizeof(p) << endl;
+//        cout << sizeof(char *) << endl;
+//        cout << sizeof(float *) << endl;
+//        cout << sizeof(double *) << endl;
+
+
+
+
+//    //指针变量p指向内存地址编号为0的空间
+//        int * p = NULL;
+//
+//        //访问空指针报错
+//        //内存编号0 ~255为系统占用内存，不允许用户访问
+//        cout << *p << endl;
+
+
+//    //指针变量p指向内存地址编号为0x1100的空间
+//        int * p = (int *)0x1100;
+//
+//        //访问野指针报错
+//        cout << *p << endl;
+
+
+
+//    int a = 10;
+//        int b = 20;
+//
+//        //const修饰的是指针，指针指向可以改，指针指向的值不可以更改
+//        const int * p1 = &a;
+//        p1 = &b; //正确
+////        *p1 = 10;  报错
+//
+//
+//        //const修饰的是常量，指针指向不可以改，指针指向的值可以更改
+//        int * const p2 = &a;
+//        //p2 = &b; //错误
+//        *p2 = 100; //正确
+//
+//        //const既修饰指针又修饰常量
+//        const int * const p3 = &a;
+//        //p3 = &b; //错误
+//        //*p3 = 100; //错误
+
+
+
+
+
+//    int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//
+//        int * p = arr;  //指向数组的指针
+//
+//        cout << "第一个元素： " << arr[0] << endl;
+//        cout << "指针访问第一个元素： " << *p << endl;
+//
+//        for (int i = 0; i < 10; i++)
+//        {
+//            //利用指针遍历数组
+//            cout << *p << endl;
+//            p++;
+//        }
+
+
+
+    int arr[10] = { 4,3,6,9,1,2,10,8,7,5 };
+        int len = sizeof(arr) / sizeof(int);
+
+        bubbleSort(arr, len);
+
+        printArray(arr, len);
+
+
+
+
+        system("pause");
+
+        return 0;
+}
+
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+//全局变量
+int g_a = 10;
+int g_b = 10;
+
+//全局常量
+const int c_g_a = 10;
+const int c_g_b = 10;
+
+int main() {
+
+    //局部变量 栈区
+    int a = 10;
+    int b = 10;
+
+    //打印地址
+    cout << "局部变量a地址为： " << (long int)&a << endl;
+    cout << "局部变量b地址为： " << (long int)&b << endl;
+
+    //局部常量 栈区
+    const int c_l_a = 10;
+    const int c_l_b = 10;
+    cout << "局部常量c_l_a地址为： " << (long int)&c_l_a << endl;
+    cout << "局部常量c_l_b地址为： " << (long int)&c_l_b << endl;
+
+
+
+
+    //全局区
+    cout << "全局变量g_a地址为： " <<  (long int)&g_a << endl;
+    cout << "全局变量g_b地址为： " <<  (long int)&g_b << endl;
+
+    //静态变量 全局区
+    static int s_a = 10;
+    static int s_b = 10;
+
+    cout << "静态变量s_a地址为： " << (long int)&s_a << endl;
+    cout << "静态变量s_b地址为： " << (long int)&s_b << endl;
+
+
+
+
+
+    //常量区
+    cout << "字符串常量地址为： " << (long int)&"hello world" << endl;
+    cout << "字符串常量地址为： " << (long int)&"hello world1" << endl;
+
+    //常量区
+    cout << "全局常量c_g_a地址为： " << (long int)&c_g_a << endl;
+    cout << "全局常量c_g_b地址为： " << (long int)&c_g_b << endl;
+
+
+    system("pause");
+
+    return 0;
+}
