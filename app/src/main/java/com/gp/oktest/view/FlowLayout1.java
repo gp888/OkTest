@@ -76,7 +76,7 @@ public class FlowLayout1 extends ViewGroup {
         //wrap_content
         setMeasuredDimension(modeWidth == MeasureSpec.EXACTLY ? sizeWidth : width,
                 modeHeight == MeasureSpec.EXACTLY ? sizeHeight : height);
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override

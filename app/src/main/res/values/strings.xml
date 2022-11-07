@@ -54,4 +54,6 @@ And here is a
     <string name="customactivityoncrash_error_activity_error_details_copied">复制日志</string>
     <string name="customactivityoncrash_error_activity_error_details_clipboard_label">错误信息</string>
 
+
+    <string name="data_count">数据量（%1$d）</string>
 </resources>

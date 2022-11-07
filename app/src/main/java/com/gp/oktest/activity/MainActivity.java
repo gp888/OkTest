@@ -162,7 +162,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         action.setMovementMethod(LinkMovementMethod.getInstance());
 
         action.setTextColor(getColor(R.color.blue));
-        action.setText(ffmpegInfo());
+//        action.setText(ffmpegInfo());
 
         String am = TimeUtils.isAm() ? "上午好" : "下午好";
         hello.setText(TimeUtils.getNowDate() + "， " + am);
@@ -498,7 +498,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //                startActivity(new Intent(this, PicMatrix.class));
 //                startActivity(new Intent(this, EGLPlayerActivity.class));
 //                startActivity(new Intent(this, SoulPlayerActivity.class));
-                startActivity(new Intent(this, SynthesizerActivity.class));
+//                startActivity(new Intent(this, SynthesizerActivity.class));
+                startActivity(new Intent(this, BarActivity.class));
                 break;
             default:
                 break;
