@@ -1,0 +1,105 @@
+/**
+     * @author lixinjie
+     * @since 2019-05-07
+     */
+    public class BioServer {
+
+        static AtomicInteger counter = new AtomicInteger(0);
+        static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+        public static void main(String[] args) {
+            try {
+                ServerSocket ss = new ServerSocket();
+                ss.bind(new InetSocketAddress("localhost", 8080));
+                while (true) {
+                    Socket s = ss.accept();
+                    processWithNewThread(s);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static void processWithNewThread(Socket s) {
+            Runnable run = () -> {
+                InetSocketAddress rsa = (InetSocketAddress)s.getRemoteSocketAddress();
+                System.out.println(time() + "->" + rsa.getHostName() + ":" + rsa.getPort() + "->" + Thread.currentThread().getId() + ":" + counter.incrementAndGet());
+                try {
+                    String result = readBytes(s.getInputStream());
+                    System.out.println(time() + "->" + result + "->" + Thread.currentThread().getId() + ":" + counter.getAndDecrement());
+                    s.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            };
+            new Thread(run).start();
+        }
+
+        static String readBytes(InputStream is) throws Exception {
+            long start = 0;
+            int total = 0;
+            int count = 0;
+            byte[] bytes = new byte[1024];
+            //开始读数据的时间
+            long begin = System.currentTimeMillis();
+            while ((count = is.read(bytes)) > -1) {
+                if (start < 1) {
+                    //第一次读到数据的时间
+                    start = System.currentTimeMillis();
+                }
+                total += count;
+            }
+            //读完数据的时间
+            long end = System.currentTimeMillis();
+            return "wait=" + (start - begin) + "ms,read=" + (end - start) + "ms,total=" + total + "bs";
+        }
+
+        static String time() {
+            return sdf.format(new Date());
+        }
+    }
+
+
+    /**
+     * @author lixinjie
+     * @since 2019-05-07
+     */
+    public class Client {
+
+        public static void main(String[] args) {
+            try {
+                for (int i = 0; i < 20; i++) {
+                    Socket s = new Socket();
+                    s.connect(new InetSocketAddress("localhost", 8080));
+                    processWithNewThread(s, i);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        static void processWithNewThread(Socket s, int i) {
+            Runnable run = () -> {
+                try {
+                    //睡眠随机的5-10秒，模拟数据尚未就绪
+                    Thread.sleep((new Random().nextInt(6) + 5) * 1000);
+                    //写1M数据，为了拉长服务器端读数据的过程
+                    s.getOutputStream().write(prepareBytes());
+                    //睡眠1秒，让服务器端把数据读完
+                    Thread.sleep(1000);
+                    s.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            };
+            new Thread(run).start();
+        }
+
+        static byte[] prepareBytes() {
+            byte[] bytes = new byte[1024*1024*1];
+            for (int i = 0; i < bytes.length; i++) {
+                bytes[i] = 1;
+            }
+            return bytes;
+        }
+    }
