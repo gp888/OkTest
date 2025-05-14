@@ -1,5 +1,5 @@
 协程本质是线程池的Task
-![img.png](../app/src/main/res/drawable-xxhdpi/coroutine_flow.png)
+![协程启动流程](../app/pic/coroutine_flow.png)
 
 kotlin 里没有静态变量和静态方法，在kotlin中通过 @JvmStatic 注解修饰才实现。需要注意，只有在object 或者 companion object 中才能使用 @JvmStatic注解
 
@@ -74,3 +74,6 @@ B.getInstance("test")
 
 
 kotlin 的协程其实是 kotlin 线程池中的一个任务（Task）
+
+
+![kotlin协程](../app/pic/coroutineScheduler.awebp)
