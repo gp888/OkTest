@@ -55,6 +55,7 @@ import com.gp.oktest.androidmedia.H264EncodeActivity;
 import com.gp.oktest.base.BaseActivity;
 import com.gp.oktest.camera.CameraPreviewActivity;
 import com.gp.oktest.database.SqliteActivity;
+import com.gp.oktest.databinding.MainActivityBinding;
 import com.gp.oktest.handlerthread.HandlerThreadActivity;
 import com.gp.oktest.hencoder.HencoderActivity;
 import com.gp.oktest.longconnect.LongConnectActivity;
@@ -98,7 +99,7 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import static android.text.format.DateUtils.FORMAT_SHOW_TIME;
 import static android.text.format.DateUtils.FORMAT_SHOW_YEAR;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity<MainActivityBinding> implements View.OnClickListener {
 
     private static final int REQ_PERMISSION_CODE_FIND_LOCATION = 0X113;
 

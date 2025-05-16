@@ -373,3 +373,102 @@ runCatching {
 }
 
 ```
+
+
+```kotlin
+val spendTime = measureTimeMillis { 
+    // 初始化SDK或者执行一些操作
+}
+
+
+
+//超时机制
+runCatching {
+    // withTimeout 会抛出异常，需要 runCatching 包裹
+    val result = withTimeout(5000) {
+
+    }
+}
+
+val result = withTimeoutOrNull(5000) {
+
+}
+
+```
+
+普通的 Flow 数据不是共享的，每次调用 collect 都会触发新的数据流
+由于 Flow 是冷流，因此它需要消费端主动调用 collect 才能触发数据的流动， 而一旦消费端停止 collect 或者生产端结束，Flow 会自动关闭。
+除此之外， Flow 也没有数据缓存的机制，无法主动获取当前发送的数据。
+
+ShareFlow 和 StateFlow 是热流，不依赖 collect 来触发数据的流动。同时 ShareFlow 和 StateFlow 都支持数据共享的，内部也有缓存，可以获取发送的数据
+
+StateFlow 主要用于共享一个状态的数据流时。在功能上，StateFlow 可以说就是一个 LiveData
+
+
+
+StateFlow 和 LiveData 一样数据会重放数据，代码示例如下。当 stateFlow 先发送数据 1，增加一个新的监听时，数据 1 会重新发送给这个新的监听者。
+需要注意的是，相同的数据是不会重放的，因为 StateFlow 内部会对数据进行判重的处理。
+
+```kotlin
+// 创建 StateFlow 必须需要一个默认值
+val stateFlow = MutableStateFlow(0)
+
+suspend fun testStateFlow() {
+    collectStateFlow()
+    delay(100)
+    stateFlow.emit(1)
+    // 第二次 collect 也会获取到之前发送过的 1
+    collectStateFlow()
+}
+
+private fun collectStateFlow() {
+    CoroutineScope(Dispatchers.IO).launch {
+        stateFlow.collect {
+            println("collect $it")
+        }
+    }
+}
+```
+
+
+StateFlow 和 LiveData 一样数据会丢失数据。当 StateFlow 连续 emit 时，我们只会获取最新的数据 3，StateFlow 会抛弃旧的数据
+```kotlin
+suspend fun testStateFlow() {
+    CoroutineScope(Dispatchers.IO).launch {
+        stateFlow.collect {
+            delay(200) // 模拟消费数据时的耗时
+            println("collect $it")
+        }
+    }
+    stateFlow.emit(1)
+    stateFlow.emit(2)
+    stateFlow.emit(3)
+}
+```
+
+
+不同于 StateFlow 和 LiveData，默认配置下 ShareFlow 既不会重放数据，也不会丢失数据。
+如果你想要避免 LiveData 的重放数据和丢失数据的问题，可以使用默认配置下的 ShareFlow。
+
+BufferOverflow.SUSPEND：缓存溢出时挂起 emit 方法
+BufferOverflow.DROP_LATEST：缓存溢出时丢失最新的数据
+BufferOverflow.DROP_OLDEST：缓存溢出时丢失最旧的数据
+
+```kotlin
+val sharedFlow = MutableSharedFlow<Int>(
+    replay = 0, // 重放数据个数
+    onBufferOverflow = BufferOverflow.SUSPEND  // 缓存溢出策略
+)
+```
+
+SharedFlow 可以根据业务的需要对其行为进行设置。如果说你想要 SharedFlow 的行为就与 StateFlow  一样，就可以使用如下的配置，
+不过这种情况是直接建议使用 StateFlow。从这里可以看出，StateFlow 实际上只是 SharedFlow 的一个特例， SharedFlow  的功能更加的全面。
+
+```kotlin
+val shared = MutableSharedFlow(
+    replay = 1,
+    onBufferOverflow = BufferOverflow.DROP_OLDEST
+)
+shared.tryEmit(initialValue) // 设置初始值
+val state = shared.distinctUntilChanged() // 过滤掉相同的数据
+```
