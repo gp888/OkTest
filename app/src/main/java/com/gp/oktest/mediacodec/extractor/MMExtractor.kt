@@ -55,9 +55,11 @@ class MMExtractor(path: String) {
         for (i in 0 until mExtractor.trackCount) {
             val mediaFormat = mExtractor.getTrackFormat(i)
             val mime = mediaFormat.getString(MediaFormat.KEY_MIME)
-            if (mime.startsWith("audio/")) {
-                mAudioTrack = i
-                break
+            if (mime != null) {
+                if (mime.startsWith("audio/")) {
+                    mAudioTrack = i
+                    break
+                }
             }
         }
         return if (mAudioTrack >= 0) {

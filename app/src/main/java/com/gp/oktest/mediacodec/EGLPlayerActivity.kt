@@ -6,12 +6,13 @@ import android.os.Handler
 import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
 import com.gp.oktest.R
+import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivityEglPlayerBinding
 import com.gp.oktest.mediacodec.decoder.AudioDecoder
 import com.gp.oktest.mediacodec.decoder.DefDecodeStateListener
 import com.gp.oktest.mediacodec.decoder.VideoDecoder
 import com.gp.oktest.mediacodec.opengl.drawer.VideoDrawer
 import com.gp.oktest.mediacodec.opengl.egl.CustomerGLRenderer
-import kotlinx.android.synthetic.main.activity_egl_player.*
 import java.util.concurrent.Executors
 
 
@@ -24,7 +25,7 @@ import java.util.concurrent.Executors
  * @Datetime 2019-10-26 21:07
  *
  */
-class EGLPlayerActivity: AppCompatActivity() {
+class EGLPlayerActivity: BaseActivity<ActivityEglPlayerBinding>() {
     private val path = Environment.getExternalStorageDirectory().absolutePath + "/mvtest_2.mp4"
     private val path2 = Environment.getExternalStorageDirectory().absolutePath + "/mvtest.mp4"
 
@@ -34,7 +35,6 @@ class EGLPlayerActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_egl_player)
         initFirstVideo()
         initSecondVideo()
         setRenderSurface()
@@ -81,6 +81,6 @@ class EGLPlayerActivity: AppCompatActivity() {
     }
 
     private fun setRenderSurface() {
-        mRenderer.setSurface(sfv)
+        mRenderer.setSurface(binding.sfv)
     }
 }

@@ -225,7 +225,7 @@ abstract class BaseDecoder(private val mFilePath: String): IDecoder {
     private fun initCodec(): Boolean {
         try {
             val type = mExtractor!!.getFormat()!!.getString(MediaFormat.KEY_MIME)
-            mCodec = MediaCodec.createDecoderByType(type)
+            mCodec = type?.let { MediaCodec.createDecoderByType(it) }
             if (!configCodec(mCodec!!, mExtractor!!.getFormat()!!)) {
                 waitDecode()
             }

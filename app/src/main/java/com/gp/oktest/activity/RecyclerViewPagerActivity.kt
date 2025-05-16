@@ -6,22 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gp.oktest.R
 import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivityRecyclerViewpagerBinding
 import com.gp.oktest.view.BannerAdapter
 import com.gp.oktest.view.PagerChangeListener
-import kotlinx.android.synthetic.main.activity_recycler_viewpager.*
 
-class RecyclerViewPagerActivity: BaseActivity() {
+class RecyclerViewPagerActivity: BaseActivity<ActivityRecyclerViewpagerBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.activity_recycler_viewpager)
 
 
         val lm = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recycler_pager.setLayoutManager(lm)
+        binding.recyclerPager.setLayoutManager(lm)
         val imagelist = mutableListOf<String>("banner_t1", "banner_t3", "banner_t3", "banner_t4")
-        recycler_pager.setAdapter1(BannerAdapter(imagelist))
-        recycler_pager.setOnPageChangeListener(PagerChangeListener(tip_text, imagelist.size))
-        recycler_pager.startPlay()
+        binding.recyclerPager.setAdapter1(BannerAdapter(imagelist))
+        binding.recyclerPager.setOnPageChangeListener(PagerChangeListener(binding.tipText, imagelist.size))
+        binding.recyclerPager.startPlay()
     }
 }

@@ -6,6 +6,8 @@ import android.view.Surface
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.gp.oktest.R
+import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivitySynthesizerBinding
 import com.gp.oktest.mediacodec.decoder.AudioDecoder
 import com.gp.oktest.mediacodec.decoder.DefDecodeStateListener
 import com.gp.oktest.mediacodec.decoder.VideoDecoder
@@ -17,7 +19,6 @@ import com.gp.oktest.mediacodec.muxer.MMuxer
 import com.gp.oktest.mediacodec.opengl.drawer.SoulVideoDrawer
 import com.gp.oktest.mediacodec.opengl.drawer.VideoDrawer
 import com.gp.oktest.mediacodec.opengl.egl.CustomerGLRenderer
-import kotlinx.android.synthetic.main.activity_synthesizer.*
 import java.util.concurrent.Executors
 
 
@@ -29,7 +30,7 @@ import java.util.concurrent.Executors
  * @version LearningVideo
  *
  */
-class SynthesizerActivity: AppCompatActivity(), MMuxer.IMuxerStateListener {
+class SynthesizerActivity: BaseActivity<ActivitySynthesizerBinding>(), MMuxer.IMuxerStateListener {
 
     private val path = Environment.getExternalStorageDirectory().absolutePath + "/mvtest.mp4"
 
@@ -47,13 +48,12 @@ class SynthesizerActivity: AppCompatActivity(), MMuxer.IMuxerStateListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_synthesizer)
         muxer.setStateListener(this)
     }
 
     fun onStartClick(view: View) {
-        btn.text = "正在编码"
-        btn.isEnabled = false
+        binding.btn.text = "正在编码"
+        binding.btn.isEnabled = false
         initVideo()
         initAudio()
         initAudioEncoder()
@@ -131,8 +131,8 @@ class SynthesizerActivity: AppCompatActivity(), MMuxer.IMuxerStateListener {
 
     override fun onMuxerFinish() {
         runOnUiThread {
-            btn.isEnabled = true
-            btn.text = "编码完成"
+            binding.btn.isEnabled = true
+            binding.btn.text = "编码完成"
         }
 
         audioDecoder?.stop()

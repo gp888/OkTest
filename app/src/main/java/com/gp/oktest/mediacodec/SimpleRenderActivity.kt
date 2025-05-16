@@ -4,10 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.gp.oktest.R
+import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivitySimpleRenderBinding
 import com.gp.oktest.mediacodec.opengl.drawer.BitmapDrawer
 import com.gp.oktest.mediacodec.opengl.drawer.IDrawer
 import com.gp.oktest.mediacodec.opengl.drawer.TriangleDrawer
-import kotlinx.android.synthetic.main.activity_simple_render.*
 
 
 /**
@@ -19,14 +20,13 @@ import kotlinx.android.synthetic.main.activity_simple_render.*
  * @Datetime 2019-10-09 09:23
  *
  */
-class SimpleRenderActivity : AppCompatActivity() {
+class SimpleRenderActivity : BaseActivity<ActivitySimpleRenderBinding>() {
 
     //自定义opengl渲染器
     private lateinit var drawer: IDrawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_simple_render)
 
         drawer = if (intent.getIntExtra("type", 0) == 0) {
             TriangleDrawer()
@@ -37,10 +37,10 @@ class SimpleRenderActivity : AppCompatActivity() {
     }
 
     private fun initRender(drawer: IDrawer) {
-        gl_surface.setEGLContextClientVersion(2)
+        binding.glSurface.setEGLContextClientVersion(2)
         val render = SimpleRender()
         render.addDrawer(drawer)
-        gl_surface.setRenderer(render)
+        binding.glSurface.setRenderer(render)
     }
 
     override fun onDestroy() {

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.gp.oktest.R
-import kotlinx.android.synthetic.main.activity_second.*//不用findView
 import org.jetbrains.anko.*
 
 /**

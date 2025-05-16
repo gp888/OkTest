@@ -9,11 +9,11 @@ import com.bumptech.glide.Glide;
 
 public class adapters {
 
-    @BindingAdapter({"app:imageUrl", "app:placeHolder"})
-    public static void loadImageFromUri(ImageView imageView, String imageUri, Drawable placeHolder){
-        Glide.with(imageView.getContext())
-                .load(imageUri)
-                .placeholder(placeHolder)
-                .into(imageView);
-    }
+//    @BindingAdapter({"app:imageUrl", "app:placeHolder"})
+//    public static void loadImageFromUri(ImageView imageView, String imageUri, Drawable placeHolder){
+//        Glide.with(imageView.getContext())
+//                .load(imageUri)
+//                .placeholder(placeHolder)
+//                .into(imageView);
+//    }
 }

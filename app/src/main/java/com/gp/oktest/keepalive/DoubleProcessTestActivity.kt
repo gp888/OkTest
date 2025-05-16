@@ -3,8 +3,9 @@ package com.gp.oktest.keepalive
 import android.content.Intent
 import android.os.Bundle
 import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivitySurfacePreviewBinding
 
-class DoubleProcessTestActivity : BaseActivity(){
+class DoubleProcessTestActivity : BaseActivity<ActivitySurfacePreviewBinding>(){
 
 //    private ServiceConnection mServiceConnection = new ServiceConnection() {
 //        @Override

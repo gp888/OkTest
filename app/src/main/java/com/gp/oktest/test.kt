@@ -1,0 +1,32 @@
+package com.gp.oktest
+
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.runInterruptible
+
+
+class Test  {
+
+    suspend fun test() {
+        runInterruptible { // 内部会调用 interrupt 方法
+            while (true){
+                Thread.sleep(100)
+                println("do something")
+            }
+        }
+    }
+
+}
+
+fun main(): Unit = runBlocking {
+    val t = Test()
+    val job = launch(Dispatchers.IO) {
+        t.test()
+    }
+    delay(500)
+    job.cancel() // 这里只需要 cancel 就可以了
+    delay(1000)
+    println("end")
+}

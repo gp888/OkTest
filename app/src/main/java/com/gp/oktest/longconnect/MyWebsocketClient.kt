@@ -18,7 +18,9 @@ class MyWebsocketClient(serverUri : URI) : WebSocketClient(serverUri, Draft_6455
     }
 
     override fun onMessage(message: String?) {
-        Log.e("JWebSClientService", message)
+        if (message != null) {
+            Log.e("JWebSClientService", message)
+        }
     }
 
     override fun onError(ex: Exception?) {

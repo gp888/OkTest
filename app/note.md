@@ -245,3 +245,131 @@ GlobalScope.launch(parentJob) {
 
 当协程1抛出异常时，协程2和协程3都能正常打印。这里需要注意的是使用 SupervisorJob(parentJob)，而不要使用 SupervisorJob()。这是为了确保协程1和 parentJob 还是父子关系。
 如果使用了SupervisorJob()，协程1和 parentJob 就不是父子结构了，这时虽然协程1抛出异常，由于不是父子关系了就不会影响其他协程，但是同时parentJob.cancel 和 join方法也无法影响到协程1了
+
+
+
+
+
+
+let、 run、 with、 apply、 以及 also 这五个函数。它们的作用就是在对象的上下文中执行代码块。
+![let、 run、 with、 apply、 以及 also 这五个函数](../app/pic/letRunWithApplyAlso.webp)
+
+可以看到这些函数基本上都执行同样的操作，即在一个对象上执行一个代码块。不同的是这个对象在代码块中如何使用，以及整个表达式的结果是什么。
+
+
+
+
+
+linux下多线程文件操作的坑
+有一块业务之前的代码逻辑大概是： 图片下载以后会在kotlin中的协程中 对这个图片进行一系列的读写操作，但是因为业务逻辑会在 bindViewHolder 中进行处理，所以这个流程会在短时间内执行多次
+线上有用户反馈 这个业务逻辑的图片有时候会加载不出来，有时候加载处理这个图片只能展示一部分（这个最奇怪）
+
+在 linux 中，一个进程内，如果有多个线程打开了同一个文件文件，那么只要有一个线程持有的 FD 做了 close 操作，那么其他线程的文件操作 都会失败
+实际上很多 app 都有类似的问题，比如 sqlite 文件锁 失败以后就会导致 sqlite 的崩溃， 很多 app 的 sqlite 文件锁失败的原因 都是  app 在启动的时候做了文件扫描，扫描到 sqlite 文件锁的文件之后 close
+从而导致 sqlite 整个文件锁机制失效
+
+
+
+java.lang.RuntimeException: android.os.TransactionTooLargeException: data parcel size
+通常人们会认为这是比较简单的 bundle 传值导致的异常，而实际上排查下来 我们并没有出现过直接用 bundle 传递大数据的情况
+所以真相只可能是 onSaveInstanceState 这个方法执行的过程 间接的保存了 bundle 导致的问题
+
+最终的解决方案也比较简单，就是在onSaveInstanceState方法中 判断下 bundle 是否超过警戒值，超过了就 clear 不走状态保存
+```kotlin
+val bundleSize = BundleUtils.sizeAsParcel(outState)
+if (bundleSize >= MAX_BUNDLE_SIZE) {
+    // 清空数据
+    outState.clear()
+} else {
+}
+
+object BundleUtils {
+    /**
+     *
+     *  @return bundle的大小 单位是byte
+     */
+    fun sizeAsParcel(bundle: Bundle): Int {
+        val parcel = Parcel.obtain()
+        try {
+            parcel.writeBundle(bundle)
+            return parcel.dataSize()
+        } finally {
+            parcel.recycle()
+        }
+    }
+}
+
+```
+
+
+
+implementation("androidx.core:core-ktx:1.10.1")
+
+```kotlin
+// 更新View的可见性
+view.isVisible = false 
+view.isInvisible = false  
+view.isGone = false
+
+// 更新间距
+view.updatePadding(left = 0, top = 0, right = 0, bottom = 0)
+view.updateLayoutParams<LinearLayout.LayoutParams> {  
+    width = 0  
+    height = 0  
+    gravity = Gravity.CENTER_HORIZONTAL  
+}
+
+
+val spannedString = buildSpannedString {
+    bold {
+        append("这是加粗文本")
+    }
+    color(Color.RED) {
+        append("这是红色文本")
+    }
+    underline {
+        append("这是下划线文本")
+    }
+    backgroundColor(Color.YELLOW) {
+        append("这是黄色背景文本")
+    }
+    italic {
+        append("这是斜体文本")
+    }
+    scale(1.5F) {
+        append("这是放大1.5倍的文本")
+    }
+    strikeThrough {
+        append("这是删除线文本")
+    }
+    subscript {
+        append("这是下标")
+    }
+    superscript {
+        append("这是上标")
+    }
+}
+```
+
+
+在Kotlin中，在有默认参数值的方法中使用 @JvmOverloads 注解，就可以很方便地实现多个重载方法。最常使用的地方就是自定义 View
+```kotlin
+class MyView @JvmOverloads constructor(context:Context, 
+                                       attributeSet: AttributeSet? = null, 
+                                       defStyleAttr: Int = 0): View(context, attributeSet, defStyleAttr) {
+}
+
+
+```
+
+使用 runCatching 取代 java 风格的 try-catch
+```kotlin
+runCatching {
+    // 执行一段可能异常的代码
+}.onSuccess { 
+    // 执行成功
+}.onFailure {
+    // 发生异常
+}
+
+```

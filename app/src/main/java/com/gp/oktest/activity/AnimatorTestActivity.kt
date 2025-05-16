@@ -14,24 +14,23 @@ import com.gp.oktest.animator.Point
 import com.gp.oktest.animator.PointEvaluator
 import com.gp.oktest.animator.SpringInterceptor
 import com.gp.oktest.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_animatortest.*
+import com.gp.oktest.databinding.ActivityAnimatortestBinding
 
-class AnimatorTestActivity : BaseActivity(){
+class AnimatorTestActivity : BaseActivity<ActivityAnimatortestBinding>(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_animatortest)
 
-        start.setOnClickListener(View.OnClickListener {
+        binding.start.setOnClickListener(View.OnClickListener {
 
-            ObjectAnimator.ofObject(pointView, "point", PointEvaluator(), Point(500f, 600f)).apply {
+            ObjectAnimator.ofObject(binding.pointView, "point", PointEvaluator(), Point(500f, 600f)).apply {
                 duration = 2000
                 interpolator = SpringInterceptor(0.6f)
                 start()
             }
         })
 
-        btn.setOnClickListener({
+        binding.btn.setOnClickListener({
 //            showPropertyValuesHolderAnim()
             rotationAnim()
         })
@@ -55,7 +54,7 @@ class AnimatorTestActivity : BaseActivity(){
         val scaleX: PropertyValuesHolder = PropertyValuesHolder.ofFloat("scaleX", 1.0f, 0.2f, 1.0f)
         val scaleY: PropertyValuesHolder = PropertyValuesHolder.ofFloat("scaleY", 1.0f, 0.2f, 1.0f)
         val color: PropertyValuesHolder = PropertyValuesHolder.ofInt("BackgroundColor", -0x100, -0xffff01)
-        val animator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(btn, alpha, scaleX, scaleY, color, rotation)
+        val animator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(binding.btn, alpha, scaleX, scaleY, color, rotation)
         animator.interpolator = OvershootInterpolator()
         animator.setDuration(5000).start()
     }
@@ -81,7 +80,7 @@ class AnimatorTestActivity : BaseActivity(){
         val holder: PropertyValuesHolder = PropertyValuesHolder.ofKeyframe("rotation", keyframe_0, keyframe_1, keyframe_2)
 
 // 3. 创建ValueAnimator实例
-        val animator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(btn, holder)
+        val animator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(binding.btn, holder)
         animator.duration = 5000
         animator.repeatCount = ValueAnimator.INFINITE
         animator.start()

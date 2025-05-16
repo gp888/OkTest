@@ -5,12 +5,13 @@ import android.os.Environment
 import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
 import com.gp.oktest.R
+import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivityOpenglPlayerBinding
 import com.gp.oktest.mediacodec.SimpleRender
 import com.gp.oktest.mediacodec.decoder.AudioDecoder
 import com.gp.oktest.mediacodec.decoder.VideoDecoder
 import com.gp.oktest.mediacodec.opengl.drawer.IDrawer
 import com.gp.oktest.mediacodec.opengl.drawer.SoulVideoDrawer
-import kotlinx.android.synthetic.main.activity_opengl_player.*
 import java.util.concurrent.Executors
 
 
@@ -23,13 +24,12 @@ import java.util.concurrent.Executors
  * @Datetime 2019-10-26 21:07
  *
  */
-class SoulPlayerActivity: AppCompatActivity() {
+class SoulPlayerActivity: BaseActivity<ActivityOpenglPlayerBinding>() {
     val path = Environment.getExternalStorageDirectory().absolutePath + "/mvtest.mp4"
     lateinit var drawer: IDrawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_opengl_player)
         initRender()
     }
 
@@ -39,10 +39,10 @@ class SoulPlayerActivity: AppCompatActivity() {
         drawer.getSurfaceTexture {
             initPlayer(Surface(it))
         }
-        gl_surface.setEGLContextClientVersion(2)
+        binding.glSurface.setEGLContextClientVersion(2)
         val render = SimpleRender()
         render.addDrawer(drawer)
-        gl_surface.setRenderer(render)
+        binding.glSurface.setRenderer(render)
     }
 
     private fun initPlayer(sf: Surface) {

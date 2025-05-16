@@ -9,10 +9,10 @@ import android.view.SurfaceHolder
 import com.gp.oktest.R
 import com.gp.oktest.base.BaseActivity
 import com.gp.oktest.camera.CameraUtil
-import kotlinx.android.synthetic.main.activity_surface_preview.*
+import com.gp.oktest.databinding.ActivitySurfacePreviewBinding
 import java.io.IOException
 
-class SurfacePreviewActivity : BaseActivity(), SurfaceHolder.Callback {
+class SurfacePreviewActivity : BaseActivity<ActivitySurfacePreviewBinding>(), SurfaceHolder.Callback {
 
     lateinit var mHolder: SurfaceHolder
     lateinit var  mCamera: Camera
@@ -20,23 +20,22 @@ class SurfacePreviewActivity : BaseActivity(), SurfaceHolder.Callback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_surface_preview)
 
 
-        mHolder = mSurface.getHolder();
+        mHolder = binding.mSurface.getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        btn_change.setOnClickListener({
+        binding.btnChange.setOnClickListener({
 //            val valuesHolder2: PropertyValuesHolder= PropertyValuesHolder.ofFloat("rotationX", 0.0f, 360.0f, 0.0F)
 //            val valuesHolder: PropertyValuesHolder = PropertyValuesHolder.ofFloat("rotationY", 0.0f, 360.0f, 0.0f)
             val valuesHolder1: PropertyValuesHolder = PropertyValuesHolder.ofFloat("scaleX", 1.0f, 0.5f, 1.0f)
             val valuesHolder3: PropertyValuesHolder = PropertyValuesHolder.ofFloat("scaleY", 1.0f, 0.5f, 1.0f)
-            val objectAnimator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(mSurface, valuesHolder1, valuesHolder3)
+            val objectAnimator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(binding.mSurface, valuesHolder1, valuesHolder3)
             objectAnimator.setDuration(5000).start()
         })
 
-        btn_switch.setOnClickListener({
+        binding.btnSwitch.setOnClickListener({
             if (mCamera != null) {
                 mCamera.stopPreview()
                 mCamera.release()
@@ -52,7 +51,7 @@ class SurfacePreviewActivity : BaseActivity(), SurfaceHolder.Callback {
         })
     }
 
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         mCamera.autoFocus { success, camera ->
             if (success) {
                 mParameters = mCamera.parameters
@@ -66,14 +65,14 @@ class SurfacePreviewActivity : BaseActivity(), SurfaceHolder.Callback {
         }
     }
 
-    override fun surfaceDestroyed(holder: SurfaceHolder?) {
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
         if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.release();
         }
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder?) {
+    override fun surfaceCreated(holder: SurfaceHolder) {
         try {
             mCamera = Camera.open(0)
             mCamera.setDisplayOrientation(90)

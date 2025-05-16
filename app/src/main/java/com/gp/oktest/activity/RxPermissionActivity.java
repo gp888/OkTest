@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 
 import com.gp.oktest.R;
 import com.gp.oktest.base.BaseActivity;
-import com.tbruyelle.rxpermissions3.RxPermissions;
 
 
 /**

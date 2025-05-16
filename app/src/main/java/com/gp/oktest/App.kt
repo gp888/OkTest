@@ -93,6 +93,7 @@ class App : MultiDexApplication() {
             when (type) {
                 NetworkType.NETWORK_WIFI -> ToastUtil.showToastLong("已切换到 WIFI 网络")
                 NetworkType.NETWORK_MOBILE -> ToastUtil.showToastLong("已切换到 2G/3G/4G 网络")
+                else ->{}
             }
             mNetType = type
         }
@@ -127,7 +128,8 @@ class App : MultiDexApplication() {
 
     fun register(){
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-            override fun onActivityCreated(activity: Activity, bundle: Bundle) {
+
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 Log.i(TAG, "onActivityCreated()")
             }
 

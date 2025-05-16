@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.gp.testdaynight.R
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * API23后，Android就有自带的api能够实现夜间模式与白天模式的切换，

@@ -34,11 +34,11 @@ class ForegroundCallbacks : Application.ActivityLifecycleCallbacks {
         listeners.remove(listener)
     }
 
-    override fun onActivityResumed(activity: Activity?) {
+    override fun onActivityResumed(activity: Activity) {
         paused = false
         val wasBackground = !isForeground
         isForeground = true
-        if (check != null) handler.removeCallbacks(check)
+        if (check != null) handler.removeCallbacks(check!!)
         if (wasBackground) {
             Log.d(TAG,"went foreground")
             for (l in listeners) {
@@ -53,9 +53,9 @@ class ForegroundCallbacks : Application.ActivityLifecycleCallbacks {
         }
     }
 
-    override fun onActivityPaused(activity: Activity?) {
+    override fun onActivityPaused(activity: Activity) {
         paused = true
-        if (check != null) handler.removeCallbacks(check)
+        if (check != null) handler.removeCallbacks(check!!)
         handler.postDelayed(object : Runnable {
             override fun run() {
                 if (isForeground && paused) {
@@ -75,11 +75,11 @@ class ForegroundCallbacks : Application.ActivityLifecycleCallbacks {
         }.also { check = it }, CHECK_DELAY)
     }
 
-    override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {}
-    override fun onActivityStarted(activity: Activity?) {}
-    override fun onActivityStopped(activity: Activity?) {}
-    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {}
-    override fun onActivityDestroyed(activity: Activity?) {}
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+    override fun onActivityStarted(activity: Activity) {}
+    override fun onActivityStopped(activity: Activity) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+    override fun onActivityDestroyed(activity: Activity) {}
 
     companion object {
         const val CHECK_DELAY: Long = 500

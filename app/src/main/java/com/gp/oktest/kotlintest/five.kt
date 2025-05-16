@@ -280,6 +280,7 @@ enum class Week{
 fun todo(week:Week){
     when(week){
         Week.星期一 -> println("444")
+        else ->{}
     }
     //获取值
     val value:Array<Week> = Week.values()

@@ -13,10 +13,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.gp.oktest.R
 import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivityCameraRecordBinding
 import com.gp.oktest.utils.ToastUtil
 import java.io.File
 
-class CameraRecordActivity : BaseActivity(){
+class CameraRecordActivity : BaseActivity<ActivityCameraRecordBinding>(){
 
 
     private val REQUEST_VIDEO_CROP_CODE = 233

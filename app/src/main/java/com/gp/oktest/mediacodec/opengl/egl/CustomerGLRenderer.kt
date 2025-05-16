@@ -59,11 +59,11 @@ class CustomerGLRenderer : SurfaceHolder.Callback {
         surface.holder.addCallback(this)
 
         surface.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener{
-            override fun onViewDetachedFromWindow(v: View?) {
+            override fun onViewDetachedFromWindow(v: View) {
                 stop()
             }
 
-            override fun onViewAttachedToWindow(v: View?) {
+            override fun onViewAttachedToWindow(v: View) {
             }
         })
     }

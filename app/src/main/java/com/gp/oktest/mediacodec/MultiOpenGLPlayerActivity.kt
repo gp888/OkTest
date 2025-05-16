@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
 import com.gp.oktest.R
+import com.gp.oktest.base.BaseActivity
+import com.gp.oktest.databinding.ActivityOpenglPlayerBinding
 import com.gp.oktest.mediacodec.decoder.AudioDecoder
 import com.gp.oktest.mediacodec.decoder.VideoDecoder
 import com.gp.oktest.mediacodec.opengl.drawer.VideoDrawer
-import kotlinx.android.synthetic.main.activity_opengl_player.*
 import java.util.concurrent.Executors
 
-class MultiOpenGLPlayerActivity: AppCompatActivity() {
+class MultiOpenGLPlayerActivity: BaseActivity<ActivityOpenglPlayerBinding>() {
     private var path = ""
     private var path2 = ""
 
@@ -20,7 +21,6 @@ class MultiOpenGLPlayerActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_opengl_player)
         path = getExternalFilesDir(null)?.getPath() + "/decode/mvtest.mp4"
         path2 = getExternalFilesDir(null)?.getPath() + "/decode/mvtest2.mp4"
 
@@ -49,7 +49,7 @@ class MultiOpenGLPlayerActivity: AppCompatActivity() {
         render.addDrawer(drawer)
 
         //设置绘制器，用于触摸移动
-        gl_surface.addDrawer(drawer)
+        binding.glSurface.addDrawer(drawer)
     }
 
     private fun initPlayer(path: String, sf: Surface, withSound: Boolean) {
@@ -65,8 +65,8 @@ class MultiOpenGLPlayerActivity: AppCompatActivity() {
     }
 
     private fun initRender() {
-        gl_surface.setEGLContextClientVersion(2)
-        gl_surface.setRenderer(render)
+        binding.glSurface.setEGLContextClientVersion(2)
+        binding.glSurface.setRenderer(render)
     }
 
     override fun onDestroy() {
