@@ -472,3 +472,47 @@ val shared = MutableSharedFlow(
 shared.tryEmit(initialValue) // 设置初始值
 val state = shared.distinctUntilChanged() // 过滤掉相同的数据
 ```
+
+
+取消当前协程
+```kotlin
+class Test  {
+    suspend fun test() {
+        runInterruptible { // 内部会调用 interrupt 方法
+            while (true){
+                Thread.sleep(100)
+                println("do something")
+            }
+        }
+    }
+
+}
+
+fun main(): Unit = runBlocking {
+    val t = Test()
+    val job = launch(Dispatchers.IO) {
+        t.test()
+    }
+    delay(500)
+    job.cancel() // 这里只需要 cancel 就可以了
+    delay(1000)
+    println("end")
+}
+```
+
+挂起函数应该考虑协程取消
+和 Java 的 interrupt 方法类似，kotlin 中的挂起函数默认是不会主动处理协程取消的。这需要你主动调用 ensureActive 方法，或者判断 isActive
+```kotlin
+suspend fun testCancel() {
+    while (true) {
+        coroutineContext.ensureActive()
+        println("do something")
+    }
+}
+
+suspend fun testCancel() {
+    while (coroutineContext.isActive) {
+        println("do something")
+    }
+}
+```
